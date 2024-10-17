@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8">
@@ -14,7 +14,9 @@
   <div class="wrapper">
     <header class="cover">
       <figure class="cover__figure">
-        <img class="cover__src" src="../../assets/images/start_img.svg">
+        <div class="cover__src">
+          <img src="../../assets/images/start_img.svg" alt="브런치 회원가입 페이지 대표 이미지, 한 여성이 책을 읽는 일러스트">
+        </div>
         <figcaption class="cover__caption">
           <h1>브런치 작가로 데뷔하세요.</h1>
           <p>진솔한 에세이부터 업계 전문 지식까지, <br />
@@ -29,17 +31,17 @@
           <input type="email" placeholder="이메일" id="loginEmail">
         </div>
         <div class="login__input">
-          <input type="email" class="login__input" placeholder="비밀번호" id="loginPassword">
+          <input type="password" class="login__input" placeholder="비밀번호" id="loginPassword">
         </div>
-        <div class="login__save">
+        <label class="login__save" for="saveIdPw">
           <img src="../../assets/icons/actions/check.svg">
-          <label for="saveIdPw"><input type="checkbox" id="saveIdPw"> 로그인 정보 저장</label>
+          <input type="checkbox" id="saveIdPw"> 로그인 정보 저장
+        </label>
+        <div class="btn">
+          <button id="loginBtn">로그인</button>
         </div>
         <div class="btn">
-          <button class="login__btn">로그인</button>
-        </div>
-        <div class="btn">
-          <button class="login__signUp">회원가입</button>
+          <button id="signUpBtn">회원가입</button>
         </div>
       </form>
     </main>
