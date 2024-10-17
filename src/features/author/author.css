@@ -88,23 +88,18 @@ body {
   position: relative;
 }
 
-.header__img-container {
+.header__image-wrapper {
   padding: 0 20px;
   position: absolute;
   right: 0;
   transform: translateY(-50%);
-  /* box-shadow: inset 0 0 20px gold; */
-}
-
-.header__img {
   aspect-ratio: 1/1;
 }
 
 .header__content {
   padding: 0 20px;
-  /* box-shadow: inset 0 0 20px red; */
 }
-.header__content-profile {
+.header__profile {
   margin-bottom: 20px;
 }
 
@@ -112,7 +107,6 @@ body {
   font-size: 2.7rem;
   font-weight: 300;
   line-height: 1.1;
-  /* -0.27px와 동일 */
   letter-spacing: -0.027px;
   color: var(--color-gray-70);
 }
@@ -124,66 +118,52 @@ body {
   color: var(--color-gray-50);
 }
 
-.header__content-interactions {
+.header__interactions {
   display: flex;
   align-items: center;
   gap: 10px;
-  /* figma디자인은 left, 임의로 수정함 */
   text-align: center;
-  /* box-shadow: inset 0 0 20px blue; */
 }
 
-.header__interactions-subscriber {
-  /* box-shadow: inset 0 0 20px purple; */
-}
-
-.header__interactions-following {
-  /* box-shadow: inset 0 0 20px orangered; */
-}
-
-.header__subscriber {
+.header__subscriber-text {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
   color: var(--color-gray-50);
 }
 
-.header__subscriber-number {
+.header__subscriber-numbers {
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.25;
   color: var(--color-gray-60);
 }
 
-.header-following {
+.header__following-text {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
   color: var(--color-gray-50);
 }
 
-.header-following-number {
+.header__following-numbers {
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.25;
   color: var(--color-gray-60);
 }
 
-.header__interactions-button {
+.header-button {
   margin-left: auto;
 }
 
-.main {
-  /* box-shadow: inset 0 0 20px blue; */
-}
-
-.main__article-list {
+.main__article-item {
   padding: 20px;
   /* 색상이 #eeeeee인데 화면에 티가 잘 안남 */
   border-bottom: 1px solid var(--color-gray-20);
 }
 
-.main__list-title {
+.main__title {
   margin-bottom: 0.4rem;
   color: var(--color-gray-70);
   font-size: 1.7rem;
@@ -191,7 +171,7 @@ body {
   line-height: 1.4;
 }
 
-.main__list-writer {
+.main__writer {
   color: var(--color-gray-60);
   font-size: 1.2rem;
   font-weight: 300;
@@ -199,14 +179,14 @@ body {
   margin-bottom: 5px;
 }
 
-.article-info__comments {
+.main__comments {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 162.5%;
 }
 
-.article-info__date {
+.main__date {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
