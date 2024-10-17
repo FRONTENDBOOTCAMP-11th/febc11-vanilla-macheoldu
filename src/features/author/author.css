@@ -57,6 +57,7 @@ body {
 /* Variables */
 :root {
   /* Colors */
+  --color-white: #ffffff;
   --color-blue-50: #00c6be;
 
   --color-gray-20: #eeeeee;
@@ -67,17 +68,142 @@ body {
 }
 
 /* Layouts - 공통으로 활용하는 레이아웃 클래스 */
-.l_wrapper {
-  width: 360x;
+.wrapper {
+  width: 360px;
   margin: 0 auto;
+  min-height: 740px;
 }
 
 /* Design */
-
-header {
-  box-shadow: inset 0 0 20px red;
+body {
+  background-color: var(--color-white);
 }
 
-main {
-  box-shadow: inset 0 0 20px blue;
+nav {
+  min-height: 144px;
+}
+
+.header {
+  position: relative;
+}
+
+.header__img {
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  /* box-shadow: inset 0 0 20px gold; */
+}
+
+.header__content {
+  padding: 0 20px;
+  /* box-shadow: inset 0 0 20px red; */
+}
+.header__content-profile {
+  margin-bottom: 20px;
+}
+
+.header__profile-title {
+  font-size: 2.7rem;
+  font-weight: 300;
+  line-height: 1.1;
+  /* -0.27px와 동일 */
+  letter-spacing: -0.027px;
+  color: var(--color-gray-70);
+}
+
+.header__profile-role {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--color-gray-50);
+}
+
+.header__content-interactions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* figma디자인은 left, 임의로 수정함 */
+  text-align: center;
+  /* box-shadow: inset 0 0 20px blue; */
+}
+
+.header__interactions-subscriber {
+  /* box-shadow: inset 0 0 20px purple; */
+}
+
+.header__interactions-following {
+  /* box-shadow: inset 0 0 20px orangered; */
+}
+
+.header__subscriber {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--color-gray-50);
+}
+
+.header__subscriber-number {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--color-gray-60);
+}
+
+.header-following {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--color-gray-50);
+}
+
+.header-following-number {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--color-gray-60);
+}
+
+.header__interactions-button {
+  margin-left: auto;
+}
+
+.main {
+  /* box-shadow: inset 0 0 20px blue; */
+}
+
+.main__article-list {
+  padding: 20px;
+  /* 색상이 #eeeeee인데 화면에 티가 잘 안남 */
+  border-bottom: 1px solid var(--color-gray-20);
+}
+
+.main__list-title {
+  margin-bottom: 0.4rem;
+  color: var(--color-gray-70);
+  font-size: 1.7rem;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.main__list-writer {
+  color: var(--color-gray-60);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 166.667%;
+  margin-bottom: 5px;
+}
+
+.article-info__comments {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 162.5%;
+}
+
+.article-info__date {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 162.5%;
 }
