@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link rel="stylesheet" href="start.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <h1 class="header__title">회원가입</h1>
+    </header>
+    <main class="sign-up">
+      <form class="sign-up__form">
+        <fieldset class="sign-up__nickname-email">
+          <legend class="ir">별명 및 이메일</legend>
+          <div class="input">
+            <input type="text" id="signUpNickname" placeholder="별명">
+            <div class="btn type--chip">
+              <button id="availabilityCheckNickname">중복확인</button>
+            </div>
+          </div>
+          <div class="sign-up__availability">사용할 수 있는 별명입니다.</div>
+          <div class="input">
+            <input type="email" id="signUpEmail" placeholder="이메일">
+            <div class="btn type--chip">
+              <button id="availabilityCheckEmail">중복확인</button>
+            </div>
+          </div>
+          <div class="sign-up__availability">사용할 수 있는 별명입니다.</div>
+        </fieldset>
+        <fieldset class="sign-up__password">
+          <legend class="ir">비밀번호</legend>
+          <div class="input">
+            <input type="password" id="signUpPw" placeholder="비밀번호">
+            <div class="btn type--visibility">
+              <img class="btn type--visibility__icon show" src="../../assets/icons/actions/show.svg">
+              <img class="btn type--visibility__icon hide hidden" src="../../assets/icons/actions/hide.svg">
+            </div>
+          </div>
+          <div class="input">
+            <input type="password" id="signUpPwCheck" placeholder="비밀번호 확인">
+            <div class="btn type--visibility">
+              <img class="btn type--visibility__icon show" src="../../assets/icons/actions/show.svg">
+              <img class="btn type--visibility__icon hide hidden" src="../../assets/icons/actions/hide.svg">
+            </div>
+          </div>
+          <div class="sign-up__pwCheck invalid">대소문자, 숫자 조합 8자 이상이어야 합니다.</div>
+        </fieldset>
+        <div class="btn type--long">
+          <button id="signUpComplete">회원가입</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+
+</html>
