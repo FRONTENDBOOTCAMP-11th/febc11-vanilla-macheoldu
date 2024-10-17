@@ -1,0 +1,83 @@
+/* Resets */
+body {
+  margin: unset;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+h2,
+h3 {
+  margin: unset;
+  font-weight: unset;
+  font-size: unset;
+}
+
+p {
+  margin: unset;
+}
+
+ul {
+  padding: unset;
+  margin: unset;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* Typography */
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+/* Variables */
+:root {
+  /* Colors */
+  --color-blue-50: #00c6be;
+
+  --color-gray-20: #eeeeee;
+  --color-gray-30: #f8f8f8;
+  --color-gray-50: #959595;
+  --color-gray-60: #666666;
+  --color-gray-70: #333333;
+}
+
+/* Layouts - 공통으로 활용하는 레이아웃 클래스 */
+.l_wrapper {
+  width: 360x;
+  margin: 0 auto;
+}
+
+/* Design */
+
+header {
+  box-shadow: inset 0 0 20px red;
+}
+
+main {
+  box-shadow: inset 0 0 20px blue;
+}
