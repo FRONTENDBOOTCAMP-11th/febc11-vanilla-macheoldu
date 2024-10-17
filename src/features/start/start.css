@@ -63,12 +63,24 @@ body {
   font-size: 1.6rem;
 }
 
+/* CSS Variables*/
+:root {
+  --bg-color: #fff;
+  --point-color: #00c6be;
+  --error-color: #fc3b75;
+  --grey-10: #ddd;
+  --grey-30: #d7d7d7;
+  --grey-50: #aaa;
+  --grey-70: #999;
+  --grey-90: #666;
+}
+
 /* Layout */
 .wrapper {
   width: 360px;
   height: 740px;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--bg-color);
 }
 .login-cover {
   margin-bottom: 12px;
@@ -85,7 +97,7 @@ label {
 }
 .input {
   height: 44px;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid var(--grey-30);
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -94,7 +106,7 @@ label {
   margin-top: 2px;
 }
 .input:has(input:focus) {
-  border-bottom: 1px solid #00c6be;
+  border-bottom: 1px solid var(--point-color);
 }
 .ir {
   position: absolute;
@@ -105,33 +117,33 @@ label {
   overflow: hidden;
 }
 .type--long:has(:focus) {
-  box-shadow: 0 0 4px 2px #00c6be;
+  box-shadow: 0 0 4px 2px var(--point-color);
 }
 .type--chip:has(:focus) {
-  box-shadow: 0 0 2px 1px #00c6be;
+  box-shadow: 0 0 2px 1px var(--point-color);
 }
 .type--long {
   height: 50px;
   font-size: 1.4rem;
   border-radius: 4px;
   box-sizing: border-box;
-  background-color: #aaa;
-  color: #fff;
+  background-color: var(--grey-50);
+  color: var(--bg-color);
 }
 .active {
-  background-color: #00c6be;
+  background-color: var(--point-color);
 }
 .hidden {
   display: none;
 }
 .invalid {
-  color: #fc3b75 !important;
+  color: var(--error-color) !important;
 }
 
 /* Components */
 /* Login Page*/
 body {
-  background-color: grey;
+  background-color: var(--grey-90);
 }
 
 .login-cover__figure {
@@ -155,7 +167,7 @@ body {
 .login-cover__caption p {
   font-size: 1.2rem;
   line-height: 1.3;
-  color: #999;
+  color: var(--grey-90);
 }
 
 .login-main__save {
@@ -166,30 +178,30 @@ body {
   gap: 4px;
 }
 .login-main__save img {
-  background-color: #dddddd;
+  background-color: var(--grey-70);
   width: 20px;
   height: 20px;
   border-radius: 10px;
 }
 .login-main__save:has(:focus) img {
-  box-shadow: 0 0 2px 2px #00c6be;
+  box-shadow: 0 0 2px 2px var(--point-color);
 }
 .login-main__save:has(:checked) img {
-  background-color: #00c6be;
+  background-color: var(--point-color);
 }
 .login-main__error {
   font-size: 1.4rem;
   margin-block: 10px;
-  color: #fc3b75;
+  color: var(--error-color);
 }
 .login-main__id-pw {
   margin-bottom: 30px;
 }
 
 .type--long:has(#signUp) {
-  background-color: #fff;
-  border: 1px solid #00c6be;
-  color: #00c6be;
+  background-color: var(--bg-color);
+  border: 1px solid var(--point-color);
+  color: var(--point-color);
 }
 .type--long + .type--long {
   margin-top: 12px;
@@ -208,12 +220,15 @@ body {
   line-height: 1.16;
 }
 
+.sign-up__password {
+  margin-bottom: 88px;
+}
 .type--chip {
   font-size: 1.3rem;
   width: 64px;
   height: 28px;
   padding-inline: 10px;
-  border: 1px solid #00c6be;
+  border: 1px solid var(--point-color);
   border-radius: 14px;
 }
 .sign-up__availability,
@@ -221,10 +236,7 @@ body {
   margin-block: 8px 10px;
   font-size: 1.2rem;
   font-weight: 300;
-  color: #00c6be;
-}
-.sign-up__pwCheck {
-  margin-bottom: 88px;
+  color: var(--point-color);
 }
 .type--visibility {
   flex-shrink: 0;
