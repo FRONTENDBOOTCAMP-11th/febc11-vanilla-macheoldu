@@ -94,7 +94,6 @@ body {
   background-color: var(--bg-color);
 }
 .login-cover {
-  /* margin-bottom: 12px; */
   padding-block: 52px 12px;
 }
 .login-main,
