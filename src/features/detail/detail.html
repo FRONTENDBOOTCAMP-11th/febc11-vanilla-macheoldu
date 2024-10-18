@@ -16,10 +16,13 @@
     <div class="wrapper">
       <!-- 시각적 효과를 위한 nav -->
       <nav class="navbar">Navbar</nav>
+
       <!-- header -->
       <header class="header">
         <div class="header__cover">
+          <!-- 글의 이미지 -->
           <img class="header__cover-image" src="" alt="" />
+
           <div class="header__cover-info">
             <!-- 글의 제목 -->
             <h3 class="header__info-title">
@@ -43,57 +46,154 @@
           </div>
         </div>
       </header>
+
       <!-- main -->
-      <main class="main">Main</main>
-      <!-- footer -->
-      <footer class="footer">
-        <section class="footer__cotents">
-          <!-- new author -->
-          <div class="footer__contents-profile">
-            <!-- new author 닉네임, 직업 -->
-            <div class="footer-profile-user">
-              <h2 class="footer__user-nickname">Sunny</h2>
-              <p class="footer__user-occupation">회사원</p>
+      <main class="main">
+        <!-- 블로그 글-->
+        <section class="main__article">
+          <div class="main__article-content">
+            <!-- 글의 header부분 -->
+            <div class="main__content-header">
+              <!-- 🚨이부분 살짝 BEM에서 벗어남, 중복해서 쓰이기 때문에 공통적으로 적용하기 위해 - 다시 한번 논의 해야 할 부분  -->
+              <p class="main__content-excerpt">
+                  그래 지난 화를 요약해 보면 생장에 도착한 나 는 도착 당일 바로
+                첫 여정을 시작하기로 마음먹 었고 추천받은 목적지인 Val
+                carlos까지 구글맵 으로 걸어서 2시간 30분 거리를 확인했다. 그러
+                나 걸어도 걸어도 줄지 않는 시간과 거리에 괴로 워했었지.
+              </p>
             </div>
-            <!-- new author 프로필 이미지 -->
-            <div class="footer__image-wraaper">
-              <img
-                src="../../assets/images/new-author.png"
-                alt="새로운 작가 프로필 사진"
-              />
+            <!-- 글의 main img -->
+            <div class="main__content-main">
+              <div class="main__main-cover">
+                <img
+                  class="main__cover-image"
+                  src="../../assets/images/cars.png"
+                  alt="프랑스와 스페인 사이의 국경선 역할을 하는 피레네 산맥 이미지"
+                />
+              </div>
+              <p class="main__cover-title">
+                여기가 바로 국경이다! 좌-프랑스, 우-스페인
+              </p>
+            </div>
+            <!-- 글의 footer 부분 -->
+            <div class="main__content-footer">
+              <p class="main__content-excerpt">
+                 오후 5시 36분. 세상에 인터넷에서 사진으로만 보다가 직접 내
+                눈으로 처음 목격한 정식적인(?) 까미노 표식! 아주 반갑기
+                그지없었다. 왠지 목 적지가 가까워진 것만 같은 느낌적인 느낌!
+                하지 만 구글맵의 내 위치는 전혀 그렇지 못했다.
+              </p>
             </div>
           </div>
-          <!-- new author 간단한 자기소개 -->
-          <div class="footer__contents-brief-info">
-            <p class="footer__brief-info">
-              12년 차 국내 항공사 승무원의 겨울 산티아고 순례길 이야기 연재 중.
-              커피 한 잔을 벗 삼아 편하게 읽을 수 있는 글쓰기에 꽤나 진심인 편입
-              니다. 후후.
-            </p>
-          </div>
-          <!-- new author 구독 관련 부분 -->
-          <div class="footer__contents-interactions">
-            <!-- 구독자 -->
-            <div class="footer__interactions-subscriber">
-              <p class="footer__subscriber">구독자</p>
-              <span class="footer__subscriber-numbers">108</span>
+          <!-- 블로그 댓글 -->
+          <div class="main__article-comment">
+            <div class="main__comment-wrapper">
+              <h6 class="main__comment">댓글</h6>
+              <span class="main__comment-numbers"> 7 </span>
             </div>
-            <!-- 구독 이미지 -->
-            <div class="footer__interactions-button">
-              <img
-                src="../../assets/icons/like_sub/sub.svg"
-                alt="구독 체크 하는 이미지"
-              />
-            </div>
+            <!-- 다른 사용자들의 댓글 -->
+            <ul class="main__comment-list">
+              <!-- 첫번째 댓글 -->
+              <li class="main__comment-entry">
+                <div class="main__entry-user">
+                  <!-- 유저의 프로필 사진 -->
+                  <div class="main__user-image-wrapper">
+                    <img
+                      class="main__user-image"
+                      src="../../assets/images/user1.png"
+                      alt="user의 프로필 이미지"
+                    />
+                  </div>
+                  <!-- 유저의 닉네임 및 작성시간 -->
+                  <div class="main__user-info">
+                    <p class="main__info-nickname">이상옥</p>
+                    <p class="main__info-date">Jul 23. 2024</p>
+                  </div>
+                  <!-- 옵션버튼 이미지 -->
+                  <div class="main__user-add-button">
+                    <img
+                      src="../../assets/icons/like_sub/addmore.svg"
+                      alt="옵션버튼 이미지"
+                    />
+                  </div>
+                </div>
+                <div class="main__entry-content-wrapper">
+                  <p class="main__entry-content">
+                    유럽은 국경이 희미해서 좋아요. 옛추억에 점 심은 프랑스에서
+                    저녁은 스위스에서 먹던 기 억이 나네요. 홀로 산티아고 길을,
+                    마치 행군 하듯이 걷는 그 고통이 기쁨으로 충만하길 바 라며
+                    읽고 있습니다. ^^
+                  </p>
+                </div>
+                <div class="main__entry-reaction-wrapper">
+                  <p class="main__entry-reaction">답글달기</p>
+                </div>
+              </li>
+              <!-- 두번째 댓글 -->
+              <li class="main__comment-entry">
+                <div class="main__entry-user">
+                  <!-- 유저의 프로필 사진 -->
+                  <div class="main__user-image-wrapper">
+                    <img
+                      class="main__user-image"
+                      src="../../assets/images/user2.png"
+                      alt="user의 프로필 이미지"
+                    />
+                  </div>
+                  <!-- 유저의 닉네임 및 작성시간 -->
+                  <div class="main__user-info">
+                    <p class="main__info-nickname">jungsin</p>
+                    <p class="main__info-date">Jul 24. 2024</p>
+                  </div>
+                  <!-- 옵션버튼 이미지 -->
+                  <div class="main__user-add-button">
+                    <img
+                      src="../../assets/icons/like_sub/addmore.svg"
+                      alt="옵션버튼 이미지"
+                    />
+                  </div>
+                </div>
+                <div class="main__entry-content-wrapper">
+                  <p class="main__entry-content">화이팅!^^</p>
+                </div>
+              </li>
+              <!-- 세번째 댓글 -->
+              <li class="main__comment-entry">
+                <div class="main__entry-user">
+                  <!-- 유저의 프로필 사진 -->
+                  <div class="main__user-image-wrapper">
+                    <img
+                      class="main__user-image"
+                      src="../../assets/images/user3.png"
+                      alt="user의 프로필 이미지"
+                    />
+                  </div>
+                  <!-- 유저의 닉네임 및 작성시간 -->
+                  <div class="main__user-info">
+                    <p class="main__info-nickname">Sunday Writer</p>
+                    <p class="main__info-date">Jul 24. 2024</p>
+                  </div>
+                  <!-- 옵션버튼 이미지 -->
+                  <div class="main__user-add-button">
+                    <img
+                      src="../../assets/icons/like_sub/addmore.svg"
+                      alt="옵션버튼 이미지"
+                    />
+                  </div>
+                </div>
+                <div class="main__entry-content-wrapper">
+                  <p class="main__entry-content">
+                    산티아고 순례길…저도 버킷리스트에 담아놓 고 있어요. 미리
+                    답사하는 기분으로 잘 읽고 있습니다^^
+                  </p>
+                </div>
+              </li>
+            </ul>
           </div>
         </section>
-        <!-- 🖤, 이동 ,댓글 부분-->
-        <div class="footer__action">
-          <div class="footer__action-like">하트</div>
-          <div class="footer__action-link">이동</div>
-          <div class="footer__action-comment">댓글</div>
-        </div>
-      </footer>
+        <!-- 새로운 작가 소개 -->
+        <section style="background-color: brown">new-author</section>
+      </main>
     </div>
   </body>
 </html>
