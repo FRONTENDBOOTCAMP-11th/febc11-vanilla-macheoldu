@@ -5,7 +5,9 @@ figure {
   margin: unset;
   padding: unset;
 }
-h1 {
+h1,
+h2,
+h3 {
   margin: unset;
   font-weight: unset;
   font-size: unset;
@@ -78,7 +80,9 @@ body {
   --grey-30: #d7d7d7;
   --grey-50: #aaa;
   --grey-70: #999;
+  --grey-80: #959595;
   --grey-90: #666;
+  --grey-95: #333;
 }
 
 /* Layout */
@@ -89,8 +93,8 @@ body {
   background-color: var(--bg-color);
 }
 .login-cover {
-  margin-bottom: 12px;
-  padding-top: 52px;
+  /* margin-bottom: 12px; */
+  padding-block: 52px 12px;
 }
 .login-main,
 .sign-up {
@@ -190,16 +194,16 @@ body {
   align-items: center;
   gap: 4px;
 }
-.login-main__save img {
+.login-main__save .checkbox {
   background-color: var(--grey-70);
   width: 20px;
   height: 20px;
   border-radius: 10px;
 }
-.login-main__save:has(:focus) img {
+.login-main__save:has(:focus) .checkbox {
   box-shadow: 0 0 2px 2px var(--point-color);
 }
-.login-main__save:has(:checked) img {
+.login-main__save:has(:checked) .checkbox {
   background-color: var(--point-color);
 }
 .login-main__error {
@@ -244,8 +248,7 @@ body {
   border: 1px solid var(--point-color);
   border-radius: 14px;
 }
-.sign-up__availability,
-.sign-up__pwCheck {
+.sign-up__valid {
   margin-block: 8px 10px;
   font-size: 1.2rem;
   font-weight: 300;

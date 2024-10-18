@@ -20,23 +20,26 @@
         <fieldset class="sign-up__nickname-email">
           <legend class="ir">별명 및 이메일</legend>
           <div class="input">
+            <label class="ir" for="signUpNickname">별명 입력란</label>
             <input type="text" id="signUpNickname" placeholder="별명">
             <div class="btn type--chip">
-              <button id="availabilityCheckNickname">중복확인</button>
+              <button type="button" id="validCheckNickname" aria-label="중복확인 버튼">중복확인</button>
             </div>
           </div>
-          <div class="sign-up__availability">사용할 수 있는 별명입니다.</div>
+          <div class="sign-up__valid nickname">사용할 수 있는 별명입니다.</div>
           <div class="input">
+            <label class="ir" for="signUpEmail">이메일 입력란</label>
             <input type="email" id="signUpEmail" placeholder="이메일">
             <div class="btn type--chip">
-              <button id="availabilityCheckEmail">중복확인</button>
+              <button type="button" id="validCheckEmail" aria-label="중복확인 버튼">중복확인</button>
             </div>
           </div>
-          <div class="sign-up__availability">사용할 수 있는 별명입니다.</div>
+          <div class="sign-up__valid email">사용할 수 있는 이메일입니다.</div>
         </fieldset>
         <fieldset class="sign-up__password">
           <legend class="ir">비밀번호</legend>
           <div class="input">
+            <label class="ir" for="signUpPw">비밀번호 입력란</label>
             <input type="password" id="signUpPw" placeholder="비밀번호">
             <div class="btn type--visibility">
               <img class="btn type--visibility__icon show hidden" src="../../assets/icons/actions/show.svg">
@@ -44,16 +47,17 @@
             </div>
           </div>
           <div class="input">
+            <label class="ir" for="signUpPwCheck">비밀번호 확인</label>
             <input type="password" id="signUpPwCheck" placeholder="비밀번호 확인">
             <div class="btn type--visibility">
               <img class="btn type--visibility__icon show hidden" src="../../assets/icons/actions/show.svg">
               <img class="btn type--visibility__icon hide" src="../../assets/icons/actions/hide.svg">
             </div>
           </div>
-          <div class="sign-up__pwCheck invalid">대소문자, 숫자 조합 8자 이상이어야 합니다.</div>
+          <div class="sign-up__valid pw invalid">대소문자, 숫자 조합 8자 이상이어야 합니다.</div>
         </fieldset>
         <div class="btn type--long">
-          <button id="signUpComplete">회원가입</button>
+          <button id="signUpComplete" aria-label="회원가입 버튼">회원가입</button>
         </div>
       </form>
     </main>

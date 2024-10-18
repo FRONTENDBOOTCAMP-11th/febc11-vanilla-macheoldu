@@ -30,22 +30,24 @@
         <fieldset class="login-main__id-pw">
           <legend class="ir">로그인 정보 입력</legend>
           <div class="input">
-            <input type="email" placeholder="이메일" id="loginEmail" aria-label="이메일 입력란">
+            <label class="ir" for="loginEmail">이메일 입력란</label>
+            <input type="email" placeholder="이메일" id="loginEmail">
           </div>
           <div class="input">
-            <input type="password" placeholder="비밀번호" id="loginPw" aria-label="비밀번호 입력란">
+            <label class="ir" for="password">비밀번호 입력란</label>
+            <input type="password" placeholder="비밀번호" id="loginPw">
           </div>
           <label class="login-main__save" for="saveIdPw">
-            <img src="../../assets/icons/actions/check.svg">
+            <img src="../../assets/icons/actions/check.svg" class="checkbox">
             <input type="checkbox" id="saveIdPw" aria-label="로그인 정보 저장 체크박스"> 로그인 정보 저장
           </label>
           <div class="login-main__error">옳지 않은 이메일과 비밀번호입니다.</div>
         </fieldset>
         <div class="btn type--long">
-          <button id="login" aria-label="로그인 버튼">로그인</button>
+          <button type="submit" id="login" aria-label="로그인 버튼">로그인</button>
         </div>
         <div class="btn type--long">
-          <button id="signUp" aria-label="회원가입 버튼">회원가입</button>
+          <button type="button" id="signUp" aria-label="회원가입 버튼">회원가입</button>
         </div>
       </form>
     </main>
