@@ -1,0 +1,174 @@
+* {
+  font-size: 100%; /* 브라우저 기본 폰트 크기로 설정 (보통 16px) */
+  font-weight: normal; /* 기본 폰트 두께로 설정 */
+  line-height: 1.5; /* 텍스트 가독성을 위해 라인 높이를 지정 (권장 값: 1.5) */
+}
+
+body,
+button,
+ul,
+li,
+a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.todays-pick__list {
+  padding: 0;
+}
+
+.cover__image-wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 360px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    sans-serif;
+  font-size: 16px; /* 기본 폰트 크기 설정 */
+  font-weight: 400; /* 보통 두께 설정 */
+}
+
+:root {
+  /* Text Colors */
+  --color-text-primary: #444444;
+  --color-text-secondary: #959595;
+  --color-text-light: #ffffff;
+  --color-text-muted: #666666;
+  --color-text-strong: #111111;
+  --color-text-accent: #00c6be;
+
+  /* Background Colors */
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f8f8f8;
+  --color-background-accent: #8d4e8e;
+  --color-background-dark: #333333;
+  --color-background-button: #231f20;
+
+  /* Border Colors */
+  --color-border-primary: #e0e0e0;
+  --color-border-secondary: #dddddd;
+  --color-border-muted: #666666;
+
+  /* Overlay and Shadow */
+  --color-overlay-light: rgba(255, 255, 255, 0.1);
+  --color-overlay-dark: rgba(0, 0, 0, 0.05);
+  --color-overlay-darker: rgba(18, 18, 18, 0.9);
+  --color-icon-shadow: rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  box-sizing: border-box;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px; /* 패딩 포함 높이 설정 */
+}
+.header__top-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.header__logo {
+  margin-right: 98px;
+  display: inline-block;
+}
+.header__actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.header__search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+}
+.header__start-button {
+  background: var(--color-background-button);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 12px;
+  padding: 5px 13px;
+  font-size: 10px;
+  line-height: 1.5;
+  width: 62px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.footer {
+  background-color: var(--color-background-dark);
+  padding: 37px 31px;
+  height: 315px;
+  box-sizing: border-box;
+}
+
+.footer__social-list {
+  display: flex;
+  justify-content: center;
+  gap: 27px;
+  margin-top: 38px;
+  margin-bottom: 17px;
+}
+
+.footer__links {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 19px;
+  margin-bottom: 55px;
+}
+
+.footer__link:nth-child(3),
+.footer__link:nth-child(6) {
+  margin-right: 0;
+}
+
+.footer__logo {
+  display: flex;
+  justify-content: center;
+}
