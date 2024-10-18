@@ -103,7 +103,7 @@ body {
   margin-bottom: 20px;
 }
 
-.header__profile-title {
+.header__profile-nickname {
   font-size: 2.7rem;
   font-weight: 300;
   line-height: 1.1;
@@ -111,7 +111,7 @@ body {
   color: var(--color-gray-70);
 }
 
-.header__profile-role {
+.header__profile-occupation {
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
@@ -125,7 +125,7 @@ body {
   text-align: center;
 }
 
-.header__subscriber-title {
+.header__subscriber {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
@@ -139,7 +139,7 @@ body {
   color: var(--color-gray-60);
 }
 
-.header__following-title {
+.header__following {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
@@ -171,7 +171,15 @@ body {
   line-height: 1.4;
 }
 
-.main__article-writer {
+.main__article-excerpt {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 166.667%;
+}
+
+.main__article-collaborators {
+  margin-right: 20px;
   color: var(--color-gray-60);
   font-size: 1.2rem;
   font-weight: 300;
