@@ -91,7 +91,7 @@ body {
 /* Layout */
 .wrapper {
   width: 360px;
-  height: 740px;
+  min-height: 740px;
   margin: 0 auto;
   background-color: var(--white);
 }
