@@ -19,26 +19,27 @@
 
       <!-- header -->
       <header class="header">
+        <!-- 껍데기 : 이미지에 글을 띄우기 위한 부모요소 -->
         <div class="header__cover">
-          <!-- 글의 이미지 -->
+          <!-- 게시글 이미지, 🚨 이미지가 따로 없어 우선 공백으로 둠-->
           <img class="header__cover-image" src="" alt="" />
-
+          <!-- 이미지 위에 떠 있는 글들 -->
           <div class="header__cover-info">
-            <!-- 글의 제목 -->
+            <!-- 글의 제목, 🚨 따로 width 설정을 주지 않아서 피그마 시안이랑 다름, 어떻게 하는게 시각적으로 좋은지 생각중-->
             <h3 class="header__info-title">
               우여곡절 끝에 도착한 첫 번째 목적지
             </h3>
-            <!-- 책 제목, 출처 위도 제목이므로 제거 가능성 높음  -->
+            <!-- 🚨 책 제목, 출처 위도 제목이랑 겹치므로 추후에 제거 가능성 높음  -->
             <p class="header__info-source">Val carlos</p>
             <!-- 글의 저자 정보 -->
             <div class="header__info-author">
-              <!-- by 이미지 -->
+              <!-- 🚨 by 이미지, 피그마에서는 이미지로 제공 되어있지만, 굳이 필요할까?라는 생각이 들어 비슷한 글꼴로 대체함 -->
               <!-- <img
                 class="header__author-byimage"
                 src="../../assets/images/by.png"
                 alt="by라는 글자의 이미지"
               /> -->
-              <!-- 저자 이름 -->
+              <!--작가 이름 -->
               <p class="header__author-nickname">
                 <span class="header__author-nickname-detail">by</span>
                 Sunny
@@ -52,12 +53,12 @@
 
       <!-- main -->
       <main class="main">
-        <!-- 블로그 글-->
+        <!-- 블로그 글 -->
         <section class="main__article">
           <div class="main__article-content">
             <!-- 글의 header부분 -->
             <div class="main__content-header">
-              <!-- 🚨이부분 살짝 BEM에서 벗어남, 중복해서 쓰이기 때문에 공통적으로 적용하기 위해 - 다시 한번 논의 해야 할 부분  -->
+              <!-- 🚨 이부분 살짝 BEM에서 벗어남, 중복해서 쓰이기 때문에 공통적으로 적용하기 위해 - 다시 한번 논의 해야 할 부분  -->
               <p class="main__content-excerpt">
                   그래 지난 화를 요약해 보면 생장에 도착한 나 는 도착 당일 바로
                 첫 여정을 시작하기로 마음먹 었고 추천받은 목적지인 Val
@@ -74,6 +75,7 @@
                   alt="프랑스와 스페인 사이의 국경선 역할을 하는 피레네 산맥 이미지"
                 />
               </div>
+              <!-- 이미지 설명 -->
               <p class="main__cover-title">
                 여기가 바로 국경이다! 좌-프랑스, 우-스페인
               </p>
@@ -121,6 +123,7 @@
                     />
                   </div>
                 </div>
+                <!-- 댓글 내용 -->
                 <div class="main__entry-content-wrapper">
                   <p class="main__entry-content">
                     유럽은 국경이 희미해서 좋아요. 옛추억에 점 심은 프랑스에서
@@ -129,6 +132,7 @@
                     읽고 있습니다. ^^
                   </p>
                 </div>
+                <!-- 답글달기 옵션 -->
                 <div class="main__entry-reaction-wrapper">
                   <p class="main__entry-reaction">답글달기</p>
                 </div>
@@ -157,6 +161,7 @@
                     />
                   </div>
                 </div>
+                <!-- 댓글 내용 -->
                 <div class="main__entry-content-wrapper">
                   <p class="main__entry-content">화이팅!^^</p>
                 </div>
@@ -185,6 +190,7 @@
                     />
                   </div>
                 </div>
+                <!-- 댓글 내용 -->
                 <div class="main__entry-content-wrapper">
                   <p class="main__entry-content">
                     산티아고 순례길…저도 버킷리스트에 담아놓 고 있어요. 미리
@@ -193,7 +199,7 @@
                 </div>
               </li>
             </ul>
-            <!-- 댓글 작성하는 이미지 -->
+            <!-- 댓글 작성 창 이미지, 🚨 필수 기능을 다 구현 한다면 입력 폼으로 대체 할 생각은 있음 -->
             <div class="main__comment-input-image-wrapper">
               <img
                 class="main__comment-input-image"
@@ -205,7 +211,6 @@
         </section>
         <!-- 새로운 작가 소개 -->
         <section class="main__author">
-          <!-- new author -->
           <div class="main__author-profile">
             <!-- new author 닉네임, 직업 -->
             <div class="main__profile-user">
