@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>발견</title>
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <link rel="stylesheet" href="discover.css" />
+  </head>
+  <body>
+    <div class="discover">
+      <!-- Header -->
+      <header class="discover__header">
+        <input
+          type="text"
+          value="꿀"
+          class="discover__header-input"
+          aria-label="검색 입력창"
+          onclick="discover()"
+        />
+        <button class="discover__header-close" aria-label="검색창 닫기" onclick="closeSearch()">
+          ×
+        </button>
+      </header>
+
+      <!-- Navigation -->
+      <nav class="discover__nav">
+        <div class="discover__nav-wrapper">
+          <button class="discover__nav-tab discover__nav-tab--active" onclick="showTab('posts')">
+            글
+          </button>
+          <button class="discover__nav-tab" onclick="showTab('authors')">작가</button>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="discover__main">
+        <div class="discover__search-header">
+          <span class="discover__count-results">글 검색 결과 800건</span>
+          <div class="discover__search-filters">
+            <button class="discover__filter-btn discover__filter-btn--active" onclick="sortResults('accuracy')">정확도</button>
+            <button class="discover__filter-btn" onclick="sortResults('recent')">최신</button>
+          </div>
+        </div>
+
+        <div class="discover__results">
+          <div class="discover__result-item">
+            <div class="discover__result-content">
+              <h3 class="discover__result-title">
+                딸의 정부청사 출장에 부모님이 동행하는 이유
+              </h3>
+              <p class="discover__result-text">
+                분이 많네요, 감사드립니다! 직장인(신입)으로 울릉도에서 근무하며
+                얻게 된 직장생활에 도움 되는...
+              </p>
+              <div class="discover__result-info">
+                Apr 19, 2024 by 은설 aka 꿈꾸는 알
+              </div>
+            </div>
+            <div class="discover__result-image">
+              <img
+                src="../../assets/images/image_sample1.png"
+                alt="관련 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="discover__result-item">
+            <div class="discover__result-content">
+              <h3 class="discover__result-title">
+                덴마크의 '꿀 하트'쿠키, Honninghjerter
+              </h3>
+              <p class="discover__result-text">
+                오늘날까지 같은 주소에서 영업 중이다. 덴마크의 여왕 잉그리드도
+                이 꿀케이크 제과점을 자주 찾는다...
+              </p>
+              <div class="discover__result-info">Nov 16, 2023 by Windsbird</div>
+            </div>
+            <div class="discover__result-image">
+              <img
+                src="../../assets/images/image_sample2.png"
+                alt="쿠키 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="discover__result-item">
+            <div class="discover__result-content">
+              <h3 class="discover__result-title">
+                덴마크의 '꿀 하트'쿠키, Honninghjerter
+              </h3>
+              <p class="discover__result-text">
+                오늘날까지 같은 주소에서 영업 중이다. 덴마크의 여왕 잉그리드도
+                이 꿀케이크 제과점을 자주 찾는다...
+              </p>
+              <div class="discover__result-info">Nov 16, 2023 by Windsbird</div>
+            </div>
+            <div class="discover__result-image">
+              <img
+                src="../../assets/images/image_sample3.png"
+                alt="쿠키 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="discover__result-item">
+            <div class="discover__result-content">
+              <h3 class="discover__result-title">
+                덴마크의 '꿀 하트'쿠키, Honninghjerter
+              </h3>
+              <p class="discover__result-text">
+                오늘날까지 같은 주소에서 영업 중이다. 덴마크의 여왕 잉그리드도
+                이 꿀케이크 제과점을 자주 찾는다...
+              </p>
+              <div class="discover__result-info">Nov 16, 2023 by Windsbird</div>
+            </div>
+            <div class="discover__result-image">
+              <img
+                src="../../assets/images/image_sample4.png"
+                alt="쿠키 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- ⚒️object-fit: cover가 안 먹히는 상황 -->
+          <div class="discover__result-item">
+            <div class="discover__result-content">
+              <h3 class="discover__result-title">
+                덴마크의 '꿀 하트'쿠키, Honninghjerter
+              </h3>
+              <p class="discover__result-text">
+                오늘날까지 같은 주소에서 영업 중이다. 덴마크의 여왕 잉그리드도
+                이 꿀케이크 제과점을 자주 찾는다...
+              </p>
+              <div class="discover__result-info">Nov 16, 2023 by Windsbird</div>
+            </div>
+            <div class="discover__result-image">
+              <img
+                src="../../assets/images/image_sample5.png"
+                alt="쿠키 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <nav class="discover__bottom-nav">
+        <a href="#" class="discover__bottom-nav-item" onclick="navigateTo('home')">
+          <span class="discover__bottom-nav-icon">
+            <img
+              src="https://via.placeholder.com/48"
+              alt="홈"
+              width="48"
+              height="48"
+            />
+          </span>
+          <span class="discover__bottom-nav-text">홈</span>
+        </a>
+        <a href="#" class="discover__bottom-nav-item discover__bottom-nav-item--active" onclick="navigateTo('discover')">
+          <span class="discover__bottom-nav-icon">
+            <img
+              src="https://via.placeholder.com/48"
+              alt="발견"
+              width="48"
+              height="48"
+            />
+          </span>
+          <span class="discover__bottom-nav-text">발견</span>
+        </a>
+        <a href="#" class="discover__bottom-nav-item" onclick="navigateTo('write')">
+          <span class="discover__bottom-nav-icon">
+            <img
+              src="https://via.placeholder.com/48"
+              alt="글쓰기"
+              width="48"
+              height="48"
+            />
+          </span>
+          <span class="discover__bottom-nav-text">글쓰기</span>
+        </a>
+        <a href="#" class="discover__bottom-nav-item" onclick="navigateTo('drawer')">
+          <span class="discover__bottom-nav-icon">
+            <img
+              src="https://via.placeholder.com/48"
+              alt="내 서랍"
+              width="48"
+              height="48"
+            />
+          </span>
+          <span class="discover__bottom-nav-text">내 서랍</span>
+        </a>
+      </nav>
+    </div>
+    <script src="discover.js"></script>
+  </body>
+</html>
