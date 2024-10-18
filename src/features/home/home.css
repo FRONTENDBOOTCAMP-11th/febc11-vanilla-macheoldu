@@ -45,8 +45,15 @@ a:visited {
 
 .wrapper {
   max-width: 360px;
+  height: 760px;
   margin: 0 auto;
   box-sizing: border-box;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 :root {
@@ -101,8 +108,13 @@ a:visited {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px; /* 패딩 포함 높이 설정 */
+  height: 50px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
 }
+
 .header__top-bar {
   display: flex;
   align-items: center;
@@ -171,4 +183,75 @@ a:visited {
 .footer__logo {
   display: flex;
   justify-content: center;
+}
+
+.cover {
+  background-color: var(--color-background-accent);
+  text-align: center;
+  color: var(--color-text-light);
+  position: relative;
+  padding: 20px;
+}
+
+.cover__title {
+  font-size: 22px;
+  padding-top: 55px;
+  margin: 0;
+}
+
+.cover__author {
+  font-size: 12px;
+  padding-bottom: 66px;
+  margin: 0;
+}
+
+.cover__image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cover__badge {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  width: 40px;
+  height: 40px;
+}
+
+.cover__support {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover__support-count {
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+.cover__progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 38px;
+}
+
+.cover__progress-steps {
+  display: flex;
+  margin-right: 9px;
+}
+
+.cover__progress-step {
+  width: 20px;
+  height: 1px;
+  background-color: var(--color-background-primary);
+  opacity: 1;
+}
+
+.cover__progress-step.active {
+  opacity: 0.3;
+}
+
+.cover__progress-text {
+  font-size: 11px;
 }
