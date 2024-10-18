@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link rel="stylesheet" href="start.css">
+  <link rel="stylesheet" href="start-kakao.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="login-header">
+      <h1 class="login-header__title">계정 정보 입력으로도 로그인할 수 있어요.</h1>
+    </header>
+    <main class="login-main">
+      <form>
+        <fieldset class="login-main__id-pw">
+          <legend class="ir">카카오 로그인 폼</legend>
+          <div class="input">
+            <input type="text" placeholder="카카오메일 아이디, 이메일, 전화번호">
+          </div>
+          <div class="input">
+            <input type="password" placeholder="비밀번호">
+          </div>
+          <label class="login-main__save kakao" for="saveIdPw">
+            <img src="../../assets/icons/top/top_check.svg" class="checkbox">
+            <input type="checkbox" id="saveIdPw" aria-label="로그인 정보 저장 체크박스"> 로그인 정보 저장
+            <img src="info.svg" class="info">
+          </label>
+        </fieldset>
+        <div class="btn type--long kakao">
+          <button>로그인</button>
+        </div>
+      </form>
+      <div></div>
+    </main>
+  </div>
+</body>
+
+</html>
