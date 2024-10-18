@@ -133,12 +133,6 @@ label {
   padding-inline: 80px;
   border-radius: 6px;
 }
-.type--long:has(:focus) {
-  box-shadow: 0 0 4px 2px var(--point-color);
-}
-.type--chip:has(:focus) {
-  box-shadow: 0 0 2px 1px var(--point-color);
-}
 .type--long {
   height: 50px;
   font-size: 1.4rem;
@@ -147,6 +141,10 @@ label {
   background-color: var(--grey-50);
   color: var(--bg-color);
 }
+.type--long:has(:focus) {
+  box-shadow: 0 0 4px 2px var(--point-color);
+}
+
 .active {
   background-color: var(--point-color);
 }
@@ -247,6 +245,9 @@ body {
   padding-inline: 10px;
   border: 1px solid var(--point-color);
   border-radius: 14px;
+}
+.type--chip:has(:focus) {
+  box-shadow: 0 0 2px 1px var(--point-color);
 }
 .sign-up__valid {
   margin-block: 8px 10px;

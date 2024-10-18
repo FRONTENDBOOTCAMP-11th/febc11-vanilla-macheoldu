@@ -1,9 +1,20 @@
+/* Kakao Pages*/
+/* Commons */
+.input.kakao:has(input:focus) {
+  border-bottom: 1px solid var(--grey-90);
+}
+.type--long.kakao:has(:focus) {
+  box-shadow: 0 0 4px 2px var(--grey-50);
+}
+.login-main__save.kakao:has(:focus) .checkbox {
+  box-shadow: 0 0 4px 2px var(--grey-50);
+}
 /* Components */
-/* Kakao Page*/
+/* Kakao Pages */
 .login-cover.kakao {
   padding-bottom: 114px;
 }
-.btn:has(#login-kakao) {
+.btn.kakao {
   background-color: #ffe500;
   border-radius: 6px;
   color: var(--grey-95);
@@ -24,4 +35,31 @@
 }
 .login-main__help-link p + p {
   margin-top: 20px;
+}
+
+.login-main__save.kakao .checkbox {
+  background-color: var(--bg-color);
+  border: 1px solid var(--grey-80);
+  box-sizing: border-box;
+}
+.login-main__save.kakao:has(:checked) .checkbox {
+  background-color: #ffe500;
+  border: none;
+}
+.l_flex {
+  display: flex;
+  gap: 8px;
+}
+.info {
+  width: 18px;
+  height: 18px;
+  margin-top: 23px;
+}
+
+.login-header {
+  padding-block: 44px 32px;
+}
+.login-header__title {
+  text-align: center;
+  font-size: 1.4rem;
 }

@@ -20,20 +20,24 @@
       <form>
         <fieldset class="login-main__id-pw">
           <legend class="ir">카카오 로그인 폼</legend>
-          <div class="input">
-            <input type="text" placeholder="카카오메일 아이디, 이메일, 전화번호">
+          <div class="input kakao">
+            <label class="ir" for="kakaoId">카카오 계정 입력란</label>
+            <input type="text" id="kakaoId" placeholder="카카오메일 아이디, 이메일, 전화번호">
           </div>
-          <div class="input">
-            <input type="password" placeholder="비밀번호">
+          <div class="input kakao">
+            <label class="ir" for="kakaoPassword">카카오 계정 비밀번호 입력란</label>
+            <input type="password" id="kakaoPassword" placeholder="비밀번호">
           </div>
-          <label class="login-main__save kakao" for="saveIdPw">
-            <img src="../../assets/icons/top/top_check.svg" class="checkbox">
-            <input type="checkbox" id="saveIdPw" aria-label="로그인 정보 저장 체크박스"> 로그인 정보 저장
-            <img src="info.svg" class="info">
-          </label>
+          <div class="l_flex">
+            <label class="login-main__save kakao" for="saveIdPw">
+              <img src="../../assets/icons/top/top_check.svg" class="checkbox">
+              <input type="checkbox" id="saveIdPw" aria-label="로그인 정보 저장 체크박스"> 로그인 정보 저장
+            </label>
+            <img src="info.svg" class="info" alt="정보 버튼">
+          </div>
         </fieldset>
         <div class="btn type--long kakao">
-          <button>로그인</button>
+          <button type="submit" id="loginKakao">로그인</button>
         </div>
       </form>
       <div></div>
