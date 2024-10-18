@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -23,7 +23,11 @@
           aria-label="검색 입력창"
           onclick="discover()"
         />
-        <button class="discover__header-close" aria-label="검색창 닫기" onclick="closeSearch()">
+        <button
+          class="discover__header-close"
+          aria-label="검색창 닫기"
+          onclick="closeSearch()"
+        >
           ×
         </button>
       </header>
@@ -31,10 +35,15 @@
       <!-- Navigation -->
       <nav class="discover__nav">
         <div class="discover__nav-wrapper">
-          <button class="discover__nav-tab discover__nav-tab--active" onclick="showTab('posts')">
+          <button
+            class="discover__nav-tab discover__nav-tab--active"
+            onclick="showTab('posts')"
+          >
             글
           </button>
-          <button class="discover__nav-tab" onclick="showTab('authors')">작가</button>
+          <button class="discover__nav-tab" onclick="showTab('authors')">
+            작가
+          </button>
         </div>
       </nav>
 
@@ -43,30 +52,41 @@
         <div class="discover__search-header">
           <span class="discover__count-results">글 검색 결과 800건</span>
           <div class="discover__search-filters">
-            <button class="discover__filter-btn discover__filter-btn--active" onclick="sortResults('accuracy')">정확도</button>
-            <button class="discover__filter-btn" onclick="sortResults('recent')">최신</button>
+            <button
+              class="discover__filter-btn discover__filter-btn--active"
+              onclick="sortResults('accuracy')"
+            >
+              정확도
+            </button>
+            <button
+              class="discover__filter-btn"
+              onclick="sortResults('recent')"
+            >
+              최신
+            </button>
           </div>
         </div>
 
-        <div class="discover__results-posts">
-          <div class="discover__result-item-posts">
-            <div class="discover__result-content-posts">
+        <div class="post__lists">
+          <div>
+            <h3 class="post__list-title">
+              딸의 정부청사 출장에 부모님이 동행하는 이유
+            </h3>
+          </div>
+          <div class="post__list-content">
+            <div class="content__text">
               <div>
-              <h3 class="discover__result-title-posts">
-                딸의 정부청사 출장에 부모님이 동행하는 이유
-              </h3>
-            </div>
-            <div>
-              <p class="discover__result-text-posts">
-                분이 많네요, 감사드립니다! 직장인(신입)으로 울릉도에서 근무하며
-                얻게 된 직장생활에 도움 되는...
-              </p>
-              <div class="discover__result-info">
-                Apr 19, 2024 <span class="info__author">by</span> 은설 aka 꿈꾸는 알
+                <p class="content__text-main">
+                  분이 많네요, 감사드립니다! 직장인(신입)으로 울릉도에서
+                  근무하며 얻게 된 직장생활에 도움 되는...
+                </p>
+                <div class="content__text-info">
+                  Apr 19, 2024 <span class="info__author">by</span> 은설 aka
+                  꿈꾸는 알
+                </div>
               </div>
             </div>
-          </div>
-            <div class="discover__result-image">
+            <div class="content__cover">
               <img
                 src="../../assets/images/image_sample1.png"
                 alt="관련 이미지"
@@ -74,92 +94,132 @@
               />
             </div>
           </div>
+        </div>
 
-          <div class="discover__result-item-posts">
-            <div class="discover__result-content-posts">
-              <h3 class="discover__result-title-posts">
-                덴마크의 '<span class="discover__keyword">꿀</span> 하트'쿠키, Honninghjerter
-              </h3>
-              <p class="discover__result-text-posts">
-                오늘날까지 같은 주소에서 영업 중이다. 덴마크의 여왕 잉그리드도
-                이 꿀케이크 제과점을 자주 찾는다...
-              </p>
-              <div class="discover__result-info">Nov 16, 2023 <span class="info__author">by</span> Windsbird</div>
+        <div class="post__lists">
+          <div>
+            <h3 class="post__list-title">
+              덴마크의 '<span class="discover__keyword">꿀</span> 하트' 쿠키,
+              Honninghjerter
+            </h3>
+          </div>
+          <div class="post__list-content">
+            <div class="content__text">
+              <div>
+                <p class="content__text-main">
+                  분이 많네요, 감사드립니다! 직장인(신입)으로 울릉도에서
+                  근무하며 얻게 된 직장생활에 도움 되는 …
+                </p>
+                <div class="content__text-info">
+                  Nov 16. 2023 <span class="info__author">by</span> Nov 16. 2023
+                </div>
+              </div>
             </div>
-            <div class="discover__result-image">
+            <div class="content__cover">
               <img
                 src="../../assets/images/image_sample2.png"
-                alt="쿠키 이미지"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div class="discover__result-item-posts">
-            <div class="discover__result-content-posts">
-              <h3 class="discover__result-title-posts">
-                <span class="discover__keyword">꿀</span> 빠는 풍경
-              </h3>
-              <p class="discover__result-text-posts">
-                책을 보며 기다린 적도 있다. 책을 가까이하는 모습 을 보이고, 책을 읽어주고. 들인 수고에 비해 효과…
-              </p>
-              <div class="discover__result-info">Jan 25, 2024 <span class="info__author">by</span> 쑥쑤루쑥</div>
-            </div>
-            <div class="discover__result-image">
-              <img
-                src="../../assets/images/image_sample3.png"
-                alt="쿠키 이미지"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div class="discover__result-item-posts">
-            <div class="discover__result-content-posts">
-              <h3 class="discover__result-title-posts">
-                373 사진만 봐도 <span class="discover__keyword">꿀</span>과 윤기가 좌르르, 구움과자 - 롱블랙 3월 28일, 문장채집 no. 373
-              </h3>
-              <p class="discover__result-text-posts">
-                주방에서 아카데미 시작. 3. 커리큘럼이 특이. 수업 중 조리 기술을 배우는 시간은 극히 일부. 수강생…
-              </p>
-              <div class="discover__result-info">Mar 28, 2023 <span class="info__author">by</span> 백영선 플라잉웨일...</div>
-            </div>
-            <div class="discover__result-image">
-              <img
-                src="../../assets/images/image_sample4.png"
-                alt="쿠키 이미지"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div class="discover__result-item-posts">
-            <div class="discover__result-content-posts">
-              <h3 class="discover__result-title-posts">
-                덴마크의 '<span class="discover__keyword">꿀</span> 하트'쿠키, Honninghjerter
-              </h3>
-              <p class="discover__result-text-posts">
-                오늘날까지 같은 주소에서 영업 중이다. 덴마크의 여왕 잉그리드도
-                이 꿀케이크 제과점을 자주 찾는다...
-              </p>
-              <div class="discover__result-info">Nov 16, 2023 <span class="info__author">by</span> Windsbird</div>
-            </div>
-            <div class="discover__result-image">
-              <img
-                src="../../assets/images/image_sample5.png"
-                alt="쿠키 이미지"
+                alt="관련 이미지"
                 loading="lazy"
               />
             </div>
           </div>
         </div>
 
+        <div class="post__lists">
+          <div>
+            <h3 class="post__list-title">
+              <span class="discover__keyword">꿀</span> 빠는 풍경
+            </h3>
+          </div>
+          <div class="post__list-content">
+            <div class="content__text">
+              <div>
+                <p class="content__text-main">
+                  책을 보며 기다린 적도 있다. 책을 가까이하는 모습 을 보이고,
+                  책을 읽어주고. 들인 수고에 비해 효과…
+                </p>
+                <div class="content__text-info">
+                  Jan 25. 2024 <span class="info__author">by</span> 쑥쑤루쑥
+                </div>
+              </div>
+            </div>
+            <div class="content__cover">
+              <img
+                src="../../assets/images/image_sample3.png"
+                alt="관련 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
 
+        <div class="post__lists">
+          <div>
+            <h3 class="post__list-title">
+              373 사진만 봐도 꿀과 윤기가 좌르르, 구움과자 - 롱블랙 3월 28일,
+              문장채집 no. 373
+            </h3>
+          </div>
+          <div class="post__list-content">
+            <div class="content__text">
+              <div>
+                <p class="content__text-main">
+                  주방에서 아카데미 시작. 3. 커리큘럼이 특이. 수업 중 조리
+                  기술을 배우는 시간은 극히 일부. 수강생…
+                </p>
+                <div class="content__text-info">
+                  Mar 28. 2023 <span class="info__author">by</span> 백영선
+                  플라잉웨일 …
+                </div>
+              </div>
+            </div>
+            <div class="content__cover">
+              <img
+                src="../../assets/images/image_sample1.png"
+                alt="관련 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="post__lists">
+          <div>
+            <h3 class="post__list-title">
+              딸의 정부청사 출장에 부모님이 동행하는 이유
+            </h3>
+          </div>
+          <div class="post__list-content">
+            <div class="content__text">
+              <div>
+                <p class="content__text-main">
+                  분이 많네요, 감사드립니다! 직장인(신입)으로 울릉도에서
+                  근무하며 얻게 된 직장생활에 도움 되는...
+                </p>
+                <div class="content__text-info">
+                  Apr 19, 2024 <span class="info__author">by</span> 은설 aka
+                  꿈꾸는 알
+                </div>
+              </div>
+            </div>
+            <div class="content__cover">
+              <img
+                src="../../assets/images/image_sample1.png"
+                alt="관련 이미지"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
       </main>
 
       <!-- Bottom Navigation -->
       <nav class="discover__bottom-nav">
-        <a href="#" class="discover__bottom-nav-item" onclick="navigateTo('home')">
+        <a
+          href="#"
+          class="discover__bottom-nav-item"
+          onclick="navigateTo('home')"
+        >
           <span class="discover__bottom-nav-icon">
             <img
               src="https://via.placeholder.com/48"
@@ -170,7 +230,11 @@
           </span>
           <span class="discover__bottom-nav-text">홈</span>
         </a>
-        <a href="#" class="discover__bottom-nav-item discover__bottom-nav-item--active" onclick="navigateTo('discover')">
+        <a
+          href="#"
+          class="discover__bottom-nav-item discover__bottom-nav-item--active"
+          onclick="navigateTo('discover')"
+        >
           <span class="discover__bottom-nav-icon">
             <img
               src="https://via.placeholder.com/48"
@@ -181,7 +245,11 @@
           </span>
           <span class="discover__bottom-nav-text">발견</span>
         </a>
-        <a href="#" class="discover__bottom-nav-item" onclick="navigateTo('write')">
+        <a
+          href="#"
+          class="discover__bottom-nav-item"
+          onclick="navigateTo('write')"
+        >
           <span class="discover__bottom-nav-icon">
             <img
               src="https://via.placeholder.com/48"
@@ -192,7 +260,11 @@
           </span>
           <span class="discover__bottom-nav-text">글쓰기</span>
         </a>
-        <a href="#" class="discover__bottom-nav-item" onclick="navigateTo('drawer')">
+        <a
+          href="#"
+          class="discover__bottom-nav-item"
+          onclick="navigateTo('drawer')"
+        >
           <span class="discover__bottom-nav-icon">
             <img
               src="https://via.placeholder.com/48"
