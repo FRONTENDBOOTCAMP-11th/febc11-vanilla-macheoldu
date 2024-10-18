@@ -155,22 +155,22 @@ input:focus::placeholder {
 }
 
 /* 검색 결과 */
-.discover__results {
+.discover__results-posts {
   padding: 0 16px;
 }
 
-.discover__result-item {
+.discover__result-item-posts {
   display: flex;
   padding: 16px 0;
   border-bottom: 1px solid var(--color-border);
 }
 
-.discover__result-content {
+.discover__result-content-posts {
   flex: 1;
   margin-right: 12px;
 }
 
-.discover__result-title {
+.discover__result-title-posts {
   margin: 0 0 8px 0;
   font-size: 0.875rem;
   font-weight: normal;
@@ -178,7 +178,7 @@ input:focus::placeholder {
   line-height: 1.4;
 }
 
-.discover__result-text {
+.discover__result-text-posts {
   font-size: 0.75rem;
   color: var(--color-content);
   margin: 0 0 8px 0;
