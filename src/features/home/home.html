@@ -20,7 +20,7 @@
           >
             <!-- 로고 이미지 -->
             <img
-              src="/src/assets/logos/logo_black.png"
+              src="/src/assets/logos/logo_black.svg"
               alt="브런치스토리 로고"
             />
           </a>
@@ -33,9 +33,8 @@
             >
               <!-- 검색 아이콘 이미지 -->
               <img
-                src="/src/assets/icons/navigation/nav_search.svg"
+                src="/src/assets/icons/top/top_search.svg"
                 alt="검색 아이콘"
-                width="24"
               />
             </button>
             <!-- 시작하기 버튼 -->
@@ -98,7 +97,7 @@
 
         <section class="weekly-serial" aria-labelledby="weeklySerialTitle">
           <!-- 요일별 연재 섹션 시작 -->
-          <h2 class="weekly-serial__title" id="weeklySerialTitle">
+          <h2 class="weekly-serial__heading" id="weeklySerialTitle">
             요일별 연재
           </h2>
           <!-- 연재 설명 문구 -->
@@ -111,12 +110,7 @@
             role="tablist"
             aria-label="요일별 연재"
           >
-            <button
-              class="weekly-serial__tab"
-              role="tab"
-              data-day="monday"
-              aria-selected="true"
-            >
+            <button class="weekly-serial__tab" role="tab" data-day="monday">
               월
             </button>
             <button class="weekly-serial__tab" role="tab" data-day="tuesday">
@@ -125,7 +119,12 @@
             <button class="weekly-serial__tab" role="tab" data-day="wednesday">
               수
             </button>
-            <button class="weekly-serial__tab" role="tab" data-day="thursday">
+            <button
+              class="weekly-serial__tab"
+              role="tab"
+              data-day="thursday"
+              aria-selected="true"
+            >
               목
             </button>
             <button class="weekly-serial__tab" role="tab" data-day="friday">
@@ -154,9 +153,7 @@
           <ul class="weekly-serial__list">
             <li class="weekly-serial__item">
               <article class="weekly-serial__info">
-                <!-- 연재 제목 -->
                 <h3 class="weekly-serial__title">낙원</h3>
-                <!-- 연재 세부 정보 -->
                 <p class="weekly-serial__details">
                   6 윤희 - 2
                   <img
@@ -165,17 +162,15 @@
                     class="weekly-serial__new"
                   />
                 </p>
-                <!-- 작가 정보 -->
-                <p class="weekly-serial__author">by 아무</p>
+                <p class="weekly-serial__author"><em>by</em> 아무</p>
               </article>
             </li>
+
             <li class="weekly-serial__item">
               <article class="weekly-serial__info">
-                <!-- 연재 제목 -->
                 <h3 class="weekly-serial__title">
                   딸과 만나기까지 100일간의 기록
                 </h3>
-                <!-- 연재 세부 정보 -->
                 <p class="weekly-serial__details">
                   D-70, 30주
                   <img
@@ -184,33 +179,29 @@
                     class="weekly-serial__new"
                   />
                 </p>
-                <!-- 작가 정보 -->
-                <p class="weekly-serial__author">by Gigantes Yang</p>
+                <p class="weekly-serial__author"><em>by</em> Gigantes Yang</p>
               </article>
-              <!-- 연재 이미지 -->
               <img
                 src="/src/assets/images/home/serial1.png"
                 alt="딸과 만나기까지 100일간의 기록"
                 class="weekly-serial__image"
               />
             </li>
+
             <li class="weekly-serial__item">
               <article class="weekly-serial__info">
-                <!-- 연재 제목 -->
                 <h3 class="weekly-serial__title">인류애 충전일기</h3>
-                <!-- 연재 세부 정보 -->
                 <p class="weekly-serial__details">
-                  열두 살 아이도 '나 몰라라' 하지는 않는다
+                  열두 살 아이도 '나 몰라라'
                   <img
                     src="/src/assets/icons/status/new.svg"
                     alt="새 글"
                     class="weekly-serial__new"
                   />
+                  <br />하지 않는다
                 </p>
-                <!-- 작가 정보 -->
-                <p class="weekly-serial__author">by 박단단</p>
+                <p class="weekly-serial__author"><em>by</em> 박단단</p>
               </article>
-              <!-- 연재 이미지 -->
               <img
                 src="/src/assets/images/home/serial2.png"
                 alt="인류애 충전일기"
@@ -219,7 +210,14 @@
             </li>
           </ul>
           <!-- 연재 작품 전체 보기 버튼 -->
-          <button class="weekly-serial__view-all">연재 작품 전체 보기</button>
+          <button class="weekly-serial__view-all">
+            <span>연재 작품 전체 보기</span>
+            <img
+              src="/src/assets/icons/actions/next.svg"
+              alt="다음"
+              class="icon-next"
+            />
+          </button>
           <!-- 요일별 연재 섹션 끝 -->
         </section>
 
@@ -234,7 +232,7 @@
                 <!-- 연재 제목 -->
                 <h3 class="todays-pick__title">무사히 마흔살이 될 수 있을까</h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 강윤이</p>
+                <p class="todays-pick__author"><em>by</em> 강윤이</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   병원에서 암 진단을 받고 나와 햇볕이 작열하며 품어오는
@@ -262,7 +260,7 @@
                 <!-- 연재 제목 -->
                 <h3 class="todays-pick__title">맞벌이 하루살이</h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 서리</p>
+                <p class="todays-pick__author"><em>by</em> 서리</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   누구의 엄마로 불리지만, 그 전에 내 이름이 있다. 엄마로
@@ -290,7 +288,7 @@
                   집이 있었는데, 이제는 없습니다
                 </h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 준지</p>
+                <p class="todays-pick__author"><em>by</em> 준지</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   성북동 부모님 집에서 편하게 얹혀 살며 대학도, 직장도 30분이
@@ -318,7 +316,7 @@
                 <!-- 연재 제목 -->
                 <h3 class="todays-pick__title">나의 우울일기 2</h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 그레이스</p>
+                <p class="todays-pick__author"><em>by</em> 그레이스</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   언제부터인지 모를, 심한 우울증을 앓고 있습니다. 인생이 무언가
@@ -346,7 +344,7 @@
                   포카리스웨트같은 과학콘텐츠 이야기
                 </h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by corescience</p>
+                <p class="todays-pick__author"><em>by</em> corescience</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   우리의 삶속에는 많은 과학적 지식 들이 숨어져 있습니다.알지만
@@ -356,7 +354,7 @@
               <!-- 연재 이미지와 오버레이 시작 -->
               <div class="todays-pick__image-wrapper">
                 <img
-                  src="/src/assets/images//home/pick5.png"
+                  src="/src/assets/images/home/pick5.png"
                   alt="포카리스웨트같은 과학콘텐츠 이야기"
                   class="todays-pick__image"
                 />
@@ -374,7 +372,7 @@
                 <!-- 연재 제목 -->
                 <h3 class="todays-pick__title">서울이 싫어서</h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 은연주</p>
+                <p class="todays-pick__author"><em>by</em> 은연주</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   원래부터 도시를 싫어했다. 남편과 연애할 때도 맨날 귀촌하자고
@@ -400,7 +398,7 @@
                 <!-- 연재 제목 -->
                 <h3 class="todays-pick__title">수요에세이</h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 뮤뮤</p>
+                <p class="todays-pick__author"><em>by</em> 뮤뮤</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   일주일에 한 번, 수요일마다 에세이 한 편을 배달해 드리겠습니다.
@@ -426,7 +424,7 @@
                 <!-- 연재 제목 -->
                 <h3 class="todays-pick__title">강남 안에, 강북 남자</h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 눅눅한과자</p>
+                <p class="todays-pick__author"><em>by</em> 눅눅한과자</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   나도 몰랐다. 내가 강남에 살게 될 줄 은. 강남 출신 아내를 만나
@@ -454,7 +452,7 @@
                   서울에서 혼자 밥해먹고 사는 사람
                 </h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 이확위</p>
+                <p class="todays-pick__author"><em>by</em> 이확위</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   해외에서 2년 반을 살다가 다시 한 국에 돌아왔습니다. 서울에서
@@ -484,7 +482,7 @@
                   이과 남편과 문과 아내의 실화극
                 </h3>
                 <!-- 작가 정보 -->
-                <p class="todays-pick__author">by 빛날현</p>
+                <p class="todays-pick__author"><em>by</em> 빛날현</p>
                 <!-- 연재 설명 -->
                 <p class="todays-pick__description">
                   결혼은 보통 극과 극이 만나 맞춰간 다고들 하지만..이건 모서리와
@@ -640,7 +638,7 @@
               <!-- 추천 도서 제목 -->
               <h3 class="main__featured-book-title">그리움이 지칠 때</h3>
               <!-- 추천 도서 작가 -->
-              <p class="main__featured-book-author">by 산들</p>
+              <p class="main__featured-book-author"><em>by</em> 산들</p>
             </div>
           </div>
           <!-- 추천 도서 이미지 -->
@@ -840,7 +838,7 @@
               <!-- 추천 도서 제목 -->
               <h3 class="main__featured-book-title">그리움이 지칠 때</h3>
               <!-- 추천 도서 작가 -->
-              <p class="main__featured-book-author">by 산들</p>
+              <p class="main__featured-book-author"><em>by</em> 산들</p>
             </div>
           </div>
 
@@ -990,7 +988,7 @@
               <!-- 첫 번째 책 제목 -->
               <p class="main__new-authors-book-title">태어나는 말들</p>
               <!-- 첫 번째 책 작가 -->
-              <p class="main__new-authors-book-author">by 조소연</p>
+              <p class="main__new-authors-book-author"><em>by</em> 조소연</p>
             </li>
 
             <!-- 두 번째 책 -->
@@ -1004,7 +1002,7 @@
               <!-- 두 번째 책 제목 -->
               <p class="main__new-authors-book-title">엄마 없는 농담</p>
               <!-- 두 번째 책 작가 -->
-              <p class="main__new-authors-book-author">by 김현민</p>
+              <p class="main__new-authors-book-author"><em>by</em> 김현민</p>
             </li>
 
             <!-- 세 번째 책 -->
@@ -1018,7 +1016,7 @@
               <!-- 세 번째 책 제목 -->
               <p class="main__new-authors-book-title">인생은 방탈출</p>
               <!-- 세 번째 책 작가 -->
-              <p class="main__new-authors-book-author">by 오지은</p>
+              <p class="main__new-authors-book-author"><em>by</em> 오지은</p>
             </li>
           </ul>
           <!-- 새로운 작가의 책 목록 끝 -->
