@@ -1,0 +1,27 @@
+/* Components */
+/* Kakao Page*/
+.login-cover.kakao {
+  padding-bottom: 114px;
+}
+.btn:has(#login-kakao) {
+  background-color: #ffe500;
+  border-radius: 6px;
+  color: var(--grey-95);
+  margin-bottom: 26px;
+}
+.kakao-logo {
+  width: 18px;
+  height: 16px;
+}
+
+.login-main__help-link {
+  text-align: center;
+}
+.login-main__help-link p a {
+  text-decoration: underline;
+  font-size: 1.3rem;
+  color: var(--grey-80);
+}
+.login-main__help-link p + p {
+  margin-top: 20px;
+}
