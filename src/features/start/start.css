@@ -10,6 +10,12 @@ h1 {
   font-weight: unset;
   font-size: unset;
 }
+a {
+  margin: unset;
+  padding: unset;
+  color: unset;
+  text-decoration: none;
+}
 img {
   vertical-align: top;
   width: 100%;
@@ -115,6 +121,13 @@ label {
   height: 1px;
   margin: -1px;
   overflow: hidden;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  padding-inline: 80px;
+  border-radius: 6px;
 }
 .type--long:has(:focus) {
   box-shadow: 0 0 4px 2px var(--point-color);
@@ -242,10 +255,8 @@ body {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  position: relative;
 }
 .type--visibility__icon {
-  position: absolute;
   left: 0;
   top: 0;
 }
