@@ -12,6 +12,7 @@
 
 <body>
   <div class="wrapper">
+    <!-- 시작하기 상단 커버 -->
     <header class="login-cover">
       <figure class="login-cover__figure">
         <div class="login-cover__src">
@@ -25,6 +26,8 @@
         </figcaption>
       </figure>
     </header>
+
+    <!-- 시작하기 로그인 폼 -->
     <main class="login-main">
       <form class="login-main__form">
         <fieldset class="login-main__id-pw">
@@ -41,11 +44,15 @@
             <img src="../../assets/icons/actions/check.svg" class="checkbox">
             <input type="checkbox" id="saveIdPw" aria-label="로그인 정보 저장 체크박스"> 로그인 정보 저장
           </label>
+          <!-- 하단 로그인 버튼 선택 시, 유효성 검증 이후 오류 시 class="hidden" 속성 제거 -->
           <div class="login-main__error">옳지 않은 이메일과 비밀번호입니다.</div>
         </fieldset>
+        <!-- 로그인 버튼, 클릭 시 로그인 시도, 올바르지 않은 이메일, 비밀번호 시 위의 에러메시지 출력
+         상단의 로그인 폼 미입력 시 disable 상태, 상단 로그인 폼 입력 시 class="active" 상태 출력 -->
         <div class="btn type--long">
           <button type="submit" id="login" aria-label="로그인 버튼">로그인</button>
         </div>
+        <!-- 회원가입 화면(signUp.html)으로 이동 -->
         <div class="btn type--long">
           <button type="button" id="signUp" aria-label="회원가입 버튼">회원가입</button>
         </div>

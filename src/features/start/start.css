@@ -264,10 +264,6 @@ body {
   width: 24px;
   height: 24px;
 }
-.type--visibility__icon {
-  left: 0;
-  top: 0;
-}
 
 /* Kakao Login-home */
 .login-cover.kakao {
