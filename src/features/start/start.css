@@ -73,17 +73,19 @@ body {
 
 /* CSS Variables*/
 :root {
-  --bg-color: #fff;
+  --white: #fff;
+  --grey-10: #e6e6e6;
+  --grey-20: #ddd;
+  --grey-30: #d7d7d7;
+  --grey-40: #aaa;
+  --grey-70: #999;
+  --grey-60: #959595;
+  --grey-70: #7d7d7d;
+  --grey-80: #666;
+  --grey-90: #333;
   --point-color: #00c6be;
   --error-color: #fc3b75;
   --kakao-color: #ffe500;
-  --grey-10: #ddd;
-  --grey-30: #d7d7d7;
-  --grey-50: #aaa;
-  --grey-70: #999;
-  --grey-80: #959595;
-  --grey-90: #666;
-  --grey-95: #333;
 }
 
 /* Layout */
@@ -91,7 +93,7 @@ body {
   width: 360px;
   height: 740px;
   margin: 0 auto;
-  background-color: var(--bg-color);
+  background-color: var(--white);
 }
 .login-cover {
   padding-block: 52px 12px;
@@ -99,6 +101,9 @@ body {
 .login-main,
 .sign-up {
   padding-inline: 20px;
+}
+.login-main__form {
+  margin-bottom: 18px;
 }
 .l_flex {
   display: flex;
@@ -142,8 +147,8 @@ label {
   font-size: 1.4rem;
   border-radius: 4px;
   box-sizing: border-box;
-  background-color: var(--grey-50);
-  color: var(--bg-color);
+  background-color: var(--grey-40);
+  color: var(--white);
 }
 .type--long:has(:focus) {
   box-shadow: 0 0 4px 2px var(--point-color);
@@ -162,7 +167,7 @@ label {
 /* Components */
 /* Login Page*/
 body {
-  background-color: var(--grey-90);
+  background-color: var(--grey-80);
 }
 
 .login-cover__figure {
@@ -186,7 +191,7 @@ body {
 .login-cover__caption p {
   font-size: 1.2rem;
   line-height: 1.3;
-  color: var(--grey-90);
+  color: var(--grey-80);
 }
 
 .login-main__save {
@@ -197,7 +202,7 @@ body {
   gap: 4px;
 }
 .login-main__save .checkbox {
-  background-color: var(--grey-70);
+  background-color: var(--grey-20);
   width: 20px;
   height: 20px;
   border-radius: 10px;
@@ -218,7 +223,7 @@ body {
 }
 
 .type--long:has(#signUp) {
-  background-color: var(--bg-color);
+  background-color: var(--white);
   border: 1px solid var(--point-color);
   color: var(--point-color);
 }
@@ -271,12 +276,10 @@ body {
 }
 .type--long.kakao {
   background-color: var(--kakao-color);
-  border-radius: 6px;
-  color: var(--grey-95);
-  margin-bottom: 26px;
+  color: var(--grey-90);
 }
 .type--long.kakao:has(:focus) {
-  box-shadow: 0 0 4px 2px var(--grey-50);
+  box-shadow: 0 0 4px 2px var(--grey-40);
 }
 .kakao-logo {
   width: 18px;
@@ -285,11 +288,12 @@ body {
 
 .login-main__help-link {
   text-align: center;
+  margin-top: 28px;
 }
 .login-main__help-link p a {
   text-decoration: underline;
   font-size: 1.3rem;
-  color: var(--grey-80);
+  color: var(--grey-60);
 }
 .login-main__help-link p + p {
   margin-top: 20px;
@@ -304,11 +308,11 @@ body {
   font-size: 1.4rem;
 }
 .input.kakao:has(input:focus) {
-  border-bottom: 1px solid var(--grey-90);
+  border-bottom: 1px solid var(--grey-80);
 }
 .login-main__save.kakao .checkbox {
-  background-color: var(--bg-color);
-  border: 1px solid var(--grey-80);
+  background-color: var(--white);
+  border: 1px solid var(--grey-60);
   box-sizing: border-box;
 }
 .login-main__save.kakao:has(:checked) .checkbox {
@@ -316,11 +320,25 @@ body {
   border: none;
 }
 .login-main__save.kakao:has(:focus) .checkbox {
-  box-shadow: 0 0 4px 2px var(--grey-50);
+  box-shadow: 0 0 4px 2px var(--grey-40);
 }
 
 .info {
   width: 18px;
   height: 18px;
   margin-top: 23px;
+}
+.login-main__find {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+.login-main__find p {
+  color: var(--grey-70);
+  font-size: 1.125rem;
+}
+.divider {
+  padding-inline: 15px;
+  border-left: 1px solid var(--grey-10);
+  border-right: 1px solid var(--grey-10);
 }
