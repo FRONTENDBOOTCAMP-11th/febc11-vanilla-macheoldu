@@ -33,13 +33,16 @@
             <!-- 글의 저자 정보 -->
             <div class="header__info-author">
               <!-- by 이미지 -->
-              <img
-                class="header__auhor-byimage"
+              <!-- <img
+                class="header__author-byimage"
                 src="../../assets/images/by.png"
                 alt="by라는 글자의 이미지"
-              />
+              /> -->
               <!-- 저자 이름 -->
-              <p class="header__author-name">Sunny</p>
+              <p class="header__author-nickname">
+                <span class="header__author-nickname-detail">by</span>
+                Sunny
+              </p>
               <!-- 작성 날짜 -->
               <span class="header__author-date">· Jul 23. 2024</span>
             </div>
@@ -244,6 +247,37 @@
           </div>
         </section>
       </main>
+      <!-- footer -->
+      <footer class="footer">
+        <ul class="footer__interactions">
+          <!-- 좋아요 아이콘 -->
+          <li class="footer__interactions-item">
+            <img
+              class="footer__like-icon"
+              src="../../assets/icons/like_sub/like_black.svg"
+              alt="좋아요"
+            />
+            <span class="footer__like-count">81</span>
+          </li>
+          <!-- 링크 아이콘 -->
+          <li class="footer__interactions-item">
+            <img
+              class="footer__move-icon"
+              src="../../assets/icons/like_sub/link.svg"
+              alt="이동하기"
+            />
+          </li>
+          <!-- 댓글 아이콘 -->
+          <li class="footer__interactions-item">
+            <img
+              class="footer__comment-icon"
+              src="../../assets/icons/like_sub/comment.svg"
+              alt="댓글 개수"
+            />
+            <span class="footer__comment-count">3</span>
+          </li>
+        </ul>
+      </footer>
     </div>
   </body>
 </html>

@@ -80,7 +80,7 @@ body {
 }
 
 /* Design */
-.body {
+body {
   background-color: var(--color-gray-25);
 }
 
@@ -97,12 +97,12 @@ body {
 
 .header__cover {
   position: relative;
+  aspect-ratio: 3/2;
 }
 
 .header__cover-image {
   width: 100%;
   height: 100%;
-  aspect-ratio: 3/2;
   object-fit: cover;
   /* 이미지 첨부하고 제거하기, HTML태그에 alt 작성하기 */
   background-color: antiquewhite;
@@ -142,12 +142,23 @@ body {
   align-items: center;
 }
 
-.header__author-name {
+.header__author-nickname {
   margin-left: 3px;
   color: var(--color-gray-60);
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.625;
+}
+
+.header__author-nickname-detail {
+  /* by img로 넣지 않고 글꼴로 가져가는게 나을 것 같다는 판단이 듬 */
+  font-family: cursive;
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.625;
+  opacity: 0.5;
+  margin-right: 2px;
 }
 
 .header__author-date {
@@ -240,6 +251,7 @@ body {
 
 .main__user-image-wrapper {
   aspect-ratio: 1/1;
+  align-self: start;
 }
 
 .main__user-image {
@@ -325,8 +337,6 @@ body {
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.5;
-  /* figma시안에는 left인데 어떻게 하는게 좋을지 논의하기 */
-  text-align: center;
 }
 
 .main__profile-image-wraaper {
@@ -381,5 +391,27 @@ body {
 }
 
 .main__interactions-button-image {
+  object-fit: cover;
+}
+
+.footer {
+  background-color: var(--color-white);
+  margin-bottom: 40px;
+}
+
+.footer__interactions {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer__interactions-item:last-child {
+  margin-left: auto;
+}
+
+.footer__like-icon,
+.footer__move-icon,
+.footer-comment-icon {
   object-fit: cover;
 }
