@@ -61,6 +61,7 @@ body {
   --color-blue-50: #00c6be;
 
   --color-gray-20: #eeeeee;
+  --color-gray-25: #f5f5f5;
   --color-gray-30: #f8f8f8;
   --color-gray-50: #959595;
   --color-gray-60: #666666;
@@ -76,7 +77,7 @@ body {
 
 /* Design */
 body {
-  background-color: var(--color-white);
+  background-color: var(--color-gray-25);
 }
 
 .navbar {
@@ -85,6 +86,7 @@ body {
 }
 
 .header {
+  background-color: var(--color-white);
   position: relative;
 }
 
@@ -97,7 +99,7 @@ body {
 }
 
 .header__contents {
-  padding: 0 20px;
+  padding: 20px;
 }
 .header__contents-profile {
   margin-bottom: 20px;
@@ -157,10 +159,14 @@ body {
   margin-left: auto;
 }
 
+.main {
+  background-color: var(--color-white);
+}
+
 .main__article-item {
   padding: 20px;
   /* 색상이 #eeeeee인데 화면에 티가 잘 안남 */
-  border-bottom: 1px solid var(--color-gray-20);
+  border-top: 1px solid var(--color-gray-20);
 }
 
 .main__article-title {
