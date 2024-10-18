@@ -32,7 +32,7 @@ ul {
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: #f5f5f5;
+  background-color: #f8f8f8;
   color: var(--color-placeholder);
   padding-bottom: 49px;
 }
@@ -95,7 +95,7 @@ input:focus::placeholder {
 .discover__nav-wrapper {
   display: flex;
   justify-content: center;
-  padding: 0 16px;
+  padding: 0;
 }
 
 .discover__nav-tab {
@@ -156,13 +156,12 @@ input:focus::placeholder {
 
 /* 검색 결과 */
 .discover__results-posts {
-  padding: 0 16px;
+  padding: 0 20px;
 }
 
 .discover__result-item-posts {
   display: flex;
   padding: 16px 0;
-  border-bottom: 1px solid var(--color-border);
 }
 
 .discover__result-content-posts {
@@ -172,14 +171,19 @@ input:focus::placeholder {
 
 .discover__result-title-posts {
   margin: 0 0 8px 0;
-  font-size: 0.875rem;
-  font-weight: normal;
+  font-size: 16px;
+  font-weight: 300;
   color: var(--color-title);
-  line-height: 1.4;
+  line-height: 1.5; /* 24px */
+}
+
+.discover__keyword {
+  color: #00C6BE;
+  font-weight: 400;
 }
 
 .discover__result-text-posts {
-  font-size: 0.75rem;
+  font-size: 12px;
   color: var(--color-content);
   margin: 0 0 8px 0;
   line-height: 1.4;
