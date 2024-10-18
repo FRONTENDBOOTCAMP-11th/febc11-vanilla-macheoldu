@@ -1,0 +1,229 @@
+/* Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variables */
+:root {
+  /* Colors */
+  --color-white: #fff;
+  --color-point: #00c6be;
+  --color-border: #ddd;
+  --color-placeholder: #bfbfbf;
+  --color-content: #959595;
+  --color-inactive: #666;
+  --color-title: #333;
+}
+
+/* Layouts */
+.discover {
+  max-width: 360px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  color: var(--color-placeholder);
+  padding-bottom: 49px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  border: none;
+  outline: none;
+  padding: 0 8px;
+}
+
+input::placeholder {
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: var(--color-placeholder);
+  line-height: normal;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+/* 검색창 헤더 */
+.discover__header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 16px;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.discover__header-input {
+  flex: 1;
+  height: 100%;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.discover__header-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-inactive);
+  margin-left: 8px;
+}
+
+/* 네비게이션 탭 */
+.discover__nav {
+  border-bottom: 1px solid #eee;
+  background-color: var(--color-white);
+}
+
+.discover__nav-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.discover__nav-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--color-inactive);
+  position: relative;
+}
+
+.discover__nav-tab--active {
+  color: var(--color-point);
+  font-weight: bold;
+}
+
+.discover__nav-tab--active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-point);
+}
+
+/* 검색 결과 헤더 */
+.discover__search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: var(--color-white);
+}
+
+.discover__count-results {
+  font-size: 0.75rem;
+  color: var(--color-content);
+}
+
+.discover__search-filters {
+  display: flex;
+  gap: 16px;
+}
+
+.discover__filter-btn {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  color: var(--color-content);
+}
+
+.discover__filter-btn--active {
+  color: var(--color-point);
+}
+
+/* 검색 결과 */
+.discover__results {
+  padding: 0 16px;
+}
+
+.discover__result-item {
+  display: flex;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.discover__result-content {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.discover__result-title {
+  margin: 0 0 8px 0;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--color-title);
+  line-height: 1.4;
+}
+
+.discover__result-text {
+  font-size: 0.75rem;
+  color: var(--color-content);
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.discover__result-info {
+  font-size: 0.75rem;
+  color: var(--color-content);
+}
+
+.discover__result-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+/* 하단 네비게이션 */
+.discover__bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 360px;
+  height: 100px; 
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.discover__bottom-nav-item {
+  color: var(--color-inactive);
+  text-decoration: none;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.discover__bottom-nav-item--active {
+  color: var(--color-point);
+}
