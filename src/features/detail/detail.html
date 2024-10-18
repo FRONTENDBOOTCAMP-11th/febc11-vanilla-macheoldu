@@ -48,10 +48,14 @@
       <!-- footer -->
       <footer class="footer">
         <section class="footer__cotents">
-          <!-- new author 소개 -->
+          <!-- new author -->
           <div class="footer__contents-profile">
-            <h2 class="footer__profile-nickname">Sunny</h2>
-            <p class="footer__profile-occupation">회사원</p>
+            <!-- new author 닉네임, 직업 -->
+            <div class="footer-profile-user">
+              <h2 class="footer__user-nickname">Sunny</h2>
+              <p class="footer__user-occupation">회사원</p>
+            </div>
+            <!-- new author 프로필 이미지 -->
             <div class="footer__image-wraaper">
               <img
                 src="../../assets/images/new-author.png"
@@ -59,12 +63,36 @@
               />
             </div>
           </div>
-          <!-- new author 글 -->
-          <div>B</div>
-          <!-- new author 구독 -->
-          <div>C</div>
+          <!-- new author 간단한 자기소개 -->
+          <div class="footer__contents-brief-info">
+            <p class="footer__brief-info">
+              12년 차 국내 항공사 승무원의 겨울 산티아고 순례길 이야기 연재 중.
+              커피 한 잔을 벗 삼아 편하게 읽을 수 있는 글쓰기에 꽤나 진심인 편입
+              니다. 후후.
+            </p>
+          </div>
+          <!-- new author 구독 관련 부분 -->
+          <div class="footer__contents-interactions">
+            <!-- 구독자 -->
+            <div class="footer__interactions-subscriber">
+              <p class="footer__subscriber">구독자</p>
+              <span class="footer__subscriber-numbers">108</span>
+            </div>
+            <!-- 구독 이미지 -->
+            <div class="footer__interactions-button">
+              <img
+                src="../../assets/icons/like_sub/sub.svg"
+                alt="구독 체크 하는 이미지"
+              />
+            </div>
+          </div>
         </section>
-        <div>하트링크댓글</div>
+        <!-- 🖤, 이동 ,댓글 부분-->
+        <div class="footer__action">
+          <div class="footer__action-like">하트</div>
+          <div class="footer__action-link">이동</div>
+          <div class="footer__action-comment">댓글</div>
+        </div>
       </footer>
     </div>
   </body>
