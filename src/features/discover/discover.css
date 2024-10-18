@@ -194,9 +194,25 @@ input:focus::placeholder {
   color: var(--color-content);
 }
 
+.info__author::before {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+}
+
+.info__author {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
+}
+
 .discover__result-image {
   width: 60px;
   height: 60px;
+}
+
+.discover__result-image img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
