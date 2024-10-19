@@ -1,13 +1,6 @@
-* {
-  font-size: 100%; /* 브라우저 기본 폰트 크기로 설정 (보통 16px) */
-  font-weight: normal; /* 기본 폰트 두께로 설정 */
-  line-height: 1.5; /* 텍스트 가독성을 위해 라인 높이를 지정 (권장 값: 1.5) */
-}
-
 body,
 button,
 ul,
-li,
 h1,
 h2,
 h3,
@@ -21,6 +14,17 @@ a {
   text-decoration: none;
   color: inherit;
   font-family: inherit;
+  font-weight: normal;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ol {
+  list-style: decimal;
+  counter-reset: item;
 }
 
 button {
@@ -40,10 +44,6 @@ a:visited {
   text-decoration: none;
 }
 
-.todays-pick__list {
-  padding: 0;
-}
-
 .cover__image-wrapper {
   margin: 0;
   padding: 0;
@@ -60,24 +60,6 @@ a:visited {
 
 .wrapper::-webkit-scrollbar {
   display: none;
-}
-
-:root {
-  font-family:
-    'Pretendard Variable',
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    Roboto,
-    'Helvetica Neue',
-    'Segoe UI',
-    'Apple SD Gothic Neo',
-    'Noto Sans KR',
-    'Malgun Gothic',
-    sans-serif;
-  font-size: 16px; /* 기본 폰트 크기 설정 */
-  font-weight: 400; /* 보통 두께 설정 */
 }
 
 :root {
@@ -378,4 +360,106 @@ a:visited {
 .icon-next {
   width: 20px;
   height: 20px;
+}
+
+.divider {
+  height: 9px;
+  border-top: 1px solid #ddd;
+  background: #f8f8f8;
+}
+
+.todays-pick__title {
+  font-weight: bold;
+  color: var(--color-text-strong);
+}
+
+.todays-pick__title--english {
+  font-size: 12px;
+}
+
+.todays-pick__title--korean {
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.todays-pick__title {
+  font-size: 17px;
+}
+
+.todays-pick__author {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.todays-pick__description {
+  color: var(--color-text-muted);
+}
+
+.todays-pick__list {
+  list-style: decimal;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+}
+
+.main__top-subscribed-authors-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+}
+
+.main__top-subscribed-author {
+  border-right: 1px solid var(--color-border-secondary); /* 오른쪽 선 */
+  border-bottom: 1px solid var(--color-border-secondary); /* 아래쪽 선 */
+}
+
+.main__top-subscribed-author:nth-child(1),
+.main__top-subscribed-author:nth-child(2) {
+  padding: 0 20px 11px 23px;
+}
+
+.main__top-subscribed-author:nth-child(3),
+.main__top-subscribed-author:nth-child(4) {
+  padding: 31px 20px 11px 23px;
+}
+/* 오른쪽 아이템의 오른쪽 선 제거 */
+.main__top-subscribed-author:nth-child(2n) {
+  border-right: none;
+}
+
+/* 첫 번째 두 개의 아이템의 위쪽 선 제거 */
+.main__top-subscribed-author:nth-child(-n + 2) {
+  border-top: none;
+}
+
+/* 마지막 두 개의 아이템의 아래쪽 선 제거 */
+.main__top-subscribed-author:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.main__top-subscribed-authors {
+  padding: 102px 25px 48px;
+}
+
+.main__top-subscribed-author-image {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.main__top-subscribed-author-name {
+  font-size: 19px;
+  color: var(--color-text-strong);
+}
+
+.main__top-subscribed-author-role {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 15px;
+}
+
+.main__top-subscribed-author-description {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.46;
 }
