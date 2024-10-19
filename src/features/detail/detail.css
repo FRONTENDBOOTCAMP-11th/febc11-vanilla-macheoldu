@@ -58,9 +58,9 @@ body {
 /* Variables */
 :root {
   /* Colors */
-  --color-white: #ffffff;
   --color-blue-50: #00c6be;
 
+  --color-white: #ffffff;
   --color-gray-20: #eeeeee;
   --color-gray-25: #f5f5f5;
   --color-gray-30: #f8f8f8;
@@ -91,7 +91,6 @@ body {
 
 .header {
   height: 240px;
-  /* box-shadow: inset 0 0 20px red; */
   position: relative;
   background-color: var(--color-white);
 }
@@ -111,7 +110,6 @@ body {
 
 .header__info {
   padding: 0 20px;
-  /* box-shadow: inset 0 0 20px blue; */
   position: absolute;
   left: 0;
   right: 0;
@@ -136,7 +134,6 @@ body {
 }
 
 .header__meta {
-  /* box-shadow: inset 0 0 20px red; */
   margin-top: 32px;
   display: flex;
   align-items: center;
@@ -176,15 +173,6 @@ body {
 
 .article {
   padding: 40px 20px;
-  /* box-shadow: inset 0 0 20px green; */
-}
-
-.article-content {
-  /* background-color: aqua; */
-}
-
-.article-header {
-  /* background-color: green; */
 }
 
 .article-excerpt {
@@ -195,7 +183,6 @@ body {
 }
 
 .article-main {
-  /* background-color: blueviolet; */
   margin: 28px 0;
 }
 
@@ -218,12 +205,12 @@ body {
 }
 
 .article__comment-wrapper {
-  margin-top: 20px;
-  /* background-color: olive; */
+  margin-top: 28px;
   display: flex;
   align-items: center;
   gap: 4px;
 }
+
 .article__comment-title {
   color: var(--color-gray-80);
   font-size: 1.5rem;
@@ -317,7 +304,6 @@ body {
   margin-bottom: 15px;
   display: flex;
   align-items: center;
-  /* background-color: #00c6be; */
 }
 
 .new-author__nickname {
@@ -346,7 +332,6 @@ body {
 
 .new-author__bio {
   margin-bottom: 15px;
-  /* background-color: orange; */
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 400;
@@ -354,7 +339,6 @@ body {
 }
 
 .new-author__interactions {
-  /* background-color: coral; */
   /* 구독자, 구독이미지 */
   display: flex;
   align-items: center;
