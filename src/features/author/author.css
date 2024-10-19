@@ -98,6 +98,10 @@ body {
   aspect-ratio: 1/1;
 }
 
+.header__image {
+  object-fit: cover;
+}
+
 .header__info {
   padding: 20px;
 }
@@ -124,6 +128,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  /* 🚨 피그마 파일과 다른 텍스트 위치 - 논의 필요 */
   text-align: center;
 }
 
@@ -157,6 +162,11 @@ body {
 
 .header__interactions-button-image-wrapper {
   margin-left: auto;
+  aspect-ratio: 13/6;
+}
+
+.header__interactions-button-image {
+  object-fit: cover;
 }
 
 .main {
@@ -165,7 +175,6 @@ body {
 
 .main__article-item {
   padding: 20px;
-  /* 색상이 #eeeeee인데 화면에 티가 잘 안남 */
   border-top: 1px solid var(--color-gray-20);
 }
 
@@ -181,7 +190,7 @@ body {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
-  line-height: 166.667%;
+  line-height: 1.66667;
 }
 
 .main__article-collaborators {
@@ -189,7 +198,7 @@ body {
   color: var(--color-gray-60);
   font-size: 1.2rem;
   font-weight: 300;
-  line-height: 166.667%;
+  line-height: 1.66667;
   margin-bottom: 5px;
 }
 
@@ -197,12 +206,12 @@ body {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
-  line-height: 162.5%;
+  line-height: 1.625;
 }
 
 .main__article-date {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
-  line-height: 162.5%;
+  line-height: 1.625;
 }
