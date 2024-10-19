@@ -91,7 +91,7 @@ body {
   position: relative;
 }
 
-.header__image-wrapper {
+.header__profile-image-wrapper {
   padding: 0 20px;
   position: absolute;
   right: 0;
@@ -99,18 +99,18 @@ body {
   aspect-ratio: 1/1;
 }
 
-.header__image {
+.header__profile-image {
   object-fit: cover;
 }
 
 .header__info {
   padding: 20px;
 }
-.header__profile {
+.header__user {
   margin-bottom: 20px;
 }
 
-.header__profile-nickname {
+.header__user-nickname {
   font-size: 2.7rem;
   font-weight: 300;
   line-height: 1.1;
@@ -118,7 +118,7 @@ body {
   color: var(--color-gray-70);
 }
 
-.header__profile-occupation {
+.header__user-occupation {
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.5;
@@ -133,40 +133,40 @@ body {
   text-align: center;
 }
 
-.header__interactions-subscriber-title {
+.header__subscriber-title {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
   color: var(--color-gray-50);
 }
 
-.header__interactions-subscriber-counts {
+.header__subscriber-count {
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.25;
   color: var(--color-gray-60);
 }
 
-.header__interactions-following-title {
+.header__following-title {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
   color: var(--color-gray-50);
 }
 
-.header__interactions-following-counts {
+.header__following-count {
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.25;
   color: var(--color-gray-60);
 }
 
-.header__interactions-button-image-wrapper {
+.header__subscription-button-wrapper {
   margin-left: auto;
   aspect-ratio: 13/6;
 }
 
-.header__interactions-button-image {
+.header__subscription-button-image {
   object-fit: cover;
 }
 
@@ -174,12 +174,12 @@ body {
   background-color: var(--color-white);
 }
 
-.main__article-item {
+.article {
   padding: 20px;
   border-top: 1px solid var(--color-gray-20);
 }
 
-.main__article-title {
+.article__title {
   margin-bottom: 0.4rem;
   color: var(--color-gray-70);
   font-size: 1.7rem;
@@ -187,14 +187,14 @@ body {
   line-height: 1.4;
 }
 
-.main__article-excerpt {
+.article__excerpt {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.66667;
 }
 
-.main__article-collaborators {
+.article__collaborators {
   margin-right: 20px;
   color: var(--color-gray-60);
   font-size: 1.2rem;
@@ -203,14 +203,14 @@ body {
   margin-bottom: 5px;
 }
 
-.main__article-comments {
+.article__comments {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.625;
 }
 
-.main__article-date {
+.article__date {
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 300;
