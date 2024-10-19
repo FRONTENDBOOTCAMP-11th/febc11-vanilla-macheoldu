@@ -57,9 +57,10 @@ body {
 /* Variables */
 :root {
   /* Colors */
-  --color-white: #ffffff;
+
   --color-blue-50: #00c6be;
 
+  --color-white: #ffffff;
   --color-gray-20: #eeeeee;
   --color-gray-25: #f5f5f5;
   --color-gray-30: #f8f8f8;
