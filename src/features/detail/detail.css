@@ -363,8 +363,10 @@ body {
   letter-spacing: 0.14px;
 }
 
-.new-author__subscribe-icon-wrapper {
+.new-author__subscribe-button {
   margin-left: auto;
+  border: none;
+  background-color: var(--color-white);
 }
 
 .footer {
@@ -372,13 +374,18 @@ body {
   margin-bottom: 40px;
 }
 
-.footer__interactions-list {
+.footer__interactions {
   padding: 15px 20px;
   display: flex;
   align-items: center;
   gap: 18px;
 }
 
-.footer-interactions:last-child {
+.footer__interaction button {
+  border: none;
+  background-color: var(--color-white);
+}
+
+.footer__interaction:last-child {
   margin-left: auto;
 }

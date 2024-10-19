@@ -217,7 +217,7 @@
         </section>
 
         <!-- 새로운 작가 소개 -->
-        <section class="new-author">
+        <aside class="new-author">
           <div class="new-author__profile">
             <!-- new author 닉네임, 직업 -->
             <div class="new-author__user-info">
@@ -229,13 +229,13 @@
               <img
                 class="new-author__image"
                 src="../../assets/images/new-author.png"
-                alt="새로운 작가 프로필 사진"
+                alt="Sunny의 프로필 사진"
               />
             </div>
           </div>
           <!-- new author 간단한 자기소개 -->
-          <div class="new-author__bio-wrapper">
-            <p class="new-author__bio">
+          <div class="new-author__bio">
+            <p>
               12년 차 국내 항공사 승무원의 겨울 산티아고 순례길 이야기 연재 중.
               커피 한 잔을 벗 삼아 편하게 읽을 수 있는 글쓰기에 꽤나 진심인 편입
               니다. 후후.
@@ -249,45 +249,51 @@
               <span class="new-author__subscriber-count">108</span>
             </div>
             <!-- 구독 이미지 -->
-            <div class="new-author__subscribe-icon-wrapper">
+            <button
+              class="new-author__subscribe-button"
+              aria-label="Sunny 구독하기"
+            >
               <img
                 class="new-author__subscribe-icon"
                 src="../../assets/icons/like_sub/sub.svg"
-                alt="구독 체크 하는 이미지"
+                alt="구독 버튼 아이콘"
               />
-            </div>
+            </button>
           </div>
-        </section>
+        </aside>
       </main>
 
       <!-- footer -->
       <footer class="footer">
-        <ul class="footer__interactions-list">
-          <!-- 좋아요 아이콘 -->
-          <li class="footer-interactions">
-            <img
-              class="footer__like-icon"
-              src="../../assets/icons/like_sub/like_black.svg"
-              alt="좋아요"
-            />
-            <span class="footer__like-count">81</span>
+        <ul class="footer__interactions">
+          <li class="footer__interaction">
+            <button aria-label="좋아요">
+              <img
+                class="footer__like-icon"
+                src="../../assets/icons/like_sub/like_black.svg"
+                alt="좋아요"
+              />
+              <span class="footer__like-count">81</span>
+            </button>
           </li>
-          <!-- 링크 아이콘 -->
-          <li class="footer-interactions">
-            <img
-              class="footer__move-icon"
-              src="../../assets/icons/like_sub/link.svg"
-              alt="이동하기"
-            />
+          <li class="footer__interaction">
+            <button aria-label="링크 복사">
+              <img
+                class="footer__link-icon"
+                src="../../assets/icons/like_sub/link.svg"
+                alt="이동하기"
+              />
+            </button>
           </li>
-          <!-- 댓글 아이콘 -->
-          <li class="footer-interactions">
-            <img
-              class="footer__comment-icon"
-              src="../../assets/icons/like_sub/comment.svg"
-              alt="댓글 개수"
-            />
-            <span class="footer__comment-count">3</span>
+          <li class="footer__interaction">
+            <button aria-label="댓글 보기">
+              <img
+                class="footer__comment-icon"
+                src="../../assets/icons/like_sub/comment.svg"
+                alt="댓글"
+              />
+              <span class="footer__comment-count">3</span>
+            </button>
           </li>
         </ul>
       </footer>
