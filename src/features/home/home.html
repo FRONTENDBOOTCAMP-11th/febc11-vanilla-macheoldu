@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="home.css" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
     <title>home</title>
   </head>
   <body>
@@ -182,7 +188,7 @@
                 <p class="weekly-serial__author"><em>by</em> Gigantes Yang</p>
               </article>
               <img
-                src="/src/assets/images/home/serial1.png"
+                src="/src/assets/images/serial1.png"
                 alt="딸과 만나기까지 100일간의 기록"
                 class="weekly-serial__image"
               />
@@ -203,7 +209,7 @@
                 <p class="weekly-serial__author"><em>by</em> 박단단</p>
               </article>
               <img
-                src="/src/assets/images/home/serial2.png"
+                src="/src/assets/images/serial2.png"
                 alt="인류애 충전일기"
                 class="weekly-serial__image"
               />
@@ -213,7 +219,7 @@
           <button class="weekly-serial__view-all">
             <span>연재 작품 전체 보기</span>
             <img
-              src="/src/assets/icons/actions/next.svg"
+              src="/src/assets/icons/ui/next.svg"
               alt="다음"
               class="icon-next"
             />
@@ -221,9 +227,15 @@
           <!-- 요일별 연재 섹션 끝 -->
         </section>
 
+        <div class="divider"></div>
+
         <section class="todays-pick">
           <!-- Today's Pick 섹션 시작 -->
-          <h2 class="todays-pick__title">Today's Pick<br />요즘 뜨는 브런치</h2>
+          <h2 class="todays-pick__title">
+            <em class="todays-pick__title--english">Today's Pick</em><br />
+            <span class="todays-pick__title--korean">요즘 뜨는 브런치</span>
+          </h2>
+
           <!-- 연재 목록 (순서 목록) 시작 -->
           <ol class="todays-pick__list">
             <!-- 첫 번째 연재 아이템 -->
@@ -239,20 +251,12 @@
                   거리로...
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick1.png"
-                  alt="무사히 마흔살이 될 수 있을까"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">
-                    무사히 마흔살이 될 수 있을까
-                  </p>
-                  <p class="todays-pick__overlay-author">강윤이</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick1.png"
+                alt="무사히 마흔살이 될 수 있을까"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 두 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -267,18 +271,12 @@
                   육아하면서 ...
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick2.png"
-                  alt="맞벌이 하루살이"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">맞벌이 하루살이</p>
-                  <p class="todays-pick__overlay-author">서리</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick2.png"
+                alt="맞벌이 하루살이"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 세 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -295,20 +293,12 @@
                   넘지…
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick3.png"
-                  alt="집이 있었는데, 이제는 없습니다"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">
-                    집이 있었는데, 이제는…
-                  </p>
-                  <p class="todays-pick__overlay-author">준지</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick3.png"
+                alt="집이 있었는데, 이제는 없습니다"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 네 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -323,18 +313,12 @@
                   잘…
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick4.png"
-                  alt="나의 우울일기 2"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">나의 우울일기 2</p>
-                  <p class="todays-pick__overlay-author">그레이스</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick4.png"
+                alt="나의 우울일기 2"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 다섯 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -351,20 +335,12 @@
                   지…
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick5.png"
-                  alt="포카리스웨트같은 과학콘텐츠 이야기"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">
-                    포카리스웨트같은 과학콘텐…
-                  </p>
-                  <p class="todays-pick__overlay-author">corescience</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick5.png"
+                alt="포카리스웨트같은 과학콘텐츠 이야기"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 여섯 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -379,18 +355,12 @@
                   서…
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick6.png"
-                  alt="서울이 싫어서"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">서울이 싫어서</p>
-                  <p class="todays-pick__overlay-author">은연주</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick6.png"
+                alt="서울이 싫어서"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 일곱 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -405,18 +375,12 @@
                   매…
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick7.png"
-                  alt="수요에세이"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">수요에세이</p>
-                  <p class="todays-pick__overlay-author">뮤뮤</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick7.png"
+                alt="수요에세이"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 여덟 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -432,17 +396,11 @@
                 </p>
               </article>
               <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick8.png"
-                  alt="강남 안에, 강북 남자"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">강남 안에, 강북 남자</p>
-                  <p class="todays-pick__overlay-author">눅눅한과자</p>
-                </div>
-              </div>
+              <img
+                src="/src/assets/images/home/pick8.png"
+                alt="강남 안에, 강북 남자"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 아홉 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -459,20 +417,12 @@
                   다…
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick9.png"
-                  alt="서울에서 혼자 밥해먹고 사는 사람"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">
-                    서울에서 혼자 밥해먹고…
-                  </p>
-                  <p class="todays-pick__overlay-author">이확위</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick9.png"
+                alt="서울에서 혼자 밥해먹고 사는 사람"
+                class="todays-pick__image"
+              />
             </li>
             <!-- 열 번째 연재 아이템 -->
             <li class="todays-pick__item">
@@ -489,20 +439,12 @@
                   모…
                 </p>
               </article>
-              <!-- 연재 이미지와 오버레이 시작 -->
-              <div class="todays-pick__image-wrapper">
-                <img
-                  src="/src/assets/images/home/pick10.png"
-                  alt="이과 남편과 문과 아내의 실화극"
-                  class="todays-pick__image"
-                />
-                <div class="todays-pick__overlay">
-                  <p class="todays-pick__overlay-title">
-                    이과 남편과 문과 아내의 실화극
-                  </p>
-                  <p class="todays-pick__overlay-author">빛날현</p>
-                </div>
-              </div>
+              <!-- 연재 이미지 시작 -->
+              <img
+                src="/src/assets/images/home/pick10.png"
+                alt="이과 남편과 문과 아내의 실화극"
+                class="todays-pick__image"
+              />
             </li>
           </ol>
           <!-- Today's Pick 섹션 끝 -->
@@ -655,102 +597,12 @@
               일이다.&rdquo;
             </blockquote>
             <img
-              src="/src/assets/logos/logo_symbol.svg"
+              src="/src/assets/logos/home/symbol.svg"
               alt="브런치스토리 로고 심볼"
               class="main__logo-symbol"
             />
           </div>
           <!-- 오늘의 추천 도서 섹션 끝 -->
-        </section>
-
-        <section
-          class="main__top-subscribed-authors"
-          id="mainTopSubscribedAuthors"
-        >
-          <!-- Top 구독 작가 섹션 시작 -->
-          <h2
-            class="main__section-title"
-            id="mainTopSubscribedAuthorsTitle"
-            aria-labelledby="mainTopSubscribedAuthorsTitle"
-          >
-            Top 구독 작가
-          </h2>
-
-          <!-- Top 구독 작가 그리드 섹션 -->
-          <div class="main__top-subscribed-authors-grid">
-            <!-- 첫 번째 구독 작가 -->
-            <article class="main__top-subscribed-author">
-              <!-- 첫 번째 구독 작가 이미지 -->
-              <img
-                src="/src/assets/images/home/author2.png"
-                alt="피터팬"
-                class="main__top-subscribed-author-image"
-              />
-              <!-- 첫 번째 구독 작가 이름 -->
-              <h3 class="main__top-subscribed-author-name">피터팬</h3>
-              <!-- 첫 번째 구독 작가 직업 -->
-              <p class="main__top-subscribed-author-role">목사 만화가</p>
-              <!-- 첫 번째 구독 작가 소개 -->
-              <p class="main__top-subscribed-author-description">
-                하나님을 사랑하고 아내를 사랑하고 여행을 ...
-              </p>
-            </article>
-
-            <!-- 두 번째 구독 작가 -->
-            <article class="main__top-subscribed-author">
-              <!-- 두 번째 구독 작가 이미지 -->
-              <img
-                src="/src/assets/images/home/author3.png"
-                alt="빛날현"
-                class="main__top-subscribed-author-image"
-              />
-              <!-- 두 번째 구독 작가 이름 -->
-              <h3 class="main__top-subscribed-author-name">빛날현</h3>
-              <!-- 두 번째 구독 작가 직업 -->
-              <p class="main__top-subscribed-author-role">에세이스트</p>
-              <!-- 두 번째 구독 작가 소개 -->
-              <p class="main__top-subscribed-author-description">
-                26살부터 47살까지 교수님이라 불리우는 목...
-              </p>
-            </article>
-
-            <!-- 세 번째 구독 작가 -->
-            <article class="main__top-subscribed-author">
-              <!-- 세 번째 구독 작가 이미지 -->
-              <img
-                src="/src/assets/images/home/author4.png"
-                alt="허사이"
-                class="main__top-subscribed-author-image"
-              />
-              <!-- 세 번째 구독 작가 이름 -->
-              <h3 class="main__top-subscribed-author-name">허사이</h3>
-              <!-- 세 번째 구독 작가 직업 -->
-              <p class="main__top-subscribed-author-role">
-                책방 셔터맨을 꿈꾸는 40대 공돌이.
-              </p>
-              <!-- 세 번째 구독 작가 소개 -->
-              <p class="main__top-subscribed-author-description">다양한 ...</p>
-            </article>
-
-            <!-- 네 번째 구독 작가 -->
-            <article class="main__top-subscribed-author">
-              <!-- 네 번째 구독 작가 이미지 -->
-              <img
-                src="/src/assets/images/home/author5.png"
-                alt="마틸다 하나씨"
-                class="main__top-subscribed-author-image"
-              />
-              <!-- 네 번째 구독 작가 이름 -->
-              <h3 class="main__top-subscribed-author-name">마틸다 하나씨</h3>
-              <!-- 네 번째 구독 작가 직업 -->
-              <p class="main__top-subscribed-author-role">에세이스트</p>
-              <!-- 네 번째 구독 작가 소개 -->
-              <p class="main__top-subscribed-author-description">
-                하노이에 깃든 시간을 따라 매일 새로운 세...
-              </p>
-            </article>
-          </div>
-          <!-- Top 구독 작가 섹션 끝 -->
         </section>
 
         <section class="main__featured-author" id="mainFeaturedAuthor">
@@ -859,7 +711,7 @@
             </blockquote>
             <!-- 브런치스토리 로고 심볼 -->
             <img
-              src="/src/assets/logos/logo_symbol.svg"
+              src="/src/assets/logos/home/symbol.svg"
               alt="브런치스토리 로고 심볼"
               class="main__logo-symbol"
             />
@@ -928,12 +780,10 @@
               />
               <!-- 세 번째 구독 작가 이름 -->
               <h3 class="main__top-subscribed-author-name">허사이</h3>
-              <!-- 세 번째 구독 작가 직업 -->
-              <p class="main__top-subscribed-author-role">
-                책방 셔터맨을 꿈꾸는 40대 공돌이.
-              </p>
               <!-- 세 번째 구독 작가 소개 -->
-              <p class="main__top-subscribed-author-description">다양한 ...</p>
+              <p class="main__top-subscribed-author-description">
+                책방 셔터맨을 꿈꾸는 40대 공돌이. 다양한 ….
+              </p>
             </article>
 
             <!-- 네 번째 구독 작가 -->
