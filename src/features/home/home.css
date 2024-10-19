@@ -14,7 +14,7 @@ a {
   text-decoration: none;
   color: inherit;
   font-family: inherit;
-  font-weight: normal;
+  font-weight: normal; /* 기본 폰트 두께로 설정 */
 }
 
 li {
@@ -462,4 +462,80 @@ a:visited {
   font-size: 13px;
   color: var(--color-text-muted);
   line-height: 1.46;
+}
+
+.main__featured-book {
+  background: linear-gradient(
+    136deg,
+    #fff 0%,
+    #f8f8f8 17%,
+    #f8f8f8 75%,
+    #eee 100%
+  );
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.main__featured-book-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main__featured-book-info {
+  flex: 1;
+}
+
+.main__featured-book-title {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.main__featured-book-author {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.main__featured-book-image-container {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.main__featured-book-image {
+  max-width: 120px;
+  height: auto;
+}
+
+.main__featured-book-quote {
+  background-color: var(--color-background-primary);
+  margin-top: -30px;
+  z-index: 3;
+  padding: 23px 25px 67px;
+  position: relative;
+}
+
+.main__featured-book-quote-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.main__featured-book-quote-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.main__featured-book-quote-text {
+  font-size: 17px;
+  color: var(--color-text-strong);
+  position: relative;
+  padding-left: 25px;
+}
+
+.main__featured-book-quote-text::before {
+  content: url('/src/assets/icons/ui/doubleQuotes.svg');
+  position: absolute;
+  left: 0;
+  top: -5px;
 }
