@@ -92,11 +92,11 @@ body {
 .header {
   height: 240px;
   /* box-shadow: inset 0 0 20px red; */
+  position: relative;
   background-color: var(--color-white);
 }
 
-.header__cover {
-  position: relative;
+.header__cover-image-wrapper {
   aspect-ratio: 3/2;
 }
 
@@ -109,7 +109,7 @@ body {
   /* filter: blur(2px); */
 }
 
-.header__cover-info {
+.header__info {
   padding: 0 20px;
   /* box-shadow: inset 0 0 20px blue; */
   position: absolute;
@@ -119,7 +119,7 @@ body {
   height: 160px;
 }
 
-.header__cover-info-title {
+.header__title {
   color: var(--color-gray-70);
   font-size: 2.8rem;
   font-weight: 300;
@@ -128,21 +128,21 @@ body {
   margin-bottom: 4px;
 }
 
-.header__cover-info-source {
+.header__source {
   color: var(--color-gray-60);
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.3125;
 }
 
-.header__cover-info-author {
+.header__meta {
   /* box-shadow: inset 0 0 20px red; */
   margin-top: 32px;
   display: flex;
   align-items: center;
 }
 
-.header__cover-info-author-nickname {
+.header__author {
   margin-left: 3px;
   color: var(--color-gray-60);
   font-size: 1.2rem;
@@ -150,7 +150,7 @@ body {
   line-height: 1.625;
 }
 
-.header__cover-info-author-nickname-by {
+.header__author-prefix {
   /* by img로 넣지 않고 글꼴로 가져가는게 나을 것 같다는 판단이 듬 */
   font-family: cursive;
   color: var(--color-gray-50);
@@ -161,7 +161,7 @@ body {
   margin-right: 2px;
 }
 
-.header__cover-info-author-date {
+.header__date {
   margin-left: 8px;
   color: var(--color-gray-50);
   font-size: 1.2rem;
@@ -174,41 +174,41 @@ body {
   background-color: var(--color-white);
 }
 
-.main__article {
+.article {
   padding: 40px 20px;
   /* box-shadow: inset 0 0 20px green; */
 }
 
-.main__article-content {
+.article-content {
   /* background-color: aqua; */
 }
 
-.main__content-header {
+.article-header {
   /* background-color: green; */
 }
 
-.main__content-excerpt {
+.article-excerpt {
   color: var(--color-gray-80);
   font-size: 1.7rem;
   font-weight: 300;
   line-height: 1.65;
 }
 
-.main__content-main {
+.article-main {
   /* background-color: blueviolet; */
   margin: 28px 0;
 }
 
-.main__main-cover {
+.article__main-image-wrapper {
   aspect-ratio: 3/2;
   height: 240px;
 }
 
-.main__cover-image {
+.article__main-image {
   object-fit: cover;
 }
 
-.main__cover-title {
+.article__main-description {
   margin-top: 8px;
   color: var(--color-gray-55);
   text-align: center;
@@ -217,6 +217,7 @@ body {
   line-height: 1.3;
 }
 
+/* 여기서 부터 작명 다시 시작해야 함 */
 .main__comment-wrapper {
   margin-top: 20px;
   /* background-color: olive; */
@@ -310,7 +311,7 @@ body {
   object-fit: cover;
 }
 
-.main__author {
+.main__new-author {
   /* box-shadow: inset 0 0 20px red; */
   padding: 40px 20px;
   border-top: 9px solid var(--color-gray-30);
@@ -399,14 +400,14 @@ body {
   margin-bottom: 40px;
 }
 
-.footer__interactions {
+.footer__interactions-list {
   padding: 15px 20px;
   display: flex;
   align-items: center;
   gap: 18px;
 }
 
-.footer__interactions-item:last-child {
+.footer-interactions:last-child {
   margin-left: auto;
 }
 

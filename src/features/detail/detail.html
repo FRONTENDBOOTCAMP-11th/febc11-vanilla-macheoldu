@@ -14,43 +14,38 @@
   </head>
   <body>
     <div class="wrapper">
-      <!-- 시각적 효과를 위한 nav -->
-      <nav class="navbar">Navbar</nav>
+      <!-- 시각적인 효과만을 위한 nav -->
+      <nav class="navbar"></nav>
 
       <!-- header -->
       <header class="header">
-        <div class="header__cover">
-          <!-- 게시글 이미지, 🚨 이미지가 따로 없어 우선 공백으로 둠-->
+        <!-- 게시글 이미지, 🚨 이미지가 따로 없어 우선 공백으로 둠-->
+        <div class="header__cover-image-wrapper">
           <img class="header__cover-image" src="" alt="" />
-          <!-- 이미지 위에 떠 있는 글들 -->
-          <div class="header__cover-info">
-            <!-- 글의 제목, 🚨 따로 width 설정을 주지 않아서 피그마 시안이랑 다름, 어떻게 하는게 시각적으로 좋은지 생각중-->
-            <h3 class="header__cover-info-title">
-              우여곡절 끝에 도착한 첫 번째 목적지
-            </h3>
-            <!-- 🚨 책 제목, 출처 위도 제목이랑 겹치므로 추후에 제거 가능성 높음  -->
-            <p class="header__cover-info-source">Val carlos</p>
-            <!-- 글의 저자 정보 -->
-            <div class="header__cover-info-author">
-              <!-- 🚨 by 이미지, 피그마에서는 이미지로 제공 되어있지만, 굳이 필요할까?라는 생각이 들어 비슷한 글꼴로 대체함 -->
-              <!-- <img
+        </div>
+        <!-- 이미지 위에 떠 있는 글들 -->
+        <div class="header__info">
+          <!-- 글의 제목, 🚨 따로 width 설정을 주지 않아서 피그마 시안이랑 다름, 어떻게 하는게 시각적으로 좋은지 생각중-->
+          <h3 class="header__title">우여곡절 끝에 도착한 첫 번째 목적지</h3>
+          <!-- 🚨 책 제목, 출처로 사용됨, 그런데 위 제목이랑 겹치므로 추후에 제거 가능성 높음  -->
+          <p class="header__source">Val carlos</p>
+          <!-- 글의 저자 정보 -->
+          <div class="header__meta">
+            <!-- 🚨 by 이미지, 피그마에서는 이미지로 제공 되어있지만, 굳이 필요할까?라는 생각이 들어 비슷한 글꼴로 대체함 -->
+            <!-- <img
                 class="header__author-byimage"
                 src="../../assets/images/by.png"
                 alt="by라는 글자의 이미지"
               /> -->
-              <!--작가 이름 -->
-              <p class="header__cover-info-author-nickname">
-                <span class="header__cover-info-author-nickname-by">by</span>
-                Sunny
-              </p>
-              <!-- 작성 날짜 -->
-              <time
-                datetime="2024-07-23"
-                class="header__cover-info-author-date"
-              >
-                · Jul 23. 2024
-              </time>
-            </div>
+            <!--작가 이름 -->
+            <p class="header__author">
+              <span class="header__author-prefix">by</span>
+              Sunny
+            </p>
+            <!-- 작성 날짜 -->
+            <time datetime="2024-07-23" class="header__date">
+              · Jul 23. 2024
+            </time>
           </div>
         </div>
       </header>
@@ -58,12 +53,11 @@
       <!-- main -->
       <main class="main">
         <!-- 블로그 글 -->
-        <section class="main__article">
-          <div class="main__article-content">
+        <section class="article">
+          <div class="article-content">
             <!-- 글의 header부분 -->
-            <div class="main__content-header">
-              <!-- 🚨 이부분 살짝 BEM에서 벗어남, 중복해서 쓰이기 때문에 공통적으로 적용하기 위해 - 다시 한번 논의 해야 할 부분  -->
-              <p class="main__content-excerpt">
+            <div class="article-header">
+              <p class="article-excerpt">
                   그래 지난 화를 요약해 보면 생장에 도착한 나 는 도착 당일 바로
                 첫 여정을 시작하기로 마음먹 었고 추천받은 목적지인 Val
                 carlos까지 구글맵 으로 걸어서 2시간 30분 거리를 확인했다. 그러
@@ -71,22 +65,22 @@
               </p>
             </div>
             <!-- 글의 main img -->
-            <div class="main__content-main">
-              <div class="main__main-cover">
+            <div class="article-main">
+              <div class="article__main-image-wrapper">
                 <img
-                  class="main__cover-image"
+                  class="article__main-image"
                   src="../../assets/images/cars.png"
                   alt="프랑스와 스페인 사이의 국경선 역할을 하는 피레네 산맥 이미지"
                 />
               </div>
               <!-- 이미지 설명 -->
-              <p class="main__cover-title">
+              <p class="article__main-description">
                 여기가 바로 국경이다! 좌-프랑스, 우-스페인
               </p>
             </div>
             <!-- 글의 footer 부분 -->
-            <div class="main__content-footer">
-              <p class="main__content-excerpt">
+            <div class="article-footer">
+              <p class="article-excerpt">
                  오후 5시 36분. 세상에 인터넷에서 사진으로만 보다가 직접 내
                 눈으로 처음 목격한 정식적인(?) 까미노 표식! 아주 반갑기
                 그지없었다. 왠지 목 적지가 가까워진 것만 같은 느낌적인 느낌!
@@ -96,7 +90,7 @@
           </div>
 
           <!-- 블로그 댓글 -->
-          <div class="main__article-comment">
+          <div class="article-comment">
             <div class="main__comment-wrapper">
               <h6 class="main__comment">댓글</h6>
               <span class="main__comment-numbers"> 7 </span>
@@ -216,7 +210,7 @@
           </div>
         </section>
         <!-- 새로운 작가 소개 -->
-        <section class="main__author">
+        <section class="main__new-author">
           <div class="main__author-profile">
             <!-- new author 닉네임, 직업 -->
             <div class="main__profile-user">
@@ -260,9 +254,9 @@
       </main>
       <!-- footer -->
       <footer class="footer">
-        <ul class="footer__interactions">
+        <ul class="footer__interactions-list">
           <!-- 좋아요 아이콘 -->
-          <li class="footer__interactions-item">
+          <li class="footer-interactions">
             <img
               class="footer__like-icon"
               src="../../assets/icons/like_sub/like_black.svg"
@@ -271,7 +265,7 @@
             <span class="footer__like-count">81</span>
           </li>
           <!-- 링크 아이콘 -->
-          <li class="footer__interactions-item">
+          <li class="footer-interactions">
             <img
               class="footer__move-icon"
               src="../../assets/icons/like_sub/link.svg"
@@ -279,7 +273,7 @@
             />
           </li>
           <!-- 댓글 아이콘 -->
-          <li class="footer__interactions-item">
+          <li class="footer-interactions">
             <img
               class="footer__comment-icon"
               src="../../assets/icons/like_sub/comment.svg"
