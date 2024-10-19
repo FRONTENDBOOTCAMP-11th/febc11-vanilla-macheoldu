@@ -20,8 +20,13 @@
       </div>
       <h1 class="write-header__title">글쓰기</h1>
       <div class="wwrite-header__save-btn">
-        <button id="postSave">
+        <button id="postSave" type="submit">
           <img src="../../assets/icons/top/top_check.svg" alt="글쓰기 저장">
+        </button>
+      </div>
+      <div class="wwrite-header__save-btn hidden">
+        <button id="postSave" type="submit">
+          <img src="../../assets/icons/top/top_check_green.svg" alt="글쓰기 저장">
         </button>
       </div>
     </header>
@@ -30,20 +35,33 @@
         <fieldset class="create-post">
           <legend class="ir">게시글 내용 입력</legend>
           <div class="post-title">
+            <label class="ir">제목 입력란</label>
             <input type="text" id="postTitle" placeholder="제목">
           </div>
           <div class="post-subtitle">
+            <label class="ir">소제목 입력란</label>
             <input type="text" id="postSubtitle" placeholder="소제목">
           </div>
           <div class="post-content">
+            <label class="ir">내용 입력란</label>
             <textarea id="postContent" placeholder="내용을 입력하세요."></textarea>
           </div>
           </textarea>
         </fieldset>
       </form>
-      </section>
       <section class="write-toolbar">
-        추가 기능 영역
+        <div class="write-toolbar__upload">
+          <label>
+            <input type="file" accept=".jpg, .jpeg, .svg, .png">
+            <img src="../../assets/icons/actions/addfile.svg">
+          </label>
+        </div>
+        <div class="write-toolbar__align">
+          <img src="../../assets/icons/actions/align_l.svg">
+        </div>
+        <div class="write-toolbar__hide-keyboard">
+          <img src="../../assets/icons/actions/hide_keyboard.svg">
+        </div>
       </section>
     </main>
   </div>
