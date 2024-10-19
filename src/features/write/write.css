@@ -159,6 +159,10 @@ body {
 .post-subtitle:has(:focus) {
   border-bottom: 1px solid var(--point-color);
 }
+.post-title:has(:focus),
+.post-subtitle:has(:focus) {
+  border-bottom: 1px solid #00c6be;
+}
 .post-content {
   font-size: 2rem;
   height: 466px;
