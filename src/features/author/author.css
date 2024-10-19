@@ -68,7 +68,7 @@ body {
   --color-gray-70: #333333;
 }
 
-/* Layouts - 공통으로 활용하는 레이아웃 클래스 */
+/* Layouts */
 .wrapper {
   width: 360px;
   margin: 0 auto;
@@ -98,10 +98,10 @@ body {
   aspect-ratio: 1/1;
 }
 
-.header__contents {
+.header__info {
   padding: 20px;
 }
-.header__contents-profile {
+.header__profile {
   margin-bottom: 20px;
 }
 
@@ -120,42 +120,42 @@ body {
   color: var(--color-gray-50);
 }
 
-.header__contents-interactions {
+.header__interactions {
   display: flex;
   align-items: center;
   gap: 10px;
   text-align: center;
 }
 
-.header__subscriber {
+.header__interactions-subscriber-title {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
   color: var(--color-gray-50);
 }
 
-.header__subscriber-numbers {
+.header__interactions-subscriber-counts {
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.25;
   color: var(--color-gray-60);
 }
 
-.header__following {
+.header__interactions-following-title {
   font-size: 1.2rem;
   line-height: 1.5;
   font-weight: 300;
   color: var(--color-gray-50);
 }
 
-.header__following-numbers {
+.header__interactions-following-counts {
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 1.25;
   color: var(--color-gray-60);
 }
 
-.header__contents-button {
+.header__interactions-button-image-wrapper {
   margin-left: auto;
 }
 
