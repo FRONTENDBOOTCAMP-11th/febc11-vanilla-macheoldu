@@ -86,9 +86,11 @@ body {
 /* Layout */
 .wrapper {
   width: 360px;
-  min-height: 740px;
+  height: 740px;
+  overflow: scroll;
   margin: 0 auto;
   background-color: #fff;
+  position: relative;
 }
 
 /* Commons */
@@ -103,12 +105,15 @@ body {
 .hidden {
   display: none;
 }
-
+.status-bar {
+  position: sticky;
+  top: 0;
+}
 /*Components*/
 body {
   background-color: #666;
 }
-.write-header {
+.post-header {
   height: 50px;
   padding-inline: 20px;
   display: flex;
@@ -116,12 +121,12 @@ body {
   border-bottom: 1px solid #eee;
   box-sizing: border-box;
 }
-.write-header__cancel-btn,
-.write-header__save-btn {
+.post-header__cancel-btn,
+.post-header__save-btn {
   width: 30px;
   size: 30px;
 }
-.write-header__title {
+.post-header__title {
   margin-inline: auto;
   font-size: 1.9rem;
   font-weight: 600;
@@ -139,6 +144,10 @@ body {
   padding: 24px 26px;
   border-bottom: 1px solid #eee;
 }
+.post-title:has(:focus),
+.post-subtitle:has(:focus) {
+  border-bottom: 1px solid #00c6be;
+}
 .post-content {
   font-size: 2rem;
   height: 332px;
@@ -146,7 +155,7 @@ body {
   padding: 26px;
 }
 
-.write-toolbar {
+.post-toolbar {
   background-color: #f8f8f8;
   height: 84px;
   padding: 22px 26px;
@@ -154,10 +163,48 @@ body {
   display: flex;
   gap: 24px;
 }
-.write-toolbar div {
+.post-toolbar div {
   width: 40px;
   height: 40px;
 }
-.write-toolbar__hide-keyboard {
+.post-toolbar__hide-keyboard {
   margin-left: auto;
+}
+
+/* File Upload Page*/
+.post-header.upload {
+  background-color: #00c6be;
+  color: white;
+  margin-bottom: 4px;
+  position: sticky;
+  top: 44px;
+}
+
+.post-main__files {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 117px));
+  grid-auto-rows: 117px;
+  gap: 4px;
+  padding-bottom: 20px;
+}
+.post-main__files .file {
+  background-color: #d9d9d9;
+}
+.post-main__files .file img {
+  height: 100%;
+  object-fit: fill;
+}
+
+.post-toolbar.upload {
+  padding: 33px;
+  position: fixed;
+  bottom: 0;
+  width: 360px;
+}
+.post-toolbar__count {
+  color: #959595;
+  font-size: 1.8rem;
+}
+.post-toolbar__count #selected {
+  color: #00c6be;
 }
