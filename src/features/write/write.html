@@ -12,22 +12,22 @@
 
 <body>
   <div class="wrapper">
-    <header class="write-header">
-      <div class="write-header__cancel-btn">
+    <header class="post-header">
+      <div class="post-header__cancel-btn">
         <button id="postCancel" aria-label="글쓰기 취소 버튼">
           <img src="../../assets/icons/top/top_cancel.svg" alt="글쓰기 취소">
         </button>
       </div>
-      <h1 class="write-header__title">글쓰기</h1>
-      <div class="write-header__save-btn">
+      <h1 class="post-header__title">글쓰기</h1>
+      <div class="post-header__save-btn">
         <button id="postSave" type="submit" aria-label="글쓰기 저장 버튼 비활성화">
           <img src="../../assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="hidden">
           <img src="../../assets/icons/top/top_check_green.svg" alt="글쓰기 저장" class="">
         </button>
       </div>
     </header>
-    <main class="write-main">
-      <form class="write-main__form">
+    <main class="post-main">
+      <form class="post-main__form">
         <fieldset class="create-post">
           <legend class="ir">게시글 내용 입력</legend>
           <div class="post-title">
@@ -44,17 +44,17 @@
           </div>
         </fieldset>
       </form>
-      <section class="write-toolbar">
-        <div class="write-toolbar__upload">
+      <section class="post-toolbar">
+        <div class="post-toolbar__upload">
           <label aria-label="파일 업로드" for="uploadFile">
             <input type="file" id="uploadFile" accept=".jpg, .jpeg, .svg, .png">
             <img src="../../assets/icons/actions/addfile.svg">
           </label>
         </div>
-        <div class="write-toolbar__align">
+        <div class="post-toolbar__align">
           <img src="../../assets/icons/actions/align_l.svg">
         </div>
-        <div class="write-toolbar__hide-keyboard">
+        <div class="post-toolbar__hide-keyboard">
           <img src="../../assets/icons/actions/hide_keyboard.svg">
         </div>
       </section>
