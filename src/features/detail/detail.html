@@ -19,20 +19,19 @@
 
       <!-- header -->
       <header class="header">
-        <!-- 껍데기 : 이미지에 글을 띄우기 위한 부모요소 -->
         <div class="header__cover">
           <!-- 게시글 이미지, 🚨 이미지가 따로 없어 우선 공백으로 둠-->
           <img class="header__cover-image" src="" alt="" />
           <!-- 이미지 위에 떠 있는 글들 -->
           <div class="header__cover-info">
             <!-- 글의 제목, 🚨 따로 width 설정을 주지 않아서 피그마 시안이랑 다름, 어떻게 하는게 시각적으로 좋은지 생각중-->
-            <h3 class="header__info-title">
+            <h3 class="header__cover-info-title">
               우여곡절 끝에 도착한 첫 번째 목적지
             </h3>
             <!-- 🚨 책 제목, 출처 위도 제목이랑 겹치므로 추후에 제거 가능성 높음  -->
-            <p class="header__info-source">Val carlos</p>
+            <p class="header__cover-info-source">Val carlos</p>
             <!-- 글의 저자 정보 -->
-            <div class="header__info-author">
+            <div class="header__cover-info-author">
               <!-- 🚨 by 이미지, 피그마에서는 이미지로 제공 되어있지만, 굳이 필요할까?라는 생각이 들어 비슷한 글꼴로 대체함 -->
               <!-- <img
                 class="header__author-byimage"
@@ -40,12 +39,17 @@
                 alt="by라는 글자의 이미지"
               /> -->
               <!--작가 이름 -->
-              <p class="header__author-nickname">
-                <span class="header__author-nickname-detail">by</span>
+              <p class="header__cover-info-author-nickname">
+                <span class="header__cover-info-author-nickname-by">by</span>
                 Sunny
               </p>
               <!-- 작성 날짜 -->
-              <span class="header__author-date">· Jul 23. 2024</span>
+              <time
+                datetime="2024-07-23"
+                class="header__cover-info-author-date"
+              >
+                · Jul 23. 2024
+              </time>
             </div>
           </div>
         </div>
