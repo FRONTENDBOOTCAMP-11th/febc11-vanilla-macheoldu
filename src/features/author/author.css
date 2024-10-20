@@ -166,6 +166,10 @@ body {
   aspect-ratio: 13/6;
 }
 
+.header__subscription-button-wrapper:hover {
+  cursor: pointer;
+}
+
 .header__subscription-button-image {
   object-fit: cover;
 }
@@ -177,6 +181,10 @@ body {
 .article {
   padding: 20px;
   border-top: 1px solid var(--color-gray-20);
+}
+
+.article:hover {
+  cursor: pointer;
 }
 
 .article__title {
