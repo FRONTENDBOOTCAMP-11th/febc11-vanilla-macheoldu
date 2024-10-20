@@ -371,37 +371,40 @@ a:visited {
   background: #f8f8f8;
 }
 
-.todays-pick__title {
+.main__todays-pick__title {
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
   color: var(--color-text-strong);
+  margin: 50px 25px 0;
 }
 
-.todays-pick__title--english {
+.main__todays-pick__title--english {
   font-size: 12px;
 }
 
-.todays-pick__title--korean {
+.main__todays-pick__title--korean {
   font-weight: 600;
   font-size: 19px;
 }
 
-.todays-pick__title {
+.main__todays-pick__title {
   font-size: 17px;
 }
 
-.todays-pick__author {
+.main__todays-pick__author {
   color: var(--color-text-secondary);
   font-size: 13px;
 }
 
-.todays-pick__description {
+.main__todays-pick__description {
   color: var(--color-text-muted);
 }
 
-.todays-pick__list {
+.main__todays-pick__list {
   list-style: decimal;
   counter-reset: item;
-  margin: 0;
+  margin: 30px 25px 50px;
   padding: 0;
 }
 
@@ -790,4 +793,64 @@ a:visited {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+}
+
+.main__todays-pick__list {
+  list-style-type: none;
+  padding-left: 20px;
+  counter-reset: main__todays-pick-counter;
+}
+
+.main__todays-pick__item {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.main__todays-pick__item::before {
+  counter-increment: main__todays-pick-counter;
+  content: counter(main__todays-pick-counter) '.';
+  position: absolute;
+  left: -25px;
+  top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #888;
+}
+
+.main__todays-pick__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.main__todays-pick__text {
+  flex: 1;
+  padding-right: 15px;
+}
+
+.main__todays-pick__item-title {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.main__todays-pick__author {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.main__todays-pick__description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.main__todays-pick__image {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
 }
