@@ -125,6 +125,10 @@ input:focus::placeholder {
 }
 
 /* 검색 결과 헤더 */
+.discover__main .discover__search-header + .post__lists  {
+  margin-top: 0;
+}
+
 .discover__search-header {
   display: flex;
   justify-content: space-between;
@@ -197,7 +201,11 @@ input:focus::placeholder {
 }
 
 .content__text-info {
+  display: flex;
+  align-items: center;
   font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1.6;
   color: var(--color-content);
 }
 
@@ -207,14 +215,18 @@ input:focus::placeholder {
   font-style: italic;
 }
 
-.info__author::before {
-  position: absolute;
-  content: " ";
-  background-color: var(--color-border);
+.circle {
+  display: inline;
   width: 2px;
-  height: 2px;
+  height:2px;
+  justify-content: center;
+  margin-left: 7px;
+  margin-right: 5px;
+  align-items: center;
   border-radius: 50%;
-}
+  background: var(--color-border);
+  }
+
 
 .content__cover {
   width: 60px;
