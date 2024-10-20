@@ -498,82 +498,71 @@
 
         <div class="divider"></div>
 
-        <section class="main__featured-author" id="mainFeaturedAuthor">
-          <!-- 오늘의 작가 섹션 시작 -->
+        <section class="featured-author" id="featuredAuthor">
           <h2
-            class="main__section-title"
-            id="mainFeaturedAuthorTitle"
-            aria-labelledby="mainFeaturedAuthorTitle"
+            class="featured-author__title"
+            id="featuredAuthorTitle"
+            aria-labelledby="featuredAuthorTitle"
           >
             오늘의 작가
           </h2>
-          <!-- 오늘의 작가 콘텐츠 기사 -->
-          <article class="main__featured-author-content">
-            <div class="main__featured-author-info">
-              <!-- 작가 이름 -->
-              <h3 class="main__featured-author-name">동그라미 원</h3>
-              <!-- 작가 직업 -->
-              <p class="main__featured-author-role">에세이스트</p>
-              <!-- 작가 소개 -->
-              <p class="main__featured-author-description">
-                새로운 인생 2막을 함께 나아가고 있습니다. 살면서 깨닫고 어려움을
-                극복한 마음들을 글을 통해 함께...
-              </p>
+
+          <article class="featured-author__content">
+            <div class="featured-author__info-wrapper">
+              <div class="featured-author__info">
+                <h3 class="featured-author__name">동그라미 원</h3>
+                <p class="featured-author__role">에세이스트</p>
+              </div>
+              <img
+                src="/src/assets/images/home/author1.png"
+                alt="동그라미 원"
+                class="featured-author__image"
+                width="80px"
+                height="80px"
+              />
             </div>
-            <!-- 작가 이미지 -->
-            <img
-              src="/src/assets/images/home/author1.png"
-              alt="동그라미 원"
-              class="main__featured-author-image"
-            />
+            <p class="featured-author__description">
+              새로운 인생 2막을 함께 나아가고 있습니다. 살면서 깨닫고 어려움을
+              극복한 마음들을 글을 통해 함께...
+            </p>
           </article>
-          <!-- 작가의 책 목록 시작 -->
-          <ul class="main__author-books-list">
-            <!-- 작가의 첫 번째 책 -->
-            <li class="main__author-books-item">
-              <div class="main__author-books-title-wrapper">
-                <!-- 첫 번째 책 이미지 -->
+
+          <ul class="featured-author__books">
+            <li class="featured-author__books-item">
+              <div class="featured-author__books-image-wrapper">
                 <img
                   src="/src/assets/images/home/authorBook1.png"
                   alt="행복하게 먹으려면 책 표지 이미지"
-                  class="main__author-book-image"
+                  class="featured-author__books-image"
                 />
               </div>
-              <div class="main__author-book-info">
-                <!-- 첫 번째 책 제목 -->
-                <h3 class="main__author-book-title">행복하게 먹으려면</h3>
-                <!-- 첫 번째 책 설명 -->
-                <p class="main__author-book-description">
+              <div class="featured-author__books-info">
+                <h3 class="featured-author__books-title">행복하게 먹으려면</h3>
+                <p class="featured-author__books-description">
                   사람이 행복하기를 원하면서 음식의 맛이나 건강 여부는 따지지만
                   먹는...
                 </p>
               </div>
             </li>
-            <!-- 작가의 두 번째 책 -->
-            <li class="main__author-books-item">
-              <div class="main__author-books-title-wrapper">
-                <!-- 두 번째 책 이미지 -->
+            <li class="featured-author__books-item">
+              <div class="featured-author__books-image-wrapper">
                 <img
                   src="/src/assets/images/home/authorBook2.png"
                   alt="저는 이런 마음입니다 책 표지 이미지"
-                  class="main__author-book-image"
+                  class="featured-author__books-image"
                 />
-                <!-- 최신작 배지 -->
-                <span class="main__author-book-badge">최신작</span>
               </div>
-              <div class="main__author-book-info">
-                <!-- 두 번째 책 제목 -->
-                <h3 class="main__author-book-title">저는 이런 마음입니다</h3>
-                <!-- 두 번째 책 설명 -->
-                <p class="main__author-book-description">
+              <div class="featured-author__books-info">
+                <h3 class="featured-author__books-title">
+                  저는 이런 마음입니다
+                </h3>
+                <p class="featured-author__books-description">
                   우리는 어떤 일들을 겪거나, 어떤 사람들과의 만남을 통해 마음이
                   요동...
                 </p>
               </div>
             </li>
           </ul>
-          <!-- 작가의 책 목록 끝 -->
-          <!-- 오늘의 작가 섹션 끝 -->
         </section>
 
         <section class="main__featured-book" id="mainFeaturedBook">
