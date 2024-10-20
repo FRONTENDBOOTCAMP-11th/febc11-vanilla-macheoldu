@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>발견</title>
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <link rel="stylesheet" href="discover_null.css" />
+  </head>
+  <body>
+    <div class="discover">
+      <!-- Header -->
+      <header class="discover__header">
+        <input
+          type="text"
+          value="꿀"
+          class="discover__header-input"
+          aria-label="검색 입력창"
+          onclick="discover()"
+        />
+        <button
+          class="discover__header-close"
+          aria-label="검색창 닫기"
+          onclick="closeSearch()"
+        >
+          ×
+        </button>
+      </header>
+
+      <!-- Navigation -->
+      <nav class="discover__nav">
+        <div class="discover__nav-wrapper">
+          <button
+            class="discover__nav-tab discover__nav-tab--active"
+            onclick="showTab('posts')"
+          >
+            글
+          </button>
+          <button class="discover__nav-tab" onclick="showTab('authors')">
+            작가
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="discover__main">
+        <div class="discover__result-noneImg">
+          <img src="../../assets/logos/logo_symbol.svg" alt="관련 이미지" />
+        </div>
+        <p class="discover__result-none">검색 결과가 없습니다.</p>
+      </main>
+    </div>
+    <script src="discover.js"></script>
+  </body>
+</html>
