@@ -130,7 +130,6 @@ input:focus::placeholder {
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
-  background-color: var(--color-white);
 }
 
 .discover__count-results {
@@ -203,12 +202,15 @@ input:focus::placeholder {
 }
 
 .info__author {
+  position: relative;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
 }
 
 .info__author::before {
+  position: absolute;
   content: " ";
+  background-color: var(--color-border);
   width: 2px;
   height: 2px;
   border-radius: 50%;
