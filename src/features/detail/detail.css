@@ -167,28 +167,25 @@ body {
   opacity: 0.5;
 }
 
+/* main */
 .main {
   background-color: var(--color-white);
 }
 
+/* main - article */
 .article {
-  padding: 40px 20px;
+  /* 시각적으로 조절 가능하면 하기 */
+  padding: 70px 20px;
 }
 
-.article-excerpt {
-  color: var(--color-gray-80);
-  font-size: 1.7rem;
-  font-weight: 300;
-  line-height: 1.65;
+.article__header {
+  margin-bottom: 28px;
 }
 
-.article-main {
-  margin: 28px 0;
-}
-
-.article__main-image-wrapper {
-  aspect-ratio: 3/2;
-  height: 240px;
+.article__main {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 4/3;
 }
 
 .article__main-image {
@@ -204,53 +201,79 @@ body {
   line-height: 1.3;
 }
 
-.article__comment-wrapper {
+.article__footer {
   margin-top: 28px;
+}
+
+.article__excerpt {
+  color: var(--color-gray-80);
+  font-size: 1.7rem;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* main - section */
+.comments {
+  padding: 0 20px;
+  margin-bottom: 64px;
+}
+
+.comments__header {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.article__comment-title {
+.comments__header:hover {
+  cursor: pointer;
+}
+
+.comments__title {
   color: var(--color-gray-80);
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.5;
 }
 
-.article__comment-count {
+.comments__count {
   color: var(--color-blue-50);
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.5;
 }
 
-.comment-item {
+.comments__item {
   margin: 20px 0;
   border-bottom: 1px solid var(--color-gray-20);
 }
 
-.comment-user {
+.comments__item:last-child {
+  border: none;
+}
+
+.comments__user {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.comment__user-profile-image-wrapper {
+.comments__profile-image-wrapper {
   aspect-ratio: 1/1;
   align-self: start;
 }
 
-.comment__user-profile-image {
+.comments__profile-image {
   object-fit: cover;
 }
 
-.comment__user-nickname {
+.comments__nickname {
   color: var(--color-gray-90);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-.comment__user-date {
+.comments__date {
   margin-top: 2px;
   color: var(--color-gray-50);
   font-size: 1.2rem;
@@ -258,45 +281,59 @@ body {
   line-height: 1.5;
 }
 
-.comment-option-icon-wrapper {
-  padding-right: 10px;
+.comments__option-button {
   margin-left: auto;
+  align-self: flex-start;
+  margin-top: 3px;
+  padding-right: 14px;
+  border: none;
+  background-color: var(--color-white);
 }
 
-.article__comment-content-wrapper {
-  padding: 10px 5px 14px 40px;
+.comments__option-button:hover {
+  cursor: pointer;
 }
 
-.article__comment-content {
+.comments__content {
+  margin: 12px 0 30px 40px;
   color: var(--color-gray-90);
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.5;
 }
 
-.article__comment-reaction-wrapper {
-  padding: 10px 0 30px 40px;
+.comments__reply {
+  margin: -16px 0 30px 40px;
 }
 
-.article__comment-reaction {
+.comments__reply:hover {
+  cursor: pointer;
+}
+
+.comments__reply-button {
+  border: none;
+  padding: 0;
+  background-color: var(--color-white);
   color: var(--color-gray-50);
   font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.5;
 }
 
-.article__comment-input-image-wrapper {
+.comments__input-image-wrapper {
   aspect-ratio: 3/2;
 }
 
-.article__comment-input-image {
+.comments__input-image {
   object-fit: cover;
 }
 
+/* aside */
 .new-author {
-  padding: 40px 20px;
+  padding: 66px 20px 40px;
   border-top: 9px solid var(--color-gray-30);
   border-bottom: 1px solid var(--color-gray-30);
+  background: #fff;
 }
 
 .new-author__profile {
@@ -369,6 +406,11 @@ body {
   background-color: var(--color-white);
 }
 
+.new-author__subscribe-button:hover {
+  cursor: pointer;
+}
+
+/* footer */
 .footer {
   background-color: var(--color-white);
   margin-bottom: 40px;
@@ -386,6 +428,28 @@ body {
   background-color: var(--color-white);
 }
 
+.footer__interaction button:hover {
+  cursor: pointer;
+}
+
 .footer__interaction:last-child {
   margin-left: auto;
+}
+
+.footer__interaction:nth-child(2) {
+  margin-bottom: 6px;
+}
+
+.footer__interaction:nth-child(3) {
+  margin-bottom: 4px;
+}
+
+.footer__like-count {
+  display: inline-block;
+  margin-top: 3px;
+}
+
+.footer__comment-count {
+  display: inline-block;
+  margin-top: 3px;
 }
