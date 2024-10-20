@@ -1,3 +1,4 @@
+/* 리셋 스타일 */
 body,
 button,
 ul,
@@ -7,19 +8,15 @@ h3,
 p,
 blockquote,
 span,
-a {
+a,
+li {
   margin: 0;
   padding: 0;
   list-style: none;
   text-decoration: none;
   color: inherit;
   font-family: inherit;
-  font-weight: normal; /* 기본 폰트 두께로 설정 */
-}
-
-li {
-  margin: 0;
-  padding: 0;
+  font-weight: normal;
 }
 
 ol {
@@ -30,13 +27,10 @@ ol {
 button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
+a,
 a:hover,
 a:active,
 a:visited {
@@ -44,60 +38,122 @@ a:visited {
   text-decoration: none;
 }
 
-.cover__image-wrapper {
-  margin: 0;
-  padding: 0;
+/* 루트 변수 */
+:root {
+  /* 메인 색상 */
+  --white: #ffffff;
+  --point-color: #00c6be;
+
+  /* 그레이 색상 */
+  --grey-10: #f8f8f8;
+  --grey-20: #eeeeee;
+  --grey-25: #e0e0e0;
+  --grey-30: #dddddd;
+  --grey-35: #bbbbbb;
+  --grey-40: #959595;
+  --grey-50: #666666;
+  --grey-60: #444444;
+  --grey-70: #333333;
+  --grey-80: #231f20;
+  --grey-90: #111111;
+
+  /* 기타 색상 */
+  --purple: #8d4e8e;
+
+  /* 오버레이 색상 */
+  --white-overlay-10: rgba(255, 255, 255, 0.1);
+  --black-overlay-5: rgba(0, 0, 0, 0.05);
+  --black-overlay-90: rgba(18, 18, 18, 0.9);
+
+  /* 폰트 크기 */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 17px;
+  --font-size-xl: 19px;
+  --font-size-xxl: 22px;
+  --font-size-xxxl: 30px;
+}
+
+/* 전역 스타일 */
+body {
+  background-color: var(--grey-60);
+  font-family: Pretendard, sans-serif;
 }
 
 .wrapper {
   max-width: 360px;
-  height: 760px;
+  height: 740px;
   margin: 0 auto;
   box-sizing: border-box;
-  overflow-y: scroll;
-  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
-  background-color: var(--color-background-primary);
+  overflow-y: auto;
+  scrollbar-width: none;
+  background-color: var(--white);
+  position: relative;
+  padding-bottom: 56px; /* 푸터를 위한 공간 */
+}
+
+.content {
+  height: calc(100% - 56px);
+  overflow-y: auto;
 }
 
 .wrapper::-webkit-scrollbar {
   display: none;
 }
-
-:root {
-  /* Text Colors */
-  --color-text-primary: #444444;
-  --color-text-secondary: #959595;
-  --color-text-light: #ffffff;
-  --color-text-muted: #666666;
-  --color-text-strong: #111111;
-  --color-text-accent: #00c6be;
-  --color-text-deep: #333333;
-  --color-text-footer: #bbbbbb;
-
-  /* Background Colors */
-  --color-background-primary: #ffffff;
-  --color-background-secondary: #f8f8f8;
-  --color-background-accent: #8d4e8e;
-  --color-background-dark: #333333;
-  --color-background-button: #231f20;
-  --color-background-darkgray: #111111;
-
-  /* Border Colors */
-  --color-border-primary: #e0e0e0;
-  --color-border-secondary: #dddddd;
-  --color-border-muted: #666666;
-  --color-border-gray-light: #eeeeee;
-  --color-border-footer: #333333;
-  --color-overlay-light: rgba(255, 255, 255, 0.1);
-  --color-overlay-dark: rgba(0, 0, 0, 0.05);
-  --color-overlay-darker: rgba(18, 18, 18, 0.9);
-  --color-icon-shadow: rgba(0, 0, 0, 0.05);
+/* 공통 스타일 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body {
-  background-color: #444444;
+.text-center {
+  text-align: center;
 }
 
+/* 타이포그래피 */
+.font-sm {
+  font-size: var(--font-size-sm);
+}
+
+.font-md {
+  font-size: var(--font-size-md);
+}
+
+.font-lg {
+  font-size: var(--font-size-lg);
+}
+
+.font-xl {
+  font-size: var(--font-size-xl);
+}
+
+.font-xxl {
+  font-size: var(--font-size-xxl);
+}
+
+.font-xxxl {
+  font-size: var(--font-size-xxxl);
+}
+
+.text-grey-40 {
+  color: var(--grey-40);
+}
+
+.text-grey-50 {
+  color: var(--grey-50);
+}
+
+.text-grey-70 {
+  color: var(--grey-70);
+}
+
+.text-grey-90 {
+  color: var(--grey-90);
+}
+
+/* 헤더 스타일 */
 .header {
   box-sizing: border-box;
   padding: 14px 20px;
@@ -107,7 +163,7 @@ body {
   height: 50px;
   position: sticky;
   top: 0;
-  background-color: white;
+  background-color: var(--white);
   z-index: 1000;
 }
 
@@ -116,97 +172,154 @@ body {
   align-items: center;
   width: 100%;
 }
+
 .header__logo {
   margin-right: 98px;
   display: inline-block;
 }
+
 .header__actions {
   display: flex;
   align-items: center;
   margin-left: auto;
 }
+
 .header__search-button {
-  background: none;
-  border: none;
-  cursor: pointer;
   margin-right: 10px;
   width: 24px;
   height: 24px;
 }
+
 .header__start-button {
-  background: var(--color-background-button);
-  color: var(--color-text-light);
-  border: none;
+  background: var(--grey-80);
+  color: var(--white);
   border-radius: 12px;
   padding: 5px 13px;
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   width: 62px;
   height: 24px;
-  cursor: pointer;
-  font-family: Pretendard;
 }
 
-.footer {
-  background-color: var(--color-background-dark);
+/* 푸터 스타일 */
+/* 메인 푸터 스타일 */
+.main-footer {
+  background-color: var(--grey-70);
   padding: 37px 31px;
-  height: 315px;
   box-sizing: border-box;
 }
 
-.footer__social-list {
+.main-footer__section {
+  margin-bottom: 30px;
+}
+
+.main-footer__section:last-child {
+  margin-bottom: 0;
+}
+/* 소셜 섹션 스타일 */
+.social__list {
   display: flex;
   justify-content: center;
   gap: 27px;
-  margin-top: 38px;
-  margin-bottom: 17px;
 }
 
-.footer__links {
-  font-size: 12px;
-  color: var(--color-text-secondary);
+.social__link {
+  display: inline-block;
+}
+
+.social__icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* 법적 정보 섹션 스타일 */
+.legal__list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 19px;
-  margin-bottom: 55px;
-  font-family: Pretendard;
 }
 
-.footer__link:nth-child(3),
-.footer__link:nth-child(6) {
-  margin-right: 0;
+.legal__link {
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
 }
 
-.footer__logo {
+/* 브랜딩 섹션 스타일 */
+.branding {
   display: flex;
   justify-content: center;
 }
 
+.branding__logo {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 네비게이션 푸터 스타일 */
+.navigation-footer {
+  background-color: var(--white);
+  border-top: 1px solid var(--grey-20);
+  position: absolute; /* 절대 위치로 변경 */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 56px; /* 명시적으로 높이 설정 */
+}
+
+.navigation-footer__list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%; /* 푸터의 전체 높이 사용 */
+}
+
+.navigation-footer__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--grey-40);
+  font-size: var(--font-size-xs);
+}
+
+.navigation-footer__link--active {
+  color: var(--grey-90);
+}
+
+.navigation-footer__icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+.navigation-footer__text {
+  font-size: var(--font-size-xs);
+}
+
+/* 커버 스타일 */
 .cover {
-  background-color: var(--color-background-accent);
+  background-color: var(--purple);
   text-align: center;
-  color: var(--color-text-light);
+  color: var(--white);
   position: relative;
   padding: 20px;
 }
 
 .cover__title {
-  font-size: 22px;
+  font-size: var(--font-size-xxl);
   padding-top: 55px;
-  font-family: Pretendard;
-  margin: 0;
 }
 
 .cover__author {
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   padding-bottom: 66px;
-  font-family: Pretendard;
-  margin: 0;
 }
 
 .cover__image-wrapper {
   position: relative;
   display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
 .cover__badge {
@@ -216,7 +329,7 @@ body {
   width: 40px;
   height: 40px;
 }
-
+/* 커버 지원 및 진행 상태 스타일 */
 .cover__support {
   display: flex;
   align-items: center;
@@ -224,9 +337,8 @@ body {
 }
 
 .cover__support-count {
-  font-size: 14px;
+  font-size: var(--font-size-md);
   margin-left: 6px;
-  font-family: Pretendard;
 }
 
 .cover__progress {
@@ -244,7 +356,7 @@ body {
 .cover__progress-step {
   width: 20px;
   height: 1px;
-  background-color: var(--color-background-primary);
+  background-color: var(--white);
   opacity: 1;
 }
 
@@ -256,54 +368,53 @@ body {
   font-size: 11px;
 }
 
+/* 주간 연재 스타일 */
 .weekly-serial {
   padding-left: 25px;
 }
 
 .weekly-serial__heading {
   padding-top: 50px;
-  font-size: 19px;
-  color: var(--color-text-strong);
-  font-family: Pretendard;
+  font-size: var(--font-size-xl);
+  color: var(--grey-90);
 }
 
 .weekly-serial__title {
   padding-top: 50px;
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   margin-bottom: 5px;
-  font-family: Pretendard;
-  color: var(--color-text-secondary);
+  color: var(--grey-40);
 }
 
 .weekly-serial__description {
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   margin-bottom: 24px;
-  color: var(--color-text-secondary);
+  color: var(--grey-40);
 }
 
 .weekly-serial__tabs {
   display: flex;
   gap: 37px;
-  color: var(--color-text-secondary);
-  border-bottom: 1px solid var(--color-border-gray-light);
+  color: var(--grey-40);
+  border-bottom: 1px solid var(--grey-20);
   justify-content: center;
-  font-family: Pretendard;
 }
 
 .weekly-serial__tab {
   padding-bottom: 10px;
-  color: var(--color-text-secondary);
+  color: var(--grey-40);
   cursor: pointer;
   font-size: 16px;
 }
 
 .weekly-serial__tab[aria-selected='true'] {
-  color: var(--color-text-strong);
-  border-bottom: 2px solid var(--color-text-accent);
+  color: var(--grey-90);
+  border-bottom: 2px solid var(--point-color);
 }
 
+/* 주간 연재 옵션 스타일 */
 .weekly-serial__options {
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -316,7 +427,7 @@ body {
 }
 
 .weekly-serial__option:nth-child(1) {
-  color: var(--color-text-deep);
+  color: var(--grey-70);
   margin-right: 12px;
   position: relative;
 }
@@ -326,25 +437,26 @@ body {
   display: block;
   width: 4px;
   height: 4px;
-  background-color: var(--color-text-accent);
+  background-color: var(--point-color);
   border-radius: 50%;
   margin-right: 6px;
 }
 
 .weekly-serial__option:nth-child(2) {
-  color: var(--color-text-secondary);
+  color: var(--grey-40);
 }
 
+/* 주간 연재 아이템 스타일 */
 .weekly-serial__details {
-  font-size: 17px;
+  font-size: var(--font-size-lg);
   line-height: 1.53;
   margin-right: 7px;
   margin-bottom: 10px;
 }
 
 .weekly-serial__author {
-  color: var(--color-text-secondary);
-  font-size: 13px;
+  color: var(--grey-40);
+  font-size: var(--font-size-sm);
   font-weight: 300;
   margin-bottom: 44px;
 }
@@ -353,66 +465,64 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-border-default, #eee);
+  border-bottom: 1px solid var(--grey-20);
 }
+
 .weekly-serial__info {
   flex: 1;
 }
 
 .weekly-serial__view-all {
   border-radius: 30px;
-  border: 1px solid var(--color-border-secondary);
-  color: var(--color-text-deep);
+  border: 1px solid var(--grey-30);
+  color: var(--grey-70);
   padding: 1px 11px 1px 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 36px auto;
   cursor: pointer;
-  font-size: 15px;
+  font-size: var(--font-size-md);
   height: 36px;
   box-sizing: border-box;
 }
 
-.icon-next {
-  width: 20px;
-  height: 20px;
-}
-
+/* 메인 섹션 스타일 */
 .divider {
   height: 9px;
-  border-top: 1px solid #ddd;
-  background: #f8f8f8;
+  border-top: 1px solid var(--grey-30);
+  background: var(--grey-10);
 }
 
+/* 오늘의 추천 스타일 */
 .main__todays-pick__title {
   font-weight: bold;
   display: flex;
   flex-direction: column;
-  color: var(--color-text-strong);
+  color: var(--grey-90);
   margin: 50px 25px 0;
 }
 
-.main__todays-pick__title--english {
-  font-size: 12px;
+.main__todays-pick-title--english {
+  font-size: var(--font-size-sm);
 }
 
-.main__todays-pick__title--korean {
+.main__todays-pick-title--korean {
   font-weight: 600;
-  font-size: 19px;
+  font-size: var(--font-size-xl);
 }
 
 .main__todays-pick__title {
-  font-size: 17px;
+  font-size: var(--font-size-lg);
 }
 
 .main__todays-pick__author {
-  color: var(--color-text-secondary);
-  font-size: 13px;
+  color: var(--grey-40);
+  font-size: var(--font-size-sm);
 }
 
 .main__todays-pick__description {
-  color: var(--color-text-muted);
+  color: var(--grey-50);
 }
 
 .main__todays-pick__list {
@@ -422,6 +532,7 @@ body {
   padding: 0;
 }
 
+/* 상위 구독 작가 그리드 스타일 */
 .main__top-subscribed-authors-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -429,10 +540,11 @@ body {
 }
 
 .main__top-subscribed-author {
-  border-right: 1px solid var(--color-border-secondary); /* 오른쪽 선 */
-  border-bottom: 1px solid var(--color-border-secondary); /* 아래쪽 선 */
+  border-right: 1px solid var(--grey-30);
+  border-bottom: 1px solid var(--grey-30);
 }
 
+/* 상위 구독 작가 아이템 스타일 */
 .main__top-subscribed-author:nth-child(1),
 .main__top-subscribed-author:nth-child(2) {
   padding: 0 20px 11px 23px;
@@ -442,17 +554,15 @@ body {
 .main__top-subscribed-author:nth-child(4) {
   padding: 31px 20px 11px 23px;
 }
-/* 오른쪽 아이템의 오른쪽 선 제거 */
+
 .main__top-subscribed-author:nth-child(2n) {
   border-right: none;
 }
 
-/* 첫 번째 두 개의 아이템의 위쪽 선 제거 */
 .main__top-subscribed-author:nth-child(-n + 2) {
   border-top: none;
 }
 
-/* 마지막 두 개의 아이템의 아래쪽 선 제거 */
 .main__top-subscribed-author:nth-last-child(-n + 2) {
   border-bottom: none;
 }
@@ -468,32 +578,30 @@ body {
 }
 
 .main__top-subscribed-author-name {
-  font-size: 19px;
-  color: var(--color-text-strong);
-  font-family: Pretendard;
+  font-size: var(--font-size-xl);
+  color: var(--grey-90);
 }
 
 .main__top-subscribed-author-role {
-  font-size: 12px;
-  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
   margin-bottom: 15px;
-  font-family: Pretendard;
 }
 
 .main__top-subscribed-author-description {
   font-size: 13px;
-  color: var(--color-text-muted);
+  color: var(--grey-50);
   line-height: 1.46;
-  font-family: Pretendard;
 }
 
+/* 추천 도서 스타일 */
 .main__featured-book {
   background: linear-gradient(
     136deg,
-    #fff 0%,
-    #f8f8f8 17%,
-    #f8f8f8 75%,
-    #eee 100%
+    var(--white) 0%,
+    var(--grey-10) 17%,
+    var(--grey-10) 75%,
+    var(--grey-20) 100%
   );
   padding: 75px 17.5px 39px;
 }
@@ -509,15 +617,13 @@ body {
 }
 
 .main__featured-book-title {
-  font-size: 17px;
+  font-size: var(--font-size-lg);
   font-weight: bold;
-  font-family: Pretendard;
 }
 
 .main__featured-book-author {
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  font-family: Pretendard;
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
 }
 
 .main__featured-book-image-container {
@@ -530,8 +636,9 @@ body {
   height: auto;
 }
 
+/* 추천 도서 인용구 스타일 */
 .main__featured-book-quote {
-  background-color: var(--color-background-primary);
+  background-color: var(--white);
   margin-top: -30px;
   z-index: 3;
   padding: 23px 25px 67px;
@@ -546,17 +653,15 @@ body {
 }
 
 .main__featured-book-quote-label {
-  font-size: 12px;
-  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
 }
 
 .main__featured-book-quote-text {
-  font-size: 17px;
-  color: var(--color-text-strong);
-  font-family: Pretendard;
+  font-size: var(--font-size-lg);
+  color: var(--grey-90);
   position: relative;
   padding-left: 25px;
-  font-family: Pretendard;
 }
 
 .main__featured-book-quote-text::before {
@@ -566,8 +671,9 @@ body {
   top: -5px;
 }
 
+/* 새로운 작가 섹션 스타일 */
 .main__new-authors {
-  background-color: var(--color-background-darkgray);
+  background-color: var(--grey-90);
   padding: 50px 25px 8px 25px;
 }
 
@@ -577,48 +683,46 @@ body {
 }
 
 .main__new-authors-book-title {
-  font-size: 14px;
-  color: var(--color-text-footer);
+  font-size: var(--font-size-md);
+  color: var(--grey-35);
   margin-top: 15px;
   margin-bottom: 7px;
-  font-family: Pretendard;
 }
 
 .main__new-authors-book-author {
-  font-size: 13px;
-  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
   text-align: center;
   margin-bottom: 25px;
-  font-family: Pretendard;
 }
 
+/* 브런치 작가 지원 링크 스타일 */
 .main__brunch-author-support {
-  font-size: 15px;
+  font-size: var(--font-size-md);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-text-secondary);
+  color: var(--grey-40);
   gap: 9px;
   position: relative;
   margin-bottom: 40px;
   padding-top: 31px;
-  border-top: 1px solid var(--color-border-footer);
-  font-family: Pretendard;
+  border-top: 1px solid var(--grey-70);
 }
 
 .main__brunch-author-support:hover {
-  color: var(--color-text-secondary);
+  color: var(--grey-40);
 }
 
+/* 추천 작가 섹션 스타일 */
 .featured-author {
   padding: 50px 25px 39px;
 }
 
 .featured-author__title {
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
-  color: var(--color-text-accent);
-  font-family: Pretendard;
+  color: var(--point-color);
 }
 
 .featured-author__info-wrapper {
@@ -628,17 +732,15 @@ body {
 }
 
 .featured-author__name {
-  font-size: 30px;
-  color: var(--color-text-strong);
+  font-size: var(--font-size-xxxl);
+  color: var(--grey-90);
   margin: 0;
-  font-family: Pretendard;
 }
 
 .featured-author__role {
-  font-size: 12px;
-  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
   font-weight: 300;
-  font-family: Pretendard;
 }
 
 .featured-author__image {
@@ -646,7 +748,7 @@ body {
 }
 
 .featured-author__books-item {
-  background-color: var(--color-background-secondary);
+  background-color: var(--grey-10);
   padding: 20px;
   display: flex;
   margin-bottom: 5px;
@@ -657,31 +759,29 @@ body {
 }
 
 .featured-author__books-title {
-  font-size: 15px;
-  color: var(--color-text-strong);
-  font-family: Pretendard;
+  font-size: var(--font-size-md);
+  color: var(--grey-90);
 }
 
 .featured-author__description {
   margin-top: 25px;
-  font-size: 15px;
-  color: var(--color-text-muted);
-  font-family: Pretendard;
+  font-size: var(--font-size-md);
+  color: var(--grey-50);
 }
 
 .featured-author__books-description {
-  font-size: 13px;
-  color: var(--color-text-muted);
-  font-family: Pretendard;
+  font-size: var(--font-size-sm);
+  color: var(--grey-50);
   font-weight: 300;
 }
 
+/* 베스트셀러 섹션 스타일 */
 .main__best-seller {
   background-image: url('/src/assets/images/home/bestseller1.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  color: var(--color-text-light);
+  color: var(--white);
   padding: 20px;
   position: relative;
 }
@@ -703,12 +803,11 @@ body {
 }
 
 .main__section-title {
-  font-size: 19px;
+  font-size: var(--font-size-xl);
   font-weight: 600;
   margin: 0 0 30px;
   padding: 10px 0;
   position: relative;
-  font-family: Pretendard;
 }
 
 .main__section-title::before,
@@ -718,17 +817,19 @@ body {
   left: 50%;
   width: 120px;
   height: 1px;
-  background-color: var(--color-background-primary);
+  background-color: var(--white);
   transform: translateX(-50%);
 }
 
 .main__section-title::before {
   top: 0;
 }
+
 .main__section-title::after {
   bottom: 0;
 }
 
+/* 베스트셀러 컨텐츠 스타일 */
 .main__best-seller-content {
   display: flex;
   flex-direction: column;
@@ -741,18 +842,17 @@ body {
 }
 
 .main__best-seller-text {
-  font-family: Pretendard;
   margin-left: 22.5px;
 }
 
 .main__best-seller-book-title {
-  font-size: 17px;
+  font-size: var(--font-size-lg);
   margin: 0 0 10px;
   font-weight: 400;
 }
 
 .main__best-seller-author {
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   margin: 0;
   font-weight: 300;
 }
@@ -764,15 +864,16 @@ body {
   margin-left: 22.5px;
 }
 
+/* 베스트셀러 인용구 스타일 */
 .main__best-seller-quote {
-  background-color: var(--color-background-primary);
+  background-color: var(--white);
   padding: 20px;
-  color: var(--color-text-strong);
+  color: var(--grey-90);
   margin-top: -30px;
 }
 
-.main__best-seller-quote-label {
-  font-size: 12px;
+.main__best-seller__quote-label {
+  font-size: var(--font-size-sm);
   font-weight: 600;
   margin: 0 0 26px;
   display: inline-flex;
@@ -780,22 +881,21 @@ body {
   position: relative;
 }
 
-.main__best-seller-quote-label::after {
+.main__best-seller__quote-label::after {
   content: '';
   display: inline-block;
   width: 40px;
   height: 1px;
-  background-color: var(--color-text-strong);
+  background-color: var(--grey-90);
   margin-left: 10px;
 }
 
 .main__best-seller-quote-text {
-  font-size: 17px;
+  font-size: var(--font-size-lg);
   margin: 0;
   font-weight: 400;
   padding-left: 20px;
   position: relative;
-  font-family: Pretendard;
 }
 
 .main__best-seller-quote-text::before {
@@ -811,13 +911,14 @@ body {
   height: 11px;
 }
 
+/* 전체 브런치북 보기 버튼 스타일 */
 .main__view-all-brunch-book {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: var(--color-text-light);
+  background-color: var(--white-overlay-10);
+  color: var(--white);
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: var(--font-size-md);
   margin-top: 20px;
   cursor: pointer;
   display: block;
@@ -826,6 +927,7 @@ body {
   margin-right: auto;
 }
 
+/* 오늘의 추천 리스트 스타일 */
 .main__todays-pick__list {
   list-style-type: none;
   padding-left: 20px;
@@ -836,7 +938,7 @@ body {
   position: relative;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--grey-20);
 }
 
 .main__todays-pick__item::before {
@@ -845,9 +947,9 @@ body {
   position: absolute;
   left: -25px;
   top: 0;
-  font-size: 20px;
+  font-size: var(--font-size-xl);
   font-weight: bold;
-  color: #888;
+  color: var(--grey-35);
 }
 
 .main__todays-pick__info {
@@ -862,21 +964,21 @@ body {
 }
 
 .main__todays-pick__item-title {
-  font-size: 17px;
+  font-size: var(--font-size-lg);
   font-weight: bold;
   margin-bottom: 4px;
-  color: #333;
+  color: var(--grey-70);
 }
 
 .main__todays-pick__author {
-  font-size: 14px;
-  color: #888;
+  font-size: var(--font-size-md);
+  color: var(--grey-35);
   margin-bottom: 10px;
 }
 
 .main__todays-pick__description {
-  font-size: 14px;
-  color: #666;
+  font-size: var(--font-size-md);
+  color: var(--grey-50);
   line-height: 1.4;
 }
 
