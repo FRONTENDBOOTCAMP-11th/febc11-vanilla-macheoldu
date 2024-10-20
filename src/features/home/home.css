@@ -79,7 +79,7 @@ a:visited {
   --color-background-accent: #8d4e8e;
   --color-background-dark: #333333;
   --color-background-button: #231f20;
-  --color-background-footer: #111111;
+  --color-background-darkgray: #111111;
 
   /* Border Colors */
   --color-border-primary: #e0e0e0;
@@ -544,7 +544,7 @@ a:visited {
 }
 
 .main__new-authors {
-  background-color: var(--color-background-footer);
+  background-color: var(--color-background-darkgray);
   padding: 50px 25px 8px 25px;
 }
 
@@ -642,4 +642,152 @@ a:visited {
   font-size: 13px;
   color: var(--color-text-muted);
   font-weight: 300;
+}
+
+.main__best-seller {
+  background-image: url('/src/assets/images/home/bestseller1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: var(--color-text-light);
+  padding: 20px;
+  position: relative;
+}
+
+.main__best-seller::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.main__best-seller > * {
+  position: relative;
+  z-index: 2;
+}
+
+.main__section-title {
+  font-size: 12px;
+  text-align: center;
+  font-weight: 300;
+  margin: 0 0 30px;
+  padding: 10px 0;
+  position: relative;
+}
+
+.main__section-title::before,
+.main__section-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 120px;
+  height: 1px;
+  background-color: var(--color-background-primary);
+  transform: translateX(-50%);
+}
+
+.main__section-title::before {
+  top: 0;
+}
+.main__section-title::after {
+  bottom: 0;
+}
+
+.main__best-seller-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__best-seller-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.main__best-seller-text {
+  flex-grow: 1;
+}
+
+.main__best-seller-book-title {
+  font-size: 17px;
+  margin: 0 0 10px;
+  font-weight: 400;
+}
+
+.main__best-seller-author {
+  font-size: 12px;
+  margin: 0;
+  font-weight: 300;
+}
+
+.main__best-seller-image {
+  width: 100px;
+  height: 140px;
+  object-fit: cover;
+  margin-left: 20px;
+}
+
+.main__best-seller-quote {
+  background-color: var(--color-background-primary);
+  padding: 20px;
+  color: var(--color-text-strong);
+  margin-top: -30px;
+}
+
+.main__best-seller-quote-label {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 26px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.main__best-seller-quote-label::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-text-strong);
+  margin-left: 10px;
+}
+
+.main__best-seller-quote-text {
+  font-size: 17px;
+  margin: 0;
+  font-weight: 400;
+  padding-left: 20px;
+  position: relative;
+}
+
+.main__best-seller-quote-text::before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  background-image: url('/src/assets/icons/like_sub/doubleQuotes.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 10px;
+  left: 0;
+  width: 15px;
+  height: 11px;
+}
+
+.main__view-all-brunch-book {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  margin-top: 20px;
+  cursor: pointer;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
