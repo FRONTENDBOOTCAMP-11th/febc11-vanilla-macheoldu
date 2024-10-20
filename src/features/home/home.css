@@ -583,3 +583,63 @@ a:visited {
 .main__brunch-author-support:hover {
   color: var(--color-text-secondary);
 }
+
+.featured-author {
+  padding: 50px 25px 39px;
+}
+
+.featured-author__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-accent);
+}
+
+.featured-author__info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.featured-author__name {
+  font-size: 30px;
+  color: var(--color-text-strong);
+  margin: 0;
+}
+
+.featured-author__role {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+}
+
+.featured-author__image {
+  border-radius: 50%;
+}
+
+.featured-author__books-item {
+  background-color: var(--color-background-secondary);
+  padding: 20px;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.featured-author__books-info {
+  margin-left: 25px;
+}
+
+.featured-author__books-title {
+  font-size: 15px;
+  color: var(--color-text-strong);
+}
+
+.featured-author__description {
+  margin-top: 25px;
+  font-size: 15px;
+  color: var(--color-text-muted);
+}
+
+.featured-author__books-description {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-weight: 300;
+}
