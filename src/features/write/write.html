@@ -14,6 +14,7 @@
   <div class="wrapper">
     <img class="status-bar" src="../../assets/images/status_bar.svg">
     <header class="post-header">
+      <!-- 취소 버튼 선택 시 이전 페이지로 이동 -->
       <div class="post-header__cancel-btn">
         <button id="postCancel" aria-label="글쓰기 취소 버튼">
           <img src="../../assets/icons/top/top_cancel.svg" alt="글쓰기 취소">
@@ -21,9 +22,12 @@
       </div>
       <h1 class="post-header__title">글쓰기</h1>
       <div class="post-header__save-btn">
-        <button id="postSave" type="submit" aria-label="글쓰기 저장 버튼 비활성화">
-          <img src="../../assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="hidden">
-          <img src="../../assets/icons/top/top_check_green.svg" alt="글쓰기 저장" class="">
+        <!-- 저장 버튼 선택 시 게시글 post 로 서버 요청 전송 -->
+        <button id="postSave" type="submit" aria-label="글쓰기 저장 버튼">
+          <!-- 글쓰기 메인 폼의 모든 입력란이 차지 않은 경우, 글쓰기 저장 비활성화 상태 -->
+          <img src="../../assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="hidden" aria-disabled="true">
+          <!-- 글쓰기 메인 폼의 모든 입력이 완료되었을 때 활성화 -->
+          <img src="../../assets/icons/top/top_check_green.svg" alt="글쓰기 저장">
         </button>
       </div>
     </header>
@@ -32,23 +36,29 @@
         <fieldset class="create-post">
           <legend class="ir">게시글 내용 입력</legend>
           <div class="post-title">
+            <!-- 게시글 제목 -->
             <label class="ir" for="postTitle">제목 입력란</label>
             <input type="text" id="postTitle" placeholder="제목">
           </div>
           <div class="post-subtitle">
+            <!-- 게시글 소제목 -->
             <label class="ir" for="postSubtitle">소제목 입력란</label>
             <input type="text" id="postSubtitle" placeholder="소제목">
           </div>
           <div class="post-content">
+            <!-- 게시글 본문 -->
             <label class="ir" for="postContent">내용 입력란</label>
             <textarea id="postContent" placeholder="내용을 입력하세요."></textarea>
           </div>
         </fieldset>
       </form>
+    </main>
+    <footer class="post-utils">
+      <!-- 파일 업로드 버튼, type="file" 로 브라우저 파일 탐색창 출력 -->
       <section class="post-toolbar">
         <div class="post-toolbar__upload">
           <label aria-label="파일 업로드" for="uploadFile">
-            <input type="file" id="uploadFile" accept=".jpg, .jpeg, .svg, .png">
+            <input type="file" id="uploadFile" accept=".jpg, .jpeg, .svg, .png" class="ir">
             <img src="../../assets/icons/actions/addfile.svg">
           </label>
         </div>
@@ -59,7 +69,7 @@
           <img src="../../assets/icons/actions/hide_keyboard.svg">
         </div>
       </section>
-    </main>
+    </footer>
   </div>
 </body>
 
