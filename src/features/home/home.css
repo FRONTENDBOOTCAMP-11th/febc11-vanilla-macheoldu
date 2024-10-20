@@ -71,6 +71,7 @@ a:visited {
   --color-text-strong: #111111;
   --color-text-accent: #00c6be;
   --color-text-deep: #333333;
+  --color-text-footer: #bbbbbb;
 
   /* Background Colors */
   --color-background-primary: #ffffff;
@@ -78,12 +79,14 @@ a:visited {
   --color-background-accent: #8d4e8e;
   --color-background-dark: #333333;
   --color-background-button: #231f20;
+  --color-background-footer: #111111;
 
   /* Border Colors */
   --color-border-primary: #e0e0e0;
   --color-border-secondary: #dddddd;
   --color-border-muted: #666666;
   --color-border-gray-light: #eeeeee;
+  --color-border-footer: #333333;
   --color-overlay-light: rgba(255, 255, 255, 0.1);
   --color-overlay-dark: rgba(0, 0, 0, 0.05);
   --color-overlay-darker: rgba(18, 18, 18, 0.9);
@@ -534,8 +537,49 @@ a:visited {
 }
 
 .main__featured-book-quote-text::before {
-  content: url('/src/assets/icons/ui/doubleQuotes.svg');
+  content: url('/src/assets/icons/like_sub/doubleQuotes.svg');
   position: absolute;
   left: 0;
   top: -5px;
+}
+
+.main__new-authors {
+  background-color: var(--color-background-footer);
+  padding: 50px 25px 8px 25px;
+}
+
+.main__new-authors-books-list {
+  display: flex;
+  gap: 8px;
+}
+
+.main__new-authors-book-title {
+  font-size: 14px;
+  color: var(--color-text-footer);
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.main__new-authors-book-author {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.main__brunch-author-support {
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-secondary);
+  gap: 9px;
+  position: relative;
+  margin-bottom: 40px;
+  padding-top: 31px;
+  border-top: 1px solid var(--color-border-footer);
+}
+
+.main__brunch-author-support:hover {
+  color: var(--color-text-secondary);
 }
