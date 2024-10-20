@@ -15,24 +15,30 @@
     <img class="status-bar" src="../../assets/images/status_bar_green.svg">
     <header class="post-header upload">
       <div class="post-header__cancel-btn">
+        <!-- 취소 버튼 선택 시 글쓰기 페이지로 이동 -->
         <button id="postCancel" aria-label="글쓰기 취소 버튼">
           <img src="../../assets/icons/top/top_cancel_white.svg" alt="글쓰기 취소">
         </button>
       </div>
       <h1 class="post-header__title">최근 항목</h1>
       <div class="post-header__save-btn">
-        <button id="postSave" type="submit" aria-label="글쓰기 저장 버튼 비활성화">
-          <img src="../../assets/icons/top/top_check_disabled.svg" alt="파일 첨부 버튼 비활성화">
+        <!-- 파일 첨부 버튼, 파일 선택 후 클릭 시 글쓰기 페이지로 이동 -->
+        <button id="postSave" type="submit" aria-label="파일 첨부 버튼">
+          <!-- 파일 첨부 버튼 비활성화 상태 -->
+          <img src="../../assets/icons/top/top_check_disabled.svg" alt="파일 첨부 버튼 비활성화" aria-disabled="true">
+          <!-- 파일 첨부 버튼 활성화 상태 -->
           <img src="../../assets/icons/top/top_check_white.svg" alt="파일 첨부 버튼" class="hidden">
         </button>
       </div>
     </header>
-    <main class="post-main">
+    <main class="post-main upload">
       <section class="post-main__files">
+        <!-- 사진 촬영 버튼 -->
         <article class="file">
           <div class="file--filter"></div>
           <img src="https://via.placeholder.com/117x117">
         </article>
+        <!-- 사용자 기기 내의 파일 리스트 출력 -->
         <img src="https://via.placeholder.com/300x300">
         <img src="https://via.placeholder.com/300x300">
         <img src="https://via.placeholder.com/300x300">
@@ -51,13 +57,14 @@
         <img src="https://via.placeholder.com/300x300">
         <img src="https://via.placeholder.com/300x300">
         <img src="https://via.placeholder.com/300x300">
-      </section>
-      <section class="post-toolbar upload">
-        <p class="post-toolbar__count">
-          <span id="selected">0</span> / <span id="total">10</span>
-        </p>
       </section>
     </main>
+    <footer class="post-utils upload">
+      <p class="post-utils__count">
+        <!-- 선택한 파일 개수 / 전체 파일 개수 표시 -->
+        <span id="selected">0</span> / <span id="total">10</span>
+      </p>
+    </footer>
   </div>
 </body>
 

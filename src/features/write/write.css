@@ -31,11 +31,6 @@ textarea,
 button {
   all: unset;
 }
-
-input[type='file'] {
-  display: none;
-}
-
 input[type='text'],
 input[type='email'],
 input[type='password'] {
@@ -95,8 +90,7 @@ body {
 /* Layout */
 .wrapper {
   width: 360px;
-  height: 740px;
-  overflow: auto;
+  min-height: 740px;
   margin: 0 auto;
   background-color: var(--white);
 }
@@ -118,23 +112,27 @@ body {
   top: 0;
   z-index: 1;
 }
+
 /*Components*/
 body {
   background-color: var(--grey-50);
 }
 .post-header {
+  background-color: var(--white);
   height: 50px;
   padding-inline: 20px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--grey-20);
   box-sizing: border-box;
-  z-index: 1;
+  position: sticky;
+  top: 44px;
+  z-index: 10;
 }
 .post-header__cancel-btn,
 .post-header__save-btn {
   width: 30px;
-  size: 30px;
+  height: 30px;
 }
 .post-header__title {
   margin-inline: auto;
@@ -142,6 +140,9 @@ body {
   font-weight: 600;
 }
 
+.post-main {
+  padding-bottom: 184px;
+}
 .post-title {
   font-size: 2.4rem;
   line-height: 1.1;
@@ -160,11 +161,17 @@ body {
 }
 .post-content {
   font-size: 2rem;
-  height: 332px;
+  height: 466px;
   box-sizing: border-box;
   padding: 26px;
 }
 
+.post-utils {
+  width: 360px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 100px;
+}
 .post-toolbar {
   background-color: var(--grey-10);
   height: 84px;
@@ -172,9 +179,6 @@ body {
   box-sizing: border-box;
   display: flex;
   gap: 24px;
-  position: fixed;
-  bottom: calc(100vh - 740px);
-  width: 360px;
 }
 .post-toolbar div {
   width: 40px;
@@ -189,16 +193,16 @@ body {
   background-color: var(--point-color);
   color: var(--white);
   margin-bottom: 4px;
-  position: sticky;
-  top: 44px;
 }
 
+.post-main.upload {
+  padding-bottom: 88px;
+}
 .post-main__files {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 117px));
   grid-auto-rows: 117px;
   gap: 4px;
-  padding-bottom: 88px;
 }
 .file {
   background-color: var(--grey-30);
@@ -212,19 +216,21 @@ body {
   position: absolute;
   background-color: rgb(0 0 0 / 0.3);
   inset: 0;
-  transform: traslate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 .post-main__files img {
   height: 100%;
   object-fit: cover;
 }
-.post-toolbar.upload {
-  padding: 33px;
+.post-utils.upload {
+  background-color: var(--grey-10);
+  padding: 33px 26px;
+  bottom: 0;
 }
-.post-toolbar__count {
+.post-utils__count {
   color: var(--grey-40);
   font-size: 1.8rem;
 }
-.post-toolbar__count #selected {
+.post-utils__count #selected {
   color: var(--point-color);
 }
