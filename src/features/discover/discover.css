@@ -135,7 +135,9 @@ input:focus::placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 16px;
+  padding: 12px auto;
+  padding-left: 20px;
+  line-height: 3;
 }
 
 .discover__count-results {
@@ -154,6 +156,7 @@ input:focus::placeholder {
   border: none;
   font-size: 0.75rem;
   color: var(--color-content);
+  padding-right: 20px;
 }
 
 .discover__filter-btn--active {
