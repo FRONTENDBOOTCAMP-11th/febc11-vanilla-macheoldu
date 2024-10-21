@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>발견</title>
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <link rel="stylesheet" href="discover_author.css" />
+  </head>
+  <body>
+    <div class="wrapper discover">
+      <!-- Header -->
+      <header class="discover__header">
+        <input
+          type="text"
+          value="꿀"
+          class="discover__header-input"
+          aria-label="검색 입력창"
+          onclick="discover()"
+        />
+        <button
+          class="discover__header-close"
+          aria-label="검색창 닫기"
+          onclick="closeSearch()"
+        >
+          ×
+        </button>
+      </header>
+
+      <!-- Navigation -->
+      <nav class="discover__nav">
+        <div class="discover__nav-wrapper">
+          <button class="discover__nav-tab" onclick="showTab('posts')">
+            글
+          </button>
+          <button
+            class="discover__nav-tab discover__nav-tab--active"
+            onclick="showTab('authors')"
+          >
+            작가
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="discover__main">
+        <div>
+          <div class="discover__search-header">작가 검색 결과 32건</div>
+        </div>
+        <div class="author__lists">
+          <div class="author__list">
+            <div>
+              <img
+                class="author__list-cover"
+                src="../../assets/images/image_sample4.png"
+                alt="관련 이미지"
+              />
+            </div>
+            <div>
+              <h3 class="author__list-title">
+                <span class="discover__keyword">꿀</span>아빠
+              </h3>
+              <p class="author__list-info">
+                두아들 아빠 기록남기기 좋아하는 아빠 고민하는 아빠입니다
+              </p>
+            </div>
+          </div>
+
+          <div class="author__list">
+            <div>
+              <img
+                class="author__list-cover"
+                src="../../assets/images/image_sample4.png"
+                alt="관련 이미지"
+              />
+            </div>
+            <div>
+              <h3 class="author__list-title">
+                <span class="discover__keyword">꿀</span>별
+              </h3>
+              <p class="author__list-info">
+                글 쓰고 디자인 하는 사람. 마음이 담긴 일을 해요. 하 는 일에
+                마음을 담아요.
+              </p>
+            </div>
+          </div>
+          <div class="author__list">
+            <div>
+              <img
+                class="author__list-cover"
+                src="../../assets/images/image_sample4.png"
+                alt="관련 이미지"
+              />
+            </div>
+            <div>
+              <h3 class="author__list-title">
+                개발자 <span class="discover__keyword">꿀</span>
+              </h3>
+              <p class="author__list-info">
+                느리게 흘러가는 스톡홀름에 사는 개발자입니다! 🙂 요가를 좋아하고
+                심심하면 이것저것 써요.
+              </p>
+            </div>
+          </div>
+          <div class="author__list">
+            <div>
+              <img
+                class="author__list-cover"
+                src="../../assets/images/image_sample4.png"
+                alt="관련 이미지"
+              />
+            </div>
+            <div>
+              <h3 class="author__list-title">
+                <span class="discover__keyword">꿀</span>갱
+              </h3>
+              <p class="author__list-info">제 일상에 대한 글입니다.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="discover.js"></script>
+  </body>
+</html>
