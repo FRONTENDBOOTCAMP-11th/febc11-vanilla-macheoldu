@@ -413,19 +413,32 @@ body {
 /* footer */
 .footer {
   background-color: var(--color-white);
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
+  margin-bottom: 100px;
 }
 
 .footer__interactions {
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 10px;
+}
+
+.footer__interaction {
+  display: flex;
+  align-items: center;
 }
 
 .footer__interaction button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   border: none;
   background-color: var(--color-white);
+}
+
+.footer__like-count {
+  margin-bottom: 4px;
 }
 
 .footer__interaction button:hover {
