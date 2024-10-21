@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
 }
-.header {
+.brunch__header {
   box-sizing: border-box;
   padding: 14px 20px;
   display: flex;
@@ -14,30 +14,30 @@
   z-index: 1000;
 }
 
-.header__top-bar {
+.brunch__header__top-bar {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-.header__logo {
+.brunch__header__logo {
   margin-right: 98px;
   display: inline-block;
 }
 
-.header__actions {
+.brunch__header__actions {
   display: flex;
   align-items: center;
   margin-left: auto;
 }
 
-.header__search-button {
+.brunch__header__search-button {
   margin-right: 10px;
   width: 24px;
   height: 24px;
 }
 
-.header__start-button {
+.brunch__header__start-button {
   background: var(--grey-80);
   color: var(--white);
   border-radius: 12px;
