@@ -12,12 +12,12 @@
 
 <body>
   <div class="wrapper">
-    <img class="status-bar" src="../../assets/images/status_bar.svg">
+    <img class="status-bar" src="/src/assets/images/status_bar.svg">
     <header class="post-header">
       <!-- 취소 버튼 선택 시 이전 페이지로 이동 -->
       <div class="post-header__cancel-btn">
         <button id="postCancel" aria-label="글쓰기 취소 버튼">
-          <img src="../../assets/icons/top/top_cancel.svg" alt="글쓰기 취소">
+          <img src="/src/assets/icons/top/top_cancel.svg" alt="글쓰기 취소">
         </button>
       </div>
       <h1 class="post-header__title">글쓰기</h1>
@@ -25,9 +25,9 @@
         <!-- 저장 버튼 선택 시 게시글 post 로 서버 요청 전송 -->
         <button id="postSave" type="submit" aria-label="글쓰기 저장 버튼">
           <!-- 글쓰기 메인 폼의 모든 입력란이 차지 않은 경우, 글쓰기 저장 비활성화 상태 -->
-          <img src="../../assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="hidden" aria-disabled="true">
+          <img src="/src/assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="hidden" aria-disabled="true">
           <!-- 글쓰기 메인 폼의 모든 입력이 완료되었을 때 활성화 -->
-          <img src="../../assets/icons/top/top_check_green.svg" alt="글쓰기 저장">
+          <img src="/src/assets/icons/top/top_check_green.svg" alt="글쓰기 저장">
         </button>
       </div>
     </header>
@@ -59,14 +59,14 @@
         <div class="post-toolbar__upload">
           <label aria-label="파일 업로드" for="uploadFile">
             <input type="file" id="uploadFile" accept=".jpg, .jpeg, .svg, .png" class="ir">
-            <img src="../../assets/icons/actions/addfile.svg">
+            <img src="/src/assets/icons/actions/addfile.svg">
           </label>
         </div>
         <div class="post-toolbar__align">
-          <img src="../../assets/icons/actions/align_l.svg">
+          <img src="/src/assets/icons/actions/align_l.svg">
         </div>
         <div class="post-toolbar__hide-keyboard">
-          <img src="../../assets/icons/actions/hide_keyboard.svg">
+          <img src="/src/assets/icons/actions/hide_keyboard.svg">
         </div>
       </section>
     </footer>
