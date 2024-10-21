@@ -76,7 +76,7 @@ body {
 .wrapper {
   width: 360px;
   margin: 0 auto;
-  min-height: 740px;
+  min-height: 100vh;
 }
 
 /* Design */
