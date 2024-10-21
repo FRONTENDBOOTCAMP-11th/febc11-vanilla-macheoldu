@@ -142,6 +142,13 @@ input:focus::placeholder {
   line-height: 3;
 }
 
+.disdover__search-header.author {
+  padding: 0;
+  margin: 12px auto;
+  font-size: 12px;
+  font-weight: 300;
+}
+
 .discover__count-results {
   margin: 12px 0;
   font-size: 0.75rem;
@@ -238,7 +245,6 @@ input:focus::placeholder {
   background: var(--color-border);
   }
 
-
 .content__cover {
   width: 60px;
   height: 60px;
@@ -248,4 +254,78 @@ input:focus::placeholder {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 🧑‍🦲 discover - author */
+.author__lists {
+  margin: 18px auto;
+}
+
+.author__list {
+  display: flex;
+  padding: 16px 20px 18px 20px;
+  border-bottom: 1px solid #EEE;
+  min-height: 80px;
+}
+
+.author__list:first-child {
+  padding-top: 0;
+}
+
+.author__list-cover{
+  margin-top: 2px;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author__list-title {
+  color: var(--color-title);
+  margin: 0;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.discover__keyword {
+  color: #00C6BE;
+  font-weight: 400;
+}
+
+.author__list-info {
+  color: var(--color-content);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.6;
+  padding-right: 10px;
+}
+
+/* 🚫 discover - null */
+.discover__main.null {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* discover - null일 때 아래 코드로 진행 */
+  /* height: calc(100vh - 96px); */
+}
+
+.discover__result-noneImg {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.discover__result-noneImg img {
+  width: 60px;
+  height: auto;
+}
+
+.discover__result-none {
+  text-align: center;
+  font-size: 16px;
+  color: var(--color-content);
+  margin-top: 0;
+  margin-bottom: 0;
 }
