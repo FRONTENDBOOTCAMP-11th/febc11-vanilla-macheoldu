@@ -162,7 +162,8 @@ input:focus::placeholder {
 .author__list {
   display: flex;
   padding: 16px 20px 18px 20px;
-  border-bottom: 1px solid #EEE;;
+  border-bottom: 1px solid #EEE;
+  min-height: 80px;
 }
 
 .author__list:first-child {
