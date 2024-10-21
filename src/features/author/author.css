@@ -81,6 +81,14 @@ body {
   background-color: var(--color-gray-25);
 }
 
+<<<<<<< HEAD
+=======
+.navbar {
+  min-height: 144px;
+  background-color: var(--color-gray-30);
+}
+
+>>>>>>> 55808c6a070d5fd7bff990f27bd65c679ecfd490
 .header {
   background-color: var(--color-white);
   position: relative;
