@@ -51,6 +51,10 @@ ul {
   padding-bottom: 49px;
 }
 
+.status-bar {
+  vertical-align: top;
+}
+
 input {
   display: block;
   width: 100%;
