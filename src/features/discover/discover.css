@@ -223,6 +223,7 @@ input:focus::placeholder {
   position: relative;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
+  margin-right: 2px;
 }
 
 .circle {
@@ -247,32 +248,4 @@ input:focus::placeholder {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* 하단 네비게이션 */
-.discover__bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  max-width: 360px;
-  height: 100px; 
-  background-color: var(--color-white);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-top: 1px solid var(--color-border);
-  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.discover__bottom-nav-item {
-  color: var(--color-inactive);
-  text-decoration: none;
-  font-size: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.discover__bottom-nav-item--active {
-  color: var(--color-point);
 }

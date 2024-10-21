@@ -134,7 +134,7 @@ input:focus::placeholder {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 52px);
+  height: calc(100vh - 96px);
 }
 
 .discover__result-noneImg {
@@ -142,7 +142,7 @@ input:focus::placeholder {
   margin-bottom: 20px;
 }
 
-.discover__result-noneImg img wjehz{
+.discover__result-noneImg img {
   width: 60px;
   height: auto;
 }
