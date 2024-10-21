@@ -141,8 +141,10 @@ input:focus::placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px auto;
+  margin: 12px auto;
   padding-left: 20px;
+  font-size: 12px;
+  font-weight: 300;
   line-height: 3;
 }
 
@@ -170,6 +172,10 @@ input:focus::placeholder {
 .author__list-cover{
   margin-top: 2px;
   margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .author__list-title {
@@ -190,4 +196,5 @@ input:focus::placeholder {
   font-size: 12px;
   font-weight: 300;
   line-height: 1.6;
+  padding-right: 10px;
 }
