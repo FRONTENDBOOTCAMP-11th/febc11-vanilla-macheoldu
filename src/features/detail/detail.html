@@ -11,11 +11,18 @@
       crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="/src/features/components/top-menu/top-menu.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/features/components/navigation/navigation.css"
+    />
   </head>
   <body>
     <div class="wrapper">
-      <!-- 시각적인 효과만을 위한 nav -->
-      <nav class="navbar"></nav>
+      <div id="header"></div>
 
       <!-- header -->
       <header class="header">
@@ -298,6 +305,22 @@
           </li>
         </ul>
       </footer>
+
+      <div id="navigation"></div>
     </div>
+
+    <script>
+      fetch('/src/features/components/top-menu/top-menu.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header').innerHTML = data;
+        });
+
+      fetch('/src/features/components/navigation/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navigation').innerHTML = data;
+        });
+    </script>
   </body>
 </html>
