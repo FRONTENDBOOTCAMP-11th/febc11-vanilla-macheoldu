@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="wrapper discover">
-      <img class="status-bar" src="../../assets/images/status_bar.svg" />
+      <img class="status-bar" src="../../assets/images/status_bar.svg" alt="status bar"/>
       <!-- Header -->
       <header class="discover__header">
         <input
@@ -56,7 +56,7 @@
         <div class="discover__search-header author">
           <span class="discover__count-results">글 검색 결과 800건</span>
           <div class="discover__search-filters">
-            <button
+                    <button
               class="discover__filter-btn discover__filter-btn--active"
               onclick="sortResults('accuracy')"
             >
@@ -305,11 +305,13 @@
         <p class="discover__result-none">검색 결과가 없습니다.</p>
         <div id="navigation"></div>
       </main>
-    <script>
-      fetch('/src/features/components/navigation/navigation.html')
-      .then(response => response.text()).then(data => {
-        document.getElementById('navigation').innerHTML = data;
-      });
-    </script>
+
+      <!-- 🧭 bottom navigation -->
+      <script>
+        fetch('../../features/components/navigation/navigation.html')
+        .then(response => response.text()).then(data => {
+          document.getElementById('navigation').innerHTML = data;
+        });
+      </script>
   </body>
 </html>
