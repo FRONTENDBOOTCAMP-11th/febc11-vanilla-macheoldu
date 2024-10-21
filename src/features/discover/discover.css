@@ -52,6 +52,8 @@ ul {
 }
 
 .status-bar {
+  position: sticky;
+  top: 0;
   vertical-align: top;
 }
 
