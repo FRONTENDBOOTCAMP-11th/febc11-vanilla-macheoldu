@@ -2,10 +2,22 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Pretendard Variable", Pretendard, -apple-system,
-    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
 }
 
 ul {
@@ -34,9 +46,9 @@ ul {
 }
 
 .discover {
-background-color: #f8f8f8;
-color: var(--color-placeholder);
-padding-bottom: 49px;
+  background-color: #f8f8f8;
+  color: var(--color-placeholder);
+  padding-bottom: 49px;
 }
 
 input {
@@ -119,7 +131,7 @@ input:focus::placeholder {
 }
 
 .discover__nav-tab--active::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -129,7 +141,7 @@ input:focus::placeholder {
 }
 
 /* 검색 결과 헤더 */
-.discover__main .discover__search-header + .post__lists  {
+.discover__main .discover__search-header + .post__lists {
   margin-top: 0;
 }
 
@@ -138,8 +150,11 @@ input:focus::placeholder {
   justify-content: space-between;
   align-items: center;
   padding: 12px auto;
-  padding-left: 20px;
   line-height: 3;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
 
 .disdover__search-header.author {
@@ -165,17 +180,17 @@ input:focus::placeholder {
   border: none;
   font-size: 0.75rem;
   color: var(--color-content);
-  padding-right: 20px;
+  padding: 0;
 }
 
 .discover__filter-btn--active {
   color: var(--color-point);
 }
 
-/* 검색 결과 */
+/* 📖 discover - post */
 .post__lists {
   padding: 0 20px;
-  margin:34px 0;
+  margin: 34px 0;
 }
 
 .post__lists:first-child {
@@ -200,7 +215,7 @@ input:focus::placeholder {
 }
 
 .discover__keyword {
-  color: #00C6BE;
+  color: #00c6be;
   font-weight: 400;
 }
 
@@ -236,14 +251,14 @@ input:focus::placeholder {
 .circle {
   display: inline;
   width: 2px;
-  height:2px;
+  height: 2px;
   justify-content: center;
   margin-left: 7px;
   margin-right: 5px;
   align-items: center;
   border-radius: 50%;
   background: var(--color-border);
-  }
+}
 
 .content__cover {
   width: 60px;
@@ -264,7 +279,7 @@ input:focus::placeholder {
 .author__list {
   display: flex;
   padding: 16px 20px 18px 20px;
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #eee;
   min-height: 80px;
 }
 
@@ -272,7 +287,7 @@ input:focus::placeholder {
   padding-top: 0;
 }
 
-.author__list-cover{
+.author__list-cover {
   margin-top: 2px;
   margin-right: 20px;
   width: 40px;
@@ -290,7 +305,7 @@ input:focus::placeholder {
 }
 
 .discover__keyword {
-  color: #00C6BE;
+  color: #00c6be;
   font-weight: 400;
 }
 
