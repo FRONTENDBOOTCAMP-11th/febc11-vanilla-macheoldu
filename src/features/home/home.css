@@ -95,7 +95,7 @@ body {
 .content {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 56px; /* 네비게이션 푸터의 높이만큼 패딩 추가 */
+  padding-bottom: 100px;
 }
 
 .wrapper::-webkit-scrollbar {
@@ -785,6 +785,8 @@ body {
   color: var(--white);
   padding: 20px;
   position: relative;
+  max-height: calc(100vh - 100px); /* navigation 높이를 고려하여 조정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능하도록 */
 }
 
 .main__best-seller::before {
@@ -871,6 +873,7 @@ body {
   padding: 20px;
   color: var(--grey-90);
   margin-top: -30px;
+  margin-bottom: 100px; /* navigation 높이만큼 여백 추가 */
 }
 
 .main__best-seller__quote-label {
