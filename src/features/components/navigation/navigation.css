@@ -1,0 +1,20 @@
+.navigation {
+  background-color: var(--white);
+  text-align: center;
+  width: 360px;
+  height: 100px;
+  padding: 18px 33px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 34px;
+  position: fixed;
+  bottom: 0;
+}
+.navigation__button {
+  width: 48px;
+}
+.navigation__text {
+  font-size: 1.2rem;
+  line-height: 27px;
+}
