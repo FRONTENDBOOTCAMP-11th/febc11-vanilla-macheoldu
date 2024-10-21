@@ -89,8 +89,8 @@ body {
 
 /* Layout */
 .wrapper {
-  width: 360px;
-  min-height: 740px;
+  max-width: 360px;
+  min-height: 100vh;
   margin: 0 auto;
   background-color: var(--white);
 }
