@@ -27,14 +27,16 @@ ul {
 }
 
 /* Layouts */
-.discover {
+.wrapper {
   max-width: 360px;
-  width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: #f8f8f8;
-  color: var(--color-placeholder);
-  padding-bottom: 49px;
+}
+
+.discover {
+background-color: #f8f8f8;
+color: var(--color-placeholder);
+padding-bottom: 49px;
 }
 
 input {
