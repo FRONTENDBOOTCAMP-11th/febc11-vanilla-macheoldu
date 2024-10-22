@@ -11,12 +11,17 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
     />
     <link rel="stylesheet" href="discover.css" />
-    <link rel="stylesheet" href="../../features/components/top-menu/top-menu.css">
-    <link rel="stylesheet" href="../../features/components/navigation/navigation.css">
+    <link
+      rel="stylesheet"
+      href="../../features/components/top-menu/top-menu.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../../features/components/navigation/navigation.css"
+    />
   </head>
   <body>
     <div class="wrapper discover">
-      <img class="status-bar" src="../../assets/images/status_bar.svg" />
       <!-- Header -->
       <header class="discover__header">
         <input
@@ -37,7 +42,6 @@
 
       <!-- Navigation -->
       <nav class="discover__nav">
-        
         <div class="discover__nav-wrapper">
           <button
             class="discover__nav-tab discover__nav-tab--active"
@@ -303,16 +307,16 @@
           <img src="../../assets/logos/logo_symbol.svg" alt="관련 이미지" />
         </div>
         <p class="discover__result-none">검색 결과가 없습니다.</p>
-        <div id="navigation"></div>
       </main>
-
-      <!-- 🧭 bottom navigation -->
-      <script>
-        fetch('../../features/components/navigation/navigation.html')
-        .then(response => response.text()).then(data => {
-          document.getElementById('navigation').innerHTML = data;
+      <div id="navigation"></div>
+    </div>
+    <!-- 🧭 bottom navigation -->
+    <script>
+      fetch("../../features/components/navigation/navigation.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navigation").innerHTML = data;
         });
-      </script>
-
+    </script>
   </body>
 </html>

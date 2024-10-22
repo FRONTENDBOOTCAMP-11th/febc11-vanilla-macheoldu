@@ -234,7 +234,7 @@ input:focus::placeholder {
   font-weight: 300;
   line-height: 1.6;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  /* -webkit-line-clamp: 2; */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
