@@ -176,6 +176,8 @@ body {
 
 .main {
   background-color: var(--color-white);
+  /* navigation 가려진 부분 해결 */
+  padding-bottom: 100px;
 }
 
 .article {
