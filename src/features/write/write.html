@@ -7,6 +7,8 @@
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
   <link rel="stylesheet" href="write.css">
+  <link rel="stylesheet" href="/src/features/components/top-menu/top-menu.css">
+  <link rel="stylesheet" href="/src/features/components/navigation/navigation.css">
   <title>Document</title>
 </head>
 
@@ -70,7 +72,14 @@
         </div>
       </section>
     </footer>
+    <div id="navigation"></div>
   </div>
+  <script>
+    fetch('/src/features/components/navigation/navigation.html')
+      .then(response => response.text()).then(data => {
+        document.getElementById('navigation').innerHTML = data;
+      });
+  </script>
 </body>
 
 </html>
