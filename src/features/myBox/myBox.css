@@ -184,7 +184,7 @@ main {
   background-color: #ffffff;
   border-radius: 1.54px, 3px, 3px, 1.54px;
   overflow: hidden;
-  padding-top: 15px;
+  padding-top: 11px;
   text-align: center;
   width: 123px;
   flex-shrink: 0;
@@ -232,11 +232,12 @@ main {
   font-size: 19px;
   line-height: 22px;
   padding-left: 25px;
+  margin-bottom: 14px;
+  /* padding-bottom: 10px; */
 }
 
 .my-brunch .brunch-info {
   border-top: 1px solid #e0e0e0;
-  /* border-bottom: 1px solid #e0e0e0; */
 }
 
 .my-brunch .brunch-info h3 {
