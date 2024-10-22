@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="home2.css" />
+    <link rel="stylesheet" href="home.css" />
     <link
       rel="stylesheet"
       as="style"
@@ -786,24 +786,30 @@
           <section class="main-footer__section legal">
             <nav class="legal__nav" aria-label="법적 정보 링크">
               <ul class="legal__list">
-                <li class="legal__item">
-                  <a href="#" class="legal__link">이용약관</a>
-                </li>
-                <li class="legal__item">
-                  <a href="#" class="legal__link">이전 이용약관</a>
-                </li>
-                <li class="legal__item">
-                  <a href="#" class="legal__link">카카오 유료서비스 이용약관</a>
-                </li>
-                <li class="legal__item">
-                  <a href="#" class="legal__link">카카오 개인정보 처리방침</a>
-                </li>
-                <li class="legal__item">
-                  <a href="#" class="legal__link">청소년 보호정책</a>
-                </li>
-                <li class="legal__item">
-                  <a href="#" class="legal__link">운영정책</a>
-                </li>
+                <div class="legal__row">
+                  <li class="legal__item">
+                    <a href="#" class="legal__link">이용약관</a>
+                  </li>
+                  <li class="legal__item">
+                    <a href="#" class="legal__link">이전 이용약관</a>
+                  </li>
+                  <li class="legal__item">
+                    <a href="#" class="legal__link"
+                      >카카오 유료서비스 이용약관</a
+                    >
+                  </li>
+                </div>
+                <div class="legal__row">
+                  <li class="legal__item">
+                    <a href="#" class="legal__link">카카오 개인정보 처리방침</a>
+                  </li>
+                  <li class="legal__item">
+                    <a href="#" class="legal__link">청소년 보호정책</a>
+                  </li>
+                  <li class="legal__item">
+                    <a href="#" class="legal__link">운영정책</a>
+                  </li>
+                </div>
               </ul>
             </nav>
           </section>
@@ -818,22 +824,22 @@
           </section>
         </footer>
         <!-- 메인 푸터 섹션 끝 -->
-        <div id="navigation"></div>
       </div>
-      <script>
-        fetch('/src/features/components/top-menu/top-menu.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('header').innerHTML = data;
-          });
-
-        fetch('/src/features/components/navigation/navigation.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('navigation').innerHTML = data;
-          });
-      </script>
-      <!-- 공통 푸터 컴포넌트 부분 나중에 머지되면 이걸로 쓸 예정 -->
+      <!-- 공통 푸터 컴포넌트 부분 -->
+      <footer id="navigation"></footer>
     </div>
+    <script>
+      fetch('/src/features/components/top-menu/top-menu.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header').innerHTML = data;
+        });
+
+      fetch('/src/features/components/navigation/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navigation').innerHTML = data;
+        });
+    </script>
   </body>
 </html>
