@@ -104,7 +104,7 @@ body {
 }
 
 .header__info {
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 .header__user {
   margin-bottom: 20px;
@@ -129,8 +129,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  /* 🚨 피그마 파일과 다른 텍스트 위치 - 논의 필요 */
-  text-align: center;
 }
 
 .header__subscriber-title {
