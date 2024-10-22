@@ -17,19 +17,6 @@
     'Segoe UI Symbol',
     sans-serif;
 }
-/* 모바일 */
-@media (max-width: 360px) {
-  .cards {
-    flex-direction: column; /* 세로로 쌓기 */
-    width: auto; /* 전체 너비 사용 */
-  }
-
-  .card {
-    width: 100%; /* 전체 너비 사용 */
-    margin-right: 0;
-    margin-bottom: 16px; /* 아래쪽 여백 추가 */
-  }
-}
 
 /* 기본스타일 초기화 */
 h2,
@@ -46,6 +33,7 @@ img {
   min-height: 100vh;
   max-width: 360px;
   overflow: hidden;
+  padding-bottom: 100px;
 }
 
 body {
