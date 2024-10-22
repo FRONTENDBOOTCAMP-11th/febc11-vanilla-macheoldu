@@ -25,8 +25,11 @@ img {
   text-align: center;
   padding: 18px 33px 0;
   box-sizing: border-box;
+
+  /* 하단 내비게이션 바 하단에 고정*/
   position: fixed;
   bottom: 0;
+  /* z-index 추가 */
   z-index: 1000;
 }
 

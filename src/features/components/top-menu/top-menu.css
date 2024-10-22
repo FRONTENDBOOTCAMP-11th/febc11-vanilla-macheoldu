@@ -9,7 +9,7 @@
   width: 100%;
 }
 /* id="header" 영역 상단 고정 */
-/* 상단 고정 및 z-index 제일 위에 표시 */
+/* z-index 추가 */
 #header {
   position: sticky;
   top: 0;
