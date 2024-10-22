@@ -107,6 +107,14 @@ input:focus::placeholder {
   margin-left: 8px;
 }
 
+.discover__reset {
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
 /* 네비게이션 탭 */
 .discover__nav {
   border-bottom: 1px solid #eee;
