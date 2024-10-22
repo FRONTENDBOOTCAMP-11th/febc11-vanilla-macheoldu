@@ -19,11 +19,11 @@
       href="/src/features/components/navigation/navigation.css"
     />
     <title>home</title>
-    <script src="home.js"></script>
   </head>
   <body>
-    <header id="header"></header>
     <div class="wrapper">
+      <div id="header"></div>
+
       <!-- 스크롤 가능 영역 -->
       <div class="content">
         <!-- 메인 콘텐츠 영역 시작 -->
@@ -505,8 +505,6 @@
                   src="/src/assets/images/home/author1.png"
                   alt="동그라미 원"
                   class="featured-author__image"
-                  width="80px"
-                  height="80px"
                 />
               </div>
               <p class="featured-author__description">
@@ -611,8 +609,7 @@
             id="mainTopSubscribedAuthors"
           >
             <h2
-              class="main__section-title"
-              id="mainTopSubscribedAuthorsTitle"
+              class="main__top-subscribed-title"
               aria-labelledby="mainTopSubscribedAuthorsTitle"
             >
               Top 구독 작가
@@ -664,7 +661,7 @@
               <!-- 네 번째 구독 작가 -->
               <article class="main__top-subscribed-author">
                 <img
-                  src="/src/assets/images/author5.png"
+                  src="/src/assets/images/home/author5.png"
                   alt="마틸다 하나씨"
                   class="main__top-subscribed-author-image"
                 />
@@ -824,9 +821,23 @@
             />
           </section>
         </footer>
+        <!-- 메인 푸터 섹션 끝 -->
+        <div id="navigation"></div>
       </div>
+      <script>
+        fetch('/src/features/components/top-menu/top-menu.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header').innerHTML = data;
+          });
+
+        fetch('/src/features/components/navigation/navigation.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('navigation').innerHTML = data;
+          });
+      </script>
+      <!-- 공통 푸터 컴포넌트 부분 나중에 머지되면 이걸로 쓸 예정 -->
     </div>
-    <!-- 메인 푸터 섹션 끝 -->
-    <nav id="navigation" class="navigation"></nav>
   </body>
 </html>

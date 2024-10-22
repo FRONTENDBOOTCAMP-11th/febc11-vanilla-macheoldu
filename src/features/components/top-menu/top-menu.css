@@ -1,0 +1,59 @@
+/* 초기화 */
+.brunch__header button {
+  background-color: transparent;
+  border: none;
+  padding: unset;
+}
+.brunch__header img {
+  vertical-align: top;
+  width: 100%;
+}
+/* 헤더 스타일 */
+#header {
+  position: sticky;
+  top: 0;
+}
+.brunch__header {
+  background-color: white;
+  box-sizing: border-box;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  background-color: var(--white);
+  z-index: 1000;
+}
+
+.brunch__header__top-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.brunch__header__logo {
+  margin-right: 98px;
+  display: inline-block;
+}
+
+.brunch__header__actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.brunch__header__search-button {
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+}
+
+.brunch__header__start-button {
+  background: #231f20 !important;
+  color: white;
+  border-radius: 12px;
+  padding: 5px 13px;
+  font-size: 10px;
+  width: 62px;
+  height: 24px;
+}

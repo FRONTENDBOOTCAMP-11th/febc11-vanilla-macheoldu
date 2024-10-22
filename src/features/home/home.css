@@ -1,41 +1,68 @@
-/* 리셋 스타일 */
-body,
-button,
-ul,
-h1,
-h2,
-h3,
-p,
-blockquote,
-span,
-a,
-li {
+/* 전체 요소에 대한 기본 설정 */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  list-style: none;
-  text-decoration: none;
-  color: inherit;
-  font-family: inherit;
+}
+
+/* 기본 폰트 및 텍스트 색상 설정 */
+body {
+  font-family: 'Pretendard Variable', sans-serif;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 헤딩 요소 초기화 */
+h1,
+h2,
+h3 {
   font-weight: normal;
+  font-size: inherit;
 }
 
-ol {
-  list-style: decimal;
-  counter-reset: item;
+/* 링크 스타일 초기화 */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
+/* 버튼 스타일 초기화 */
 button {
-  background-color: transparent;
+  background: none;
   border: none;
   cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
-a,
-a:hover,
-a:active,
-a:visited {
-  color: inherit;
-  text-decoration: none;
+/* 리스트 스타일 초기화 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 이미지 기본 스타일 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 입력 요소 스타일 초기화 */
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* figure 요소 마진 제거 */
+figure {
+  margin: 0;
+}
+
+/* blockquote 스타일 초기화 */
+blockquote {
+  margin: 0;
 }
 
 /* 루트 변수 */
@@ -95,7 +122,7 @@ body {
 .content {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 100px;
+  padding-bottom: 56px; /* 네비게이션 푸터의 높이만큼 패딩 추가 */
 }
 
 .wrapper::-webkit-scrollbar {
@@ -110,47 +137,6 @@ body {
 
 .text-center {
   text-align: center;
-}
-
-/* 타이포그래피 */
-.font-sm {
-  font-size: var(--font-size-sm);
-}
-
-.font-md {
-  font-size: var(--font-size-md);
-}
-
-.font-lg {
-  font-size: var(--font-size-lg);
-}
-
-.font-xl {
-  font-size: var(--font-size-xl);
-}
-
-.font-xxl {
-  font-size: var(--font-size-xxl);
-}
-
-.font-xxxl {
-  font-size: var(--font-size-xxxl);
-}
-
-.text-grey-40 {
-  color: var(--grey-40);
-}
-
-.text-grey-50 {
-  color: var(--grey-50);
-}
-
-.text-grey-70 {
-  color: var(--grey-70);
-}
-
-.text-grey-90 {
-  color: var(--grey-90);
 }
 
 /* 헤더 스타일 */
@@ -198,6 +184,12 @@ body {
   font-size: var(--font-size-xs);
   width: 62px;
   height: 24px;
+}
+
+.divider {
+  height: 9px;
+  border-top: 1px solid var(--grey-30);
+  background: var(--grey-10);
 }
 
 /* 푸터 스타일 */
@@ -297,85 +289,112 @@ body {
   font-size: var(--font-size-xs);
 }
 
-/* 커버 스타일 */
+/* 커버 섹션의 전체 스타일 */
 .cover {
   background-color: var(--purple);
-  text-align: center;
   color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  padding: 20px;
+  padding: 55px 0 28px;
 }
 
+/* 책 제목 스타일 */
 .cover__title {
   font-size: var(--font-size-xxl);
-  padding-top: 55px;
+  font-weight: 300;
+  line-height: 1.41;
+  margin: 0;
 }
 
+/* 작가 이름 스타일 */
 .cover__author {
-  font-size: var(--font-size-sm);
-  padding-bottom: 66px;
+  font-size: 12px;
+  line-height: 1.33;
+  margin-top: 10.5px; /* 제목과의 간격 */
+  margin-bottom: 66px; /* 이미지와의 간격 */
 }
 
+/* 이미지 컨테이너 스타일 */
 .cover__image-wrapper {
   position: relative;
   display: inline-block;
-  margin: 0;
-  padding: 0;
 }
 
+/* 책 표지 이미지 스타일 */
+.cover__image {
+  width: 135px;
+  height: 190px;
+}
+
+/* 응원 뱃지 스타일 */
 .cover__badge {
   position: absolute;
-  top: -10px;
-  right: -5px;
-  width: 40px;
-  height: 40px;
+  top: -5px;
+  right: 0;
+  width: 29px;
+  height: 32px;
 }
-/* 커버 지원 및 진행 상태 스타일 */
+
+/* 응원 정보 컨테이너 스타일 */
 .cover__support {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 30px; /* 이미지와의 간격 */
+  margin-bottom: 38px; /* 프로그레스 바와의 간격 */
 }
 
+/* 응원 아이콘 스타일 */
+.cover__support-icon {
+  margin-right: 4px;
+  width: 21px;
+  height: 21px;
+}
+
+/* 응원 수 텍스트 스타일 */
 .cover__support-count {
-  font-size: var(--font-size-md);
-  margin-left: 6px;
+  font-size: 14px;
 }
 
+/* 프로그레스 바 컨테이너 스타일 */
 .cover__progress {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 38px;
 }
 
+/* 프로그레스 바 스텝 컨테이너 스타일 */
 .cover__progress-steps {
   display: flex;
-  margin-right: 9px;
+  gap: 1px;
 }
 
+/* 프로그레스 바 각 스텝 스타일 */
 .cover__progress-step {
   width: 20px;
   height: 1px;
-  background-color: var(--white);
+  background-color: white;
   opacity: 1;
 }
 
+/* 활성화된 프로그레스 바 스텝 스타일 */
 .cover__progress-step.active {
   opacity: 0.3;
 }
 
+/* 프로그레스 텍스트 스타일 */
 .cover__progress-text {
   font-size: 11px;
+  margin-left: 3px;
 }
 
 /* 주간 연재 스타일 */
 .weekly-serial {
-  padding-left: 25px;
+  padding: 50px 25px 34px;
 }
 
 .weekly-serial__heading {
-  padding-top: 50px;
   font-size: var(--font-size-xl);
   color: var(--grey-90);
 }
@@ -455,11 +474,21 @@ body {
   margin-bottom: 10px;
 }
 
+.weekly-serial__new {
+  width: 14px;
+  height: 14px;
+}
+
 .weekly-serial__author {
   color: var(--grey-40);
   font-size: var(--font-size-sm);
   font-weight: 300;
   margin-bottom: 44px;
+}
+
+.weekly-serial__image {
+  width: 80px;
+  height: 80px;
 }
 
 .weekly-serial__item {
@@ -486,13 +515,6 @@ body {
   font-size: var(--font-size-md);
   height: 36px;
   box-sizing: border-box;
-}
-
-/* 메인 섹션 스타일 */
-.divider {
-  height: 9px;
-  border-top: 1px solid var(--grey-30);
-  background: var(--grey-10);
 }
 
 /* 오늘의 추천 스타일 */
@@ -537,7 +559,7 @@ body {
 .main__top-subscribed-authors-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  text-align: center;
+  gap: 20px;
 }
 
 .main__top-subscribed-author {
@@ -569,7 +591,14 @@ body {
 }
 
 .main__top-subscribed-authors {
-  padding: 102px 25px 48px;
+  padding: 50px 25px 48px;
+}
+
+.main__top-subscribed-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 .main__top-subscribed-author-image {
@@ -581,12 +610,15 @@ body {
 .main__top-subscribed-author-name {
   font-size: var(--font-size-xl);
   color: var(--grey-90);
+  margin: 8px 0 4px;
+  text-align: center;
 }
 
 .main__top-subscribed-author-role {
   font-size: var(--font-size-sm);
   color: var(--grey-40);
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  margin: 0 0 4px;
 }
 
 .main__top-subscribed-author-description {
@@ -656,6 +688,11 @@ body {
 .main__featured-book-quote-label {
   font-size: var(--font-size-sm);
   color: var(--grey-40);
+}
+
+.main__logo-symbol {
+  width: 18px;
+  height: 18px;
 }
 
 .main__featured-book-quote-text {
@@ -746,6 +783,8 @@ body {
 
 .featured-author__image {
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
 }
 
 .featured-author__books-item {
@@ -778,39 +817,23 @@ body {
 
 /* 베스트셀러 섹션 스타일 */
 .main__best-seller {
-  background-image: url('/src/assets/images/home/bestseller1.png');
+  background-image: url('/src/assets/images/home/bestsellerBg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   color: var(--white);
-  padding: 20px;
+  padding: 40px 22.5px 39px;
   position: relative;
-  max-height: calc(100vh - 100px); /* navigation 높이를 고려하여 조정 */
-  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능하도록 */
-}
-
-.main__best-seller::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-.main__best-seller > * {
-  position: relative;
-  z-index: 2;
 }
 
 .main__section-title {
   font-size: var(--font-size-xl);
   font-weight: 600;
-  margin: 0 0 30px;
-  padding: 10px 0;
+  /* margin: 0 0 30px; */
+  /* padding: 10px 0; */
+  text-align: right;
   position: relative;
+  text-align: center;
 }
 
 .main__section-title::before,
@@ -841,22 +864,16 @@ body {
 .main__best-seller-info {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.main__best-seller-text {
-  margin-left: 22.5px;
 }
 
 .main__best-seller-book-title {
   font-size: var(--font-size-lg);
-  margin: 0 0 10px;
+  margin-bottom: 10px;
   font-weight: 400;
 }
 
 .main__best-seller-author {
   font-size: var(--font-size-sm);
-  margin: 0;
   font-weight: 300;
 }
 
@@ -864,23 +881,21 @@ body {
   width: 100px;
   height: 140px;
   object-fit: cover;
-  margin-left: 22.5px;
 }
 
 /* 베스트셀러 인용구 스타일 */
 .main__best-seller-quote {
   background-color: var(--white);
-  padding: 20px;
   color: var(--grey-90);
   margin-top: -30px;
-  margin-bottom: 100px; /* navigation 높이만큼 여백 추가 */
+  padding: 22.75px 20px 23px;
+  margin-bottom: 30px;
 }
 
 .main__best-seller__quote-label {
   font-size: var(--font-size-sm);
-  font-weight: 600;
-  margin: 0 0 26px;
-  display: inline-flex;
+  font-weight: 700;
+  display: flex;
   align-items: center;
   position: relative;
 }
@@ -891,15 +906,13 @@ body {
   width: 40px;
   height: 1px;
   background-color: var(--grey-90);
-  margin-left: 10px;
 }
 
 .main__best-seller-quote-text {
   font-size: var(--font-size-lg);
   margin: 0;
-  font-weight: 400;
-  padding-left: 20px;
   position: relative;
+  padding-left: 25px; /* 따옴표 이미지를 위한 공간 */
 }
 
 .main__best-seller-quote-text::before {
@@ -909,7 +922,7 @@ body {
   background-image: url('/src/assets/icons/like_sub/doubleQuotes.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  top: 10px;
+  top: 5px;
   left: 0;
   width: 15px;
   height: 11px;
@@ -919,16 +932,24 @@ body {
 .main__view-all-brunch-book {
   background-color: var(--white-overlay-10);
   color: var(--white);
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
   font-size: var(--font-size-md);
-  margin-top: 20px;
   cursor: pointer;
-  display: block;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  border-radius: 20px;
+  padding: 12px 9px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* 버튼을 정확히 중앙으로 위치시킴 */
+  white-space: nowrap;
+}
+
+/* 다음 아이콘 스타일 */
+.icon-next {
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
 }
 
 /* 오늘의 추천 리스트 스타일 */
