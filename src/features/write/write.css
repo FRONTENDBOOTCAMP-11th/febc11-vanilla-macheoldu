@@ -221,6 +221,8 @@ body {
   background-color: rgb(0 0 0 / 0.3);
   inset: 0;
 }
+
+/* 동적으로 이미지 불러와지는 경우 대비해서 유지*/
 .post-main__files img {
   height: 100%;
   object-fit: cover;
