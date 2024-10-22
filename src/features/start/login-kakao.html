@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link rel="stylesheet" href="start.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- 카카오 계정 로그인 페이지 -->
+    <header class="login-header">
+      <h1 class="login-header__title">계정 정보 입력으로도 로그인할 수 있어요.</h1>
+    </header>
+    <main class="login-main">
+      <!-- 카카오 계정 로그인 정보 입력 폼 -->
+      <form class="login-main__form kakao">
+        <fieldset class="login-main__id-pw">
+          <legend class="ir">카카오 로그인 폼</legend>
+          <div class="input kakao">
+            <label class="ir" for="kakaoId">카카오 계정 입력란</label>
+            <input type="text" id="kakaoId" placeholder="카카오메일 아이디, 이메일, 전화번호">
+          </div>
+          <div class="input kakao">
+            <label class="ir" for="kakaoPassword">카카오 계정 비밀번호 입력란</label>
+            <input type="password" id="kakaoPassword" placeholder="비밀번호">
+          </div>
+          <div class="l_flex">
+            <label class="login-main__save kakao" for="saveIdPw">
+              <div class="checkbox"></div>
+              <input type="checkbox" id="saveIdPw" aria-label="로그인 정보 저장 체크박스"> 간편로그인 정보 저장
+            </label>
+            <img src="../../assets/icons/actions/info.svg" class="info" alt="정보 버튼">
+          </div>
+          <!-- 로그인 오류 시, class="hidden" 제거 -->
+          <div class="login-main__error">옳지 않은 이메일과 비밀번호입니다.</div>
+        </fieldset>
+        <!-- 버튼 클릭 시 로그인 시도, 오류 발생 시, 상단의 에러 메시지 출력 -->
+        <div class="btn type--long kakao">
+          <button type="submit" id="loginKakao">로그인</button>
+        </div>
+      </form>
+      <div class="login-main__find">
+        <p><a href="#" aria-label="회원가입 링크">회원가입</a></p>
+        <p class="divider"><a href="#" aria-label="계정 찾기 링크">계정 찾기</a></p>
+        <p><a href="#" aria-label="비밀번호 찾기 링크">비밀번호 찾기</a></p>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
