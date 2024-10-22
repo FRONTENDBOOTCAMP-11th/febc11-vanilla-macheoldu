@@ -71,6 +71,13 @@ blockquote {
   background: var(--grey-10);
 }
 
+/* 다음 아이콘 스타일 */
+.icon-next {
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+}
+
 /* 루트 변수 */
 :root {
   /* 메인 색상 */
@@ -440,4 +447,361 @@ body {
   width: 80px;
   height: 120px;
   object-fit: cover;
+}
+
+/* 베스트셀러 섹션 스타일 */
+.main__best-seller {
+  background-image: url('/src/assets/images/home/bestsellerBg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+  padding: 40px 22.5px 39px;
+  position: relative;
+}
+
+.main__section-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  margin: 0 0 30px;
+  padding: 10px 0;
+  position: relative;
+  text-align: center;
+}
+
+.main__new-authors-subtitle {
+  width: 310px;
+  height: 56px;
+  margin-bottom: 25px;
+}
+
+.main__section-title::before,
+.main__section-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 120px;
+  height: 1px;
+  background-color: var(--white);
+  transform: translateX(-50%);
+}
+
+.main__section-title::before {
+  top: 0;
+}
+
+.main__section-title::after {
+  bottom: 0;
+}
+
+/* 베스트셀러 컨텐츠 스타일 */
+.main__best-seller-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__best-seller-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__best-seller-book-title {
+  font-size: var(--font-size-lg);
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.main__best-seller-author {
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+}
+
+.main__best-seller-image {
+  width: 100px;
+  height: 140px;
+  object-fit: cover;
+}
+
+/* 베스트셀러 인용구 스타일 */
+.main__best-seller-quote {
+  background-color: var(--white);
+  color: var(--grey-90);
+  margin-top: -30px;
+  padding: 22.75px 20px 23px;
+  margin-bottom: 30px;
+}
+
+.main__best-seller__quote-label {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.main__best-seller__quote-label::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--grey-90);
+}
+
+.main__best-seller-quote-text {
+  font-size: var(--font-size-lg);
+  margin: 0;
+  position: relative;
+  padding-left: 25px; /* 따옴표 이미지를 위한 공간 */
+}
+
+.main__best-seller-quote-text::before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  background-image: url('/src/assets/icons/like_sub/doubleQuotes.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 5px;
+  left: 0;
+  width: 15px;
+  height: 11px;
+}
+
+/* 전체 브런치북 보기 버튼 스타일 */
+.main__view-all-brunch-book {
+  background-color: var(--white-overlay-10);
+  color: var(--white);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 12px 9px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* 버튼을 정확히 중앙으로 위치시킴 */
+  white-space: nowrap;
+}
+
+/* 추천 작가 섹션 스타일 */
+.featured-author {
+  padding: 50px 25px 39px;
+}
+
+.featured-author__title {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--point-color);
+}
+
+.featured-author__info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.featured-author__name {
+  font-size: var(--font-size-xxxl);
+  color: var(--grey-90);
+  margin: 0;
+}
+
+.featured-author__role {
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
+  font-weight: 300;
+}
+
+.featured-author__image {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.featured-author__books-item {
+  background-color: var(--grey-10);
+  padding: 20px;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.featured-author__books-info {
+  margin-left: 25px;
+}
+
+.featured-author__books-title {
+  font-size: var(--font-size-md);
+  color: var(--grey-90);
+}
+
+.featured-author__description {
+  margin-top: 25px;
+  font-size: var(--font-size-md);
+  color: var(--grey-50);
+}
+
+.featured-author__books-description {
+  font-size: var(--font-size-sm);
+  color: var(--grey-50);
+  font-weight: 300;
+}
+
+.featured-author__books-image {
+  width: 60px;
+  height: 85px;
+}
+
+/* 추천 도서 스타일 */
+.main__featured-book {
+  background: linear-gradient(
+    136deg,
+    var(--white) 0%,
+    var(--grey-10) 17%,
+    var(--grey-10) 75%,
+    var(--grey-20) 100%
+  );
+  padding: 75px 17.5px 39px;
+}
+
+.main__featured-book-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main__featured-book-info {
+  flex: 1;
+}
+
+.main__featured-book-title {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+}
+
+.main__featured-book-author {
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
+}
+
+.main__featured-book-image-container {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.main__featured-book-image {
+  max-width: 120px;
+  height: auto;
+}
+
+/* 추천 도서 인용구 스타일 */
+.main__featured-book-quote {
+  background-color: var(--white);
+  margin-top: -30px;
+  z-index: 3;
+  padding: 23px 25px 67px;
+  position: relative;
+}
+
+.main__featured-book-quote-label-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.main__featured-book-quote-label {
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
+}
+
+.main__logo-symbol {
+  width: 18px;
+  height: 18px;
+}
+
+.main__featured-book-quote-text {
+  font-size: var(--font-size-lg);
+  color: var(--grey-90);
+  position: relative;
+  padding-left: 25px;
+}
+
+.main__featured-book-quote-text::before {
+  content: url('/src/assets/icons/like_sub/doubleQuotes.svg');
+  position: absolute;
+  left: 0;
+  top: -5px;
+}
+
+/* 상위 구독 작가 그리드 스타일 */
+.main__top-subscribed-authors-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.main__top-subscribed-author {
+  border-right: 1px solid var(--grey-30);
+  border-bottom: 1px solid var(--grey-30);
+}
+
+/* 상위 구독 작가 아이템 스타일 */
+.main__top-subscribed-author:nth-child(1),
+.main__top-subscribed-author:nth-child(2) {
+  padding: 0 20px 11px 23px;
+}
+
+.main__top-subscribed-author:nth-child(3),
+.main__top-subscribed-author:nth-child(4) {
+  padding: 31px 20px 11px 23px;
+}
+
+.main__top-subscribed-author:nth-child(2n) {
+  border-right: none;
+}
+
+.main__top-subscribed-author:nth-child(-n + 2) {
+  border-top: none;
+}
+
+.main__top-subscribed-author:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.main__top-subscribed-authors {
+  padding: 50px 25px 48px;
+}
+
+.main__top-subscribed-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.main__top-subscribed-author-image {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+.main__top-subscribed-author-name {
+  font-size: var(--font-size-xl);
+  color: var(--grey-90);
+  margin: 8px 0 4px;
+  text-align: center;
+}
+
+.main__top-subscribed-author-role {
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
+  /* margin-bottom: 15px; */
+  margin: 0 0 4px;
+}
+
+.main__top-subscribed-author-description {
+  font-size: 13px;
+  color: var(--grey-50);
+  line-height: 1.46;
 }
