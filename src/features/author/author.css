@@ -84,9 +84,6 @@ body {
 .header {
   background-color: var(--color-white);
   position: relative;
-
-  /* 시각적 효과 */
-  background-color: mediumaquamarine;
 }
 
 .header__proile-background-wrapper {
