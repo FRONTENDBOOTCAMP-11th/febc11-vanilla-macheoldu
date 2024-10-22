@@ -805,3 +805,108 @@ body {
   color: var(--grey-50);
   line-height: 1.46;
 }
+
+/* 새로운 작가 섹션 스타일 */
+.main__new-authors {
+  background-color: var(--grey-90);
+  padding: 50px 25px 8px 25px;
+}
+
+.main__new-authors-birth {
+  width: 140px;
+  height: 17px;
+}
+
+.main__new-authors-subtitle {
+  width: 310px;
+  height: 56px;
+  margin-bottom: 25px;
+}
+
+.main__new-authors-books-list {
+  display: flex;
+  gap: 8px;
+}
+
+.main__new-authors-book-title {
+  font-size: var(--font-size-md);
+  color: var(--grey-35);
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.main__new-authors-book-author {
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* 브런치 작가 지원 링크 스타일 */
+.main__brunch-author-support {
+  font-size: var(--font-size-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--grey-40);
+  gap: 9px;
+  position: relative;
+  margin-bottom: 40px;
+  padding-top: 31px;
+  border-top: 1px solid var(--grey-70);
+}
+
+/* 메인 푸터 스타일 */
+.main-footer {
+  background-color: var(--grey-70);
+  padding: 37px 31px;
+  box-sizing: border-box;
+}
+
+.main-footer__section {
+  margin-bottom: 30px;
+}
+
+.main-footer__section:last-child {
+  margin-bottom: 0;
+}
+/* 소셜 섹션 스타일 */
+.social__list {
+  display: flex;
+  justify-content: center;
+  gap: 27px;
+}
+
+.social__link {
+  display: inline-block;
+}
+
+.social__icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* 법적 정보 섹션 스타일 */
+.legal__list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 19px;
+}
+
+.legal__link {
+  font-size: var(--font-size-sm);
+  color: var(--grey-40);
+}
+
+/* 브랜딩 섹션 스타일 */
+.branding {
+  display: flex;
+  justify-content: center;
+}
+
+.branding__logo {
+  max-width: 100%;
+  width: 87px;
+  height: 15px;
+}
