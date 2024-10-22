@@ -68,7 +68,7 @@ h2 {
 main {
   background-color: #ffffff;
 }
-/* 재활용 */
+/* 재활용 h2 각 타이틀 */
 .section-title {
   display: inline-block;
   align-items: center;
@@ -76,6 +76,11 @@ main {
 .section-title h2 {
   display: inline-block;
   margin: 0;
+}
+
+.recently-viewed,
+.interested-posts {
+  overflow: hidden;
 }
 
 .section-title .arrow img {
