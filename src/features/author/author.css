@@ -84,6 +84,14 @@ body {
 .header {
   background-color: var(--color-white);
   position: relative;
+
+  /* 시각적 효과 */
+  background-color: mediumaquamarine;
+}
+
+.header__proile-background-wrapper {
+  height: 94px;
+  background-color: var(--color-gray-25);
 }
 
 .header__profile-image-wrapper {
