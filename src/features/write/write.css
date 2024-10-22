@@ -126,7 +126,7 @@ body {
   border-bottom: 1px solid var(--grey-20);
   box-sizing: border-box;
   position: sticky;
-  top: 44px;
+  top: 0;
   z-index: 10;
 }
 .post-header__cancel-btn,
