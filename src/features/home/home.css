@@ -78,6 +78,11 @@ blockquote {
   margin-left: 2px;
 }
 
+.weekly-serial__view-all .icon-next {
+  width: 20px;
+  height: 20px;
+}
+
 em {
   font-family: Georgia;
 }
@@ -366,7 +371,8 @@ body {
   border-radius: 30px;
   border: 1px solid var(--grey-30);
   color: var(--grey-70);
-  padding: 1px 11px 1px 22px;
+  padding-left: 22px;
+  padding-right: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -390,6 +396,9 @@ body {
 }
 
 .main__todays-pick-title--english {
+  font-family: Georgia;
+  color: var(--grey-90);
+  font-weight: 400;
   font-size: var(--font-size-sm);
 }
 
@@ -402,6 +411,7 @@ body {
   font-size: var(--font-size-lg);
   margin-bottom: 30px;
 }
+
 /* 오늘의 추천 리스트 스타일 */
 .main__todays-pick__list {
   list-style-type: none;
@@ -414,6 +424,16 @@ body {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--grey-20);
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* 제목, 작성자, 설명 사이의 간격 */
+}
+
+.main__todays-pick__item:last-child {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: none;
 }
 
 .main__todays-pick__item::before {
@@ -456,10 +476,34 @@ body {
   margin-bottom: 10px;
 }
 
-.main__todays-pick__description {
-  font-size: var(--font-size-md);
+/* .main__todays-pick__description {
+  font-size: 13px;
   color: var(--grey-50);
+  font-weight: 300;
   line-height: 1.4;
+} */
+
+.main__todays-pick__description {
+  font-size: 13px;
+  color: var(--grey-50);
+  font-weight: 300;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 2줄로 제한 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all; /* 단어 단위로 줄바꿈 */
+  height: 2.8em; /* line-height 1.4 × 2줄 = 2.8 */
+}
+
+.main__todays-pick__text {
+  flex: 1;
+  padding-right: 15px;
+  width: calc(
+    100% - 95px
+  ); /* 이미지 width(80px) + padding-right(15px) 만큼 제외 */
+  min-width: 0; /* flex item 내부의 텍스트 줄바꿈을 위해 필요 */
 }
 
 .main__todays-pick__image {
@@ -546,31 +590,36 @@ body {
   background-color: var(--white);
   color: var(--grey-90);
   margin-top: -30px;
-  padding: 22.75px 20px 23px;
   margin-bottom: 30px;
+  padding-left: 20px;
 }
 
 .main__best-seller__quote-label {
   font-size: var(--font-size-sm);
+  padding-top: 23px;
   font-weight: 700;
   display: flex;
   align-items: center;
-  position: relative;
+  gap: 8px;
+  margin-bottom: 26px;
 }
 
 .main__best-seller__quote-label::after {
   content: '';
-  display: inline-block;
-  width: 40px;
+  display: block;
+  width: 34px;
   height: 1px;
   background-color: var(--grey-90);
+  margin-left: 4px;
 }
 
 .main__best-seller-quote-text {
   font-size: var(--font-size-lg);
   margin: 0;
   position: relative;
-  padding-left: 25px; /* 따옴표 이미지를 위한 공간 */
+  padding: 0 26px 23px 22px;
+  line-height: 1.41;
+  word-break: keep-all;
 }
 
 .main__best-seller-quote-text::before {
@@ -605,74 +654,80 @@ body {
 }
 
 /* 추천 작가 섹션 스타일 */
-.main__featured-author__books-image-wrapper {
+.main__main__featured-author__books-image-wrapper {
   flex-shrink: 0;
   width: 60px;
 }
 
-.featured-author {
+.main__featured-author {
   padding: 50px 25px 39px;
 }
 
-.featured-author__title {
+.main__featured-author__title {
   font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--point-color);
 }
 
-.featured-author__info-wrapper {
+.main__featured-author__info-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.featured-author__name {
+.main__featured-author__name {
   font-size: var(--font-size-xxxl);
   color: var(--grey-90);
   margin: 0;
 }
 
-.featured-author__role {
+.main__featured-author__role {
   font-size: var(--font-size-sm);
   color: var(--grey-40);
   font-weight: 300;
+  line-height: 1.47;
 }
 
-.featured-author__image {
+.main__featured-author__image {
   border-radius: 50%;
   width: 80px;
   height: 80px;
 }
 
-.main__featured-author__books-item {
+.main__main__featured-author__books-item {
   background-color: var(--grey-10);
   padding: 20px;
   display: flex;
   margin-bottom: 5px;
 }
 
-.main__featured-author__books-info {
+.main__main__featured-author__books-info {
   margin-left: 25px;
 }
 
-.main__featured-author__books-title {
+.main__main__featured-author__books-title {
   font-size: var(--font-size-md);
   color: var(--grey-90);
 }
 
-.featured-author__description {
+.main__featured-author__description {
   margin-top: 25px;
-  font-size: var(--font-size-md);
+  font-size: 15px;
+  font-weight: 300;
   color: var(--grey-50);
+  word-break: keep-all; /* 단어 단위로 줄바꿈 */
+  white-space: normal; /* 자동 줄바꿈 허용 */
+  line-height: 1.47;
+  margin-bottom: 25px;
 }
 
-.main__featured-author__books-description {
+.main__main__featured-author__books-description {
   font-size: var(--font-size-sm);
   color: var(--grey-50);
   font-weight: 300;
 }
 
-.main__featured-author__books-image {
+.main__main__featured-author__books-image {
   width: 60px;
   height: 85px;
 }
@@ -722,7 +777,7 @@ body {
 /* 추천 도서 인용구 스타일 */
 .main__featured-book-quote {
   background-color: var(--white);
-  margin-top: -30px;
+  margin-top: -25px;
   z-index: 3;
   padding: 23px 25px 67px;
   position: relative;
@@ -750,6 +805,7 @@ body {
   color: var(--grey-90);
   position: relative;
   padding-left: 25px;
+  line-height: 1.41;
 }
 
 .main__featured-book-quote-text::before {
@@ -849,7 +905,7 @@ body {
 .main__top-subscribed-author-role {
   font-size: var(--font-size-sm);
   color: var(--grey-40);
-  margin: 0;
+  margin-bottom: 15px;
 }
 
 .main__top-subscribed-author-description {
@@ -862,6 +918,10 @@ body {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+.main__top-subscribed-author-description:nth-child(2) {
+  padding-top: 18px;
 }
 
 /* 새로운 작가 섹션 스타일 */
@@ -944,11 +1004,11 @@ body {
 }
 
 /* 법적 정보 섹션 스타일 */
-.legal__nav {
+.main__legal--nav {
   width: 100%;
 }
 
-.legal__list {
+.main__legal--list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -956,29 +1016,28 @@ body {
 }
 
 /* 각 줄을 감싸는 div 추가 */
-.legal__row {
+.main__legal--row {
   display: flex;
   justify-content: center;
   width: 100%;
   gap: 0;
 }
 
-.legal__item {
+.main__legal--item {
   display: flex;
   align-items: center;
 }
 
 /* 구분선 스타일 */
-.legal__item:not(:nth-child(3)):not(:last-child)::after {
+.main__legal--item:not(:nth-child(3)):not(:last-child)::after {
   content: '';
   display: inline-block;
   width: 1px;
   height: 12px;
-  background-color: var(--grey-40);
   margin: 0 8px;
 }
 
-.legal__link {
+.main__legal--link {
   font-size: var(--font-size-sm);
   color: var(--grey-40);
   line-height: 1.5;
