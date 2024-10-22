@@ -28,25 +28,21 @@
       <header class="header">
         <!-- 게시글 이미지, 🚨 이미지가 따로 없어 우선 공백으로 둠-->
         <div class="header__cover-image-wrapper">
-          <img class="header__cover-image" src="" alt="" />
+          <img
+            class="header__cover-image"
+            src="../../assets/images/heartbg.png"
+            alt=""
+          />
         </div>
         <!-- 이미지 위에 떠 있는 글들 -->
         <div class="header__info">
-          <!-- 글의 제목, 🚨 따로 width 설정을 주지 않아서 피그마 시안이랑 다름, 어떻게 하는게 시각적으로 좋은지 생각중-->
           <h3 class="header__title">우여곡절 끝에 도착한 첫 번째 목적지</h3>
-          <!-- 🚨 책 제목, 출처로 사용됨, 그런데 위 제목이랑 겹치므로 추후에 제거 가능성 높음  -->
           <p class="header__source">Val carlos</p>
           <!-- 글의 저자 정보 -->
           <div class="header__meta">
-            <!-- 🚨 by 이미지, 피그마에서는 이미지로 제공 되어있지만, 굳이 필요할까?라는 생각이 들어 비슷한 글꼴로 대체함 -->
-            <!-- <img
-                class="header__author-byimage"
-                src="../../assets/images/by.png"
-                alt="by라는 글자의 이미지"
-              /> -->
             <!--작가 이름 -->
             <p class="header__author">
-              <span class="header__author-prefix">by</span>
+              <em class="header__author-prefix">by</em>
               Sunny
             </p>
             <!-- 작성 날짜 -->

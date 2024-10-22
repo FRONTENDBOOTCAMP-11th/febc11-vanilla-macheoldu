@@ -103,9 +103,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 이미지 첨부하고 제거하기, HTML태그에 alt 작성하기 */
-  background-color: antiquewhite;
-  /* filter: blur(2px); */
 }
 
 .header__info {
@@ -122,8 +119,12 @@ body {
   font-size: 2.8rem;
   font-weight: 300;
   line-height: 1.21429;
-  /* 제목이 긴 경우, 짧은 경우가 있어서 어떻게 width를 설정하면 좋을지 생각해보기 */
   margin-bottom: 4px;
+
+  /* 한글 단어 단위로 끊기 */
+  word-break: keep-all;
+  /* 컨테이너 너비를 초과할 경우만 단어만 강제 줄바꿈 */
+  word-wrap: break-word;
 }
 
 .header__source {
@@ -148,14 +149,15 @@ body {
 }
 
 .header__author-prefix {
-  /* by img로 넣지 않고 글꼴로 가져가는게 나을 것 같다는 판단이 듬 */
-  font-family: cursive;
   color: var(--color-gray-50);
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.625;
   opacity: 0.5;
-  margin-right: 2px;
+}
+
+em {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .header__date {
@@ -174,7 +176,6 @@ body {
 
 /* main - article */
 .article {
-  /* 시각적으로 조절 가능하면 하기 */
   padding: 70px 20px;
 }
 
@@ -439,7 +440,9 @@ body {
 }
 
 .footer__like-count {
-  margin-bottom: 4px;
+  font-size: 1.6rem;
+  display: inline-block;
+  margin-top: 2px;
 }
 
 .footer__interaction button:hover {
@@ -451,19 +454,15 @@ body {
 }
 
 .footer__interaction:nth-child(2) {
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 
 .footer__interaction:nth-child(3) {
   margin-bottom: 4px;
 }
 
-.footer__like-count {
-  display: inline-block;
-  margin-top: 3px;
-}
-
 .footer__comment-count {
   display: inline-block;
-  margin-top: 3px;
+  margin-top: 4px;
+  font-size: 1.6rem;
 }
