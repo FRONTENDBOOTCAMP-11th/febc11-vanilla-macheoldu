@@ -244,7 +244,8 @@ body {
 
 .branding__logo {
   max-width: 100%;
-  height: auto;
+  width: 87px;
+  height: 15px;
 }
 
 /* 네비게이션 푸터 스타일 */
@@ -827,13 +828,18 @@ body {
 }
 
 .main__section-title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-sm);
   font-weight: 600;
-  /* margin: 0 0 30px; */
-  /* padding: 10px 0; */
-  text-align: right;
+  margin: 0 0 30px;
+  padding: 10px 0;
   position: relative;
   text-align: center;
+}
+
+.main__new-authors-subtitle {
+  width: 310px;
+  height: 56px;
+  margin-bottom: 25px;
 }
 
 .main__section-title::before,

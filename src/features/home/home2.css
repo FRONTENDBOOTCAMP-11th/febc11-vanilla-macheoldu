@@ -1,0 +1,443 @@
+/* 전체 요소에 대한 기본 설정 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 기본 폰트 및 텍스트 색상 설정 */
+body {
+  font-family: 'Pretendard Variable', sans-serif;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 헤딩 요소 초기화 */
+h1,
+h2,
+h3 {
+  font-weight: normal;
+  font-size: inherit;
+}
+
+/* 링크 스타일 초기화 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 버튼 스타일 초기화 */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* 리스트 스타일 초기화 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 이미지 기본 스타일 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 입력 요소 스타일 초기화 */
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* figure 요소 마진 제거 */
+figure {
+  margin: 0;
+}
+
+/* blockquote 스타일 초기화 */
+blockquote {
+  margin: 0;
+}
+
+.divider {
+  height: 9px;
+  border-top: 1px solid var(--grey-30);
+  background: var(--grey-10);
+}
+
+/* 루트 변수 */
+:root {
+  /* 메인 색상 */
+  --white: #ffffff;
+  --point-color: #00c6be;
+
+  /* 그레이 색상 */
+  --grey-10: #f8f8f8;
+  --grey-20: #eeeeee;
+  --grey-25: #e0e0e0;
+  --grey-30: #dddddd;
+  --grey-35: #bbbbbb;
+  --grey-40: #959595;
+  --grey-50: #666666;
+  --grey-60: #444444;
+  --grey-70: #333333;
+  --grey-80: #231f20;
+  --grey-90: #111111;
+
+  /* 기타 색상 */
+  --purple: #8d4e8e;
+
+  /* 오버레이 색상 */
+  --white-overlay-10: rgba(255, 255, 255, 0.1);
+  --black-overlay-5: rgba(0, 0, 0, 0.05);
+  --black-overlay-90: rgba(18, 18, 18, 0.9);
+
+  /* 폰트 크기 */
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 17px;
+  --font-size-xl: 19px;
+  --font-size-xxl: 22px;
+  --font-size-xxxl: 30px;
+}
+
+/* 전역 스타일 */
+body {
+  background-color: var(--grey-60);
+  font-family: Pretendard, sans-serif;
+}
+
+.wrapper {
+  max-width: 360px;
+  min-height: 100vh;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: var(--white);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 56px; /* 네비게이션 푸터의 높이만큼 패딩 추가 */
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* 커버 섹션의 전체 스타일 */
+.cover {
+  background-color: var(--purple);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 55px 0 28px;
+}
+
+/* 책 제목 스타일 */
+.cover__title {
+  font-size: var(--font-size-xxl);
+  font-weight: 300;
+  line-height: 1.41;
+  margin: 0;
+}
+
+/* 작가 이름 스타일 */
+.cover__author {
+  font-size: 12px;
+  line-height: 1.33;
+  margin-top: 10.5px; /* 제목과의 간격 */
+  margin-bottom: 66px; /* 이미지와의 간격 */
+}
+
+/* 이미지 컨테이너 스타일 */
+.cover__image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* 책 표지 이미지 스타일 */
+.cover__image {
+  width: 135px;
+  height: 190px;
+}
+
+/* 응원 뱃지 스타일 */
+.cover__badge {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  width: 29px;
+  height: 32px;
+}
+
+/* 응원 정보 컨테이너 스타일 */
+.cover__support {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px; /* 이미지와의 간격 */
+  margin-bottom: 38px; /* 프로그레스 바와의 간격 */
+}
+
+/* 응원 아이콘 스타일 */
+.cover__support-icon {
+  margin-right: 4px;
+  width: 21px;
+  height: 21px;
+}
+
+/* 응원 수 텍스트 스타일 */
+.cover__support-count {
+  font-size: 14px;
+}
+
+/* 프로그레스 바 컨테이너 스타일 */
+.cover__progress {
+  display: flex;
+  align-items: center;
+}
+
+/* 프로그레스 바 스텝 컨테이너 스타일 */
+.cover__progress-steps {
+  display: flex;
+  gap: 1px;
+}
+
+/* 프로그레스 바 각 스텝 스타일 */
+.cover__progress-step {
+  width: 20px;
+  height: 1px;
+  background-color: white;
+  opacity: 1;
+}
+
+/* 활성화된 프로그레스 바 스텝 스타일 */
+.cover__progress-step.active {
+  opacity: 0.3;
+}
+
+/* 프로그레스 텍스트 스타일 */
+.cover__progress-text {
+  font-size: 11px;
+  margin-left: 3px;
+}
+
+/* 주간 연재 스타일 */
+.weekly-serial {
+  padding: 50px 25px 34px;
+}
+
+.weekly-serial__heading {
+  font-size: var(--font-size-xl);
+  color: var(--grey-90);
+}
+
+.weekly-serial__title {
+  padding-top: 50px;
+  font-size: var(--font-size-sm);
+  margin-bottom: 5px;
+  color: var(--grey-40);
+}
+
+.weekly-serial__description {
+  font-size: var(--font-size-sm);
+  margin-bottom: 24px;
+  color: var(--grey-40);
+}
+
+.weekly-serial__tabs {
+  display: flex;
+  gap: 37px;
+  color: var(--grey-40);
+  border-bottom: 1px solid var(--grey-20);
+  justify-content: center;
+}
+
+.weekly-serial__tab {
+  padding-bottom: 10px;
+  color: var(--grey-40);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.weekly-serial__tab[aria-selected='true'] {
+  color: var(--grey-90);
+  border-bottom: 2px solid var(--point-color);
+}
+
+/* 주간 연재 옵션 스타일 */
+.weekly-serial__options {
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 13px;
+}
+
+.weekly-serial__option {
+  display: flex;
+  align-items: center;
+}
+
+.weekly-serial__option:nth-child(1) {
+  color: var(--grey-70);
+  margin-right: 12px;
+  position: relative;
+}
+
+.weekly-serial__option:nth-child(1)::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: var(--point-color);
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.weekly-serial__option:nth-child(2) {
+  color: var(--grey-40);
+}
+
+/* 주간 연재 아이템 스타일 */
+.weekly-serial__details {
+  font-size: var(--font-size-lg);
+  line-height: 1.53;
+  margin-right: 7px;
+  margin-bottom: 10px;
+}
+
+.weekly-serial__new {
+  width: 14px;
+  height: 14px;
+}
+
+.weekly-serial__author {
+  color: var(--grey-40);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  margin-bottom: 44px;
+}
+
+.weekly-serial__image {
+  width: 80px;
+  height: 80px;
+}
+
+.weekly-serial__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--grey-20);
+}
+
+.weekly-serial__info {
+  flex: 1;
+}
+
+.weekly-serial__view-all {
+  border-radius: 30px;
+  border: 1px solid var(--grey-30);
+  color: var(--grey-70);
+  padding: 1px 11px 1px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 36px auto;
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  height: 36px;
+  box-sizing: border-box;
+}
+
+/* 오늘의 추천 스타일 */
+.main__todays-pick {
+  padding: 50px 25px;
+}
+.main__todays-pick__title {
+  font-weight: bold;
+  display: flex;
+  font-size: var(--font-size-lg);
+  flex-direction: column;
+  color: var(--grey-90);
+}
+
+.main__todays-pick-title--english {
+  font-size: var(--font-size-sm);
+}
+
+.main__todays-pick-title--korean {
+  font-weight: 600;
+  font-size: var(--font-size-xl);
+}
+
+.main__todays-pick__title {
+  font-size: var(--font-size-lg);
+  margin-bottom: 30px;
+}
+/* 오늘의 추천 리스트 스타일 */
+.main__todays-pick__list {
+  list-style-type: none;
+  padding-left: 25px;
+  counter-reset: main__todays-pick-counter; /* item 대신 실제 사용되는 카운터 이름으로 통일 */
+}
+
+.main__todays-pick__item {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--grey-20);
+}
+
+.main__todays-pick__item::before {
+  counter-increment: main__todays-pick-counter;
+  content: counter(main__todays-pick-counter) '.';
+  position: absolute;
+  left: -25px;
+  top: 0;
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  color: var(--grey-35);
+}
+
+.main__todays-pick__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.main__todays-pick__text {
+  flex: 1;
+  padding-right: 15px;
+}
+
+.main__todays-pick__author {
+  font-size: var(--font-size-md);
+  color: var(--grey-35);
+  margin-bottom: 10px;
+}
+
+.main__todays-pick__description {
+  font-size: var(--font-size-md);
+  color: var(--grey-50);
+  line-height: 1.4;
+}
+
+.main__todays-pick__image {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+}
