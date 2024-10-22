@@ -561,7 +561,7 @@ body {
   content: '';
   position: absolute;
   display: inline-block;
-  background-image: url('/src/assets/icons/like_sub/doubleQuotes.svg');
+  background-image: url('/src/assets/icons/etc/doubleQuotes.svg');
   background-size: contain;
   background-repeat: no-repeat;
   top: 5px;
@@ -574,10 +574,11 @@ body {
 .main__view-all-brunch-book {
   background-color: var(--white-overlay-10);
   color: var(--white);
-  font-size: var(--font-size-md);
+  font-size: 13px;
+  font-weight: 300;
   cursor: pointer;
   border-radius: 20px;
-  padding: 12px 9px 20px;
+  padding: 12px 20px 9px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -731,7 +732,7 @@ body {
 }
 
 .main__featured-book-quote-text::before {
-  content: url('/src/assets/icons/like_sub/doubleQuotes.svg');
+  content: url('/src/assets/icons/etc/doubleQuotes.svg');
   position: absolute;
   left: 0;
   top: -5px;
