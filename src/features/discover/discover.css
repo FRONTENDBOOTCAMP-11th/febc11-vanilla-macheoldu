@@ -215,6 +215,11 @@ input:focus::placeholder {
   color: var(--color-content);
 }
 
+/* discover - home */
+.discover__home {
+  height: 300px;
+}
+
 /* 📖 discover - post */
 .post {
   /* 하단 내비 바 중첩되는 부분 */
