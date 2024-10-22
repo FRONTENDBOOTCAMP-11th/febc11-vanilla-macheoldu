@@ -1,4 +1,4 @@
-/* 초기화 */
+/* 상단바 하위 요소만 초기화 */
 .brunch__header button {
   background-color: transparent;
   border: none;
@@ -8,21 +8,23 @@
   vertical-align: top;
   width: 100%;
 }
-/* 헤더 스타일 */
+/* id="header" 영역 상단 고정 */
+/* 상단 고정 및 z-index 제일 위에 표시 */
 #header {
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
+/* 헤더 스타일 */
 .brunch__header {
-  background-color: white;
+  /* 고정 컬러로 지정 */
+  background-color: #fff;
   box-sizing: border-box;
   padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 50px;
-  background-color: var(--white);
-  z-index: 1000;
 }
 
 .brunch__header__top-bar {

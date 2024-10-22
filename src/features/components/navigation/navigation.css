@@ -27,6 +27,7 @@ img {
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
+  z-index: 1000;
 }
 
 .navigation__button {

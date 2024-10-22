@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/src/features/components/top-menu/top-menu.css">
+  <link rel="stylesheet" href="/src/features/components/navigation/navigation.css">
+  <style>
+    body {
+      background-color: grey;
+      margin: unset;
+      padding: unset;
+    }
+
+    .wrapper {
+      max-width: 360px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background-color: white;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div id="header"></div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div style="background-color: pink;">content</div>
+    <div id="navigation"></div>
+  </div>
+</body>
+<script>
+  fetch('/src/features/components/top-menu/top-menu.html')
+    .then(response => response.text()).then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+
+  fetch('/src/features/components/navigation/navigation.html')
+    .then(response => response.text()).then(data => {
+      document.getElementById('navigation').innerHTML = data;
+    });
+</script>
+
+</html>
