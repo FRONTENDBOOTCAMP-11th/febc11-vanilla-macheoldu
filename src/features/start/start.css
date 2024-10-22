@@ -78,7 +78,7 @@ body {
   --grey-20: #ddd;
   --grey-30: #d7d7d7;
   --grey-40: #aaa;
-  --grey-70: #999;
+  --grey-50: #999;
   --grey-60: #959595;
   --grey-70: #7d7d7d;
   --grey-80: #666;
@@ -252,6 +252,7 @@ body {
 }
 .type--chip {
   font-size: 1.3rem;
+  color: var(--point-color);
   width: 64px;
   height: 28px;
   padding-inline: 10px;
@@ -315,11 +316,11 @@ body {
 }
 .login-main__save.kakao .checkbox {
   background-color: var(--white);
-  border: 1px solid var(--grey-60);
+  border: 1.5px solid var(--grey-40);
   box-sizing: border-box;
 }
 .login-main__save.kakao:has(:checked) .checkbox {
-  background-color: var(--kakao-color);
+  background-image: url(/src/assets/icons/actions/check-kakao.svg);
   border: none;
 }
 .login-main__save.kakao:has(:focus) .checkbox {
