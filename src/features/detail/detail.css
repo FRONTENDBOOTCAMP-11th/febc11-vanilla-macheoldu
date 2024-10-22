@@ -1,0 +1,468 @@
+/* Resets */
+body {
+  margin: unset;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+h2,
+h3,
+h6 {
+  margin: unset;
+  font-weight: unset;
+  font-size: unset;
+}
+
+p {
+  margin: unset;
+}
+
+ul {
+  padding: unset;
+  margin: unset;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* Typography */
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+/* Variables */
+:root {
+  /* Colors */
+  --color-blue-50: #00c6be;
+
+  --color-white: #ffffff;
+  --color-gray-20: #eeeeee;
+  --color-gray-25: #f5f5f5;
+  --color-gray-30: #f8f8f8;
+  --color-gray-50: #959595;
+  --color-gray-55: #838383;
+  --color-gray-60: #666666;
+  --color-gray-70: #333333;
+  --color-gray-80: #1b1b1b;
+  --color-gray-90: #111111;
+}
+
+/* Layouts - 공통으로 활용하는 레이아웃 클래스 */
+.wrapper {
+  width: 360px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* Design */
+body {
+  background-color: var(--color-gray-25);
+}
+
+.navbar {
+  min-height: 94px;
+  background-color: var(--color-gray-30);
+}
+
+.header {
+  height: 240px;
+  position: relative;
+  background-color: var(--color-white);
+}
+
+.header__cover-image-wrapper {
+  aspect-ratio: 3/2;
+}
+
+.header__cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header__info {
+  padding: 0 76px 0 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+}
+
+.header__title {
+  color: var(--color-gray-70);
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 1.21429;
+  margin-bottom: 4px;
+
+  /* 한글 단어 단위로 끊기 */
+  word-break: keep-all;
+  /* 컨테이너 너비를 초과할 경우만 단어만 강제 줄바꿈 */
+  word-wrap: break-word;
+}
+
+.header__source {
+  color: var(--color-gray-60);
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.3125;
+}
+
+.header__meta {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.header__author {
+  margin-left: 3px;
+  color: var(--color-gray-60);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.625;
+}
+
+.header__author-prefix {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.625;
+  opacity: 0.5;
+}
+
+em {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.header__date {
+  margin-left: 8px;
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.625;
+  opacity: 0.5;
+}
+
+/* main */
+.main {
+  background-color: var(--color-white);
+}
+
+/* main - article */
+.article {
+  padding: 70px 20px;
+}
+
+.article__header {
+  margin-bottom: 28px;
+}
+
+.article__main {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 4/3;
+}
+
+.article__main-image {
+  object-fit: cover;
+}
+
+.article__main-description {
+  margin-top: 8px;
+  color: var(--color-gray-55);
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.article__footer {
+  margin-top: 28px;
+}
+
+.article__excerpt {
+  color: var(--color-gray-80);
+  font-size: 1.7rem;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* main - section */
+.comments {
+  padding: 0 20px;
+  margin-bottom: 64px;
+}
+
+.comments__header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.comments__header:hover {
+  cursor: pointer;
+}
+
+.comments__title {
+  color: var(--color-gray-80);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.comments__count {
+  color: var(--color-blue-50);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.comments__item {
+  margin: 20px 0;
+  border-bottom: 1px solid var(--color-gray-20);
+}
+
+.comments__item:last-child {
+  border: none;
+}
+
+.comments__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comments__profile-image-wrapper {
+  aspect-ratio: 1/1;
+  align-self: start;
+}
+
+.comments__profile-image {
+  object-fit: cover;
+}
+
+.comments__nickname {
+  color: var(--color-gray-90);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.comments__date {
+  margin-top: 2px;
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.comments__option-button {
+  margin-left: auto;
+  align-self: flex-start;
+  margin-top: 3px;
+  padding-right: 14px;
+  border: none;
+  background-color: var(--color-white);
+}
+
+.comments__option-button:hover {
+  cursor: pointer;
+}
+
+.comments__content {
+  margin: 12px 0 30px 40px;
+  color: var(--color-gray-90);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.comments__reply {
+  margin: -16px 0 30px 40px;
+}
+
+.comments__reply:hover {
+  cursor: pointer;
+}
+
+.comments__reply-button {
+  border: none;
+  padding: 0;
+  background-color: var(--color-white);
+  color: var(--color-gray-50);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.comments__input-image-wrapper {
+  aspect-ratio: 3/2;
+}
+
+.comments__input-image {
+  object-fit: cover;
+}
+
+/* aside */
+.new-author {
+  padding: 66px 20px 40px;
+  border-top: 9px solid var(--color-gray-30);
+  border-bottom: 1px solid var(--color-gray-30);
+  background: #fff;
+}
+
+.new-author__profile {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.new-author__nickname {
+  color: var(--color-gray-70);
+  font-size: 2.2rem;
+  font-weight: 300;
+  line-height: 1.09091;
+  margin-bottom: 4px;
+}
+
+.new-author__occupation {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.new-author__image-wrapper {
+  margin-left: auto;
+  aspect-ratio: 1/1;
+}
+
+.new-author__image {
+  object-fit: cover;
+}
+
+.new-author__bio {
+  margin-bottom: 15px;
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.66667;
+}
+
+.new-author__interactions {
+  /* 구독자, 구독이미지 */
+  display: flex;
+  align-items: center;
+}
+
+.new-author__subscriber {
+  display: flex;
+  gap: 4px;
+}
+
+.new-author__subscriber-title {
+  color: var(--color-gray-50);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.new-author__subscriber-count {
+  color: #666;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.14px;
+}
+
+.new-author__subscribe-button {
+  margin-left: auto;
+  border: none;
+  background-color: var(--color-white);
+}
+
+.new-author__subscribe-button:hover {
+  cursor: pointer;
+}
+
+/* footer */
+.footer {
+  background-color: var(--color-white);
+  /* margin-bottom: 40px; */
+  padding-bottom: 100px;
+}
+
+.footer__interactions {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--color-gray-25);
+}
+
+.footer__interaction {
+  display: flex;
+  align-items: center;
+}
+
+.footer__interaction button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background-color: var(--color-white);
+}
+
+.footer__like-count {
+  font-size: 1.6rem;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.footer__interaction button:hover {
+  cursor: pointer;
+}
+
+.footer__interaction:last-child {
+  margin-left: auto;
+}
+
+.footer__interaction:nth-child(2) {
+  margin-bottom: 2px;
+}
+
+.footer__interaction:nth-child(3) {
+  margin-bottom: 4px;
+}
+
+.footer__comment-count {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 1.6rem;
+}

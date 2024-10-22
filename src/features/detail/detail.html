@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상세페이지</title>
+    <link rel="stylesheet" href="detail.css" />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/features/components/top-menu/top-menu.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/src/features/components/navigation/navigation.css"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="header"></div>
+
+      <!-- header -->
+      <header class="header">
+        <!-- 게시글 이미지, 🚨 이미지가 따로 없어 우선 공백으로 둠-->
+        <div class="header__cover-image-wrapper">
+          <img
+            class="header__cover-image"
+            src="../../assets/images/heartbg.png"
+            alt=""
+          />
+        </div>
+        <!-- 이미지 위에 떠 있는 글들 -->
+        <div class="header__info">
+          <h3 class="header__title">우여곡절 끝에 도착한 첫 번째 목적지</h3>
+          <p class="header__source">Val carlos</p>
+          <!-- 글의 저자 정보 -->
+          <div class="header__meta">
+            <!--작가 이름 -->
+            <p class="header__author">
+              <em class="header__author-prefix">by</em>
+              Sunny
+            </p>
+            <!-- 작성 날짜 -->
+            <time datetime="2024-07-23" class="header__date">
+              · Jul 23. 2024
+            </time>
+          </div>
+        </div>
+      </header>
+
+      <!-- main -->
+      <main class="main">
+        <!-- 블로그 글 -->
+        <article class="article">
+          <!-- 글의 첫 단락 -->
+          <header class="article__header">
+            <p class="article__excerpt">
+                그래 지난 화를 요약해 보면 생장에 도착한 나 는 도착 당일 바로 첫
+              여정을 시작하기로 마음먹 었고 추천받은 목적지인 Val carlos까지
+              구글맵 으로 걸어서 2시간 30분 거리를 확인했다. 그러나 걸어도
+              걸어도 줄지 않는 시간과 거리에 괴로 워했었지.
+            </p>
+          </header>
+          <!-- 글 img -->
+          <figure class="article__main">
+            <img
+              class="article__main-image"
+              src="../../assets/images/cars.png"
+              alt="프랑스와 스페인 사이의 국경선 역할을 하는 피레네 산맥 이미지"
+            />
+            <figcaption class="article__main-description">
+              여기가 바로 국경이다! 좌-프랑스, 우-스페인
+            </figcaption>
+          </figure>
+          <!-- 글의 마지막 단락 -->
+          <footer class="article__footer">
+            <p class="article__excerpt">
+               오후 5시 36분. 세상에 인터넷에서 사진으로만 보다가 직접 내 눈으로
+              처음 목격한 정식적인(?) 까미노 표식! 아주 반갑기 그지없었다. 왠지
+              목적지가 가까워진 것만 같은 느낌적인 느낌! 하지만 구글맵의 내
+              위치는 전혀 그렇지 못했다.
+            </p>
+          </footer>
+        </article>
+
+        <!-- 블로그 댓글 -->
+        <section class="comments">
+          <div class="comments__header">
+            <h6 class="comments__title">댓글</h6>
+            <span class="comments__count">7</span>
+          </div>
+
+          <ul class="comments__list">
+            <!-- 첫번째 댓글 -->
+            <li class="comments__item">
+              <div class="comments__user">
+                <!-- 유저 프로필 -->
+                <div class="comments__profile-image-wrapper">
+                  <img
+                    class="comments__profile-image"
+                    src="../../assets/images/user1.png"
+                    alt="이상옥의 프로필 이미지"
+                  />
+                </div>
+                <!-- 유저 닉네임 및 날짜 -->
+                <div class="comments__user-info">
+                  <p class="comments__nickname">이상옥</p>
+                  <time datetime="2024-07-23" class="comments__date"
+                    >Jul 23. 2024</time
+                  >
+                </div>
+                <!-- 옵션 버튼 -->
+                <button
+                  class="comments__option-button"
+                  aria-label="옵션 메뉴 열기"
+                >
+                  <img
+                    class="comments__option-icon"
+                    src="../../assets/icons/like_sub/addmore.svg"
+                    alt="옵션 버튼 아이콘"
+                  />
+                </button>
+              </div>
+              <!-- 유저 댓글 -->
+              <div class="comments__content">
+                <p>
+                  유럽은 국경이 희미해서 좋아요. 옛추억에 점심은 프랑스에서
+                  저녁은 스위스에서 먹던 기억이 나네요. 홀로 산티아고 길을, 마치
+                  행군하듯이 걷는 그 고통이 기쁨으로 충만하길 바랍니다. ^^
+                </p>
+              </div>
+              <!-- 댓글 달기 버튼 -->
+              <div class="comments__reply">
+                <button class="comments__reply-button" aria-label="답글 달기">
+                  답글달기
+                </button>
+              </div>
+            </li>
+
+            <!-- 두번째 댓글 -->
+            <li class="comments__item">
+              <div class="comments__user">
+                <div class="comments__profile-image-wrapper">
+                  <img
+                    class="comments__profile-image"
+                    src="../../assets/images/user2.png"
+                    alt="jungsin의 프로필 이미지"
+                  />
+                </div>
+                <div class="comments__user-info">
+                  <p class="comments__nickname">jungsin</p>
+                  <time datetime="2024-07-24" class="comments__date"
+                    >Jul 24. 2024</time
+                  >
+                </div>
+                <button
+                  class="comments__option-button"
+                  aria-label="옵션 메뉴 열기"
+                >
+                  <img
+                    class="comments__option-icon"
+                    src="../../assets/icons/like_sub/addmore.svg"
+                    alt="옵션 버튼 아이콘"
+                  />
+                </button>
+              </div>
+              <div class="comments__content">
+                <p>화이팅!^^</p>
+              </div>
+            </li>
+
+            <!-- 세번째 댓글 -->
+            <li class="comments__item">
+              <div class="comments__user">
+                <div class="comments__profile-image-wrapper">
+                  <img
+                    class="comments__profile-image"
+                    src="../../assets/images/user3.png"
+                    alt="Sunday Writer의 프로필 이미지"
+                  />
+                </div>
+                <div class="comments__user-info">
+                  <p class="comments__nickname">Sunday Writer</p>
+                  <time datetime="2024-07-24" class="comments__date"
+                    >Jul 24. 2024</time
+                  >
+                </div>
+                <button
+                  class="comments__option-button"
+                  aria-label="옵션 메뉴 열기"
+                >
+                  <img
+                    class="comments__option-icon"
+                    src="../../assets/icons/like_sub/addmore.svg"
+                    alt="옵션 버튼 아이콘"
+                  />
+                </button>
+              </div>
+              <div class="comments__content">
+                <p>
+                  산티아고 순례길…저도 버킷리스트에 담아놓고 있어요. 미리
+                  답사하는 기분으로 잘 읽고 있습니다^^
+                </p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 댓글 추가 창 -->
+          <div class="comments__input-image-wrapper">
+            <img
+              class="comments__input-image"
+              src="../../assets/images/input.png"
+              alt="댓글 입력"
+            />
+          </div>
+        </section>
+
+        <!-- 새로운 작가 소개 -->
+        <aside class="new-author">
+          <div class="new-author__profile">
+            <!-- 새로운 작가 닉네임 및 직업 -->
+            <div class="new-author__user-info">
+              <h2 class="new-author__nickname">Sunny</h2>
+              <p class="new-author__occupation">회사원</p>
+            </div>
+            <!-- 새로운 작가 이미지 -->
+            <div class="new-author__image-wrapper">
+              <img
+                class="new-author__image"
+                src="../../assets/images/new-author.png"
+                alt="Sunny의 프로필 사진"
+              />
+            </div>
+          </div>
+          <!-- 새로운 작가 간단한 글(소개)-->
+          <div class="new-author__bio">
+            <p>
+              12년 차 국내 항공사 승무원의 겨울 산티아고 순례길 이야기 연재 중.
+              커피 한 잔을 벗 삼아 편하게 읽을 수 있는 글쓰기에 꽤나 진심인
+              편입니다. 후후.
+            </p>
+          </div>
+          <!-- 구독자, 구독 버튼 -->
+          <div class="new-author__interactions">
+            <div class="new-author__subscriber">
+              <p class="new-author__subscriber-title">구독자</p>
+              <span class="new-author__subscriber-count">108</span>
+            </div>
+            <button
+              class="new-author__subscribe-button"
+              aria-label="Sunny 구독하기"
+            >
+              <img
+                class="new-author__subscribe-icon"
+                src="../../assets/icons/like_sub/sub.svg"
+                alt="구독 버튼 아이콘"
+              />
+            </button>
+          </div>
+        </aside>
+      </main>
+
+      <!-- footer -->
+      <footer class="footer">
+        <ul class="footer__interactions">
+          <!-- 좋아요 버튼 -->
+          <li class="footer__interaction">
+            <button aria-label="좋아요">
+              <img
+                class="footer__like-icon"
+                src="../../assets/icons/like_sub/like_black.svg"
+                alt="좋아요"
+              />
+              <span class="footer__like-count">81</span>
+            </button>
+          </li>
+          <!-- 링크 버튼 -->
+          <li class="footer__interaction">
+            <button aria-label="링크 복사">
+              <img
+                class="footer__link-icon"
+                src="../../assets/icons/like_sub/link.svg"
+                alt="이동하기"
+              />
+            </button>
+          </li>
+          <!-- 댓글 버튼 -->
+          <li class="footer__interaction">
+            <button aria-label="댓글 보기">
+              <img
+                class="footer__comment-icon"
+                src="../../assets/icons/like_sub/comment.svg"
+                alt="댓글"
+              />
+              <span class="footer__comment-count">3</span>
+            </button>
+          </li>
+        </ul>
+      </footer>
+
+      <div id="navigation"></div>
+    </div>
+
+    <script>
+      fetch('/src/features/components/top-menu/top-menu.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header').innerHTML = data;
+        });
+
+      fetch('/src/features/components/navigation/navigation.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('navigation').innerHTML = data;
+        });
+    </script>
+  </body>
+</html>
