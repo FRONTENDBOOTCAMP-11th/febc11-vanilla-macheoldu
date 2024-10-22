@@ -333,6 +333,10 @@ body {
 .weekly-serial__new {
   width: 14px;
   height: 14px;
+
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 2px;
 }
 
 .weekly-serial__author {
@@ -414,13 +418,25 @@ body {
 
 .main__todays-pick__item::before {
   counter-increment: main__todays-pick-counter;
-  content: counter(main__todays-pick-counter) '.';
+  content: counter(main__todays-pick-counter);
   position: absolute;
   left: -25px;
   top: 0;
   font-size: var(--font-size-xl);
   font-weight: bold;
-  color: var(--grey-35);
+  color: var(--grey-90);
+}
+
+.number-wrapper {
+  position: relative;
+}
+
+.up-triangle {
+  position: absolute;
+  left: -25px;
+  top: 25px;
+  width: 10px;
+  height: 10px;
 }
 
 .main__todays-pick__info {
@@ -589,6 +605,11 @@ body {
 }
 
 /* 추천 작가 섹션 스타일 */
+.main__featured-author__books-image-wrapper {
+  flex-shrink: 0;
+  width: 60px;
+}
+
 .featured-author {
   padding: 50px 25px 39px;
 }
@@ -623,18 +644,18 @@ body {
   height: 80px;
 }
 
-.featured-author__books-item {
+.main__featured-author__books-item {
   background-color: var(--grey-10);
   padding: 20px;
   display: flex;
   margin-bottom: 5px;
 }
 
-.featured-author__books-info {
+.main__featured-author__books-info {
   margin-left: 25px;
 }
 
-.featured-author__books-title {
+.main__featured-author__books-title {
   font-size: var(--font-size-md);
   color: var(--grey-90);
 }
@@ -645,13 +666,13 @@ body {
   color: var(--grey-50);
 }
 
-.featured-author__books-description {
+.main__featured-author__books-description {
   font-size: var(--font-size-sm);
   color: var(--grey-50);
   font-weight: 300;
 }
 
-.featured-author__books-image {
+.main__featured-author__books-image {
   width: 60px;
   height: 85px;
 }
