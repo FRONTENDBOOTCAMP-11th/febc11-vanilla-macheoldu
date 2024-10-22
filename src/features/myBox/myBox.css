@@ -32,7 +32,6 @@ img {
   box-sizing: border-box;
   min-height: 100vh;
   max-width: 360px;
-  overflow: hidden;
   padding-bottom: 100px;
 }
 
@@ -50,7 +49,7 @@ main {
 
 /* 헤더 (공간만) */
 header {
-  height: 94px;
+  height: 54px;
   background-color: #ffffff;
   /* border-bottom: 1px solid #e0e0e0; */
   display: flex;
