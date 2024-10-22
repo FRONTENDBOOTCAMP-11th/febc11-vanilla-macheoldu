@@ -1,0 +1,241 @@
+/* CSS Reset */
+body,
+p,
+figure {
+  margin: unset;
+  padding: unset;
+}
+h1,
+h2,
+h3 {
+  margin: unset;
+  font-weight: unset;
+  font-size: unset;
+}
+a {
+  margin: unset;
+  padding: unset;
+  color: unset;
+  text-decoration: none;
+}
+img {
+  vertical-align: top;
+  width: 100%;
+}
+/* form 요소 초기화 및 동기화*/
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='checkbox'],
+textarea,
+button {
+  all: unset;
+}
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  display: block;
+  width: 100%;
+}
+textarea {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+button {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+fieldset {
+  all: unset;
+  display: block;
+}
+
+/* Typography */
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+}
+
+/* CSS Variables */
+:root {
+  --white: #fff;
+  --point-color: #00c6be;
+  --grey-10: #f8f8f8;
+  --grey-20: #eee;
+  --grey-30: #d9d9d9;
+  --grey-40: #959595;
+  --grey-50: #666;
+}
+
+/* Layout */
+.wrapper {
+  max-width: 360px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: var(--white);
+}
+
+/* Commons */
+.ir {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+.hidden {
+  display: none;
+}
+.status-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/*Components*/
+body {
+  background-color: var(--grey-50);
+}
+.post-header {
+  background-color: var(--white);
+  height: 50px;
+  padding-inline: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--grey-20);
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.post-header__cancel-btn,
+.post-header__save-btn {
+  width: 30px;
+  height: 30px;
+}
+.post-header__title {
+  margin-inline: auto;
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+
+.post-main {
+  padding-bottom: 184px;
+}
+.post-title {
+  font-size: 2.4rem;
+  line-height: 1.1;
+  padding: 22px 26px;
+  border-bottom: 1px solid var(--grey-20);
+}
+.post-subtitle {
+  font-size: 2rem;
+  line-height: 1.1;
+  padding: 24px 26px;
+  border-bottom: 1px solid var(--grey-20);
+}
+.post-title:has(:focus),
+.post-subtitle:has(:focus) {
+  border-bottom: 1px solid var(--point-color);
+}
+.post-title:has(:focus),
+.post-subtitle:has(:focus) {
+  border-bottom: 1px solid #00c6be;
+}
+.post-content {
+  font-size: 2rem;
+  height: 466px;
+  box-sizing: border-box;
+  padding: 26px;
+}
+
+.post-utils {
+  width: 360px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 100px;
+}
+.post-toolbar {
+  background-color: var(--grey-10);
+  height: 84px;
+  padding: 22px 26px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 24px;
+}
+.post-toolbar div {
+  width: 40px;
+  height: 40px;
+}
+.post-toolbar__hide-keyboard {
+  margin-left: auto;
+}
+
+/* File Upload Page*/
+.post-header.upload {
+  background-color: var(--point-color);
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.post-main.upload {
+  padding-bottom: 88px;
+}
+.post-main__files {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 117px));
+  grid-auto-rows: 117px;
+  gap: 4px;
+}
+.file {
+  background-color: var(--grey-30);
+  position: relative;
+  z-index: 0;
+}
+.file .file--filter {
+  background-image: url('../../assets/icons/actions/photo_icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  background-color: rgb(0 0 0 / 0.3);
+  inset: 0;
+}
+
+/* 동적으로 이미지 불러와지는 경우 대비해서 유지*/
+.post-main__files img {
+  height: 100%;
+  object-fit: cover;
+}
+.post-utils.upload {
+  background-color: var(--grey-10);
+  padding: 33px 26px;
+  bottom: 0;
+}
+.post-utils__count {
+  color: var(--grey-40);
+  font-size: 1.8rem;
+}
+.post-utils__count #selected {
+  color: var(--point-color);
+}

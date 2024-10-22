@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link rel="stylesheet" href="start.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!--카카오계정 로그인 메인 화면 -->
+    <header class="login-cover kakao">
+      <figure class="login-cover__figure">
+        <div class="login-cover__src">
+          <img src="../../assets/images/start_img.svg" alt="책 읽는 여성 일러스트">
+        </div>
+        <figcaption class="login-cover__caption">
+          <h1>브런치 작가로 데뷔하세요.</h1>
+          <p>진솔한 에세이부터 업계 전문 지식까지, <br />
+            당신의 이야기를 세상에 선보이세요
+          </p>
+        </figcaption>
+      </figure>
+    </header>
+
+    <!-- 카카오계정으로 로그인-->
+    <main class="login-main kakao-layout">
+      <!-- 버튼 클릭 시 login-kakao.html 로 이동 -->
+      <div class="btn type--long kakao">
+        <img class="kakao-logo" src="../../assets/icons/social/social_kakao_icon.svg">
+        <button type="button" id="moveToLoginKakao" aria-label="카카오계정으로 로그인 버튼">카카오계정으로 로그인</button>
+      </div>
+      <!-- 외부 링크 -->
+      <div class="login-main__help-link">
+        <p>
+          <a href="#" aria-label="브런치스토리의 카카오 계정 찾기 링크">내 브런치스토리의 카카오계정을 모르겠어요</a>
+        </p>
+        <p>
+          <a href="#" aria-label="페이스북, 트위터 로그인 링크">페이스북·트위터로만 로그인 했었나요?</a>
+        </p>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

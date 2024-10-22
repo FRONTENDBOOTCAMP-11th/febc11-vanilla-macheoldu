@@ -215,8 +215,9 @@ input:focus::placeholder {
   color: var(--color-content);
 }
 
-/* discover - home */
+/* discover - home을 보기 위한 임시 코드 */
 .discover__home {
+  margin-left: 35%;
   height: 300px;
 }
 
@@ -355,13 +356,14 @@ em {
 }
 
 /* 🚫 discover - null */
-.discover__main.null {
+.discover__none {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* discover - null일 때 아래 코드로 진행 */
-  /* height: calc(100vh - 96px); */
+  padding-bottom: 100px;
+  /* 하단 내비 바 중첩되는 부분, 위에 두 개 합친 것이 96px */
+  height: calc(100vh - 96px);
 }
 
 .discover__none {
