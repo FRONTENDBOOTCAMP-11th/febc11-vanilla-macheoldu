@@ -97,6 +97,7 @@ input:focus::placeholder {
   height: 100%;
   font-size: 1.25rem;
   text-align: center;
+  color: var(--color-title);
 }
 
 .discover__header-close {
@@ -108,11 +109,13 @@ input:focus::placeholder {
 }
 
 .discover__reset {
+  display: flex;
   padding: 0;
   width: 16px;
   height: 16px;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
 
 /* 네비게이션 탭 */
@@ -186,20 +189,30 @@ input:focus::placeholder {
 }
 
 .discover__search-filters {
+  margin: 0;
   display: flex;
-  gap: 16px;
+}
+
+.circle__active {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-point);
 }
 
 .discover__filter-btn {
   background: none;
   border: none;
-  font-size: 0.75rem;
-  color: var(--color-content);
-  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  gap: 5px; /* 원과 텍스트 사이 5px의 간격 */
+  font-size: 13px;
 }
 
-.discover__filter-btn--active {
-  color: var(--color-point);
+.discover__filter-btn.recent {
+  color: var(--color-content);
 }
 
 /* 📖 discover - post */

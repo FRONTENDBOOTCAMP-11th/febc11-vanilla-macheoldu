@@ -65,13 +65,15 @@
           <span class="discover__count-results">글 검색 결과 800건</span>
           <div class="discover__search-filters">
             <button
-              class="discover__filter-btn discover__filter-btn--active"
+              class="discover__filter-btn"
               onclick="sortResults('accuracy')"
             >
+              <!-- 텍스트 전에 원 배치 -->
+              <div class="circle__active"></div>
               정확도
             </button>
             <button
-              class="discover__filter-btn"
+              class="discover__filter-btn recent"
               onclick="sortResults('recent')"
             >
               최신
@@ -123,7 +125,9 @@
                 <div>
                   <p class="content__text-main">
                     오늘날까지 같은 주소에서 영업 중이다. 덴마크의 여 왕
-                    잉그리드도 이 꿀케이크 제과점을 자주 찾는다…
+                    잉그리드도 이
+                    <span class="discover__keyword">꿀</span>케이크 제과점을
+                    자주 찾는다…
                   </p>
                   <div class="content__text-info">
                     Nov 16. 2023
