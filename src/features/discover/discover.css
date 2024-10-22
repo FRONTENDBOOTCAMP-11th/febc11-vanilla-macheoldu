@@ -339,8 +339,11 @@ input:focus::placeholder {
   justify-content: center;
   /* discover - null일 때 아래 코드로 진행 */
   /* height: calc(100vh - 96px); */
+}
+
+.discover__none {
   /* 하단 내비 바 중첩되는 부분 */
-  /* padding-bottom: 100px; */
+  padding-bottom: 100px;
 }
 
 .discover__result-noneImg {
