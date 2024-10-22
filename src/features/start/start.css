@@ -83,6 +83,8 @@ body {
   --grey-70: #7d7d7d;
   --grey-80: #666;
   --grey-90: #333;
+  --black: #000;
+  --black-opacity-70: #000000b5;
   --point-color: #00c6be;
   --error-color: #fc3b75;
   --kakao-color: #ffe500;
@@ -191,12 +193,13 @@ body {
 .login-cover__caption p {
   font-size: 1.2rem;
   line-height: 1.3;
-  color: var(--grey-80);
+  color: var(--grey-60);
 }
 
 .login-main__save {
   margin-top: 22px;
   font-size: 1.3rem;
+  color: var(--black-opacity-70);
   display: inline-flex;
   align-items: center;
   gap: 4px;
