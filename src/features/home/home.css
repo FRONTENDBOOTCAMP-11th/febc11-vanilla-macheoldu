@@ -78,6 +78,10 @@ blockquote {
   margin-left: 2px;
 }
 
+em {
+  font-family: Georgia;
+}
+
 /* 루트 변수 */
 :root {
   /* 메인 색상 */
