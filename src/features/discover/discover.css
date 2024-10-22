@@ -246,18 +246,15 @@ input:focus::placeholder {
 
 .content__text-info {
   display: flex;
+  gap: 2px;
   align-items: center;
   font-size: 12px;
   font-weight: 300;
   line-height: 1.6;
   color: var(--color-content);
 }
-
-.info__author {
-  position: relative;
+em {
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-style: italic;
-  margin-right: 2px;
 }
 
 .circle {
