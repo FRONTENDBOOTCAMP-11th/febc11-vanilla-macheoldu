@@ -1,0 +1,249 @@
+/* CSS */
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+}
+
+/* 기본스타일 초기화 */
+h2,
+h3,
+main,
+img {
+  margin: 0;
+  padding: 0;
+}
+/* 기본 스타일 */
+.wrapper {
+  margin: 0 auto;
+  box-sizing: border-box;
+  min-height: 100vh;
+  max-width: 360px;
+  padding-bottom: 100px;
+}
+
+body {
+  background-color: #ffffff;
+  color: #111111;
+  margin: 0;
+  padding: 0;
+}
+
+/* 전체 레이아웃 */
+main {
+  margin-left: 25px;
+}
+
+/* 헤더 (공간만) */
+header {
+  height: 54px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 360px;
+}
+
+/* 메인 콘텐츠 */
+h2 {
+  font-weight: 600;
+  font-size: 19px;
+  /* line-height: 22px; */
+}
+
+main {
+  background-color: #ffffff;
+}
+/* 재활용 h2 각 타이틀 */
+.section-title {
+  display: inline-block;
+  align-items: center;
+}
+.section-title h2 {
+  display: inline-block;
+  margin: 0;
+}
+
+.recently-viewed,
+.interested-posts {
+  overflow: hidden;
+}
+
+.section-title .arrow img {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 3px;
+  margin-bottom: 6px;
+}
+.arrow a {
+  text-decoration: none;
+}
+
+/* 관심작가 섹션 */
+.interested-authors {
+  padding-top: 34px;
+  padding-bottom: 18px;
+}
+
+.interested-authors a {
+  text-decoration: none;
+  color: #959595;
+}
+
+.interested-authors__ul {
+  display: flex;
+  gap: 26px;
+  list-style: none;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+  scroll-snap-align: start;
+  text-align: center;
+  scroll-behavior: smooth;
+}
+
+.interested-posts .cards {
+  display: flex;
+  gap: 35px; /* 카드 간의 간격 */
+  overflow: hidden; /* 스크롤바 숨김 */
+  scroll-snap-type: x mandatory; /* 스크롤 스냅 활성화 */
+  -webkit-overflow-scrolling: touch; /* 부드러운 스크롤 */
+  width: 360px; /* 또는 적절한 너비 */
+  position: relative; /* 상대 위치 설정 */
+}
+
+.interested-authors__ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.interested-authors__ul img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.interested-authors span {
+  margin-top: 16px;
+  font-size: 13px;
+  height: 22px;
+  width: 45px;
+}
+
+.interested-authors__ul {
+  user-select: none; /* 드래그 시 텍스트 선택 방지 */
+}
+
+/* 카드 섹션 공통 스타일 */
+.cards {
+  display: flex;
+  gap: 35px;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  transition: transform 0.3s ease;
+  width: 360px;
+  -webkit-overflow-scrolling: touch; /* 부드러운 스크롤 */
+}
+.card-slider {
+  position: relative;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 1.54px, 3px, 3px, 1.54px;
+  overflow: hidden;
+  padding-top: 11px;
+  text-align: center;
+  width: 123px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+
+  /* height: 172px; */
+}
+.card:last-child {
+  margin-right: 0;
+}
+
+.card img {
+  width: 100%;
+  height: 172px;
+  max-width: 123px;
+  object-fit: cover;
+  border-radius: 1.5px, 3px, 3px, 1.5px;
+  /* margin-bottom: 16px; */
+}
+
+.cards .card h3 {
+  font-size: 12px;
+  line-height: 23px;
+  color: #111111;
+  margin-top: 12px;
+  font-weight: 400;
+}
+
+.card p {
+  font-size: 13px;
+  line-height: 20px;
+  color: #959595;
+  margin-top: 2px;
+  margin-bottom: 38px;
+}
+
+/* 내 브런치 섹션 */
+.my-brunch {
+  background-color: #ffffff;
+  padding: 0px;
+  border-radius: 8px;
+}
+
+.my-brunch h2 {
+  font-size: 19px;
+  line-height: 22px;
+  padding-left: 25px;
+  margin-bottom: 14px;
+  /* padding-bottom: 10px; */
+}
+
+.my-brunch .brunch-info {
+  border-top: 1px solid #e0e0e0;
+}
+
+.my-brunch .brunch-info h3 {
+  font-size: 17px;
+  color: #111111;
+  font-weight: 400;
+  line-height: 26px;
+  padding-left: 25px;
+  margin-top: 14px;
+}
+
+.my-brunch .brunch-info p {
+  font-size: 12px;
+  color: #959595;
+  margin-top: 8px;
+  padding-left: 25px;
+}
