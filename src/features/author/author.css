@@ -1,0 +1,226 @@
+/* Resets */
+body {
+  margin: unset;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+h2,
+h3 {
+  margin: unset;
+  font-weight: unset;
+  font-size: unset;
+}
+
+p {
+  margin: unset;
+}
+
+ul {
+  padding: unset;
+  margin: unset;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* Typography */
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+/* Variables */
+:root {
+  /* Colors */
+
+  --color-blue-50: #00c6be;
+
+  --color-white: #ffffff;
+  --color-gray-20: #eeeeee;
+  --color-gray-25: #f5f5f5;
+  --color-gray-30: #f8f8f8;
+  --color-gray-50: #959595;
+  --color-gray-60: #666666;
+  --color-gray-70: #333333;
+}
+
+/* Layouts */
+.wrapper {
+  width: 360px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* Design */
+body {
+  background-color: var(--color-white);
+}
+
+.header {
+  background-color: var(--color-white);
+  position: relative;
+}
+
+.header__proile-background-wrapper {
+  height: 94px;
+  background-color: var(--color-gray-25);
+}
+
+.header__profile-image-wrapper {
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  aspect-ratio: 1/1;
+}
+
+.header__profile-image {
+  object-fit: cover;
+}
+
+.header__info {
+  padding: 0 20px 20px 20px;
+}
+.header__user {
+  margin-bottom: 20px;
+}
+
+.header__user-nickname {
+  font-size: 2.7rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.027px;
+  color: var(--color-gray-70);
+}
+
+.header__user-occupation {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--color-gray-50);
+}
+
+.header__interactions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header__subscriber-title {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--color-gray-50);
+}
+
+.header__subscriber-count {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--color-gray-60);
+}
+
+.header__following-title {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--color-gray-50);
+}
+
+.header__following-count {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--color-gray-60);
+}
+
+.header__subscription-button-wrapper {
+  margin-left: auto;
+  aspect-ratio: 13/6;
+}
+
+.header__subscription-button-wrapper:hover {
+  cursor: pointer;
+}
+
+.header__subscription-button-image {
+  object-fit: cover;
+}
+
+.main {
+  background-color: var(--color-white);
+  /* navigation 가려진 부분 해결 */
+  padding-bottom: 100px;
+}
+
+.article {
+  padding: 20px;
+  border-bottom: 1px solid var(--color-gray-20);
+}
+
+.article:hover {
+  cursor: pointer;
+}
+
+.article__title {
+  margin-bottom: 0.4rem;
+  color: var(--color-gray-70);
+  font-size: 1.7rem;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.article__excerpt {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.66667;
+}
+
+.article__collaborators {
+  margin-right: 20px;
+  color: var(--color-gray-60);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.66667;
+  margin-bottom: 5px;
+}
+
+.article__comments {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.625;
+}
+
+.article__date {
+  color: var(--color-gray-50);
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.625;
+}

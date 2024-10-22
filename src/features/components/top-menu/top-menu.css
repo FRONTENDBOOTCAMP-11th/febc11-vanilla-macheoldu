@@ -18,7 +18,7 @@
 /* 헤더 스타일 */
 .brunch__header {
   /* 고정 컬러로 지정 */
-  background-color: #fff;
+  background-color: white;
   box-sizing: border-box;
   padding: 14px 20px;
   display: flex;
