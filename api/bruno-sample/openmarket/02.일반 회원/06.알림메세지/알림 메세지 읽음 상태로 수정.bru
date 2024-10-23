@@ -1,0 +1,24 @@
+meta {
+  name: 알림 메세지 읽음 상태로 수정
+  type: http
+  seq: 3
+}
+
+patch {
+  url: {{url}}/notifications/read
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "type": "qna",
+    "target_id": 11,
+    "channel": "toast",
+    "content": "11번에게 보내는 메세지 2",
+    "extra": {
+      "lecture_id": 2,
+      "url": "/posts/3"
+    }
+  }
+}

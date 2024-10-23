@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "openmarket",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

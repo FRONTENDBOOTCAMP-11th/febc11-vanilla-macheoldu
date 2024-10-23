@@ -1,0 +1,15 @@
+meta {
+  name: 상품 목록 조회(성별, 가격대 필터링)
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{url}}/products?custom={  "$and": [ {"extra.gender": "women"}, {"price": {"$gte": 100000}}, {"price": {"$lte": 150000}} ] }
+  body: none
+  auth: none
+}
+
+params:query {
+  custom: {  "$and": [ {"extra.gender": "women"}, {"price": {"$gte": 100000}}, {"price": {"$lte": 150000}} ] }
+}

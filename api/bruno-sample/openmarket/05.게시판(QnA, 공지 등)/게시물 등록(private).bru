@@ -1,0 +1,20 @@
+meta {
+  name: 게시물 등록(private)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/posts
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "type": "diary",
+      "title": "8월 7일 일기",
+      "content": "나 혼자만 볼 일기 입니다.",
+      "private": true
+  }
+}

@@ -1,0 +1,17 @@
+meta {
+  name: 게시물 수정(private 게시물 공유)
+  type: http
+  seq: 7
+}
+
+patch {
+  url: {{url}}/posts/7
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "share": [2, 3]
+  }
+}

@@ -1,0 +1,24 @@
+meta {
+  name: 알림 메세지 등록
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/notifications
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "type": "qna",
+    "target_id": 3,
+    "channel": "toast",
+    "content": "2번에게 보내는 메세지",
+    "extra": {
+      "lecture_id": 2,
+      "url": "/posts/3"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+meta {
+  name: 내가 작성한 게시물 목록 조회(QnA)
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/posts/users?type=qna
+  body: none
+  auth: inherit
+}
+
+params:query {
+  type: qna
+  ~type: info
+}

@@ -1,0 +1,27 @@
+meta {
+  name: 회원가입
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "_id": 5,
+    "email": "u3@gmail.com",
+    "password": "$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2",
+    "name": "제이지2",
+    "type": "user",
+    "loginType": "email",
+    "image": "/files/vanilla00/user-jayg.webp",
+    "extra": {
+      "birthday": "1988.05.13"
+    }
+  }
+  
+}

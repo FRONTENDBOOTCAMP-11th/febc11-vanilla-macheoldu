@@ -1,0 +1,17 @@
+meta {
+  name: 게시물 목록 조회(pagination)
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/posts?type=info&page=2&limit=5
+  body: none
+  auth: none
+}
+
+params:query {
+  type: info
+  page: 2
+  limit: 5
+}

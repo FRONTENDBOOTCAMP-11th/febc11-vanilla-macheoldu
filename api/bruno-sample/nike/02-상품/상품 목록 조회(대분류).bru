@@ -1,0 +1,17 @@
+meta {
+  name: 상품 목록 조회(대분류)
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{url}}/products?custom={"extra.category.0": "PC01"}
+  body: none
+  auth: none
+}
+
+params:query {
+  custom: {"extra.category.0": "PC01"}
+  ~custom: {"extra.category.0": "PC02"}
+  ~custom: {"extra.category.0": "PC03"}
+}

@@ -1,0 +1,21 @@
+meta {
+  name: 게시물 등록(상품 Q&A, private)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/posts
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "type": "qna",
+      "product_id": 2,
+      "title": "비밀 질문입니다.",
+      "content": "나만 깎아주세요.",
+      "private": true
+  }
+}

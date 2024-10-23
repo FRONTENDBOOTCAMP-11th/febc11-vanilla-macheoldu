@@ -1,0 +1,21 @@
+meta {
+  name: 게시물 추가
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/posts
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "type": "community",
+    "title": "주말 공원 다녀온 후기 입니다.",
+    "content": "주말에 공원에 다녀왔어요. 날씨가 흐려서 걱정했는데 다행히 비가 안와서 좋았어요.",
+    "image": "sample-bugatti.png",
+    "tag": "공원,인라인,가을"
+  }
+}
