@@ -3,20 +3,20 @@ body {
   margin: 0;
   padding: 0;
   font-family:
-    "Pretendard Variable",
+    'Pretendard Variable',
     Pretendard,
     -apple-system,
     BlinkMacSystemFont,
     system-ui,
     Roboto,
-    "Helvetica Neue",
-    "Segoe UI",
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    "Malgun Gothic",
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
     sans-serif;
 }
 
@@ -39,6 +39,10 @@ ul {
 }
 
 /* Layouts */
+body {
+  background-color: grey;
+}
+
 .wrapper {
   max-width: 360px;
   min-height: 100vh;
@@ -149,7 +153,7 @@ input:focus::placeholder {
 }
 
 .discover__nav-tab--active::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -281,7 +285,7 @@ input:focus::placeholder {
   color: var(--color-content);
 }
 em {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .circle {
