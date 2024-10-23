@@ -169,7 +169,7 @@ label {
 /* Components */
 /* Login Page*/
 body {
-  background-color: var(--grey-80);
+  background-color: grey;
 }
 
 .login-cover__figure {
