@@ -77,11 +77,12 @@ body {
   width: 360px;
   margin: 0 auto;
   min-height: 100vh;
+  background-color: var(--color-white);
 }
 
 /* Design */
 body {
-  background-color: var(--color-gray-25);
+  background-color: gray;
 }
 
 .navbar {
