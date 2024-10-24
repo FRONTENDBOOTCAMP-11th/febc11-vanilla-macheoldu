@@ -5,24 +5,52 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        index: resolve(__dirname, 'index.html'), // 기본 index.html
-        home: resolve(__dirname, 'src/features/home/home.html'), // 홈 페이지 .html
-        discover: resolve(__dirname, 'src/features/discover/discover.html'), // 발견 페이지 .html
-        write: resolve(__dirname, 'src/features/write/write.html'), // 글쓰기 페이지 .html
-        myBox: resolve(__dirname, 'src/features/myBox/myBox.html'), // 내 서랍 페이지 .html
-        author: resolve(__dirname, 'src/features/author/author.html'), // 작가 홈 페이지 .html
-        detail: resolve(__dirname, 'src/features/detail/detail.html'), // 상세 페이지 .html
-        start: resolve(__dirname, 'src/features/start/start.html'), // 시작하기 페이지 .html
-        signUp: resolve(__dirname, 'src/features/start/signUp.html'), // 회원가입 페이지 .html
-        startKakao: resolve(__dirname, 'src/features/start/start-kakao.html'), // 카카오 시작하기 페이지 .html
-        loginKakao: resolve(__dirname, 'src/features/start/login-kakao.html'), // 시작하기 페이지 .html
-        topMenu: resolve(__dirname, 'src/features/components/top-menu/top-menu.html'), // 상단 메뉴 .html
-        navigation: resolve(__dirname, 'src/features/components/navigation/navigation.html'), // 상세 페이지 .html
-        // login: resolve(__dirname, 'src/pages/auth/login.html'), // 추가 HTML 파일
-        // list: resolve(__dirname, 'src/pages/board/list.html'), // 추가 HTML 파일
-        // 필요한 다른 HTML 파일을 여기에 추가
+        index: resolve(__dirname, 'index.html'),
+        home: resolve(__dirname, 'src/features/home/home.html'),
+        discover: resolve(__dirname, 'src/features/discover/discover.html'),
+        write: resolve(__dirname, 'src/features/write/write.html'),
+        myBox: resolve(__dirname, 'src/features/myBox/myBox.html'),
+        author: resolve(__dirname, 'src/features/author/author.html'),
+        detail: resolve(__dirname, 'src/features/detail/detail.html'),
+        start: resolve(__dirname, 'src/features/start/start.html'),
+        signUp: resolve(__dirname, 'src/features/start/signUp.html'),
+        startKakao: resolve(__dirname, 'src/features/start/start-kakao.html'),
+        loginKakao: resolve(__dirname, 'src/features/start/login-kakao.html'),
+        topMenu: resolve(
+          __dirname,
+          'src/features/components/top-menu/top-menu.html',
+        ),
+        navigation: resolve(
+          __dirname,
+          'src/features/components/navigation/navigation.html',
+        ),
       },
     },
   },
-  appType: 'mpa', // fallback url 사용안함
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://11.fesp.shop',
+        changeOrigin: true,
+        secure: false, // HTTPS 인증서 검증 건너뛰기
+        rewrite: path => path.replace(/^\/api/, ''),
+        configure: (proxy, options) => {
+          proxy.on('error', (err, req, res) => {
+            console.log('proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            proxyReq.setHeader('Origin', 'https://11.fesp.shop');
+          });
+        },
+      },
+    },
+    cors: true, // CORS 활성화
+    headers: {
+      // 기본 헤더 설정
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  },
+  appType: 'mpa',
 });
