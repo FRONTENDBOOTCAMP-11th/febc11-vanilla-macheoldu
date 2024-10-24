@@ -9,6 +9,7 @@ window.addEventListener('load', () => {
   const $saveIdPw = document.getElementById('saveIdPw');
   const $loginError = document.querySelector('.login-main__error');
   const $loginBtn = document.getElementById('login');
+  let loginStatus = false;
 
   // 로그인 버튼 클릭 이벤트 발생 시 실행 함수
   $loginBtn.addEventListener('click', function (e) {
@@ -48,23 +49,43 @@ window.addEventListener('load', () => {
       $loginError.innerText = '올바른 형식의 이메일을 입력해주세요.'
     } else {
       // 입력된 이메일 비번으로 로그인 시도
-      function loginTest(email, password) {
+      const login = function (userEmail, userPassword) {
         axios({
+          // client header
           method: 'post',
           url: 'https://11.fesp.shop/users/login',
-          header: [],
-          params: {
-            "email": `${email}`,
-            "password": `${password}`
+          headers: {
+            'client-id': 'vanilla03',
+            'content-type': 'application/json',
+            accept: 'application/json'
+          },
+          // 로그인 버튼 클릭 시 데이터 전송 및 검증
+          data: {
+            email: `${userEmail}`,
+            password: `${userPassword}`
           }
-        }).then(response => {
-          console.log(response.data.statusText);
-        }).catch(error => {
-          console.log(error.response.data)
         })
+          // 로그인 성공 시, 홈 페이지로 이동
+          .then(response => {
+            console.log(response.data);
+            window.open('/src/features/home/home.html', '_self');
+            loginStatus = true;
+          })
+          .catch(error => {
+            if (error.response.status === 403) {
+              // 로그인 실패 case 1. 잘못된 정보(403 error)
+              console.log(error.response.data.message);
+              $loginError.classList.remove('hidden');
+              $loginError.textContent = error.response.data.message;
+            } else if (error.response.status === 500) {
+              // 로그인 실패 case 2. 서버 에러(500 error)
+              $loginError.classList.remove('hidden');
+              $loginError.textContent = error.response.data.message;
+            }
+          })
       }
 
-      loginTest(emailValue, passwordValue);
+      login(emailValue, passwordValue);
     }
 
     console.log(emailValue);
@@ -72,5 +93,7 @@ window.addEventListener('load', () => {
     console.log(passwordValue);
 
     console.log($saveIdPw.checked);
+
+    console.log(loginStatus);
   });
 })
