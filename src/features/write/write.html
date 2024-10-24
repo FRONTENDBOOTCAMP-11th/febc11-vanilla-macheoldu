@@ -73,12 +73,7 @@
     </footer>
     <div id="navigation"></div>
   </div>
-  <script>
-    fetch('/src/features/components/navigation/navigation.html')
-      .then(response => response.text()).then(data => {
-        document.getElementById('navigation').innerHTML = data;
-      });
-  </script>
+  <script src="/src/features/components/navigation/navigation.js"></script>
 </body>
 
 </html>
