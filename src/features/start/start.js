@@ -29,8 +29,21 @@ window.addEventListener('load', () => {
     $loginError.classList.add('hidden');
   }
 
+  // 화면 로딩 완료 시, 로컬 스토리지에 저장된 데이터가 있으면 이걸 어떻게 처리해야하지? 고민 중.....
   // if (localStorage) {
-  //   console.log(localStorage.getItem());
+  //   axios({
+  //     method: 'post',
+  //     url: '/api/users/login',
+  //     headers: {
+  //       'client-id': 'vanilla03',
+  //       'content-type': 'application/json',
+  //       accept: 'application/json',
+  //       Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+  //     },
+  //     data: {
+  //       email: localStorage.getItem('userEmail')
+  //     }
+  //   })
   // }
 
   // 로그인 버튼 클릭 이벤트 발생 시 실행 함수
@@ -96,6 +109,14 @@ window.addEventListener('load', () => {
             loginStatus = true;
             // sessionStorage 에 로그인 상태 추가 -> 각 페이지 이동 시, sessionStorage 에 유지
             sessionStorage.setItem('login-status', loginStatus);
+
+            // 로그인 정보 저장 체크박스 선택 시 로컬 스토리지에 사용자 데이터 저장(이메일, 사용자 토큰)
+            // if ($saveIdPw.checked) {
+            //   let res = response.data.item;
+            //   localStorage.userEmail = res.email;
+            //   localStorage.userAccessToken = res.token.accessToken;
+            //   console.log(localStorage.userEmail, localStorage.userAccesToken);
+            // }
           })
           .catch(error => {
             if (error.response.status === 403) {
@@ -114,9 +135,6 @@ window.addEventListener('load', () => {
       login(emailValue, passwordValue);
     }
 
-    if ($saveIdPw.checked) {
-      localStorage.setItem('userId', emailValue);
-    }
     console.log(emailValue);
     console.log(passwordValue);
     console.log($saveIdPw.checked);
