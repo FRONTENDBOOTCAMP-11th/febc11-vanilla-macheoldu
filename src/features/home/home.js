@@ -25,53 +25,6 @@ const getCurrentDay = () => {
   return days[today];
 };
 
-// Today's Pick 렌더링 함수
-const renderTodaysPick = posts => {
-  const postsHTML = posts
-    .slice(0, 10)
-    .map((post, index) => {
-      const description =
-        post.content
-          .replace(/<[^>]*>/g, '')
-          .trim()
-          .slice(0, 100) + '...';
-
-      // 이미지 경로를 index + 1을 사용하여 생성
-      const imgNum = index + 1;
-      const imgPath = `/src/assets/images/home/pick${imgNum}.png`;
-
-      return `
-      <li class="main__todays-pick__item">
-        <div class="main__todays-pick__info">
-          <div class="main__todays-pick__text">
-            <h3 class="main__todays-pick__item-title">
-              ${post.title}
-            </h3>
-            <p class="main__todays-pick__author">
-              <em style="font-family: Georgia">by</em> ${post.user.name}
-            </p>
-            <p class="main__todays-pick__description">
-              ${description}
-            </p>
-          </div>
-          <img
-            src="${imgPath}"
-            alt="${post.title}"
-            class="main__todays-pick__image"
-            onerror="this.src='/src/assets/images/home/pick1.png'"
-          />
-        </div>
-      </li>
-    `;
-    })
-    .join('');
-
-  const container = document.querySelector('.main__todays-pick__list');
-  if (container) {
-    container.innerHTML = postsHTML;
-  }
-};
-
 // 모든 탭 버튼을 선택하고 이벤트를 설정하는 함수
 const initializeTabs = () => {
   const $tabButtons = document.querySelectorAll('.weekly-serial__tab');
@@ -99,7 +52,55 @@ const initializeTabs = () => {
   }
 };
 
-// Today's pick 데이터 가져오기
+// Today's Pick 렌더링 함수
+const renderTodaysPick = posts => {
+  const postsHTML = posts
+    .slice(0, 10)
+    .map((post, index) => {
+      // HTML 태그 제거하고 첫 100자만 추출
+      const description =
+        post.content
+          .replace(/<[^>]*>/g, '')
+          .trim()
+          .slice(0, 100) + '...';
+
+      // 이미지 경로를 index + 1을 사용하여 생성
+      const imageNumber = index + 1;
+      const imagePath = `/src/assets/images/home/pick${imageNumber}.png`;
+
+      return `
+      <li class="main__todays-pick__item">
+        <div class="main__todays-pick__info">
+          <div class="main__todays-pick__text">
+            <h3 class="main__todays-pick__item-title">
+              ${post.title}
+            </h3>
+            <p class="main__todays-pick__author">
+              <em style="font-family: Georgia">by</em> ${post.user.name}
+            </p>
+            <p class="main__todays-pick__description">
+              ${description}
+            </p>
+          </div>
+          <img
+            src="${imagePath}"
+            alt="${post.title}"
+            class="main__todays-pick__image"
+            onerror="this.src='/src/assets/images/home/pick1.png'"
+          />
+        </div>
+      </li>
+    `;
+    })
+    .join('');
+
+  const container = document.querySelector('.main__todays-pick__list');
+  if (container) {
+    container.innerHTML = postsHTML;
+  }
+};
+
+// Today's Pick 데이터 가져오기
 const fetchTodaysPick = async () => {
   try {
     const response = await api.get('/posts?type=info');
@@ -110,11 +111,17 @@ const fetchTodaysPick = async () => {
   }
 };
 
-/// 페이지 로드 시 실행
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', fetchTodaysPick);
-} else {
+// 페이지 초기화 함수
+const initialize = () => {
+  initializeTabs();
   fetchTodaysPick();
+};
+
+// 페이지 로드 시 실행
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initialize);
+} else {
+  initialize();
 }
 
-export default fetchTodaysPick;
+export default initialize;
