@@ -32,6 +32,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-neo.webp`,
         createdAt: getTime(-50),
         updatedAt: getTime(-30, -60 * 60 * 3),
+        posts: 2,
         extra: {
           job: '마케터',
           biography: '서른살, 새내기 취준생',
@@ -64,6 +65,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-apeach.webp`,
         createdAt: getTime(-20, -60 * 22),
         updatedAt: getTime(-10, -60 * 11),
+        posts: 1,
         extra: {
           job: 'edifice 매니저',
           biography: '프롬프트 기획 전문가 & GPT전문강사, 강연자',
@@ -91,7 +93,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-joyping.webp`,
         createdAt: getTime(-20, -60 * 20),
         updatedAt: getTime(-10, -60 * 10),
-        post: 2,
+        posts: 2,
         bookmark: {
           users: 9,
         },
@@ -109,7 +111,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-sparkleping.webp`,
         createdAt: getTime(-18, -60 * 19),
         updatedAt: getTime(-9, -60 * 9),
-        post: 0,
+        posts: 0,
         bookmark: {
           users: 4,
         },
@@ -127,7 +129,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-loveping.webp`,
         createdAt: getTime(-17, -60 * 18),
         updatedAt: getTime(-8, -60 * 8),
-        post: 2,
+        posts: 1,
         bookmark: {
           users: 10,
         },
@@ -145,7 +147,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-twinklingping.webp`,
         createdAt: getTime(-16, -60 * 17),
         updatedAt: getTime(-8, -60 * 7),
-        post: 0,
+        posts: 1,
         bookmark: {
           users: 3,
         },
@@ -163,7 +165,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-flowerping.webp`,
         createdAt: getTime(-15, -60 * 16),
         updatedAt: getTime(-7, -60 * 6),
-        post: 4,
+        posts: 10,
         bookmark: {
           users: 7,
         },
@@ -181,7 +183,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-cookping.webp`,
         createdAt: getTime(-14, -60 * 15),
         updatedAt: getTime(-6, -60 * 5),
-        post: 3,
+        posts: 1,
         bookmark: {
           users: 12,
         },
@@ -199,7 +201,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-dreamping.webp`,
         createdAt: getTime(-13, -60 * 14),
         updatedAt: getTime(-5, -60 * 4),
-        post: 0,
+        posts: 3,
         bookmark: {
           users: 9,
         },
