@@ -1,14 +1,18 @@
 import axios from 'axios';
 
 "use strict";
-/* 윈도우 로드 이벤트 추가, 페이지 로딩이 완료되면 아래 함수 실행 */
+// 윈도우 로드 이벤트 추가, 페이지 로딩이 완료되면 아래 함수 실행
 window.addEventListener('load', () => {
-  /* 필요한 노드 획득 */
+
+  // 필요한 노드 획득
   const $email = document.getElementById('loginEmail');
   const $password = document.getElementById('loginPw');
   const $saveIdPw = document.getElementById('saveIdPw');
   const $loginError = document.querySelector('.login-main__error');
   const $loginBtn = document.getElementById('login');
+  const $signUpBtn = document.getElementById('signUp');
+
+  // 초기 로그인 상태
   let loginStatus = false;
 
   // Login 시 사용 변수 및 함수
@@ -103,12 +107,12 @@ window.addEventListener('load', () => {
         })
           // 로그인 성공 시, 홈 페이지로 이동
           .then(response => {
-            console.log(response.data);
-            // window.open('/src/features/home/home.html', '_self');
             // loginStatus 상태 변경
             loginStatus = true;
-            // sessionStorage 에 로그인 상태 추가 -> 각 페이지 이동 시, sessionStorage 에 유지
+
+            // sessionStorage 에 로그인 상태, 사용자 이메일 저장 -> 각 페이지 이동 시, sessionStorage 에 유지
             sessionStorage.setItem('login-status', loginStatus);
+            sessionStorage.setItem('userEmail', response.data.item.email);
 
             // 로그인 정보 저장 체크박스 선택 시 로컬 스토리지에 사용자 데이터 저장(이메일, 사용자 토큰)
             // if ($saveIdPw.checked) {
@@ -117,6 +121,9 @@ window.addEventListener('load', () => {
             //   localStorage.userAccessToken = res.token.accessToken;
             //   console.log(localStorage.userEmail, localStorage.userAccesToken);
             // }
+
+            //로그인 완료 시 홈 화면으로 이동
+            window.open('/src/features/home/home.html', '_self');
           })
           .catch(error => {
             if (error.response.status === 403) {
@@ -141,6 +148,10 @@ window.addEventListener('load', () => {
     console.log(loginStatus);
   });
 
+  // 회원가입 버튼 선택 시 회원가입 화면으로 이동
+  $signUpBtn.addEventListener('click', function (e) {
+    e.preventDefault();
 
-
+    window.open('./signUp.html', '_self');
+  });
 })
