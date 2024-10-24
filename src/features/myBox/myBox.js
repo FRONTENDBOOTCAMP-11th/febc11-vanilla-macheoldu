@@ -47,7 +47,6 @@ function initializeSlider(slider) {
     slider.scrollLeft = scrollLeft - walk;
   });
 }
-
 // 모든 슬라이더에 적용
 const sliders = document.querySelectorAll('.cards');
 sliders.forEach(slider => initializeSlider(slider));
@@ -55,3 +54,24 @@ sliders.forEach(slider => initializeSlider(slider));
 // 관심작가 섹션의 슬라이더
 const authorSliders = document.querySelectorAll('.interested-authors__ul');
 authorSliders.forEach(slider => initializeSlider(slider));
+
+//구독 버튼 클릭 이벤트
+// document.getElementById('')
+
+axios
+  .get('/api/posts?type=info', {
+    headers: {
+      'client-id': 'vanilla03', // client-id 헤더 추가
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+  .then(response => {
+    // 응답 데이터에서 첫 번째 항목 가져오기
+    const firstItem = response.data.item[0];
+    console.log(firstItem);
+  })
+  .catch(error => {
+    // 에러가 발생하면 콘솔에 에러 출력
+    console.error('Error fetching data:', error);
+  });

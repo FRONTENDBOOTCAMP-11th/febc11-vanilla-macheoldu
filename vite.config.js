@@ -6,6 +6,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'index.html'),
+<<<<<<< HEAD
         // home 
         home: resolve(__dirname, 'src/features/home/home.html'),
         homeCSS: resolve(__dirname, 'src/features/home/home.css'),
@@ -68,6 +69,26 @@ export default defineConfig({
         navigation: resolve(__dirname, 'src/features/components/navigation/navigation.html'),
         navigationCSS: resolve(__dirname, 'src/features/components/navigation/navigation.css'),
         navigationJS: resolve(__dirname, 'src/features/components/navigation/navigation.js'),
+=======
+        home: resolve(__dirname, 'src/features/home/home.html'),
+        discover: resolve(__dirname, 'src/features/discover/discover.html'),
+        write: resolve(__dirname, 'src/features/write/write.html'),
+        myBox: resolve(__dirname, 'src/features/myBox/myBox.html'),
+        author: resolve(__dirname, 'src/features/author/author.html'),
+        detail: resolve(__dirname, 'src/features/detail/detail.html'),
+        start: resolve(__dirname, 'src/features/start/start.html'),
+        signUp: resolve(__dirname, 'src/features/start/signUp.html'),
+        startKakao: resolve(__dirname, 'src/features/start/start-kakao.html'),
+        loginKakao: resolve(__dirname, 'src/features/start/login-kakao.html'),
+        topMenu: resolve(
+          __dirname,
+          'src/features/components/top-menu/top-menu.html',
+        ),
+        navigation: resolve(
+          __dirname,
+          'src/features/components/navigation/navigation.html',
+        ),
+>>>>>>> 1fa1a7c (htmlscript 추가)
       },
     },
   },
@@ -97,4 +118,8 @@ export default defineConfig({
     },
   },
   appType: 'mpa',
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 1fa1a7c (htmlscript 추가)
