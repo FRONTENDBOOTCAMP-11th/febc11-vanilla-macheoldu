@@ -36,7 +36,7 @@ img {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: grey;
   color: #111111;
   margin: 0;
   padding: 0;
@@ -44,7 +44,7 @@ body {
 
 /* 전체 레이아웃 */
 main {
-  margin-left: 25px;
+  padding-left: 25px;
 }
 
 /* 헤더 (공간만) */
@@ -67,6 +67,7 @@ h2 {
 
 main {
   background-color: #ffffff;
+  padding-left: 25px;
 }
 /* 재활용 h2 각 타이틀 */
 .section-title {
@@ -217,7 +218,7 @@ main {
 .my-brunch {
   background-color: #ffffff;
   padding: 0px;
-  border-radius: 8px;
+  padding-bottom: 100px;
 }
 
 .my-brunch h2 {
