@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 "use strict";
 /* 윈도우 로드 이벤트 추가, 페이지 로딩이 완료되면 아래 함수 실행 */
 window.addEventListener('load', () => {
@@ -15,6 +17,7 @@ window.addEventListener('load', () => {
 
     const emailValue = $email.value;
     const passwordValue = $password.value;
+    const regExId = `^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
 
     if (!emailValue) {
       // 이메일 또는 이메일과 비밀번호 모두 입력하지 않고 로그인 버튼 선택 시 안내 메시지 출력
@@ -39,6 +42,29 @@ window.addEventListener('load', () => {
           $loginError.classList.add('hidden');
         }
       })
+    } else if (!emailValue.match(regExId)) {
+      // 이메일 형식 유효성 검사
+      $loginError.classList.remove('hidden');
+      $loginError.innerText = '올바른 형식의 이메일을 입력해주세요.'
+    } else {
+      // 입력된 이메일 비번으로 로그인 시도
+      function loginTest(email, password) {
+        axios({
+          method: 'post',
+          url: 'https://11.fesp.shop/users/login',
+          header: [],
+          params: {
+            "email": `${email}`,
+            "password": `${password}`
+          }
+        }).then(response => {
+          console.log(response.data.statusText);
+        }).catch(error => {
+          console.log(error.response.data)
+        })
+      }
+
+      loginTest(emailValue, passwordValue);
     }
 
     console.log(emailValue);
@@ -46,6 +72,5 @@ window.addEventListener('load', () => {
     console.log(passwordValue);
 
     console.log($saveIdPw.checked);
-  })
-
+  });
 })
