@@ -90,7 +90,14 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'email',
         image: `/files/${clientId}/user-joyping.webp`,
         createdAt: getTime(-20, -60 * 20),
-        updatedAt: getTime(-10, -60 * 10)
+        updatedAt: getTime(-10, -60 * 10),
+        post: 2,
+        bookmark: {
+          users: 9,
+        },
+        bookmarkedBy: {
+          users: 11,
+        }
       },
       {
         _id: await nextSeq('user'),
@@ -101,7 +108,14 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'kakao',
         image: `/files/${clientId}/user-sparkleping.webp`,
         createdAt: getTime(-18, -60 * 19),
-        updatedAt: getTime(-9, -60 * 9)
+        updatedAt: getTime(-9, -60 * 9),
+        post: 0,
+        bookmark: {
+          users: 4,
+        },
+        bookmarkedBy: {
+          users: 6,
+        },
       },
       {
         _id: await nextSeq('user'),
@@ -112,7 +126,14 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'email',
         image: `/files/${clientId}/user-loveping.webp`,
         createdAt: getTime(-17, -60 * 18),
-        updatedAt: getTime(-8, -60 * 8)
+        updatedAt: getTime(-8, -60 * 8),
+        post: 2,
+        bookmark: {
+          users: 10,
+        },
+        bookmarkedBy: {
+          users: 12,
+        },
       },
       {
         _id: await nextSeq('user'),
@@ -123,7 +144,14 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'kakao',
         image: `/files/${clientId}/user-twinklingping.webp`,
         createdAt: getTime(-16, -60 * 17),
-        updatedAt: getTime(-8, -60 * 7)
+        updatedAt: getTime(-8, -60 * 7),
+        post: 0,
+        bookmark: {
+          users: 3,
+        },
+        bookmarkedBy: {
+          users: 2,
+        },
       },
       {
         _id: await nextSeq('user'),
@@ -134,7 +162,14 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'email',
         image: `/files/${clientId}/user-flowerping.webp`,
         createdAt: getTime(-15, -60 * 16),
-        updatedAt: getTime(-7, -60 * 6)
+        updatedAt: getTime(-7, -60 * 6),
+        post: 4,
+        bookmark: {
+          users: 7,
+        },
+        bookmarkedBy: {
+          users: 12,
+        },
       },
       {
         _id: await nextSeq('user'),
@@ -145,7 +180,14 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'kakao',
         image: `/files/${clientId}/user-cookping.webp`,
         createdAt: getTime(-14, -60 * 15),
-        updatedAt: getTime(-6, -60 * 5)
+        updatedAt: getTime(-6, -60 * 5),
+        post: 3,
+        bookmark: {
+          users: 12,
+        },
+        bookmarkedBy: {
+          users: 4,
+        },
       },
       {
         _id: await nextSeq('user'),
@@ -156,7 +198,14 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'email',
         image: `/files/${clientId}/user-dreamping.webp`,
         createdAt: getTime(-13, -60 * 14),
-        updatedAt: getTime(-5, -60 * 4)
+        updatedAt: getTime(-5, -60 * 4),
+        post: 0,
+        bookmark: {
+          users: 9,
+        },
+        bookmarkedBy: {
+          users: 8,
+        },
       }
 
     ],
