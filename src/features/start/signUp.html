@@ -7,6 +7,7 @@
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
   <link rel="stylesheet" href="start.css">
+  <script type="module" src="signUp.js"></script>
   <title>Document</title>
 </head>
 
@@ -29,7 +30,7 @@
             <input type="text" id="signUpNickname" placeholder="별명">
             <div class="btn type--chip">
               <!-- 중복확인 버튼 클릭 시 서버의 닉네임 확인 -->
-              <button type="button" id="validCheckNickname" aria-label="중복확인 버튼">중복확인</button>
+              <button type="button" id="checkNickname" aria-label="중복확인 버튼">중복확인</button>
             </div>
           </div>
           <!-- 중복 데이터 존재 시, class="invalid" 추가, innerHTML 로 에러 메시지 추가(중복된 별명입니다.)
@@ -41,7 +42,7 @@
             <input type="email" id="signUpEmail" placeholder="이메일">
             <div class="btn type--chip">
               <!-- 중복확인 버튼 클릭 시 서버의 이메일 확인 -->
-              <button type="button" id="validCheckEmail" aria-label="중복확인 버튼">중복확인</button>
+              <button type="button" id="checkEmail" aria-label="중복확인 버튼">중복확인</button>
             </div>
           </div>
           <!-- 중복 데이터 존재 시, class="invalid" 추가, innerHTML 로 에러 메시지 추가(중복된 이메일입니다.)
