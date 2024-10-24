@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+// Top 구독작가 js...
+import initializeTopAuthors from './topAuthors.js';
+
 // axios 인스턴스 생성
 const api = axios.create({
   baseURL: 'https://11.fesp.shop',
@@ -9,48 +12,6 @@ const api = axios.create({
     Accept: 'application/json',
   },
 });
-
-// 현재 요일 가져오기 (0: 일요일, 1: 월요일, ...)
-const getCurrentDay = () => {
-  const days = [
-    'sunday',
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-  ];
-  const today = new Date().getDay();
-  return days[today];
-};
-
-// 모든 탭 버튼을 선택하고 이벤트를 설정하는 함수
-const initializeTabs = () => {
-  const $tabButtons = document.querySelectorAll('.weekly-serial__tab');
-
-  // 탭 선택 함수
-  const selectTab = $selectedButton => {
-    $tabButtons.forEach($tab => {
-      $tab.setAttribute('aria-selected', 'false');
-    });
-    $selectedButton.setAttribute('aria-selected', 'true');
-  };
-
-  // 각 탭 버튼에 클릭 이벤트 리스너 추가
-  $tabButtons.forEach($button => {
-    $button.addEventListener('click', () => {
-      selectTab($button);
-    });
-  });
-
-  // 현재 요일 탭 선택
-  const currentDay = getCurrentDay();
-  const $currentTab = document.querySelector(`[data-day="${currentDay}"]`);
-  if ($currentTab) {
-    selectTab($currentTab);
-  }
-};
 
 // Today's Pick 렌더링 함수
 const renderTodaysPick = posts => {
@@ -111,10 +72,53 @@ const fetchTodaysPick = async () => {
   }
 };
 
+// 현재 요일 가져오기 (0: 일요일, 1: 월요일, ...)
+const getCurrentDay = () => {
+  const days = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+  ];
+  const today = new Date().getDay();
+  return days[today];
+};
+
+// 모든 탭 버튼을 선택하고 이벤트를 설정하는 함수
+const initializeTabs = () => {
+  const $tabButtons = document.querySelectorAll('.weekly-serial__tab');
+
+  // 탭 선택 함수
+  const selectTab = $selectedButton => {
+    $tabButtons.forEach($tab => {
+      $tab.setAttribute('aria-selected', 'false');
+    });
+    $selectedButton.setAttribute('aria-selected', 'true');
+  };
+
+  // 각 탭 버튼에 클릭 이벤트 리스너 추가
+  $tabButtons.forEach($button => {
+    $button.addEventListener('click', () => {
+      selectTab($button);
+    });
+  });
+
+  // 현재 요일 탭 선택
+  const currentDay = getCurrentDay();
+  const $currentTab = document.querySelector(`[data-day="${currentDay}"]`);
+  if ($currentTab) {
+    selectTab($currentTab);
+  }
+};
+
 // 페이지 초기화 함수
 const initialize = () => {
   initializeTabs();
   fetchTodaysPick();
+  initializeTopAuthors();
 };
 
 // 페이지 로드 시 실행
