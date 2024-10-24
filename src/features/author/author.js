@@ -15,9 +15,8 @@ axios
     const firstItem = response.data.item;
     console.log(firstItem);
     console.log(firstItem[0]);
-
-    const nickname = firstItem.name;
-    console.log(nickname);
+    console.log(firstItem[0].bookmark.users);
+    console.log(firstItem[0].bookmarkedBy.users);
   })
   .catch(error => {
     // 에러가 발생하면 콘솔에 에러 출력
