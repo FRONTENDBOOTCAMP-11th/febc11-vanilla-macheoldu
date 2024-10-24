@@ -1,5 +1,15 @@
 import axios from 'axios';
 
+// axios 인스턴스 생성
+const api = axios.create({
+  baseURL: 'https://11.fesp.shop',
+  headers: {
+    'client-id': 'vanilla03',
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+});
+
 // 현재 요일 가져오기 (0: 일요일, 1: 월요일, ...)
 const getCurrentDay = () => {
   const days = [
@@ -13,6 +23,53 @@ const getCurrentDay = () => {
   ];
   const today = new Date().getDay();
   return days[today];
+};
+
+// Today's Pick 렌더링 함수
+const renderTodaysPick = posts => {
+  const postsHTML = posts
+    .slice(0, 10)
+    .map((post, index) => {
+      const description =
+        post.content
+          .replace(/<[^>]*>/g, '')
+          .trim()
+          .slice(0, 100) + '...';
+
+      // 이미지 경로를 index + 1을 사용하여 생성
+      const imgNum = index + 1;
+      const imgPath = `/src/assets/images/home/pick${imgNum}.png`;
+
+      return `
+      <li class="main__todays-pick__item">
+        <div class="main__todays-pick__info">
+          <div class="main__todays-pick__text">
+            <h3 class="main__todays-pick__item-title">
+              ${post.title}
+            </h3>
+            <p class="main__todays-pick__author">
+              <em style="font-family: Georgia">by</em> ${post.user.name}
+            </p>
+            <p class="main__todays-pick__description">
+              ${description}
+            </p>
+          </div>
+          <img
+            src="${imgPath}"
+            alt="${post.title}"
+            class="main__todays-pick__image"
+            onerror="this.src='/src/assets/images/home/pick1.png'"
+          />
+        </div>
+      </li>
+    `;
+    })
+    .join('');
+
+  const container = document.querySelector('.main__todays-pick__list');
+  if (container) {
+    container.innerHTML = postsHTML;
+  }
 };
 
 // 모든 탭 버튼을 선택하고 이벤트를 설정하는 함수
@@ -42,26 +99,22 @@ const initializeTabs = () => {
   }
 };
 
-const handleSort = sortType => {
-  // 모든 버튼에서 active 클래스 제거
-  const $buttons = document.querySelectorAll('.weekly-serial__option');
-  $buttons.forEach($button => $button.classList.remove('active'));
-
-  // 클릭된 버튼에 active 클래스 추가
-  const $selectedButton = document.querySelector(
-    `[onclick="handleSort('${sortType}')"]`,
-  );
-  $selectedButton.classList.add('active');
+// Today's pick 데이터 가져오기
+const fetchTodaysPick = async () => {
+  try {
+    const response = await api.get('/posts?type=info');
+    const posts = response.data.item;
+    renderTodaysPick(posts);
+  } catch (error) {
+    console.error("Error fetching Today's Pick:", error);
+  }
 };
 
-// 초기 상태 설정 (최신순 선택)
-window.onload = () => {
-  handleSort('latest');
-};
-
-// 페이지 로드 시 초기화
+/// 페이지 로드 시 실행
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeTabs);
+  document.addEventListener('DOMContentLoaded', fetchTodaysPick);
 } else {
-  initializeTabs();
+  fetchTodaysPick();
 }
+
+export default fetchTodaysPick;

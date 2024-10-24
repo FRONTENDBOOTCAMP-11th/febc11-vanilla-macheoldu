@@ -214,6 +214,10 @@
             </h2>
 
             <ol class="main__todays-pick__list">
+              <!-- JavaScript로 동적으로 내용이 채워질 예정이므로 비워둡니다 -->
+            </ol>
+
+            <!-- <ol class="main__todays-pick__list">
               <li class="main__todays-pick__item">
                 <div class="main__todays-pick__info">
                   <div class="main__todays-pick__text">
@@ -431,7 +435,7 @@
                   />
                 </div>
               </li>
-            </ol>
+            </ol> -->
             <!-- Today's Pick 섹션 끝 -->
           </section>
 
@@ -843,18 +847,11 @@
       <!-- 공통 푸터 컴포넌트 부분 -->
       <footer id="navigation"></footer>
     </div>
-    <script>
-      fetch('/src/features/components/top-menu/top-menu.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('header').innerHTML = data;
-        });
+    <!-- 상단 메뉴 -->
+    <script src="/src/features/components/top-menu/top-menu.js"></script>
 
-      fetch('/src/features/components/navigation/navigation.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('navigation').innerHTML = data;
-        });
-    </script>
+    <!-- 하단 네비게이션 -->
+    <script src="/src/features/components/navigation/navigation.js"></script>
+    <script src="home.js" type="module"></script>
   </body>
 </html>
