@@ -107,7 +107,7 @@ window.addEventListener('load', () => {
         })
           // 로그인 성공 시, 홈 페이지로 이동
           .then(response => {
-            // loginStatus 상태 변경
+            // 로그인 상태 변경
             loginStatus = true;
 
             // sessionStorage 에 로그인 상태, 사용자 이메일 저장 -> 각 페이지 이동 시, sessionStorage 에 유지
