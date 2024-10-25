@@ -1,0 +1,15 @@
+meta {
+  name: 게시물 추가
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/posts?type=community
+  body: json
+  auth: none
+}
+
+params:query {
+  type: community
+}

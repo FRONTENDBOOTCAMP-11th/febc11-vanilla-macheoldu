@@ -19,23 +19,14 @@
       rel="stylesheet"
       href="../../features/components/navigation/navigation.css"
     />
+    <script type="module" src="discover.js"></script>
   </head>
   <body>
     <div class="wrapper discover">
       <!-- Header -->
       <header class="discover__header">
-        <input
-          type="text"
-          value="꿀"
-          class="discover__header-input"
-          aria-label="검색 입력창"
-          onclick="discover()"
-        />
-        <button
-          class="discover__header-close"
-          aria-label="검색창 닫기"
-          onclick="closeSearch()"
-        >
+        <input type="text" class="discover__header-input" />
+        <button class="discover__header-close" aria-label="검색창 닫기">
           <img
             class="discover__reset"
             src="../../assets/icons/etc/reset.svg"
@@ -47,15 +38,8 @@
       <!-- Navigation -->
       <nav class="discover__nav">
         <div class="discover__nav-wrapper">
-          <button
-            class="discover__nav-tab discover__nav-tab--active"
-            onclick="showTab('posts')"
-          >
-            글
-          </button>
-          <button class="discover__nav-tab" onclick="showTab('authors')">
-            작가
-          </button>
+          <button class="discover__nav-tab active">글</button>
+          <button class="discover__nav-tab">작가</button>
         </div>
       </nav>
 
@@ -63,22 +47,6 @@
       <main class="discover__main null">
         <div class="discover__search-header author">
           <span class="discover__count-results">글 검색 결과 800건</span>
-          <div class="discover__search-filters">
-            <button
-              class="discover__filter-btn"
-              onclick="sortResults('accuracy')"
-            >
-              <!-- 텍스트 전에 원 배치 -->
-              <div class="circle__active"></div>
-              정확도
-            </button>
-            <button
-              class="discover__filter-btn recent"
-              onclick="sortResults('recent')"
-            >
-              최신
-            </button>
-          </div>
         </div>
 
         <!-- 검색 하기 전 화면 -->
@@ -328,13 +296,11 @@
       </main>
       <div id="navigation"></div>
     </div>
+
     <!-- 🧭 bottom navigation -->
-    <script>
-      fetch("../../features/components/navigation/navigation.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("navigation").innerHTML = data;
-        });
-    </script>
+    <script
+      type="module"
+      src="/src/features/components/navigation/navigation.js"
+    ></script>
   </body>
 </html>

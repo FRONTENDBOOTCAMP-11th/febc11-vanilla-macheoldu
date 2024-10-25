@@ -1,0 +1,18 @@
+meta {
+  name: 북마크 추가 (게시물)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/bookmarks/posts
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "target_id": 131
+  }
+  
+}
