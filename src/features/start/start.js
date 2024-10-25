@@ -57,7 +57,7 @@ window.addEventListener('load', () => {
 
     const emailValue = $email.value;
     const passwordValue = $password.value;
-    const regExId = `^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
+    const regExEmail = `^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
 
     if (!emailValue) {
       // 이메일 또는 이메일과 비밀번호 모두 입력하지 않고 로그인 버튼 선택 시 안내 메시지 출력
@@ -83,7 +83,7 @@ window.addEventListener('load', () => {
           hideErrorMsg();
         }
       })
-    } else if (!emailValue.match(regExId)) {
+    } else if (!emailValue.match(regExEmail)) {
       // 이메일 형식 유효성 검사
       showErrorMsg();
       errorMsg(wrongFormatMsg);
