@@ -5,18 +5,21 @@ window.addEventListener('load', () => {
   // 필요한 노드 획득
   const $signUpNickname = document.getElementById('signUpNickname');
   const $checkNicknameBtn = document.getElementById('checkNickname');
-  const $checkNicknameResult = document.querySelector('.nickname');
+  const $checkNicknameResult = document.querySelector('.sign-up__valid.nickname');
+
   const $signUpEmail = document.getElementById('signUpEmail');
   const $checkEmailBtn = document.getElementById('checkEmail');
-  const $checkEmailResult = document.querySelector('.email');
+  const $checkEmailResult = document.querySelector('.sign-up__valid.email');
 
   const $signUpPw = document.getElementById('signUpPw');
   const $signUpPwCheck = document.getElementById('signUpPwCheck');
+  const $checkPwResult = document.querySelector('.sign-up__valid.pw')
 
   const $signUpBtn = document.getElementById('signUpComplete')
 
   let isNicknameValidated = false;
   let isEmailValidated = false;
+  let isPwValidated = false;
 
   $checkNicknameBtn.addEventListener('click', function () {
     console.log('check nickname button clicked');
@@ -34,7 +37,7 @@ window.addEventListener('load', () => {
 
   $checkEmailBtn.addEventListener('click', function () {
     console.log('check email button clicked');
-    const regExEmail = `^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
+    const regExEmail = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     const userEmail = $signUpEmail.value;
     if (userEmail) {
       if (userEmail.match(regExEmail)) {
@@ -71,6 +74,38 @@ window.addEventListener('load', () => {
       $checkEmailResult.textContent = '이메일을 입력해주세요.'
       $checkEmailResult.classList.add('invalid');
       isEmailValidated = false;
+    }
+  });
+
+  $signUpPw.addEventListener('change', function () {
+    const userPw = $signUpPw.value;
+    const regExPw = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d\W]{8,}$/;
+    if (regExPw.test(userPw)) {
+      console.log('valid password');
+      $checkPwResult.classList.add('hidden');
+    } else {
+      $checkPwResult.textContent = '대소문자, 숫자 조합 8자 이상이어야 합니다.';
+      $checkPwResult.classList.remove('hidden');
+    };
+  })
+  $signUpPwCheck.addEventListener('change', function () {
+    const userPw = $signUpPw.value;
+    const userPwCheck = $signUpPwCheck.value;
+    if (userPwCheck !== userPw) {
+      $checkPwResult.textContent = '비밀번호가 일치하지 않습니다.'
+      $checkPwResult.classList.remove('hidden');
+      $checkPwResult.classList.add('invalid');
+    } else {
+      $checkPwResult.textContent = '비밀번호가 일치합니다.'
+      $checkPwResult.classList.remove('hidden');
+      $checkPwResult.classList.remove('invalid');
+      isPwValidated = true;
+    }
+  })
+
+  window.addEventListener('change', function () {
+    if (isNicknameValidated && isEmailValidated && isPwValidated) {
+      $signUpBtn.classList.add('active');
     }
   })
 
