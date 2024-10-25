@@ -204,9 +204,19 @@ body {
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.66667;
+
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 비표준 속성 (WebKit 전용) */
+  line-clamp: 2; /* 표준 속성 (추가) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.article__collaborators {
+.article__subtitle {
   margin-right: 20px;
   color: var(--color-gray-60);
   font-size: 1.2rem;
