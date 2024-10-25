@@ -31,15 +31,35 @@ window.addEventListener('load', () => {
     const userNickname = $signUpNickname.value;
     // 별명 입력 확인 알고리즘
     if (userNickname) {
-      // 별명이 입력된 경우, 별도 중복 확인 없이 사용 가능한 닉네임 등록 -> API 여부 확인
-      $checkNicknameResult.textContent = '사용할 수 있는 닉네임입니다.';
-      $checkNicknameResult.classList.remove('invalid');
+      // 별명이 입력된 경우, 아래 코드 실행
+      axios({
+        method: 'get',
+        // 요청 헤더에 별명 전송
+        url: `/api/users?name=${userNickname}`,
+        headers: {
+          'client-id': 'vanilla03',
+          'content-type': 'application/json',
+          accept: 'application/json',
+        }
+      }).then(response => {
+        if (response.data.item.length == 0) {
+          // 중복된 별명이 없는 경우 안내 메시지
+          $checkNicknameResult.textContent = '사용할 수 있는 별명입니다.';
+          $checkNicknameResult.classList.remove('invalid');
+        } else {
+          // 중복된 별명이 있는 경우 안내 메시지
+          $checkNicknameResult.textContent = '이미 등록된 별명입니다.';
+          $checkNicknameResult.classList.add('invalid');
+          // 별명 인증 상태 변경
+          isNicknameValidated = true;
+        }
+      }).catch(error => {
+        alert(error.response.data.message)
+      })
 
-      // 별명 인증 상태 변경
-      isNicknameValidated = true;
     } else {
       // 별명이 입력되지 않은 경우, 버튼 클릭 시 안내 메시지 출력
-      $checkNicknameResult.textContent = '닉네임을 입력해주세요.';
+      $checkNicknameResult.textContent = '별명을 입력해주세요.';
       $checkNicknameResult.classList.add('invalid');
 
       //별명이 입력되지 않은 경우 인증 상태는 false
@@ -82,6 +102,8 @@ window.addEventListener('load', () => {
             $checkEmailResult.classList.add('invalid');
             // 이메일 확인 상태값 false
             isEmailValidated = false;
+          } else if (error.response.status === 500) {
+            alert(error.response.data.message)
           }
         })
       } else {
