@@ -97,11 +97,14 @@ body {
   position: absolute;
   right: 0;
   transform: translateY(-50%);
-  aspect-ratio: 1/1;
+  /* aspect-ratio: 1/1; */
+  width: 80px;
+  height: 80px;
 }
 
 .header__profile-image {
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .header__info {
