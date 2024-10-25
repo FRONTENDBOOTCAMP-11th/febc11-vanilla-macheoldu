@@ -1,24 +1,49 @@
 import axios from 'axios';
 
-// API 서버에서 게시물 목록 조회
-axios
-  .get('/api/users', {
-    headers: {
-      'client-id': 'vanilla03', // client-id 헤더 추가
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-  })
-  .then(response => {
-    // 응답 데이터에서 첫 번째 항목 가져오기
+const api = axios.create({
+  baseURL: 'https://11.fesp.shop',
+  headers: {
+    'client-id': 'vanilla03',
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+});
 
-    const firstItem = response.data.item;
-    console.log(firstItem);
-    console.log(firstItem[0]);
-    console.log(firstItem[0].bookmark.users);
-    console.log(firstItem[0].bookmarkedBy.users);
-  })
-  .catch(error => {
-    // 에러가 발생하면 콘솔에 에러 출력
-    console.error('Error fetching data:', error);
-  });
+async function getUserInfo() {
+  try {
+    // API 응답 결과
+    const response = await api.get('/users/12');
+    console.log('API 응답:', response.data);
+
+    // 12번 유저 정보 가져오기
+    const userData = response.data.item;
+    console.log('드림핑 데이터:', userData);
+
+    // 12번 유저 네임 가져오기
+    const $userNickname = document.getElementById('userNickname');
+    $userNickname.textContent = userData.name;
+
+    // 12번 유저 직업 가져오기, 직업 없으면 작가로 초기 설정 값
+    const $userOccupation = document.getElementById('userOccupation');
+    if ($userOccupation) {
+      $userOccupation.textContent = userData.extra?.job || '작가';
+    }
+
+    // 12번 구독자 수 가져오기, 수 없으면 초기 설정 값
+    const $subscriberCount = document.getElementById('subscriberCount');
+    if ($subscriberCount) {
+      $subscriberCount.textContent = userData.bookmakedBy?.users || 7777;
+    }
+
+    // 12번 관심작가 수 가져오기, 수 없으면 초기 설정 값
+    const $followingCount = document.getElementById('followingCount');
+    if ($followingCount) {
+      $followingCount.textContent = userData.bookmark?.users || 7777;
+    }
+  } catch (error) {
+    console.error('유저 정보를 가져오는 중 에러 발생:', error);
+  }
+}
+
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', getUserInfo);
