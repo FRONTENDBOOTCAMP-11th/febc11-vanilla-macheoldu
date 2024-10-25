@@ -13,6 +13,185 @@ const api = axios.create({
   },
 });
 
+// 이미지 URL 생성 함수
+const getImgUrl = imgPath => {
+  return `https://11.fesp.shop${imgPath}`;
+};
+
+// 오늘의 작가를 24시간 마다 랜덤으로 나타내기 위해서 24시간을 밀리초로 변환
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+// 오늘의 작가 과련 로컬 스토리지 키
+const STORAGE_KEYS = {
+  AUTHOR: 'todaysAuthor',
+  POSTS: 'todaysAuthorPosts',
+  TIMESTAMP: 'todaysAuthorTimestamp',
+};
+
+// 오늘의 작가를 랜덤으로 선택하는 함수
+const getRandomTodaysAuthor = (authors, posts) => {
+  // 디버깅을 위한 로그
+  console.log('All authors:', authors);
+
+  // type이 'user'이고 posts 속성이 있으며 0보다 큰 작가만 필터링
+  const userAuthors = authors.filter(author => {
+    const hasPostsProperty = typeof author.posts !== 'undefined';
+    const isValidPostCount = hasPostsProperty && author.posts > 0;
+    const isUserType = author.type === 'user';
+
+    console.log(`Author ${author.name}:`, {
+      hasPostsProperty,
+      isValidPostCount,
+      isUserType,
+      postsCount: author.posts,
+    });
+
+    return isUserType && isValidPostCount;
+  });
+
+  console.log('Filtered user authors:', userAuthors);
+
+  // 글을 작성한 작가만 한 번 더 필터링 (실제 posts에서 확인)
+  const authorsWithPosts = userAuthors.filter(author => {
+    const authorPosts = posts.filter(post => post.user._id === author._id);
+    console.log(`${author.name}'s actual posts:`, authorPosts.length);
+    return authorPosts.length > 0;
+  });
+
+  console.log('Authors with actual posts:', authorsWithPosts);
+
+  // 글을 작성한 작가가 없는 경우 처리
+  if (authorsWithPosts.length === 0) {
+    console.error('작가가 작성한 글이 없습니다');
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * authorsWithPosts.length);
+  return authorsWithPosts[randomIndex];
+};
+
+// 지정된 작가 정보가 유효한지 확인하는 함수
+const isStoredAuthorValid = () => {
+  const timestamp = localStorage.getItem(STORAGE_KEYS.TIMESTAMP);
+  if (!timestamp) return false;
+
+  const now = new Date().getTime();
+  const storedTime = parseInt(timestamp);
+
+  // 24시간이 지났는지 확인..
+  return now - storedTime < ONE_DAY_MS;
+};
+
+// 오늘의 작가가 쓴 글 필터링 함수
+const getAuthorsPosts = (posts, authorId) => {
+  return posts.filter(post => post.user._id === authorId).slice(0, 2); // 최대 2개의 글만 표시
+};
+
+// 작가 정보 렌더링 함수
+const renderAuthorInfo = author => {
+  return `
+    <article class="main__featured-author__content">
+      <div class="main__featured-author__info-wrapper">
+        <div class="main__featured-author__info">
+          <h3 class="main__featured-author__name">${author.name}</h3>
+          ${
+            author.extra?.job
+              ? `<p class="main__featured-author__role">${author.extra.job}</p>`
+              : ''
+          }
+        </div>
+        <img
+          src="${getImgUrl(author.image)}"
+          alt="${author.name}"
+          class="main__featured-author__image"
+        />
+      </div>
+      ${
+        author.extra?.biography
+          ? `<p class="main__featured-author__description">${author.extra.biography.slice(
+              0,
+              50,
+            )}...</p>`
+          : ''
+      }
+    </article>
+  `;
+};
+
+// 작가 정보를 로컬 스토리지에 저장하는 함수
+const storeAuthorData = (author, posts) => {
+  localStorage.setItem(STORAGE_KEYS.AUTHOR, JSON.stringify(author));
+  localStorage.setItem(STORAGE_KEYS.POSTS, JSON.stringify(posts));
+  localStorage.setItem(STORAGE_KEYS.TIMESTAMP, new Date().getTime().toString());
+};
+
+// 저장된 작가 정보를 가져오는 함수
+const getStoredAuthorData = () => {
+  try {
+    const author = JSON.parse(localStorage.getItem(STORAGE_KEYS.AUTHOR));
+    const posts = JSON.parse(localStorage.getItem(STORAGE_KEYS.POSTS));
+    return { author, posts };
+  } catch (error) {
+    console.error('Error parsing stored author data:', error);
+    return null;
+  }
+};
+
+// 작가의 글 목록 렌더링 함수
+const renderAuthorPosts = posts => {
+  if (!posts.length) return '';
+  const postsHTML = posts
+    .map((post, index) => {
+      const description =
+        post.content.replace(/<[^>]*>/g, '').slice(0, 50) + '...';
+
+      // 이미지 경로를 index + 1을 사용하여 생성 (1 또는 2)
+      const imageNumber = index + 1;
+      const imagePath = `/src/assets/images/home/authorBook${imageNumber}.png`; // 현재 posts에 user 이미지는 있는데 글에 대한 이미지가 안 보임
+
+      return `
+      <li class="main__featured-author__books-item">
+        <div class="main__featured-author__books-image-wrapper">
+          <img
+            src="${imagePath}"
+            alt="${post.title}"
+            class="main__featured-author__books-image"
+            onerror="this.src='/src/assets/images/home/book1.png'"
+          />
+        </div>
+        <div class="main__featured-author__books-info">
+          <h3 class="main__featured-author__books-title">
+            ${post.title}
+          </h3>
+          <p class="main__featured-author__books-description">
+            ${description}
+          </p>
+        </div>
+      </li>
+    `;
+    })
+    .join('');
+
+  return `<ul class="main__featured-author__books">${postsHTML}</ul>`;
+};
+
+// 오늘의 작가 섹션 메인 랜더링 함수
+const renderTodaysAuthor = (author, posts) => {
+  const container = document.querySelector('.main__featured-author');
+  if (!container) return;
+
+  const authorInfo = renderAuthorInfo(author);
+  const authorPosts = renderAuthorPosts(posts);
+
+  container.innerHTML = `
+    <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">
+      오늘의 작가
+    </h2>
+    ${authorInfo}
+    ${authorPosts}
+  `;
+};
+
 // Today's Pick 렌더링 함수
 const renderTodaysPick = posts => {
   const postsHTML = posts
@@ -114,18 +293,64 @@ const initializeTabs = () => {
   }
 };
 
-// 페이지 초기화 함수
-const initialize = () => {
-  initializeTabs();
-  fetchTodaysPick();
-  initializeTopAuthors();
-};
+// initialize 함수
+const initialize = async () => {
+  try {
+    // 저장된 작가 정보가 유효한지 확인 (24시간이 지나지 않았다면 기존 작가 정보 사용)
+    if (isStoredAuthorValid()) {
+      const storedData = getStoredAuthorData();
+      if (storedData && storedData.author && storedData.posts) {
+        console.log('Using stored author:', storedData.author);
+        // 저장된 정보로 렌더링
+        renderTodaysAuthor(storedData.author, storedData.posts);
 
+        // 다른 초기화 함수들 실행
+        initializeTabs();
+        fetchTodaysPick();
+        initializeTopAuthors();
+        return;
+      }
+    }
+
+    // 24시간이 지났거나 저장된 정보가 없는 경우에만 새로운 작가 선택
+    const [usersResponse, postsResponse] = await Promise.all([
+      api.get('/users'),
+      api.get('/posts?type=info'),
+    ]);
+
+    const posts = postsResponse.data.item;
+    const randomAuthor = getRandomTodaysAuthor(usersResponse.data.item, posts);
+    console.log('선택된 새 작가:', randomAuthor);
+
+    // 유효한 작가를 찾지 못한 경우 처리
+    if (!randomAuthor) {
+      console.error('유효한 작가를 찾을 수 없습니다');
+      return;
+    }
+
+    const authorPosts = getAuthorsPosts(posts, randomAuthor._id);
+    if (authorPosts.length === 0) {
+      console.error('선택된 작가의 게시물이 없습니다');
+      return;
+    }
+
+    // 새로운 작가 정보 저장
+    storeAuthorData(randomAuthor, authorPosts);
+
+    // 오늘의 작가 섹션 렌더링
+    renderTodaysAuthor(randomAuthor, authorPosts);
+
+    // 다른 초기화 함수들 실행
+    initializeTabs();
+    fetchTodaysPick();
+    initializeTopAuthors();
+  } catch (error) {
+    console.error('Error initializing:', error);
+  }
+};
 // 페이지 로드 시 실행
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initialize);
 } else {
   initialize();
 }
-
-export default initialize;

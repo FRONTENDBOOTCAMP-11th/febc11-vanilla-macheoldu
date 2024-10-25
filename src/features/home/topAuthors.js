@@ -76,7 +76,7 @@ const fetchTopAuthors = async () => {
     const response = await api.get('/users');
     const users = response.data.item;
 
-    // seller 타입 사용자만 필터링
+    // user 타입 사용자만 필터링
     const user = users.filter(user => user.type === 'user');
 
     // 구독자 수로 정렬 (내림차순)

@@ -654,7 +654,7 @@ body {
 }
 
 /* 추천 작가 섹션 스타일 */
-.main__main__featured-author__books-image-wrapper {
+.main__featured-author__books-image-wrapper {
   flex-shrink: 0;
   width: 60px;
 }
@@ -694,18 +694,18 @@ body {
   height: 80px;
 }
 
-.main__main__featured-author__books-item {
+.main__featured-author__books-item {
   background-color: var(--grey-10);
   padding: 20px;
   display: flex;
   margin-bottom: 5px;
 }
 
-.main__main__featured-author__books-info {
+.main__featured-author__books-info {
   margin-left: 25px;
 }
 
-.main__main__featured-author__books-title {
+.main__featured-author__books-title {
   font-size: var(--font-size-md);
   color: var(--grey-90);
 }
@@ -721,13 +721,13 @@ body {
   margin-bottom: 25px;
 }
 
-.main__main__featured-author__books-description {
+.main__featured-author__books-description {
   font-size: var(--font-size-sm);
   color: var(--grey-50);
   font-weight: 300;
 }
 
-.main__main__featured-author__books-image {
+.main__featured-author__books-image {
   width: 60px;
   height: 85px;
 }
