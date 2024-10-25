@@ -26,6 +26,14 @@ window.addEventListener('load', () => {
   let isEmailValidated = false;
   let isPwValidated = false;
 
+  // 안내 메시지 출력 함수
+  const addMsg = function (node, msg) { node.textContent = msg };
+  const hideMsg = function (node) { node.classList.add('hidden') };
+  const showMsg = function (node) { node.classList.remove('hidden') };
+  const isInvalidMsg = function (node) { node.classList.add('invalid') };
+  const isValidMsg = function (node) { node.classList.remove('invalid') };
+
+
   // 별명 중복확인 버튼 클릭 이벤트 발생 시 실행 코드
   $checkNicknameBtn.addEventListener('click', function () {
     const userNickname = $signUpNickname.value;
@@ -44,14 +52,14 @@ window.addEventListener('load', () => {
       }).then(response => {
         if (response.data.item.length == 0) {
           // 중복된 별명이 없는 경우 안내 메시지
-          $checkNicknameResult.textContent = '사용할 수 있는 별명입니다.';
-          $checkNicknameResult.classList.remove('invalid');
-        } else {
-          // 중복된 별명이 있는 경우 안내 메시지
-          $checkNicknameResult.textContent = '이미 등록된 별명입니다.';
-          $checkNicknameResult.classList.add('invalid');
+          addMsg($checkNicknameResult, '사용할 수 있는 별명입니다.');
+          isValidMsg($checkNicknameResult);
           // 별명 인증 상태 변경
           isNicknameValidated = true;
+        } else {
+          // 중복된 별명이 있는 경우 안내 메시지
+          addMsg($checkNicknameResult, '이미 등록된 별명입니다.');
+          isInvalidMsg($checkNicknameResult);
         }
       }).catch(error => {
         alert(error.response.data.message)
@@ -59,8 +67,8 @@ window.addEventListener('load', () => {
 
     } else {
       // 별명이 입력되지 않은 경우, 버튼 클릭 시 안내 메시지 출력
-      $checkNicknameResult.textContent = '별명을 입력해주세요.';
-      $checkNicknameResult.classList.add('invalid');
+      addMsg($checkNicknameResult, '별명을 입력해주세요.');
+      isInvalidMsg($checkNicknameResult);
 
       //별명이 입력되지 않은 경우 인증 상태는 false
       isNicknameValidated = false;
@@ -90,16 +98,16 @@ window.addEventListener('load', () => {
           }
         }).then(response => {
           // 중복된 이메일 없는 경우, 사용 가능 이메일 안내 메시지 출력
-          $checkEmailResult.textContent = '사용할 수 있는 이메일입니다.';
-          $checkEmailResult.classList.remove('invalid');
+          addMsg($checkEmailResult, '사용할 수 있는 이메일입니다.');
+          isValidMsg($checkEmailResult);
           // 이메일 확인 상태값 true 로 변경
           isEmailValidated = true;
         }).catch(error => {
           if (error.response.status === 409) {
             // 중복된 이메일이 존재하는 경우, 에러 메시지 출력
             const invalidEmail = error.response.data.message;
-            $checkEmailResult.textContent = invalidEmail;
-            $checkEmailResult.classList.add('invalid');
+            addMsg($checkEmailResult, invalidEmail);
+            isInvalidMsg($checkEmailResult);
             // 이메일 확인 상태값 false
             isEmailValidated = false;
           } else if (error.response.status === 500) {
@@ -109,14 +117,14 @@ window.addEventListener('load', () => {
       } else {
         // 올바르지 않은 형식의 이메일이 입력된 경우, 안내 메시지 출력
         console.log('유효하지 않은 이메일 형식입니다.');
-        $checkEmailResult.textContent = '유효하지 않은 이메일 형식입니다';
-        $checkEmailResult.classList.add('invalid');
+        addMsg($checkEmailResult, '유효하지 않은 이메일 형식입니다');
+        isInvalidMsg($checkEmailResult);
       }
 
     } else {
       // 이메일 입력란에 입력값 없는 경우 안내 메시지 출력
-      $checkEmailResult.textContent = '이메일을 입력해주세요.'
-      $checkEmailResult.classList.add('invalid');
+      addMsg($checkEmailResult, '이메일을 입력해주세요.');
+      isInvalidMsg($checkEmailResult);
       // 이메일 확인 상태값 false 
       isEmailValidated = false;
     }
@@ -129,32 +137,32 @@ window.addEventListener('load', () => {
     const regExPw = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d\W]{8,}$/;
     // 비밀번호가 정규 표현식의 조건 만족 시
     if (regExPw.test(userPw)) {
-      $checkPwResult.classList.add('hidden');
+      hideMsg($checkPwResult);
 
       // 비밀번호 확인란 입력 시 발생 이벤트
       $signUpPwCheck.addEventListener('input', function () {
         const userPwCheck = $signUpPwCheck.value;
         if (userPwCheck !== userPw) {
           // 비밀번호와 비밀번호 확인란 입력값 일치하지 않는 경우, 안내 메시지 출력
-          $checkPwResult.textContent = '비밀번호가 일치하지 않습니다.'
-          $checkPwResult.classList.remove('hidden');
-          $checkPwResult.classList.add('invalid');
+          addMsg($checkPwResult, '비밀번호가 일치하지 않습니다.');
+          showMsg($checkPwResult);
+          isInvalidMsg($checkPwResult);
           // 비밀번호 확인 상태값 false
           isPwValidated = false;
         } else {
           // 비밀번호와 비밀번화 확인란 입력값 일치 시, 안내 메시지 출력
-          $checkPwResult.textContent = '비밀번호가 일치합니다.'
-          $checkPwResult.classList.remove('hidden');
-          $checkPwResult.classList.remove('invalid');
+          addMsg($checkPwResult, '비밀번호가 일치합니다.');
+          showMsg($checkPwResult);
+          isValidMsg($checkPwResult);
           // 비밀번호 확인 상태값 true
           isPwValidated = true;
         }
       })
     } else {
       // 비밀번호 입력값이 정규 표현식의 조건을 만족하지 않는 경우, 안내 메시지 출력
-      $checkPwResult.textContent = '대소문자, 숫자 조합 8자 이상이어야 합니다.';
-      $checkPwResult.classList.remove('hidden');
-      $checkPwResult.classList.add('invalid');
+      addMsg($checkPwResult, '대소문자, 숫자 조합 8자 이상이어야 합니다.');
+      showMsg($checkPwResult);
+      isInvalidMsg($checkPwResult);
       // 비밀번호 확인 상태값 false
       isPwValidated = false;
     };
@@ -162,6 +170,7 @@ window.addEventListener('load', () => {
 
   // 회원가입 버튼 활성화 코드
   window.addEventListener('input', function () {
+    console.log(isNicknameValidated, isEmailValidated, isPwValidated)
     if (isNicknameValidated && isEmailValidated && isPwValidated) {
       // 별명, 이메일, 비밀번호 확인 상태값이 모두 true 인 경우, 버튼 활성화 상태로 변경
       $signUpBtn.classList.add('active');
@@ -178,16 +187,16 @@ window.addEventListener('load', () => {
       // 별명 및 이메일 중복확인 미실행 시
       if (isNicknameValidated === false) {
         // 별명 중복확인 미실행 시, 안내 메시지 출력, 해당 입력란에 focus
-        $checkNicknameResult.textContent = '닉네임 중복확인을 진행해주세요.';
-        $checkNicknameResult.classList.remove('hidden');
-        $checkNicknameResult.classList.add('invalid');
+        addMsg($checkNicknameResult, '닉네임 중복확인을 진행해주세요.');
+        showMsg($checkNicknameResult);
+        isInvalidMsg($checkNicknameResult);
         $signUpNickname.focus();
       }
       if (isEmailValidated === false) {
         // 별명 중복확인 미실행 시, 안내 메시지 출력, 해당 입력란에 focus
-        $checkEmailResult.textContent = '이메일 중복확인을 진행해주세요.'
-        $checkEmailResult.classList.remove('hidden');
-        $checkEmailResult.classList.add('invalid');
+        addMsg($checkEmailResult, '이메일 중복확인을 진행해주세요.');
+        showMsg($checkEmailResult);
+        isInvalidMsg($checkEmailResult);
         $signUpEmail.focus();
       }
     } else {
