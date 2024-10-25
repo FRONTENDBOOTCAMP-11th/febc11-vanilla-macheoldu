@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
     $loginError.classList.add('hidden');
   }
 
-  // 화면 로딩 완료 시, 로컬 스토리지에 저장된 데이터가 있으면 이걸 어떻게 처리해야하지? 고민 중.....
+  // 로그인 정보 저장 선택 시, 저장 방법 고민 중
   // if (localStorage) {
   //   axios({
   //     method: 'post',
