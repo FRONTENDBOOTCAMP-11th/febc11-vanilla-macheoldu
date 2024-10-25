@@ -1,3 +1,5 @@
+const { default: axios } = require('axios');
+
 function initializeSlider(slider) {
   let isDown = false;
   let startX;
@@ -55,23 +57,58 @@ sliders.forEach(slider => initializeSlider(slider));
 const authorSliders = document.querySelectorAll('.interested-authors__ul');
 authorSliders.forEach(slider => initializeSlider(slider));
 
-//구독 버튼 클릭 이벤트
-// document.getElementById('')
-
-axios
-  .get('/api/posts?type=info', {
-    headers: {
-      'client-id': 'vanilla03', // client-id 헤더 추가
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-  })
+// 로그인 요청 (POST /users/login)
+axios({
+  method: 'post',
+  url: '/users/login',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  data: {
+    email: 'u1@market.com', // 실제 입력한 이메일
+    password: '11111111', // 실제 입력한 비밀번호
+  },
+})
   .then(response => {
-    // 응답 데이터에서 첫 번째 항목 가져오기
-    const firstItem = response.data.item[0];
-    console.log(firstItem);
+    const accessToken = response.data.item.token.accessToken;
+
+    // 로그인된 사용자 정보를 가져오기 위한 요청 (GET /users/{_id})
+    axios({
+      method: 'get',
+      url: `/users/${response.data.item._id}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Bearer 방식의 인증
+        Accept: 'application/json',
+      },
+    })
+      .then(userResponse => {
+        const userData = userResponse.data.item;
+        const bookmarkedUsers = userData.bookmark.users;
+
+        // 북마크한 사용자 수가 4명을 넘으면 4명까지만 자르기
+        const displayedUsers = bookmarkedUsers.slice(0, 4);
+
+        // 북마크한 사용자 정보를 <ul>에 추가
+        const ulElement = document.querySelector('.interested-authors__ul');
+        ulElement.innerHTML = ''; // 기존 목록을 초기화
+
+        displayedUsers.forEach(bookmarkedUser => {
+          const li = document.createElement('li');
+          li.classList.add('interested-author-item');
+
+          // 이미지와 이름을 li 요소에 추가
+          li.innerHTML = `
+        <img src="${bookmarkedUser.img}" alt="${bookmarkedUser.name}의 이미지" />
+        <p>${bookmarkedUser.name}</p>
+      `;
+
+          ulElement.appendChild(li); // <ul>에 li 요소 추가
+        });
+      })
+      .catch(error => {
+        console.error('사용자 정보 조회 중 오류 발생:', error);
+      });
   })
   .catch(error => {
-    // 에러가 발생하면 콘솔에 에러 출력
-    console.error('Error fetching data:', error);
+    console.error('로그인 중 오류 발생:', error);
   });
