@@ -98,7 +98,7 @@ axios({
 
           // 이미지와 이름을 li 요소에 추가
           li.innerHTML = `
-        <img src="${bookmarkedUser.img}" alt="${bookmarkedUser.name}의 이미지" />
+        <img src="${bookmarkedUser.image}" alt="${bookmarkedUser.name}의 이미지" />
         <p>${bookmarkedUser.name}</p>
       `;
 
