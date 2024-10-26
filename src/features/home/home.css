@@ -250,7 +250,7 @@ body {
   margin-left: 3px;
 }
 
-/* 요일별 모아보기 스타일 */
+/* 요일별 연재 스타일 */
 .weekly-serial {
   padding: 50px 25px 34px;
 }
@@ -293,7 +293,7 @@ body {
   border-bottom: 2px solid var(--point-color);
 }
 
-/* 요일별 모아보기 옵션 스타일 */
+/* 요일별 연재 옵션 스타일 */
 .weekly-serial__options {
   font-size: var(--font-size-sm);
   display: flex;
@@ -327,7 +327,7 @@ body {
   color: var(--grey-40);
 }
 
-/* 요일별 모아보기 아이템 스타일 */
+/* 요일별 연재 아이템 스타일 */
 .weekly-serial__details {
   font-size: var(--font-size-lg);
   line-height: 1.53;
@@ -353,7 +353,7 @@ body {
 
 .weekly-serial__image {
   width: 80px;
-  height: 120px;
+  height: 80px;
 }
 
 .weekly-serial__item {
