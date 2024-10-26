@@ -48,6 +48,9 @@ const $userOccupation = document.querySelector('.header__user-occupation');
 const $profileImage = document.querySelector('.header__profile-image');
 const $subscriberCount = document.querySelector('.header__subscriber-count');
 const $followingCount = document.querySelector('.header__following-count');
+// const $subscribeButton = document.querySelector(
+//   'header__subscription-button-image',
+// );
 
 // DOM 요소 선택 - 유저(작가)의 게시물 관련 DOM 요소
 const $postList = document.querySelector('.article-list');
@@ -61,7 +64,7 @@ const getUserInfo = async function () {
     // userId를 사용해 해당 유저(작가)의 정보를 API에서 가져옴
     const response = await api.get(`/users/${userId}`);
     const userData = response.data.item;
-    // console.log(userData);
+    console.log(userData);
 
     // 유저(작가)정보 넣기
     $userNickname.textContent = userData.name;
@@ -98,7 +101,7 @@ const getUserPost = async function () {
 
         // TODO:  <p class="article__excerpt"> - post.content 데이터 수정 필요
         return `
-          <li class="article article--featured">
+          <li class="article article--featured" data-post-id="${post._id}">
             <h3 class="article__title">${post.title}</h3>
             <p class="article__excerpt">
               <span class="article__subtitle">${post.extra.subTitle}</span>
@@ -114,6 +117,19 @@ const getUserPost = async function () {
         `;
       })
       .join('');
+
+    // 게시물을 클릭하면 상세페이지로 이동 하는 코드
+    // 1. article 클래스를 가진 모든 li 요소 선택
+    const $postItems = document.querySelectorAll('.article');
+    // 2. 각 li 요소에 클릭 이벤트 추가
+    $postItems.forEach(postItem => {
+      postItem.addEventListener('click', function () {
+        // 3. 클릭 된 요소의 data-post-id 값 가져오기
+        const postId = postItem.dataset.postId;
+        // 4. datail 페이지로 이동 (postId를 쿼리스트링으로 전달)
+        window.location.href = `/src/features/detail/detail.html?postId=${postId}`;
+      });
+    });
   } catch (error) {
     console.error('유저 게시물을 가져오는 중 에러 발생:', error);
   }
