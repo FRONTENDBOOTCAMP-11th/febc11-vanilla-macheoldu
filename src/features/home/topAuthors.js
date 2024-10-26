@@ -94,7 +94,7 @@ const fetchTopAuthors = async () => {
     const topAuthors = sortedSellers.slice(0, 4);
     renderTopAuthors(topAuthors);
   } catch (error) {
-    console.error('Error fetching top authors:', error);
+    console.error('top 구독작가 에러:', error);
   }
 };
 

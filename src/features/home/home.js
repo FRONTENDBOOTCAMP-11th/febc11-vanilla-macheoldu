@@ -13,6 +13,54 @@ const api = axios.create({
   },
 });
 
+// posts api 주소
+let postsApiAddress = '/posts?type=info';
+
+/**
+ * 날짜 계산 함수
+ * @param {string} type - 계산 유형 ('year', 'month', 'day' 중 하나)
+ * @param {number} value - 더하거나 뺄 값
+ * @param {number} [year] - 시작 연도 (생략시 현재 연도)
+ * @param {number} [month] - 시작 월 (생략시 현재 월)
+ * @param {number} [day] - 시작 일 (생략시 현재 일)
+ * @returns {string} YYYY-MM-DD 형식의 날짜 문자열
+ */
+function calculateDate(type, value, year, month, day) {
+  // 기준 날짜 설정
+  const baseDate = new Date();
+
+  // 사용자가 지정한 날짜가 있으면 해당 날짜로 설정
+  if (year !== undefined) baseDate.setFullYear(year);
+  if (month !== undefined) baseDate.setMonth(month - 1); // JavaScript의 월은 0부터 시작
+  if (day !== undefined) baseDate.setDate(day);
+
+  if (type) {
+    // 타입에 따른 날짜 계산
+    switch (type.toLowerCase()) {
+      case 'year':
+        baseDate.setFullYear(baseDate.getFullYear() + value);
+        break;
+      case 'month':
+        baseDate.setMonth(baseDate.getMonth() + value);
+        break;
+      case 'day':
+        baseDate.setDate(baseDate.getDate() + value);
+        break;
+      default:
+        throw new Error(
+          '유효하지 않은 타입입니다. year, month, day 중 하나를 사용하세요.',
+        );
+    }
+  }
+
+  // 날짜 포맷팅
+  const resultYear = baseDate.getFullYear();
+  const resultMonth = String(baseDate.getMonth() + 1).padStart(2, '0');
+  const resultDay = String(baseDate.getDate()).padStart(2, '0');
+
+  return `${resultYear}.${resultMonth}.${resultDay}`;
+}
+
 // 이미지 URL 생성 함수
 const getImgUrl = imgPath => {
   return `https://11.fesp.shop${imgPath}`;
@@ -243,11 +291,14 @@ const renderTodaysPick = posts => {
 // Today's Pick 데이터 가져오기
 const fetchTodaysPick = async () => {
   try {
-    const response = await api.get('/posts?type=info');
+    const response = await api.get(
+      // TODO 현재는 오늘 날짜 기준으로 최대 30일 전까지 발간된 글만 보이는 데 나중에는 7일로 바꿔야 함
+      `${postsApiAddress}&sort={"views": -1}&custom={"createdAt": {"$gte": "${calculateDate('day', -30)}", "$lt": "${calculateDate()}"}}`,
+    ); // 조회수 내림차순
     const posts = response.data.item;
     renderTodaysPick(posts);
   } catch (error) {
-    console.error("Error fetching Today's Pick:", error);
+    console.error("Today's Pick 에러:", error);
   }
 };
 
@@ -315,7 +366,7 @@ const initialize = async () => {
     // 24시간이 지났거나 저장된 정보가 없는 경우에만 새로운 작가 선택
     const [usersResponse, postsResponse] = await Promise.all([
       api.get('/users'),
-      api.get('/posts?type=info'),
+      api.get(postsApiAddress),
     ]);
 
     const posts = postsResponse.data.item;
