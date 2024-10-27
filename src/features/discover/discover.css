@@ -128,7 +128,7 @@ input:focus::placeholder {
   background-color: var(--color-white);
 }
 
-.discover__nav-wrapper {
+/* .discover__nav-wrapper {
   display: flex;
   justify-content: center;
   padding: 0;
@@ -147,9 +147,35 @@ input:focus::placeholder {
   position: relative;
 }
 
-.discover__nav-tab--active {
+.discover__nav-tab.active {
   color: var(--color-point);
-  border-bottom: #00c6be;
+  border-bottom: 1px solid #00c6be;
+} */
+
+.discover__nav-wrapper {
+  display: flex;
+  justify-content: center;
+  border-bottom: none; /* 기본 회색 선 제거 */
+}
+
+.discover__nav-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-inactive);
+  position: relative;
+  outline: none; /* 버튼 스타일을 깔끔하게 */
+  border-bottom: 1px solid #ddd; /* 기본 회색 선 */
+}
+
+/* 활성화된 탭에 하단 선 추가 */
+.discover__nav-tab.active {
+  color: var(--color-point);
+  border-bottom: 1px solid #00c6be; /* 활성화된 탭에만 하단 선 추가 */
 }
 
 /* .discover__nav-tab--active::after {
