@@ -53,4 +53,8 @@ export default defineConfig({
     },
   },
   appType: 'mpa',
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 14042c8602a04c6adf08c5fe1d9fc22cfaad3a8c
