@@ -1,4 +1,4 @@
-const { default: axios } = require('axios');
+import axios from 'axios';
 
 function initializeSlider(slider) {
   let isDown = false;
@@ -73,40 +73,49 @@ axios({
     const accessToken = response.data.item.token.accessToken;
 
     // 로그인된 사용자 정보를 가져오기 위한 요청 (GET /users/{_id})
+// 로그인 요청 (POST /users/login)
+axios({
+  method: 'post',
+  url: '/users/login',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  data: {
+    email: 'u1@market.com',
+    password: '11111111',
+  },
+})
+  .then(response => {
+    const accessToken = response.data.item.token.accessToken;
+    const bookmarkId = response.data.item.bookmark; // 로그인한 유저의 bookmark ID
+
+    // 북마크한 사용자 정보를 요청 (GET /users/{bookmarkId})
     axios({
       method: 'get',
-      url: `/users/${response.data.item._id}`,
+      url: `/users/${bookmarkId}`, // bookmark ID를 사용하여 유저 정보 요청
       headers: {
-        Authorization: `Bearer ${accessToken}`, // Bearer 방식의 인증
+        Authorization: `Bearer ${accessToken}`,
         Accept: 'application/json',
       },
     })
-      .then(userResponse => {
-        const userData = userResponse.data.item;
-        const bookmarkedUsers = userData.bookmark.users;
-
-        // 북마크한 사용자 수가 4명을 넘으면 4명까지만 자르기
-        const displayedUsers = bookmarkedUsers.slice(0, 4);
+      .then(bookmarkResponse => {
+        const bookmarkedUser = bookmarkResponse.data.item; // 북마크한 사용자 정보
 
         // 북마크한 사용자 정보를 <ul>에 추가
         const ulElement = document.querySelector('.interested-authors__ul');
-        ulElement.innerHTML = ''; // 기존 목록을 초기화
+        ulElement.innerHTML = ''; // 기존 목록 초기화
 
-        displayedUsers.forEach(bookmarkedUser => {
-          const li = document.createElement('li');
-          li.classList.add('interested-author-item');
-
-          // 이미지와 이름을 li 요소에 추가
-          li.innerHTML = `
-        <img src="${bookmarkedUser.image}" alt="${bookmarkedUser.name}의 이미지" />
-        <p>${bookmarkedUser.name}</p>
-      `;
-
-          ulElement.appendChild(li); // <ul>에 li 요소 추가
-        });
+        // 새로운 li 요소 생성 및 사용자 정보 추가
+        const li = document.createElement('li');
+        li.classList.add('interested-author-item');
+        li.innerHTML = `
+          <img src="${bookmarkedUser.image}" alt="${bookmarkedUser.name}의 이미지" />
+          <p>${bookmarkedUser.name}</p>
+        `;
+        ulElement.appendChild(li); // <ul>에 li 요소 추가
       })
       .catch(error => {
-        console.error('사용자 정보 조회 중 오류 발생:', error);
+        console.error('북마크된 사용자 정보 조회 중 오류 발생:', error);
       });
   })
   .catch(error => {
