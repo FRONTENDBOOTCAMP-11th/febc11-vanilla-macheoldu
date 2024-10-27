@@ -10,13 +10,12 @@ const api = axios.create({
   },
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   // 검색, 결과 및 여러 DOM 요소들을 선택하여 변수에 할당
   const $searchInput = document.querySelector('.discover__header-input'); // 검색 입력창
   const $mainContent = document.querySelector('.discover__main'); // 메인 콘텐츠 영역
   const $postContent = document.querySelector('.post'); // 글 탭 콘텐츠
   const $authorContent = document.querySelector('.author__lists'); // 작가 탭 콘텐츠
-  const $homeContent = document.querySelector('.discover__home'); // 초기 화면 콘텐츠
   const $noneContent = document.querySelector('.discover__none'); // '결과 없음' 표시 영역
   const $navTabs = document.querySelectorAll('.discover__nav-tab'); // 글/작가 탭 버튼
   const $searchCount = document.querySelector('.discover__count-results'); // 검색 결과 카운트
@@ -25,14 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let posts = []; // API로부터 받아온 게시물들을 저장할 배열
 
   hideAllContent(); // 모든 콘텐츠 숨기기
-  showHomeContent(); // 기본적으로 초기 화면 콘텐츠 보여주기
 
   fetchPosts(); // 페이지 로드 시 서버로부터 게시물을 불러 옴
 
   // 글/작가 탭을 전환하는 이벤트 리스너
-  $navTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      $navTabs.forEach(t => t.classList.remove('active')); // 모든 탭에서 'active' 클래스 제거
+  $navTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      $navTabs.forEach(function (t) {
+        t.classList.remove('active');
+      }); // 모든 탭에서 'active' 클래스 제거
       tab.classList.add('active'); // 클릭된 탭에 'active' 클래스 추가
       currentTab = tab.textContent === '글' ? 'post' : 'author';
 
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  $searchInput.addEventListener('keypress', e => {
+  $searchInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       const searchTerm = $searchInput.value.trim();
       if (searchTerm) {
@@ -52,10 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const $resetButton = document.querySelector('.discover__header-close');
-  $resetButton.addEventListener('click', () => {
+  $resetButton.addEventListener('click', function () {
     $searchInput.value = '';
     hideAllContent();
-    showHomeContent();
   });
 
   async function fetchPosts() {
@@ -68,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function performSearch(searchTerm) {
-    const filteredPosts = posts.filter(post => {
+    const filteredPosts = posts.filter(function (post) {
       return (
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -92,14 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     $searchCount.textContent = `${currentTab === 'post' ? '글' : '작가'} 검색 결과 ${filteredPosts.length}건`;
   }
 
-  // CHANGES START
   function displayPostResults(posts, searchTerm) {
     $postContent.innerHTML = posts
-      .map((post, index) => {
-        // 이미지 URL 결정 로직
+      .map(function (post, index) {
         let imageUrl = null;
 
-        // 1. content에서 이미지 URL 추출 시도
         if (post.content) {
           const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
           if (imgMatch) {
@@ -107,17 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // 2. product.image 확인
         if (!imageUrl && post.product && post.product.image) {
           imageUrl = post.product.image;
         }
 
-        // 3. user.image 확인
         if (!imageUrl && post.user && post.user.image) {
           imageUrl = post.user.image;
         }
 
-        // 4. 폴백 이미지 설정
         const defaultImagePath = '/src/assets/images/home/pick1.png';
         const imageNumber = (index % 10) + 1;
         const fallbackImagePath = `/src/assets/images/home/pick${imageNumber}.png`;
@@ -160,10 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayAuthorResults(posts, searchTerm) {
-    const uniqueAuthors = [...new Set(posts.map(post => post.user))];
+    const uniqueAuthors = [
+      ...new Set(
+        posts.map(function (post) {
+          return post.user;
+        }),
+      ),
+    ];
 
     $authorContent.innerHTML = uniqueAuthors
-      .map((author, index) => {
+      .map(function (author, index) {
         const defaultImagePath = '/src/assets/images/home/pick1.png';
         const imageNumber = (index % 10) + 1;
         const fallbackImagePath = `/src/assets/images/home/pick${imageNumber}.png`;
@@ -183,7 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${highlightSearchTerm(author.name, searchTerm)}
               </h3>
               <p class="author__list-info">
-                ${stripHtml(posts.find(post => post.user._id === author._id).content).substring(0, 50)}...
+                ${stripHtml(
+                  posts.find(function (post) {
+                    return post.user._id === author._id;
+                  }).content,
+                ).substring(0, 50)}...
               </p>
             </div>
           </div>
@@ -211,22 +214,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function highlightSearchTerm(text, searchTerm) {
     if (!searchTerm) return text;
     const regex = new RegExp(searchTerm, 'gi');
-    return text.replace(
-      regex,
-      match => `<span class="discover__keyword">${match}</span>`,
-    );
+    return text.replace(regex, function (match) {
+      return `<span class="discover__keyword">${match}</span>`;
+    });
   }
-  // CHANGES END
 
   function hideAllContent() {
     $postContent.style.display = 'none';
     $authorContent.style.display = 'none';
-    $homeContent.style.display = 'none';
     $noneContent.style.display = 'none';
-  }
-
-  function showHomeContent() {
-    $homeContent.style.display = 'block';
   }
 
   function showNoResults() {
