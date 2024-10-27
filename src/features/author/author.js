@@ -12,14 +12,14 @@ const api = axios.create({
 // Utility 함수 - URL에서 userId 가져오는 함수
 const getUserIdFromUrl = function () {
   const params = new URLSearchParams(window.location.search);
-  return params.get('userId') || 10; // 없으면 기본 값 10으로 설정
+  return params.get('userId') || 12; // 없으면 기본 값 10으로 설정
 };
 
 //  Utility 함수 - 날짜 함수, 유저(작가)게시물 가져오는 함수 안에서 사용
 // cratedAt는 post.createdAt 값을 받음
-const getFormattedDate = function (cratedAt) {
+const getFormattedDate = function (createdAt) {
   // 날짜와 시간 분리해서 날짜만 가져오기
-  const dateOnly = cratedAt.split(' ')[0];
+  const dateOnly = createdAt.split(' ')[0];
   // 날짜를 년, 월, 일로 분리
   const [year, month, day] = dateOnly.split('.');
   // 월 숫자를 영문으로 바꾸기 위한 배열
@@ -79,6 +79,20 @@ const getUserInfo = async function () {
   }
 };
 
+// 게시물 클릭 시 상세페이지로 이동하는 함수
+const setupPostClickToDetail = function () {
+  // 모든 게시물 요소 선택
+  const $postItems = document.querySelectorAll('.article');
+
+  // 각 게시물에 클릭 이벤트 추가
+  $postItems.forEach(postItem => {
+    postItem.addEventListener('click', function () {
+      const postId = postItem.dataset.postId;
+      window.location.href = `/src/features/detail/detail.html?postId=${postId}`;
+    });
+  });
+};
+
 // 유저(작가) 게시물 가져오는 함수
 const getUserPost = async function () {
   try {
@@ -105,7 +119,7 @@ const getUserPost = async function () {
             <h3 class="article__title">${post.title}</h3>
             <p class="article__excerpt">
               <span class="article__subtitle">${post.extra.subTitle}</span>
-              | ${post.content.substring(0, 100)}...
+              | ${post.content}...
             </p>
             <div class="article__meta">
               <span class="article__comments">댓글 ${post.repliesCount} ·</span>
@@ -118,24 +132,13 @@ const getUserPost = async function () {
       })
       .join('');
 
-    // 게시물을 클릭하면 상세페이지로 이동 하는 코드
-    // 1. article 클래스를 가진 모든 li 요소 선택
-    const $postItems = document.querySelectorAll('.article');
-    // 2. 각 li 요소에 클릭 이벤트 추가
-    $postItems.forEach(postItem => {
-      postItem.addEventListener('click', function () {
-        // 3. 클릭 된 요소의 data-post-id 값 가져오기
-        const postId = postItem.dataset.postId;
-        // 4. datail 페이지로 이동 (postId를 쿼리스트링으로 전달)
-        window.location.href = `/src/features/detail/detail.html?postId=${postId}`;
-      });
-    });
+    // 게시물 클릭 이벤트 함수 호출
+    setupPostClickToDetail();
   } catch (error) {
     console.error('유저 게시물을 가져오는 중 에러 발생:', error);
   }
 };
 
-// 이벤트 리스너
 // 이벤트 리스너 - 페이지 로드 시 실행될 함수들
 document.addEventListener('DOMContentLoaded', function () {
   getUserInfo();
