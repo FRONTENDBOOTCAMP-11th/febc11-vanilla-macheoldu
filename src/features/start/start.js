@@ -53,7 +53,6 @@ window.addEventListener('load', () => {
   // 로그인 버튼 클릭 이벤트 발생 시 실행 함수
   $loginBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    console.log('button click');
 
     const emailValue = $email.value;
     const passwordValue = $password.value;
@@ -128,24 +127,18 @@ window.addEventListener('load', () => {
           .catch(error => {
             if (error.response.status === 403) {
               // 로그인 실패 case 1. 잘못된 정보(403 error)
-              console.log(error.response.data.message);
               showErrorMsg();
               errorMsg(error.response.data.message);
             } else if (error.response.status === 500) {
               // 로그인 실패 case 2. 서버 에러(500 error)
               showErrorMsg();
-              errorMsg(error.response.data.message);
             }
           })
       }
 
       login(emailValue, passwordValue);
     }
-
-    console.log(emailValue);
-    console.log(passwordValue);
     console.log($saveIdPw.checked);
-    console.log(loginStatus);
   });
 
   // 회원가입 버튼 선택 시 회원가입 화면으로 이동
