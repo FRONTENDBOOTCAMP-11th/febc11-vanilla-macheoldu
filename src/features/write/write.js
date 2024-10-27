@@ -16,19 +16,20 @@ window.addEventListener('load', function () {
 
   const $postCancel = document.getElementById('postCancel');
   const $postSave = document.getElementById('postSave');
+
   const $uploadFile = document.getElementById('uploadFile');
+  const $fileList = document.querySelector('.file-list');
 
   $postCancel.addEventListener('click', function () {
-    console.log('cancel');
     if ($postTitle.value || $postSubtitle.value || $postCancel.value) {
       const cancel = confirm('작성 중인 내용이 있습니다. 작성을 종료하시겠습니까?');
       if (cancel) {
         history.back();
       }
+    } else {
+      history.back();
     }
   })
-
-  // window.addEventListener('chang')
 
   window.addEventListener('input', function () {
     if ($postTitle.value && $postSubtitle.value && $postContent.value) {
@@ -40,6 +41,25 @@ window.addEventListener('load', function () {
       document.querySelector('.disabled').classList.remove('hidden');
       $postSave.classList.remove('confirmSave');
     }
+  })
+
+  $uploadFile.addEventListener('change', function (e) {
+    const files = Array.from(e.target.files);
+    $fileList.classList.remove('hidden');
+    files.forEach(function (file, index) {
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const liNode = document.createElement('li');
+          const imgNode = document.createElement('img');
+          imgNode.setAttribute('src', reader.result);
+          liNode.appendChild(imgNode);
+          $fileList.appendChild(liNode);
+        }
+        reader.readAsDataURL(file);
+      }
+      window.selectedFiles = files;
+    })
   })
 
   $postSave.addEventListener('click', function (e) {
@@ -55,6 +75,20 @@ window.addEventListener('load', function () {
     } else {
       const save = confirm('저장하시겠습니까?');
       if (save) {
+        const formData = new FormData();
+        formData.append('type', 'info');
+        formData.append('title', `${title}`);
+        formData.append('extra[subTitle]', `${subtitle}`);
+        formData.append('user[_id]', `${userIdNum}`);
+        formData.append('user[name]', `${userName}`);
+        formData.append('content', `${content}`);
+
+        if (window.selectedFiles && window.selectedFiles.length > 0) {
+          for (let i = 0; i < window.selectedFiles.length; i++) {
+            formData.append('image', window.selectedFiles[i]);
+          }
+        }
+
         axios({
           method: 'post',
           url: '/api/posts',
@@ -63,21 +97,10 @@ window.addEventListener('load', function () {
             'Content-Type': 'application/json',
             accept: 'application/json'
           },
-          data: {
-            'type': 'info',
-            'title': `${title}`,
-            'extra': {
-              'subTitle': `${subtitle}`
-            },
-            user: {
-              '_id': `${userIdNum}`,
-              'name': `${userName}`
-            },
-            'content': `${content}`,
-            // image: 
-          }
+          data: formData
         }).then(response => {
           alert('저장을 완료했습니다');
+          console.log(window.selectedFiles);
         }).catch(error => {
           if (error.response.status === 500) {
             const errorMsg = error.response.data.message;
@@ -88,6 +111,7 @@ window.addEventListener('load', function () {
         console.log($postTitle.value);
         console.log($postSubtitle.value);
         console.log($postContent.value);
+        console.log(formData);
       } else {
         alert('저장을 취소하였습니다')
       }
