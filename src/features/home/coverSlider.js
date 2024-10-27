@@ -121,7 +121,7 @@ class CoverSlider {
           overflow: hidden;
           position: relative;
           width: 360px;
-          background-color: var(--purple);
+          background-color : ${returnColorsList()[0]};
           color: var(--white);
           user-select: none;  /* 표준 문법 /
           -webkit-user-select: none;  / 사파리, 크롬 등 /
@@ -162,7 +162,7 @@ class CoverSlider {
             width: 20px;
             height: 1px;
             background-color: white;
-            opacity: ${step.classList.contains('active') ? '0.3' : '1'};
+            opacity: ${step.classList.contains('active') ? '1' : '0.3'};
           `;
         });
 
@@ -291,8 +291,8 @@ class CoverSlider {
 
     // 경계값 체크
     if (
-      (this.currentSlide === 0 && movePercent < 0) ||
-      (this.currentSlide === this.totalSlides - 1 && movePercent > 0)
+      (this.currentSlide === -1 && movePercent < 0) ||
+      (this.currentSlide === this.totalSlides && movePercent > 0)
     ) {
       return;
     }
@@ -304,10 +304,14 @@ class CoverSlider {
     const threshold = 360 * 0.3; // 30%로 증가
 
     if (Math.abs(diff) > threshold) {
-      if (diff > 0 && this.currentSlide < this.totalSlides - 1) {
+      if (diff > 0 && this.currentSlide < this.totalSlides) {
         this.currentSlide++;
-      } else if (diff < 0 && this.currentSlide > 0) {
+        if (this.currentSlide == this.totalSlides) this.currentSlide = 0;
+        updateCoverBgColor(this.currentSlide);
+      } else if (diff < 0 && this.currentSlide >= 0) {
         this.currentSlide--;
+        if (this.currentSlide < 0) this.currentSlide = 5;
+        updateCoverBgColor(this.currentSlide);
       }
     }
 
@@ -323,7 +327,25 @@ class CoverSlider {
     // 프로그레스 업데이트
     const steps = document.querySelectorAll('.cover__progress-step');
     steps.forEach((step, index) => {
-      step.classList.toggle('active', index <= this.currentSlide);
+      if (index == this.currentSlide) {
+        step.classList.add('active');
+      } else {
+        step.classList.remove('active');
+      }
+    });
+
+    // 프로그래스 바 스타일 변경
+    const progressStepElements = document.querySelectorAll(
+      '.cover__progress-step',
+    );
+
+    progressStepElements.forEach(step => {
+      step.style.cssText = `
+        width: 20px;
+        height: 1px;
+        background-color: white;
+        opacity: ${step.classList.contains('active') ? '1' : '0.3'};
+      `;
     });
 
     document.querySelector('.cover__progress-text').textContent =
@@ -333,6 +355,19 @@ class CoverSlider {
       this.isAnimating = false;
     }, 500);
   }
+}
+
+function returnColorsList() {
+  return ['#E19999', '#E1A87A', '#E1CD87', '#87CF87', '#7FB3CC ', '#B8A3D1'];
+}
+
+function updateCoverBgColor(indexStep) {
+  const CoverSlider = document.querySelectorAll('.cover__slider');
+
+  CoverSlider.forEach(step => {
+    // 선택된 색상을 backgroundColor로 지정
+    step.style.backgroundColor = returnColorsList()[!indexStep ? 0 : indexStep];
+  });
 }
 
 // 초기화 함수
