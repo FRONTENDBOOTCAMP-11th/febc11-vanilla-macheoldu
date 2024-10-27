@@ -108,11 +108,13 @@ window.addEventListener('load', () => {
           .then(response => {
             // 로그인 상태 변경
             loginStatus = true;
+            const accessToken = response.data.item.token.accessToken;
+            const refeshToken = response.data.item.token.refeshToken;
 
             // sessionStorage 에 로그인 상태, 사용자 _id, name 저장 -> 각 페이지 이동 시, sessionStorage 에 유지
             sessionStorage.setItem('login-status', loginStatus);
-            sessionStorage.setItem('login-user-ID-Num', response.data.item._id);
-            sessionStorage.setItem('login-user-name', response.data.item.name);
+            sessionStorage.setItem('login-accessToken', accessToken);
+            sessionStorage.setItem('login-refreshToken', refeshToken);
 
             // 로그인 정보 저장 체크박스 선택 시 로컬 스토리지에 사용자 데이터 저장(이메일, 사용자 토큰)
             // if ($saveIdPw.checked) {
