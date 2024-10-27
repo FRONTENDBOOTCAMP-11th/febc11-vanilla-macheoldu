@@ -197,8 +197,8 @@ const renderService = {
     return `
       <li class="weekly-serial__item">
         <article class="weekly-serial__info">
-          <h3 class="weekly-serial__title">${post.title}</h3>
-          <p class="weekly-serial__details">${post.extra?.subTitle || ''}
+          <h3 class="weekly-serial__title">${post.extra?.subTitle || ''}</h3>
+          <p class="weekly-serial__details">${post.title}
             ${
               utils.isNewPost(post.createdAt)
                 ? '<img src="/src/assets/icons/status/new.svg" alt="새 글" class="weekly-serial__new" />'
