@@ -33,22 +33,29 @@ window.addEventListener('load', () => {
     $loginError.classList.add('hidden');
   }
 
-  // 로그인 정보 저장 선택 시, 저장 방법 고민 중
-  // if (localStorage) {
-  //   axios({
-  //     method: 'post',
-  //     url: '/api/users/login',
-  //     headers: {
-  //       'client-id': 'vanilla03',
-  //       'content-type': 'application/json',
-  //       accept: 'application/json',
-  //       Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
-  //     },
-  //     data: {
-  //       email: localStorage.getItem('userEmail')
-  //     }
-  //   })
-  // }
+  // 로그인 정보 저장 선택 시, 로컬 스토리지에 저장된 이메일 주소 불러오기
+  if (localStorage.userAccessToken) {
+    const userEmail = localStorage.getItem('userEmail');
+    $email.value = userEmail;
+    $saveIdPw.checked = true;
+    // const userAccessToken = localStorage.getItem('userAccessToken');
+    // axios({
+    //   method: 'get',
+    //   url: '/api/users',
+    //   headers: {
+    //     'client-id': 'vanilla03',
+    //     'content-type': 'application/json',
+    //     accept: 'application/json',
+    //   }
+    // }).then(response => {
+    //   $email.textContent = response.data.item.email;
+    //   $password.textContent = response.data.item.password;
+    //   $saveIdPw.checked;
+    //   console.log(response.data.item);
+    // }).catch(error => {
+    //   alert(error.response.data.message);
+    // })
+  }
 
   // 로그인 버튼 클릭 이벤트 발생 시 실행 함수
   $loginBtn.addEventListener('click', function (e) {
@@ -108,21 +115,25 @@ window.addEventListener('load', () => {
           .then(response => {
             // 로그인 상태 변경
             loginStatus = true;
-            const accessToken = response.data.item.token.accessToken;
-            const refeshToken = response.data.item.token.refeshToken;
+            const userEmail = response.data.item.email;
+            const userAccessToken = response.data.item.token.accessToken;
+            const userRefeshToken = response.data.item.token.refeshToken;
 
             // sessionStorage 에 로그인 상태, 사용자 _id, name 저장 -> 각 페이지 이동 시, sessionStorage 에 유지
             sessionStorage.setItem('login-status', loginStatus);
-            sessionStorage.setItem('login-accessToken', accessToken);
-            sessionStorage.setItem('login-refreshToken', refeshToken);
+            sessionStorage.setItem('userEmail', userEmail);
+            sessionStorage.setItem('userAccessToken', userAccessToken);
+            sessionStorage.setItem('userRefreshToken', userRefeshToken);
 
             // 로그인 정보 저장 체크박스 선택 시 로컬 스토리지에 사용자 데이터 저장(이메일, 사용자 토큰)
-            // if ($saveIdPw.checked) {
-            //   let res = response.data.item;
-            //   localStorage.userEmail = res.email;
-            //   localStorage.userAccessToken = res.token.accessToken;
-            //   console.log(localStorage.userEmail, localStorage.userAccesToken);
-            // }
+            if ($saveIdPw.checked) {
+              let res = response.data.item;
+              localStorage.userAccessToken = res.token.accessToken;
+              localStorage.userRefreshToken = res.token.accesToken;
+              localStorage.userEmail = res.email;
+            } else {
+              localStorage.clear();
+            }
 
             //로그인 완료 시 홈 화면으로 이동
             window.open('/src/features/home/home.html', '_self');
