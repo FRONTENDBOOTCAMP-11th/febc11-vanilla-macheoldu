@@ -1,9 +1,9 @@
-// 요일별 연재 버전..
-
+// 외부 라이브러리 import
 import axios from 'axios';
 import initializeTopAuthors from './topAuthors.js';
+import { initializeCoverSlider } from './coverSlider.js';
 
-// 상수 및 설정
+// API 설정 및 상수
 const CONFIG = {
   API: {
     BASE_URL: 'https://11.fesp.shop',
@@ -17,6 +17,8 @@ const CONFIG = {
     AUTHOR: 'todaysAuthor',
     POSTS: 'todaysAuthorPosts',
     TIMESTAMP: 'todaysAuthorTimestamp',
+    FEATURED_BOOK: 'todaysFeaturedBook',
+    FEATURED_BOOK_TIMESTAMP: 'todaysFeaturedBookTimestamp',
   },
   DAYS: [
     'sunday',
@@ -30,17 +32,18 @@ const CONFIG = {
   ONE_DAY_MS: 24 * 60 * 60 * 1000,
 };
 
-// API 설정
+// API 인스턴스 생성
 const api = axios.create({
   baseURL: CONFIG.API.BASE_URL,
   headers: CONFIG.API.HEADERS,
 });
 
-const postsApiAddress = '/posts?type=info';
+const POSTS_API_ADDRESS = '/posts?type=info';
 
-// 유틸리티 함수들
+// 유틸리티 함수 객체
 const utils = {
-  calculateDate(type, value, year, month, day) {
+  // 날짜 계산 함수
+  calculateDate: (type, value, year, month, day) => {
     const baseDate = new Date();
 
     if (year !== undefined) baseDate.setFullYear(year);
@@ -65,37 +68,36 @@ const utils = {
       }
     }
 
-    return this.formatDate(baseDate);
+    return utils.formatDate(baseDate);
   },
 
-  formatDate(date) {
+  // 날짜 포맷팅 함수
+  formatDate: date => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}.${month}.${day}`;
   },
 
-  getImgUrl(imgPath) {
-    return `${CONFIG.API.BASE_URL}${imgPath}`;
-  },
+  // 이미지 URL 생성 함수
+  getImgUrl: imgPath => `${CONFIG.API.BASE_URL}${imgPath}`,
 
-  getWeekday(dateString) {
-    const date = new Date(dateString);
-    return CONFIG.DAYS[date.getDay()];
-  },
+  // 요일 구하기 함수
+  getWeekday: dateString => CONFIG.DAYS[new Date(dateString).getDay()],
 
-  getCurrentDay() {
-    return CONFIG.DAYS[new Date().getDay()];
-  },
+  // 현재 요일 구하기 함수
+  getCurrentDay: () => CONFIG.DAYS[new Date().getDay()],
 
-  isNewPost(createdAt) {
+  // 새 글 여부 확인 함수
+  isNewPost: createdAt => {
     const postDate = new Date(createdAt);
     const now = new Date();
     const diffHours = (now - postDate) / (1000 * 60 * 60);
     return diffHours <= 48;
   },
 
-  truncateText(text, length) {
+  // 텍스트 자르기 함수
+  truncateText: (text, length) => {
     return (
       text
         .replace(/<[^>]*>/g, '')
@@ -104,21 +106,47 @@ const utils = {
     );
   },
 
-  getPlaceholderImage(type, index) {
-    return `/src/assets/images/home/${type}${index}.png`;
-  },
+  // 플레이스홀더 이미지 URL 생성 함수
+  getPlaceholderImage: (type, index) =>
+    `/src/assets/images/home/${type}${index}.png`,
 };
 
-// 스토리지 서비스
+// 스토리지 서비스 객체
 const storageService = {
-  isStoredAuthorValid() {
+  // 저장된 작가 정보 유효성 검사
+  isStoredAuthorValid: () => {
     const timestamp = localStorage.getItem(CONFIG.STORAGE_KEYS.TIMESTAMP);
     if (!timestamp) return false;
-    const now = new Date().getTime();
-    return now - parseInt(timestamp) < CONFIG.ONE_DAY_MS;
+
+    // 현재 날짜의 자정 시간 구하기
+    const now = new Date();
+    const todayMidnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      0,
+      0,
+      0,
+      0,
+    );
+
+    // 저장된 시간이 오늘 자정 이전인지 확인
+    const storedTime = new Date(parseInt(timestamp));
+    const storedMidnight = new Date(
+      storedTime.getFullYear(),
+      storedTime.getMonth(),
+      storedTime.getDate(),
+      0,
+      0,
+      0,
+      0,
+    );
+
+    return storedMidnight >= todayMidnight;
   },
 
-  storeAuthorData(author, posts) {
+  // 작가 데이터 저장
+  storeAuthorData: (author, posts) => {
     localStorage.setItem(CONFIG.STORAGE_KEYS.AUTHOR, JSON.stringify(author));
     localStorage.setItem(CONFIG.STORAGE_KEYS.POSTS, JSON.stringify(posts));
     localStorage.setItem(
@@ -127,7 +155,8 @@ const storageService = {
     );
   },
 
-  getStoredAuthorData() {
+  // 저장된 작가 데이터 조회
+  getStoredAuthorData: () => {
     try {
       return {
         author: JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.AUTHOR)),
@@ -138,11 +167,46 @@ const storageService = {
       return null;
     }
   },
+
+  // 저장된 추천 도서 유효성 검사
+  isStoredFeaturedBookValid: () => {
+    const timestamp = localStorage.getItem(
+      CONFIG.STORAGE_KEYS.FEATURED_BOOK_TIMESTAMP,
+    );
+    if (!timestamp) return false;
+    const now = new Date().getTime();
+    return now - parseInt(timestamp) < CONFIG.ONE_DAY_MS;
+  },
+
+  // 추천 도서 저장
+  storeFeaturedBook: bookData => {
+    localStorage.setItem(
+      CONFIG.STORAGE_KEYS.FEATURED_BOOK,
+      JSON.stringify(bookData),
+    );
+    localStorage.setItem(
+      CONFIG.STORAGE_KEYS.FEATURED_BOOK_TIMESTAMP,
+      new Date().getTime().toString(),
+    );
+  },
+
+  // 저장된 추천 도서 조회
+  getStoredFeaturedBook: () => {
+    try {
+      return JSON.parse(
+        localStorage.getItem(CONFIG.STORAGE_KEYS.FEATURED_BOOK),
+      );
+    } catch (error) {
+      console.error('저장된 추천 도서 데이터 파싱 오류:', error);
+      return null;
+    }
+  },
 };
 
-// 렌더링 서비스
+// 렌더링 서비스 객체
 const renderService = {
-  renderAuthorInfo(author) {
+  // 작가 정보 렌더링
+  renderAuthorInfo: author => {
     return `
       <article class="main__featured-author__content">
         <div class="main__featured-author__info-wrapper">
@@ -158,14 +222,15 @@ const renderService = {
         </div>
         ${
           author.extra?.biography
-            ? `<p class="main__featured-author__description">${utils.truncateText(author.extra.biography, 50)}</p>`
+            ? `<p class="main__featured-author__description">${author.extra.biography.slice(0, 50)}...</p>`
             : ''
         }
       </article>
     `;
   },
 
-  renderAuthorPosts(posts) {
+  // 작가의 게시글 렌더링
+  renderAuthorPosts: posts => {
     if (!posts.length) return '';
 
     const postsHTML = posts
@@ -192,7 +257,35 @@ const renderService = {
     return `<ul class="main__featured-author__books">${postsHTML}</ul>`;
   },
 
-  renderTodaysPick(posts) {
+  // 주간 게시글 렌더링
+  renderWeeklyPost: (post, index) => {
+    return `
+      <li class="weekly-serial__item">
+        <article class="weekly-serial__info">
+          <h3 class="weekly-serial__title">${post.extra?.subTitle || ''}</h3>
+          <p class="weekly-serial__details">${post.title}
+            ${
+              utils.isNewPost(post.createdAt)
+                ? '<img src="/src/assets/icons/status/new.svg" alt="새 글" class="weekly-serial__new" />'
+                : ''
+            }
+          </p>
+          <p class="weekly-serial__author">
+            <em>by</em> ${post.user.name}
+          </p>
+        </article>
+        <img 
+          src="${utils.getPlaceholderImage('pick', (index % 10) + 1)}"
+          alt="${post.title}"
+          class="weekly-serial__image"
+          onerror="this.src='/src/assets/images/home/serial1.png'"
+        />
+      </li>
+    `;
+  },
+
+  // 오늘의 추천 게시글 렌더링
+  renderTodaysPick: posts => {
     const postsHTML = posts
       .slice(0, 10)
       .map(
@@ -218,184 +311,106 @@ const renderService = {
       )
       .join('');
 
-    const container = document.querySelector('.main__todays-pick__list');
-    if (container) {
-      container.innerHTML = postsHTML;
+    const $container = document.querySelector('.main__todays-pick__list');
+    if ($container) {
+      $container.innerHTML = postsHTML;
     }
   },
 };
 
-// 주간 연재 관리자
+// 작가 서비스 객체
+const authorService = {
+  // 랜덤 작가 선택
+  getRandomTodaysAuthor: (authors, posts) => {
+    const userAuthors = authors.filter(
+      author =>
+        typeof author.posts !== 'undefined' &&
+        author.posts > 0 &&
+        author.type === 'user',
+    );
+
+    const authorsWithPosts = userAuthors.filter(author =>
+      posts.some(post => post.user._id === author._id),
+    );
+
+    if (authorsWithPosts.length === 0) {
+      console.error('작가가 작성한 글이 없습니다');
+      return null;
+    }
+
+    return authorsWithPosts[
+      Math.floor(Math.random() * authorsWithPosts.length)
+    ];
+  },
+
+  // 작가의 게시글 조회
+  getAuthorsPosts: (posts, authorId) => {
+    return posts.filter(post => post.user._id === authorId).slice(0, 2);
+  },
+};
+
+// 주간 포스트 관리 클래스
 class WeeklyPostsManager {
   constructor() {
-    this.serialsByDay = null;
+    this.postsByDay = null;
     this.currentSortOrder = 'latest';
     this.$tabButtons = document.querySelectorAll('.weekly-serial__tab');
     this.$postsList = document.querySelector('.weekly-serial__list');
-    this.mockSerials = [
-      {
-        title: '우리가 빛나는 순간',
-        subtitle: '오늘도 별자리를 그리다',
-        author: '하루별',
-        category: '에세이',
-        days: ['monday', 'thursday'],
-      },
-      {
-        title: '일주일의 레시피',
-        subtitle: 'ep.32 할머니의 된장찌개',
-        author: '달콤한식탁',
-        category: '요리',
-        days: ['tuesday', 'friday'],
-      },
-      {
-        title: '서울문학산책',
-        subtitle: '경복궁의 봄을 걷다',
-        author: '도시산책자',
-        category: '여행',
-        days: ['wednesday', 'saturday'],
-      },
-      {
-        title: '매일 쓰는 시',
-        subtitle: '창밖의 봄비가 내리고',
-        author: '시인의아침',
-        category: '시',
-        days: ['monday', 'friday'],
-      },
-      {
-        title: '필름 다이어리',
-        subtitle: '오늘의 한 컷 - 골목길 풍경',
-        author: '필름로그',
-        category: '사진',
-        days: ['thursday', 'sunday'],
-      },
-      {
-        title: '커피 한 잔, 글 한 페이지',
-        subtitle: '제주도 카페에서 쓴 편지',
-        author: '커피리스트',
-        category: '에세이',
-        days: ['tuesday', 'saturday'],
-      },
-      {
-        title: '고양이와 살아가는 법',
-        subtitle: '냥이의 새로운 친구',
-        author: '캣다방',
-        category: '반려동물',
-        days: ['wednesday', 'sunday'],
-      },
-      {
-        title: '스물다섯, 파리에서',
-        subtitle: '몽마르트 언덕의 아침',
-        author: '파리지엔',
-        category: '해외생활',
-        days: ['monday', 'thursday'],
-      },
-      {
-        title: '베란다 정원 일기',
-        subtitle: '첫 번째 방울토마토',
-        author: '식물집사',
-        category: '취미',
-        days: ['tuesday', 'friday'],
-      },
-      {
-        title: '오늘의 작은 음악회',
-        subtitle: '비오는 날의 재즈',
-        author: '멜로디',
-        category: '음악',
-        days: ['wednesday', 'saturday'],
-      },
-    ];
   }
 
+  // 초기화
   async initialize() {
-    this.generateMockSerials();
+    await this.fetchPosts();
     this.initializeTabs();
     this.initializeEventListeners();
   }
 
-  generateMockSerials() {
-    // 요일별로 연재물 정리
-    this.serialsByDay = {
-      monday: [],
-      tuesday: [],
-      wednesday: [],
-      thursday: [],
-      friday: [],
-      saturday: [],
-      sunday: [],
-    };
-
-    // 각 연재물을 해당 요일에 배치
-    this.mockSerials.forEach((serial, index) => {
-      const mockSerial = {
-        ...serial,
-        id: Math.floor(Math.random() * 1000),
-        isNew: Math.random() > 0.7, // 30% 확률로 NEW 표시
-        createdAt: new Date(
-          Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000,
-        ).toISOString(),
-        // Picsum을 사용한 랜덤 이미지 URL
-        imageUrl: `https://picsum.photos/400/300?random=${index}`,
-      };
-
-      // 각 연재물을 지정된 요일에 추가
-      serial.days.forEach(day => {
-        this.serialsByDay[day].push({
-          ...mockSerial,
-          // 같은 연재물이라도 요일별로 다른 이미지 사용
-          imageUrl: `https://picsum.photos/400/300?random=${index}-${day}`,
-        });
-      });
-    });
-
-    // 현재 요일의 연재물 표시
-    this.displaySerials(utils.getCurrentDay());
+  // 게시글 데이터 가져오기
+  async fetchPosts() {
+    try {
+      const response = await api.get(POSTS_API_ADDRESS);
+      this.postsByDay = this.categorizePostsByDay(response.data.item);
+      this.displayPosts(utils.getCurrentDay());
+    } catch (error) {
+      console.error('게시글 가져오기 실패:', error);
+    }
   }
 
-  displaySerials(day) {
-    if (!this.serialsByDay || !this.serialsByDay[day]) {
-      this.$postsList.innerHTML = '<li>해당 요일의 연재물이 없습니다.</li>';
+  // 요일별 게시글 분류
+  categorizePostsByDay(posts) {
+    return posts.reduce((acc, post) => {
+      const weekday = utils.getWeekday(post.createdAt);
+      if (!acc[weekday]) acc[weekday] = [];
+      acc[weekday].push(post);
+      return acc;
+    }, {});
+  }
+
+  // 게시글 표시
+  displayPosts(day) {
+    if (!this.postsByDay || !this.postsByDay[day]) {
+      this.$postsList.innerHTML =
+        '<li>해당 요일에 작성된 작가의 글이 없습니다!</li>';
       return;
     }
 
-    const serials = this.sortSerials(this.serialsByDay[day]);
-    this.$postsList.innerHTML = serials
-      .map((serial, index) => this.createSerialHTML(serial, index))
+    const posts = this.sortPosts(this.postsByDay[day]);
+    this.$postsList.innerHTML = posts
+      .map((post, index) => renderService.renderWeeklyPost(post, index))
       .join('');
   }
 
-  sortSerials(serials) {
+  // 게시글 정렬
+  sortPosts(posts) {
     if (this.currentSortOrder === 'latest') {
-      return [...serials].sort(
+      return [...posts].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
       );
     }
-    return serials;
+    return posts;
   }
 
-  createSerialHTML(serial, index) {
-    return `
-      <li class="weekly-serial__item">
-        <article class="weekly-serial__info">
-          <h3 class="weekly-serial__title">${serial.title}</h3>
-          <p class="weekly-serial__details">
-            ${serial.subtitle}
-            ${serial.isNew ? '<img src="/src/assets/icons/status/new.svg" alt="새 글" class="weekly-serial__new" />' : ''}
-          </p>
-          <p class="weekly-serial__author">
-            <em>by</em> ${serial.author}
-            <span class="weekly-serial__category">${serial.category}</span>
-          </p>
-        </article>
-        <img 
-          src="${serial.imageUrl}"
-          alt="${serial.title}"
-          class="weekly-serial__image"
-          onerror="this.src='https://picsum.photos/400/300?random=${Math.random()}'"
-        />
-      </li>
-    `;
-  }
-
+  // 탭 초기화
   initializeTabs() {
     const currentDay = utils.getCurrentDay();
     const $currentTab = document.querySelector(`[data-day="${currentDay}"]`);
@@ -404,6 +419,7 @@ class WeeklyPostsManager {
     }
   }
 
+  // 탭 선택
   selectTab($selectedButton) {
     this.$tabButtons.forEach($tab => {
       $tab.setAttribute('aria-selected', 'false');
@@ -411,99 +427,240 @@ class WeeklyPostsManager {
     $selectedButton.setAttribute('aria-selected', 'true');
   }
 
+  // 이벤트 리스너 초기화
   initializeEventListeners() {
     this.$tabButtons.forEach($button => {
       $button.addEventListener('click', () => {
         this.selectTab($button);
-        this.displaySerials($button.dataset.day);
+        this.displayPosts($button.dataset.day);
       });
     });
 
-    document.querySelectorAll('.weekly-serial__option').forEach($button => {
+    const $optionButtons = document.querySelectorAll('.weekly-serial__option');
+    $optionButtons.forEach($button => {
       $button.addEventListener('click', () => {
         const newOrder = $button.textContent.includes('최신순')
           ? 'latest'
           : 'likeit';
         if (this.currentSortOrder !== newOrder) {
           this.currentSortOrder = newOrder;
-          const currentDay = document.querySelector(
+          const $currentTab = document.querySelector(
             '.weekly-serial__tab[aria-selected="true"]',
-          ).dataset.day;
-          this.displaySerials(currentDay);
+          );
+          this.displayPosts($currentTab.dataset.day);
         }
       });
     });
   }
 }
 
-// 메인 초기화
-async function initialize() {
+// 추천 도서 서비스 객체
+const featuredBookService = {
+  // 랜덤 도서 선택
+  getRandomBook: posts => {
+    if (!posts || posts.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * posts.length);
+    const post = posts[randomIndex];
+    const quote = featuredBookService.extractRandomQuote(post.content);
+
+    return {
+      title: post.title,
+      author: post.user.name,
+      quote: quote,
+    };
+  },
+
+  // 컨텐츠에서 랜덤 문장 추출
+  extractRandomQuote: content => {
+    const plainText = content.replace(/<[^>]*>/g, '');
+    const sentences = plainText
+      .split(/[.!?]/)
+      .map(sentence => sentence.trim())
+      .filter(sentence => sentence.length > 10 && sentence.length < 100);
+
+    if (sentences.length === 0) return null;
+
+    const randomIndex = Math.floor(Math.random() * sentences.length);
+    return sentences[randomIndex];
+  },
+
+  // 추천 도서 렌더링
+  renderFeaturedBook: bookData => {
+    if (!bookData) return '';
+
+    return `
+      <div class="main__featured-book-content">
+        <div class="main__featured-book-info">
+          <h3 class="main__featured-book-title">${bookData.title}</h3>
+          <p class="main__featured-book-author"><em>by</em> ${bookData.author}</p>
+        </div>
+
+        <div class="main__featured-book-image-container">
+          <img
+            src="/src/assets/images/home/featuredBook.png"
+            alt="${bookData.title} 책 표지 이미지"
+            class="main__featured-book-image"
+          />
+        </div>
+      </div>
+
+      <div class="main__featured-book-quote">
+        <div class="main__featured-book-quote-label-container">
+          <p class="main__featured-book-quote-label">책 속 한 구절 ——</p>
+          <img
+            src="/src/assets/logos/logo_symbol.svg"
+            alt="브런치스토리 로고 심볼"
+            class="main__logo-symbol"
+            width="18px"
+            height="18px"
+          />
+        </div>
+        <div class="main__featured-book-quote-text">
+          ${bookData.quote || '여행의 끝에서 일상으로 돌아오는 것은 몸의 기억을 되살리는 일이다.'}
+        </div>
+      </div>
+    `;
+  },
+};
+
+// 메인 초기화 함수
+const initialize = async () => {
   try {
-    // 요일별 연재 초기화
+    console.log('Starting initialization...');
+
+    await initializeCoverSlider();
+    console.log('Cover slider initialized');
+
     const weeklyPosts = new WeeklyPostsManager();
     await weeklyPosts.initialize();
 
-    // 오늘의 작가 & 투데이스 픽 초기화
+    // 추천 도서 처리
+    const $featuredBookSection = document.querySelector('.main__featured-book');
+    let featuredBook;
+
+    // 저장된 추천 도서 확인
+    if (storageService.isStoredFeaturedBookValid()) {
+      featuredBook = storageService.getStoredFeaturedBook();
+      if (featuredBook && $featuredBookSection) {
+        $featuredBookSection.innerHTML =
+          featuredBookService.renderFeaturedBook(featuredBook);
+      }
+    }
+
+    // 저장된 작가 정보 확인
     if (storageService.isStoredAuthorValid()) {
       const storedData = storageService.getStoredAuthorData();
       if (storedData?.author && storedData?.posts) {
-        document.querySelector('.main__featured-author').innerHTML = `
-          <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">
-            오늘의 작가
-          </h2>
-          ${renderService.renderAuthorInfo(storedData.author)}
-          ${renderService.renderAuthorPosts(storedData.posts)}
-        `;
+        await handleStoredAuthorData(
+          storedData,
+          featuredBook,
+          $featuredBookSection,
+        );
+        return;
       }
-    } else {
-      // Mock 오늘의 작가 데이터
-      const mockAuthor = {
-        name: weeklyPosts.mockSerials[0].author,
-        image: 'https://picsum.photos/150/150?random=author', // 랜덤 작가 이미지
-        extra: {
-          job: weeklyPosts.mockSerials[0].category,
-          biography: '작가 소개글이 들어갈 자리입니다.',
-        },
-      };
-      const mockPosts = [
-        {
-          title: weeklyPosts.mockSerials[0].title,
-          content: weeklyPosts.mockSerials[0].subtitle,
-        },
-      ];
-
-      document.querySelector('.main__featured-author').innerHTML = `
-        <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">
-          오늘의 작가
-        </h2>
-        ${renderService.renderAuthorInfo(mockAuthor)}
-        ${renderService.renderAuthorPosts(mockPosts)}
-      `;
     }
 
-    // Mock Today's Pick 데이터
-    const mockTodaysPicks = weeklyPosts.mockSerials.map(serial => ({
-      title: serial.title,
-      content: serial.subtitle,
-      user: {
-        name: serial.author,
-      },
-    }));
-    renderService.renderTodaysPick(mockTodaysPicks);
-
-    // Top Authors 초기화 (기존 함수 사용)
-    initializeTopAuthors();
+    // 새로운 데이터 가져오기
+    await handleNewData($featuredBookSection, featuredBook);
   } catch (error) {
     console.error('초기화 오류:', error);
   }
-}
+};
 
-// 페이지 로드 시 실행
+// 저장된 작가 데이터 처리 함수
+const handleStoredAuthorData = async (
+  storedData,
+  featuredBook,
+  $featuredBookSection,
+) => {
+  const $featuredAuthor = document.querySelector('.main__featured-author');
+  $featuredAuthor.innerHTML = `
+    <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">오늘의 작가</h2>
+    ${renderService.renderAuthorInfo(storedData.author)}
+    ${renderService.renderAuthorPosts(storedData.posts)}
+  `;
+
+  const response = await api.get(
+    `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -30)}","$lt":"${utils.calculateDate()}"}}`,
+  );
+
+  // 추천 도서 처리
+  if (!featuredBook) {
+    featuredBook = featuredBookService.getRandomBook(response.data.item);
+    if (featuredBook && $featuredBookSection) {
+      storageService.storeFeaturedBook(featuredBook);
+      $featuredBookSection.innerHTML =
+        featuredBookService.renderFeaturedBook(featuredBook);
+    }
+  }
+
+  renderService.renderTodaysPick(response.data.item);
+  await initializeTopAuthors();
+};
+
+// 새로운 데이터 가져오기 및 처리 함수
+const handleNewData = async ($featuredBookSection, featuredBook) => {
+  const [usersResponse, postsResponse] = await Promise.all([
+    api.get('/users'),
+    api.get(POSTS_API_ADDRESS),
+  ]);
+
+  const posts = postsResponse.data.item;
+
+  // 추천 도서 처리
+  if (!featuredBook) {
+    featuredBook = featuredBookService.getRandomBook(posts);
+    if (featuredBook && $featuredBookSection) {
+      storageService.storeFeaturedBook(featuredBook);
+      $featuredBookSection.innerHTML =
+        featuredBookService.renderFeaturedBook(featuredBook);
+    }
+  }
+
+  // 랜덤 작가 처리
+  const randomAuthor = authorService.getRandomTodaysAuthor(
+    usersResponse.data.item,
+    posts,
+  );
+
+  if (randomAuthor) {
+    const authorPosts = authorService.getAuthorsPosts(posts, randomAuthor._id);
+    if (authorPosts.length > 0) {
+      handleNewAuthorData(randomAuthor, authorPosts);
+    }
+  }
+
+  // 오늘의 추천 게시글 처리
+  const todaysPickResponse = await api.get(
+    `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -30)}","$lt":"${utils.calculateDate()}"}}`,
+  );
+  renderService.renderTodaysPick(todaysPickResponse.data.item);
+  await initializeTopAuthors();
+};
+
+// 새로운 작가 데이터 처리 함수
+const handleNewAuthorData = (author, posts) => {
+  storageService.storeAuthorData(author, posts);
+  const $featuredAuthor = document.querySelector('.main__featured-author');
+  $featuredAuthor.innerHTML = `
+    <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">오늘의 작가</h2>
+    ${renderService.renderAuthorInfo(author)}
+    ${renderService.renderAuthorPosts(posts)}
+  `;
+};
+
+// 페이지 로드 시 초기화
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initialize);
 } else {
   initialize();
 }
 
-// 필요한 것들 export
-export { WeeklyPostsManager, utils, renderService, storageService };
+export {
+  WeeklyPostsManager,
+  utils,
+  renderService,
+  authorService,
+  storageService,
+  featuredBookService,
+};
