@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="write.css">
   <link rel="stylesheet" href="/src/features/components/top-menu/top-menu.css">
   <link rel="stylesheet" href="/src/features/components/navigation/navigation.css">
-  <title>Document</title>
+  <script type="module" src="write.js"></script>
+  <title>글쓰기</title>
 </head>
 
 <body>
@@ -26,9 +27,9 @@
         <!-- 저장 버튼 선택 시 게시글 post 로 서버 요청 전송 -->
         <button id="postSave" type="submit" aria-label="글쓰기 저장 버튼">
           <!-- 글쓰기 메인 폼의 모든 입력란이 차지 않은 경우, 글쓰기 저장 비활성화 상태 -->
-          <img src="/src/assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="hidden" aria-disabled="true">
+          <img src="/src/assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" aria-disabled="true">
           <!-- 글쓰기 메인 폼의 모든 입력이 완료되었을 때 활성화 -->
-          <img src="/src/assets/icons/top/top_check_green.svg" alt="글쓰기 저장">
+          <img src="/src/assets/icons/top/top_check_green.svg" alt="글쓰기 저장" class="hidden">
         </button>
       </div>
     </header>
