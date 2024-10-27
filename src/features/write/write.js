@@ -67,20 +67,18 @@ window.addEventListener('load', function () {
     const title = $postTitle.value;
     const subtitle = $postSubtitle.value;
     const content = $postContent.value;
-    const userIdNum = sessionStorage.getItem('login-user-ID-Num');
-    const userName = sessionStorage.getItem('login-user-name');
+    const userAccessToken = sessionStorage.getItem('userAccessToken');
+    const userRefreshToken = sessionStorage.getItem('userRefreshToken');
 
-    if (!$postSave.classList.item('confirmSave')) {
-      console.log('disabled');
-    } else {
+    console.dir(window.selectedFiles);
+
+    if ($postSave.classList.item('confirmSave')) {
       const save = confirm('저장하시겠습니까?');
       if (save) {
         const formData = new FormData();
         formData.append('type', 'info');
         formData.append('title', `${title}`);
         formData.append('extra[subTitle]', `${subtitle}`);
-        formData.append('user[_id]', `${userIdNum}`);
-        formData.append('user[name]', `${userName}`);
         formData.append('content', `${content}`);
 
         if (window.selectedFiles && window.selectedFiles.length > 0) {
@@ -95,7 +93,8 @@ window.addEventListener('load', function () {
           headers: {
             'client-id': 'vanilla03',
             'Content-Type': 'application/json',
-            accept: 'application/json'
+            accept: 'application/json',
+            'Authorization': `Bearer ${userAccessToken}`
           },
           data: formData
         }).then(response => {
