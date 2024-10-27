@@ -29,34 +29,25 @@
         <!-- 메인 콘텐츠 영역 시작 -->
         <main>
           <!-- 표지(커버) 섹션 시작 -->
-          <section class="cover">
-            <!-- 작품 제목 -->
+          <!-- <section class="cover">
             <h1 class="cover__title">멈추어 버린 시간</h1>
-            <!-- 작가명 -->
             <p class="cover__author"><em>by</em> 김수정</p>
-            <!-- 표지 이미지 영역 -->
             <figure class="cover__image-wrapper">
-              <!-- 표지 대표 이미지 -->
               <img
                 src="/src/assets/images/home/hourglass.png"
                 alt="멈추어 버린 시간"
                 class="cover__image"
               />
-              <!-- '응원' 뱃지 -->
               <img src="/src/assets/icons/etc/cheer.svg" class="cover__badge" />
             </figure>
-            <!-- 응원 정보 표시 영역 -->
             <div class="cover__support">
-              <!-- 응원 아이콘 -->
               <img
                 src="/src/assets/icons/etc/won.svg"
                 alt="응원 아이콘"
                 class="cover__support-icon"
               />
-              <!-- 응원 수 표시 -->
               <span class="cover__support-count">47명이 응원</span>
             </div>
-            <!-- 페이지 정보 표시 영역 -->
             <div class="cover__progress">
               <div class="cover__progress-steps">
                 <div class="cover__progress-step active"></div>
@@ -68,23 +59,25 @@
               </div>
               <span class="cover__progress-text">5 / 6</span>
             </div>
-          </section>
+          </section> -->
+
+          <section class="cover"></section>
 
           <!--이 섹션은 구현 안 해도 되지만 다른 방식으로 구현 해보고 싶어서..-->
-          <!-- 요일별 연재 -> 요일별 연재 섹션 시작 -->
+          <!-- 요일별 연재 -> 요일별 모아보기 섹션 시작 -->
           <section class="weekly-serial" aria-labelledby="weeklySerialTitle">
             <h2 class="weekly-serial__heading" id="weeklySerialTitle">
-              요일별 연재
+              요일별 모아보기
             </h2>
-            <!-- 요일별 연재 설명 문구 -->
+            <!-- 모아보기 설명 문구 -->
             <p class="weekly-serial__description">
-              브런치북 오리지널 연재를 만나 보세요.
+              요일별로 브런치북 작가들의 글을 만나보세요!
             </p>
             <!-- 요일별 탭 네비게이션 -->
             <nav
               class="weekly-serial__tabs"
               role="tablist"
-              aria-label="요일별 연재"
+              aria-label="요일별 모아보기"
             >
               <button class="weekly-serial__tab" role="tab" data-day="monday">
                 월
@@ -195,7 +188,7 @@
                 class="icon-next"
               />
             </button>
-            <!-- 요일별 연재 섹션 끝 -->
+            <!-- 요일별 모아보기 섹션 끝 -->
           </section>
 
           <div class="divider"></div>

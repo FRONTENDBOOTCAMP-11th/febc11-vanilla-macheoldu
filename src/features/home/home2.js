@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import initializeTopAuthors from './topAuthors.js';
+import { initializeCoverSlider } from './coverSlider.js';
 
 // 상수 및 설정
 const CONFIG = {
@@ -379,6 +380,12 @@ class WeeklyPostsManager {
 // 메인 초기화
 async function initialize() {
   try {
+    console.log('Starting initialization...'); // 로그 추가
+
+    // 커버 슬라이더 초기화를 최우선으로
+    await initializeCoverSlider();
+    console.log('Cover slider initialized'); // 로그 추가
+
     const weeklyPosts = new WeeklyPostsManager();
     await weeklyPosts.initialize();
 
