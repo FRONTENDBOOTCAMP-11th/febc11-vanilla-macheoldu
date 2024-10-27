@@ -128,34 +128,14 @@ input:focus::placeholder {
   background-color: var(--color-white);
 }
 
-/* .discover__nav-wrapper {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-.discover__nav-tab {
-  flex: 1;
-  text-align: center;
-  padding: 12px 0;
-  background: none;
-  background-color: #fff;
-  border: none;
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--color-inactive);
-  position: relative;
-}
-
-.discover__nav-tab.active {
-  color: var(--color-point);
-  border-bottom: 1px solid #00c6be;
-} */
-
 .discover__nav-wrapper {
   display: flex;
   justify-content: center;
   border-bottom: none; /* 기본 회색 선 제거 */
+  position: sticky; /* 스크롤할 때 고정 */
+  top: 60px; /* 검색창 높이만큼 아래에 고정 */
+  z-index: 10; /* 다른 요소 위에 표시 */
+  background-color: #fff; /* 배경색 지정하여 콘텐츠와 구분 */
 }
 
 .discover__nav-tab {
@@ -189,6 +169,14 @@ input:focus::placeholder {
 } */
 
 /* 검색 결과 헤더 */
+/* .discover__main {
+  max-height: calc(
+    100vh - 160px
+  ); 상단 탭과 하단 내비게이션 바 높이를 제외한 영역
+  overflow-y: hidden; 기본적으로 스크롤바를 숨김
+  padding: 16px;
+} */
+
 .discover__main .discover__search-header + .post__lists {
   margin-top: 0;
 }

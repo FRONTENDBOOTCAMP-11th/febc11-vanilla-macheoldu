@@ -19,62 +19,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const $noneContent = document.querySelector('.discover__none'); // '결과 없음' 표시 영역
   const $navTabs = document.querySelectorAll('.discover__nav-tab'); // 글/작가 탭 버튼
   const $searchCount = document.querySelector('.discover__count-results'); // 검색 결과 카운트
+  const $resetButton = document.querySelector('.discover__header-close'); // X 버튼
 
   let currentTab = 'post'; // 기본 탭을 '글'로 설정
   let posts = []; // API로부터 받아온 게시물들을 저장할 배열
 
-  hideAllContent(); // 모든 콘텐츠 숨기기
+  function hideAllContent() {
+    $postContent.style.display = 'none';
+    $authorContent.style.display = 'none';
+    $noneContent.style.display = 'none';
+  }
 
-  fetchPosts(); // 페이지 로드 시 서버로부터 게시물을 불러 옴
-
-  // 처음 화면에서 모든 탭에서 active 클래스 제거
-  $navTabs.forEach(function (tab) {
-    tab.classList.remove('active');
-  });
-
-  // 글/작가 탭을 전환하는 이벤트 리스너
-  // $navTabs.forEach(function (tab) {
-  //   tab.addEventListener('click', function () {
-  //     $navTabs.forEach(function (t) {
-  //       t.classList.remove('active');
-  //     }); // 모든 탭에서 'active' 클래스 제거
-  //     tab.classList.add('active'); // 클릭된 탭에 'active' 클래스 추가
-  //     currentTab = tab.textContent === '글' ? 'post' : 'author';
-
-  //     if ($searchInput.value) {
-  //       performSearch($searchInput.value);
-  //     }
-  //   });
-  // });
-
-  $navTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      $navTabs.forEach(function (t) {
-        t.classList.remove('active'); // 모든 탭에서 'active' 클래스 제거
-      });
-      tab.classList.add('active'); // 클릭된 탭에 'active' 클래스 추가
-      currentTab = tab.textContent === '글' ? 'post' : 'author';
-
-      if ($searchInput.value) {
-        performSearch($searchInput.value);
-      }
-    });
-  });
-
-  $searchInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      const searchTerm = $searchInput.value.trim();
-      if (searchTerm) {
-        performSearch(searchTerm);
-      }
-    }
-  });
-
-  const $resetButton = document.querySelector('.discover__header-close');
-  $resetButton.addEventListener('click', function () {
-    $searchInput.value = '';
-    hideAllContent();
-  });
+  // 검색 결과 없음
+  function showNoResults() {
+    $noneContent.style.display = 'flex';
+  }
 
   async function fetchPosts() {
     try {
@@ -85,32 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // function performSearch(searchTerm) {
-  //   const filteredPosts = posts.filter(function (post) {
-  //     return (
-  //       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //       post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //       post.user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //   });
-  //   // 기존 컨텐츠 숨김
-  //   hideAllContent();
-
-  //   if (filteredPosts.length === 0) {
-  //     showNoResults(); // 검색 결과가 없다면 "결과 없음" 메시지 표시
-  //     $searchCount.textContent = ''; // 검색 결과가 없을 때 카운트도 지우기
-  //     return;
-  //   }
-
-  //   if (currentTab === 'post') {
-  //     displayPostResults(filteredPosts, searchTerm);
-  //   } else {
-  //     displayAuthorResults(filteredPosts, searchTerm);
-  //   }
-
-  //   $searchCount.textContent = `${currentTab === 'post' ? '글' : '작가'} 검색 결과 ${filteredPosts.length}건`;
-  // }
-
+  // 검색 수행하는 함수
   function performSearch(searchTerm) {
     const filteredPosts = posts.filter(function (post) {
       return (
@@ -144,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // 글 검색 결과 표시
   function displayPostResults(posts, searchTerm) {
     $postContent.innerHTML = posts
       .map(function (post, index) {
@@ -205,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $postContent.style.display = 'block';
   }
 
+  // 작가 검색 결과 표시
   function displayAuthorResults(posts, searchTerm) {
     const uniqueAuthors = [
       ...new Set(
@@ -250,6 +186,109 @@ document.addEventListener('DOMContentLoaded', function () {
     $authorContent.style.display = 'block';
   }
 
+  // "X" 버튼 초기화 코드
+  $resetButton.addEventListener('click', async function () {
+    $searchInput.value = ''; // 검색창 입력 초기화
+    hideAllContent(); // 기존 콘텐츠 숨기기
+
+    // 모든 탭에서 'active' 클래스 제거
+    $navTabs.forEach(function (tab) {
+      tab.classList.remove('active');
+    });
+
+    $searchCount.textContent = ''; // 검색 결과 개수 초기화
+    $mainContent.innerHTML = ''; // 검색 결과 내용 제거
+    $mainContent.style.overflowY = 'hidden'; // 스크롤바 숨기기
+
+    currentTab = 'post'; // 기본 탭을 'post'로 초기화
+    posts = []; // posts 배열 초기화
+
+    await fetchPosts(); // X 버튼 클릭 후 데이터 다시 불러오기
+
+    // 검색 기능 재활성화 확인용
+    $searchInput.addEventListener('input', function () {
+      if ($searchInput.value.trim()) {
+        performSearch($searchInput.value);
+      }
+    });
+
+    $searchInput.focus(); // 검색창에 포커스 설정
+  });
+
+  // 검색어 입력 이벤트 (Enter키로 검색 실행)
+  $searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      const searchTerm = $searchInput.value.trim();
+      if (searchTerm) {
+        performSearch(searchTerm);
+      }
+    }
+  });
+
+  hideAllContent(); // 모든 콘텐츠 숨기기
+
+  fetchPosts(); // 페이지 로드 시 서버로부터 게시물을 불러 옴
+
+  // 처음 화면에서 모든 탭에서 active 클래스 제거
+  $navTabs.forEach(function (tab) {
+    tab.classList.remove('active');
+  });
+
+  // 글/작가 탭을 전환하는 이벤트 리스너
+  // $navTabs.forEach(function (tab) {
+  //   tab.addEventListener('click', function () {
+  //     $navTabs.forEach(function (t) {
+  //       t.classList.remove('active');
+  //     }); // 모든 탭에서 'active' 클래스 제거
+  //     tab.classList.add('active'); // 클릭된 탭에 'active' 클래스 추가
+  //     currentTab = tab.textContent === '글' ? 'post' : 'author';
+
+  //     if ($searchInput.value) {
+  //       performSearch($searchInput.value);
+  //     }
+  //   });
+  // });
+
+  $navTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      $navTabs.forEach(function (t) {
+        t.classList.remove('active'); // 모든 탭에서 'active' 클래스 제거
+      });
+      tab.classList.add('active'); // 클릭된 탭에 'active' 클래스 추가
+      currentTab = tab.textContent === '글' ? 'post' : 'author';
+
+      if ($searchInput.value) {
+        performSearch($searchInput.value);
+      }
+    });
+  });
+
+  // function performSearch(searchTerm) {
+  //   const filteredPosts = posts.filter(function (post) {
+  //     return (
+  //       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       post.user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //   });
+  //   // 기존 컨텐츠 숨김
+  //   hideAllContent();
+
+  //   if (filteredPosts.length === 0) {
+  //     showNoResults(); // 검색 결과가 없다면 "결과 없음" 메시지 표시
+  //     $searchCount.textContent = ''; // 검색 결과가 없을 때 카운트도 지우기
+  //     return;
+  //   }
+
+  //   if (currentTab === 'post') {
+  //     displayPostResults(filteredPosts, searchTerm);
+  //   } else {
+  //     displayAuthorResults(filteredPosts, searchTerm);
+  //   }
+
+  //   $searchCount.textContent = `${currentTab === 'post' ? '글' : '작가'} 검색 결과 ${filteredPosts.length}건`;
+  // }
+
   function stripHtml(html) {
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
@@ -270,16 +309,5 @@ document.addEventListener('DOMContentLoaded', function () {
     return text.replace(regex, function (match) {
       return `<span class="discover__keyword">${match}</span>`;
     });
-  }
-
-  function hideAllContent() {
-    $postContent.style.display = 'none';
-    $authorContent.style.display = 'none';
-    $noneContent.style.display = 'none';
-  }
-
-  // 검색 결과 없음
-  function showNoResults() {
-    $noneContent.style.display = 'flex';
   }
 });
