@@ -116,7 +116,6 @@ window.addEventListener('load', () => {
         })
       } else {
         // 올바르지 않은 형식의 이메일이 입력된 경우, 안내 메시지 출력
-        console.log('유효하지 않은 이메일 형식입니다.');
         addMsg($checkEmailResult, '유효하지 않은 이메일 형식입니다');
         isInvalidMsg($checkEmailResult);
       }
@@ -170,7 +169,6 @@ window.addEventListener('load', () => {
 
   // 회원가입 버튼 활성화 코드
   window.addEventListener('input', function () {
-    console.log(isNicknameValidated, isEmailValidated, isPwValidated)
     if (isNicknameValidated && isEmailValidated && isPwValidated) {
       // 별명, 이메일, 비밀번호 확인 상태값이 모두 true 인 경우, 버튼 활성화 상태로 변경
       $signUpBtn.classList.add('active');
@@ -204,7 +202,7 @@ window.addEventListener('load', () => {
       const signUpNickname = $signUpNickname.value;
       const signUpEmail = $signUpEmail.value;
       const signUpPw = $signUpPw.value;
-      console.log($signUpNickname.value, $signUpEmail.value);
+      // 사용자 입력 데이터 서버 전송
       axios({
         method: 'post',
         url: '/api/users',
@@ -225,7 +223,6 @@ window.addEventListener('load', () => {
       })
         .then(response => {
           // 회원가입 성공 시, 시작하기 메인 화면으로 이동
-          console.log(response);
           window.open('/src/features/start/start.html', '_self');
         })
         .catch(error => {
