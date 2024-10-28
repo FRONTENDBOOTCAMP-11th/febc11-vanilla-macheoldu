@@ -43,14 +43,18 @@ window.addEventListener('load', () => {
       axios({
         method: 'get',
         // 요청 헤더에 별명 전송
-        url: `/api/users?name=${userNickname}`,
+        url: `/api/users/name`,
         headers: {
           'client-id': 'vanilla03',
           'content-type': 'application/json',
           accept: 'application/json',
+        },
+        params: {
+          name: `${userNickname}`
         }
       }).then(response => {
-        if (response.data.item.length == 0) {
+        console.log(response);
+        if (response.data.ok == 1) {
           // 중복된 별명이 없는 경우 안내 메시지
           addMsg($checkNicknameResult, '사용할 수 있는 별명입니다.');
           isValidMsg($checkNicknameResult);
