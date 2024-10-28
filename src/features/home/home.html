@@ -273,6 +273,11 @@
               src="/src/assets/images/home/newAuthorsSubtxt.png"
               alt="제 11회 브런치북 출판 프로젝트 수상작 보기"
               class="main__new-authors-subtitle"
+              style="cursor: pointer"
+              onclick="window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
+              onkeypress="if(event.key === 'Enter') window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
+              tabindex="0"
+              role="link"
             />
 
             <!-- 새로운 작가의 책 목록 시작 -->
@@ -322,7 +327,10 @@
             <!-- 새로운 작가의 책 목록 끝 -->
 
             <!-- 브런치 작가 지원 프로젝트 링크 -->
-            <a href="#" class="main__brunch-author-support">
+            <a
+              href="https://brunch.co.kr/special/list"
+              class="main__brunch-author-support"
+            >
               브런치 작가 지원 프로젝트
               <img
                 src="/src/assets/icons/etc/whiteNext.svg"

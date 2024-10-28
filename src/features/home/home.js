@@ -30,15 +30,20 @@ const CONFIG = {
     'saturday',
   ],
   ONE_DAY_MS: 24 * 60 * 60 * 1000,
+  ASSETS: {
+    IMAGES_PATH: '/src/assets/images/home',
+    ICONS_PATH: '/src/assets/icons',
+    LOGOS_PATH: '/src/assets/logos',
+  },
 };
+
+const POSTS_API_ADDRESS = '/posts?type=info';
 
 // API 인스턴스 생성
 const api = axios.create({
   baseURL: CONFIG.API.BASE_URL,
   headers: CONFIG.API.HEADERS,
 });
-
-const POSTS_API_ADDRESS = '/posts?type=info';
 
 // 유틸리티 함수 객체
 const utils = {
@@ -71,24 +76,22 @@ const utils = {
     return utils.formatDate(baseDate);
   },
 
-  // 날짜 포맷팅 함수
   formatDate: date => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    return `${year}.${month}.${day}`;
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
   },
 
-  // 이미지 URL 생성 함수
   getImgUrl: imgPath => `${CONFIG.API.BASE_URL}${imgPath}`,
 
-  // 요일 구하기 함수
   getWeekday: dateString => CONFIG.DAYS[new Date(dateString).getDay()],
 
-  // 현재 요일 구하기 함수
   getCurrentDay: () => CONFIG.DAYS[new Date().getDay()],
 
-  // 새 글 여부 확인 함수
   isNewPost: createdAt => {
     const postDate = new Date(createdAt);
     const now = new Date();
@@ -96,7 +99,6 @@ const utils = {
     return diffHours <= 48;
   },
 
-  // 텍스트 자르기 함수
   truncateText: (text, length) => {
     return (
       text
@@ -106,9 +108,29 @@ const utils = {
     );
   },
 
-  // 플레이스홀더 이미지 URL 생성 함수
-  getPlaceholderImage: (type, index) =>
-    `/src/assets/images/home/${type}${index}.png`,
+  // 동적 이미지 URL 생성 함수
+  getAssetUrl: (type, filename) => {
+    let basePath;
+    switch (type) {
+      case 'image':
+        basePath = CONFIG.ASSETS.IMAGES_PATH;
+        break;
+      case 'icon':
+        basePath = CONFIG.ASSETS.ICONS_PATH;
+        break;
+      case 'logo':
+        basePath = CONFIG.ASSETS.LOGOS_PATH;
+        break;
+      default:
+        throw new Error('Invalid asset type');
+    }
+    return new URL(`${basePath}/${filename}`, import.meta.url).href;
+  },
+
+  getPlaceholderImage: (type, index) => {
+    const filename = `${type}${index}.png`;
+    return utils.getAssetUrl('image', filename);
+  },
 };
 
 // 스토리지 서비스 객체
@@ -205,7 +227,6 @@ const storageService = {
 
 // 렌더링 서비스 객체
 const renderService = {
-  // 작가 정보 렌더링
   renderAuthorInfo: author => {
     return `
       <article class="main__featured-author__content">
@@ -229,7 +250,6 @@ const renderService = {
     `;
   },
 
-  // 작가의 게시글 렌더링
   renderAuthorPosts: posts => {
     if (!posts.length) return '';
 
@@ -242,7 +262,7 @@ const renderService = {
             src="${utils.getPlaceholderImage('authorBook', index + 1)}"
             alt="${post.title}"
             class="main__featured-author__books-image"
-            onerror="this.src='/src/assets/images/home/book1.png'"
+            onerror="this.src='${utils.getAssetUrl('image', 'book1.png')}'"
           />
         </div>
         <div class="main__featured-author__books-info">
@@ -257,7 +277,6 @@ const renderService = {
     return `<ul class="main__featured-author__books">${postsHTML}</ul>`;
   },
 
-  // 주간 게시글 렌더링
   renderWeeklyPost: (post, index) => {
     return `
       <li class="weekly-serial__item">
@@ -266,7 +285,7 @@ const renderService = {
           <p class="weekly-serial__details">${post.title}
             ${
               utils.isNewPost(post.createdAt)
-                ? '<img src="/src/assets/icons/status/new.svg" alt="새 글" class="weekly-serial__new" />'
+                ? `<img src="${utils.getAssetUrl('icon', 'status/new.svg')}" alt="새 글" class="weekly-serial__new" />`
                 : ''
             }
           </p>
@@ -278,36 +297,37 @@ const renderService = {
           src="${utils.getPlaceholderImage('pick', (index % 10) + 1)}"
           alt="${post.title}"
           class="weekly-serial__image"
-          onerror="this.src='/src/assets/images/home/serial1.png'"
+          onerror="this.src='${utils.getAssetUrl('image', 'serial1.png')}'"
         />
       </li>
     `;
   },
 
-  // 오늘의 추천 게시글 렌더링
   renderTodaysPick: posts => {
     const postsHTML = posts
       .slice(0, 10)
       .map(
         (post, index) => `
-      <li class="main__todays-pick__item">
-        <div class="main__todays-pick__info">
-          <div class="main__todays-pick__text">
-            <h3 class="main__todays-pick__item-title">${post.title}</h3>
-            <p class="main__todays-pick__author">
-              <em style="font-family: Georgia">by</em> ${post.user.name}
-            </p>
-            <p class="main__todays-pick__description">${utils.truncateText(post.content, 100)}</p>
-          </div>
-          <img
-            src="${utils.getPlaceholderImage('pick', index + 1)}"
-            alt="${post.title}"
-            class="main__todays-pick__image"
-            onerror="this.src='/src/assets/images/home/pick1.png'"
-          />
-        </div>
-      </li>
-    `,
+          <li class="main__todays-pick__item">
+            <a href="./detail/detail.html?postId=${post._id}">
+              <div class="main__todays-pick__info">
+                <div class="main__todays-pick__text">
+                  <h3 class="main__todays-pick__item-title">${post.title}</h3>
+                  <p class="main__todays-pick__author">
+                    <em style="font-family: Georgia">by</em> ${post.user.name}
+                  </p>
+                  <p class="main__todays-pick__description">${utils.truncateText(post.content, 100)}</p>
+                </div>
+                <img
+                  src="${post.image?.[0] ? utils.getImgUrl(post.image[0]) : utils.getPlaceholderImage('pick', Math.floor(Math.random() * 10) + 1)}"
+                  alt="${post.title}"
+                  class="main__todays-pick__image"
+                  onerror="this.src='${utils.getAssetUrl('image', 'pick1.png')}'"
+                />
+              </div>
+            </a>
+          </li>
+        `,
       )
       .join('');
 
@@ -349,7 +369,7 @@ const authorService = {
   },
 };
 
-// 요일별 연재(이 부분 필요 없음)
+// 요일별 연재
 class WeeklyPostsManager {
   constructor() {
     this.$tabButtons = document.querySelectorAll('.weekly-serial__tab');
@@ -414,7 +434,6 @@ class WeeklyPostsManager {
 
 // 추천 도서 서비스 객체
 const featuredBookService = {
-  // 랜덤 도서 선택
   getRandomBook: posts => {
     if (!posts || posts.length === 0) return null;
     const randomIndex = Math.floor(Math.random() * posts.length);
@@ -428,7 +447,6 @@ const featuredBookService = {
     };
   },
 
-  // 컨텐츠에서 랜덤 문장 추출
   extractRandomQuote: content => {
     const plainText = content.replace(/<[^>]*>/g, '');
     const sentences = plainText
@@ -442,7 +460,6 @@ const featuredBookService = {
     return sentences[randomIndex];
   },
 
-  // 추천 도서 렌더링
   renderFeaturedBook: bookData => {
     if (!bookData) return '';
 
@@ -455,7 +472,7 @@ const featuredBookService = {
 
         <div class="main__featured-book-image-container">
           <img
-            src="/src/assets/images/home/featuredBook.png"
+            src="${utils.getAssetUrl('image', 'featuredBook.png')}"
             alt="${bookData.title} 책 표지 이미지"
             class="main__featured-book-image"
           />
@@ -466,7 +483,7 @@ const featuredBookService = {
         <div class="main__featured-book-quote-label-container">
           <p class="main__featured-book-quote-label">책 속 한 구절 ——</p>
           <img
-            src="/src/assets/logos/logo_symbol.svg"
+            src="${utils.getAssetUrl('logo', 'logo_symbol.svg')}"
             alt="브런치스토리 로고 심볼"
             class="main__logo-symbol"
             width="18px"
@@ -481,51 +498,7 @@ const featuredBookService = {
   },
 };
 
-// 메인 초기화 함수
-const initialize = async () => {
-  try {
-    console.log('Starting initialization...');
-
-    await initializeCoverSlider();
-    console.log('Cover slider initialized');
-
-    const weeklyPosts = new WeeklyPostsManager();
-    weeklyPosts.initialize();
-
-    // 추천 도서 처리
-    const $featuredBookSection = document.querySelector('.main__featured-book');
-    let featuredBook;
-
-    // 저장된 추천 도서 확인
-    if (storageService.isStoredFeaturedBookValid()) {
-      featuredBook = storageService.getStoredFeaturedBook();
-      if (featuredBook && $featuredBookSection) {
-        $featuredBookSection.innerHTML =
-          featuredBookService.renderFeaturedBook(featuredBook);
-      }
-    }
-
-    // 저장된 작가 정보 확인
-    if (storageService.isStoredAuthorValid()) {
-      const storedData = storageService.getStoredAuthorData();
-      if (storedData?.author && storedData?.posts) {
-        await handleStoredAuthorData(
-          storedData,
-          featuredBook,
-          $featuredBookSection,
-        );
-        return;
-      }
-    }
-
-    // 새로운 데이터 가져오기
-    await handleNewData($featuredBookSection, featuredBook);
-  } catch (error) {
-    console.error('초기화 오류:', error);
-  }
-};
-
-// 저장된 작가 데이터 처리 함수
+// 초기화 함수들
 const handleStoredAuthorData = async (
   storedData,
   featuredBook,
@@ -538,11 +511,12 @@ const handleStoredAuthorData = async (
     ${renderService.renderAuthorPosts(storedData.posts)}
   `;
 
-  const response = await api.get(
-    `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -30)}","$lt":"${utils.calculateDate()}"}}`,
-  );
+  const apiUrl = `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -14)}","$lt":"${utils.calculateDate()}"}}`;
+  console.log('API URL:', apiUrl);
 
-  // 추천 도서 처리
+  const response = await api.get(apiUrl);
+  console.log('API Response:', response.data);
+
   if (!featuredBook) {
     featuredBook = featuredBookService.getRandomBook(response.data.item);
     if (featuredBook && $featuredBookSection) {
@@ -556,7 +530,6 @@ const handleStoredAuthorData = async (
   await initializeTopAuthors();
 };
 
-// 새로운 데이터 가져오기 및 처리 함수
 const handleNewData = async ($featuredBookSection, featuredBook) => {
   const [usersResponse, postsResponse] = await Promise.all([
     api.get('/users'),
@@ -565,7 +538,6 @@ const handleNewData = async ($featuredBookSection, featuredBook) => {
 
   const posts = postsResponse.data.item;
 
-  // 추천 도서 처리
   if (!featuredBook) {
     featuredBook = featuredBookService.getRandomBook(posts);
     if (featuredBook && $featuredBookSection) {
@@ -575,7 +547,6 @@ const handleNewData = async ($featuredBookSection, featuredBook) => {
     }
   }
 
-  // 랜덤 작가 처리
   const randomAuthor = authorService.getRandomTodaysAuthor(
     usersResponse.data.item,
     posts,
@@ -588,15 +559,14 @@ const handleNewData = async ($featuredBookSection, featuredBook) => {
     }
   }
 
-  // 오늘의 추천 게시글 처리
   const todaysPickResponse = await api.get(
-    `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -30)}","$lt":"${utils.calculateDate()}"}}`,
+    `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -14)}","$lt":"${utils.calculateDate()}"}}`,
   );
+
   renderService.renderTodaysPick(todaysPickResponse.data.item);
   await initializeTopAuthors();
 };
 
-// 새로운 작가 데이터 처리 함수
 const handleNewAuthorData = (author, posts) => {
   storageService.storeAuthorData(author, posts);
   const $featuredAuthor = document.querySelector('.main__featured-author');
@@ -605,6 +575,44 @@ const handleNewAuthorData = (author, posts) => {
     ${renderService.renderAuthorInfo(author)}
     ${renderService.renderAuthorPosts(posts)}
   `;
+};
+
+const initialize = async () => {
+  try {
+    console.log('Starting initialization...');
+    await initializeCoverSlider();
+    console.log('Cover slider initialized');
+
+    const weeklyPosts = new WeeklyPostsManager();
+    weeklyPosts.initialize();
+
+    const $featuredBookSection = document.querySelector('.main__featured-book');
+    let featuredBook;
+
+    if (storageService.isStoredFeaturedBookValid()) {
+      featuredBook = storageService.getStoredFeaturedBook();
+      if (featuredBook && $featuredBookSection) {
+        $featuredBookSection.innerHTML =
+          featuredBookService.renderFeaturedBook(featuredBook);
+      }
+    }
+
+    if (storageService.isStoredAuthorValid()) {
+      const storedData = storageService.getStoredAuthorData();
+      if (storedData?.author && storedData?.posts) {
+        await handleStoredAuthorData(
+          storedData,
+          featuredBook,
+          $featuredBookSection,
+        );
+        return;
+      }
+    }
+
+    await handleNewData($featuredBookSection, featuredBook);
+  } catch (error) {
+    console.error('초기화 오류:', error);
+  }
 };
 
 // 페이지 로드 시 초기화

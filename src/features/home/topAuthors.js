@@ -40,6 +40,7 @@ const renderTopAuthors = authors => {
             />
             <div class="author-text">
               <h3 class="main__top-subscribed-author-name">${author.name || 'Unknown Author'}</h3>
+              <p class="main__top-subscribed-author-subscribers">구독자 ${author.bookmarkedBy?.users || 0}명</p>
               ${
                 author.extra?.job
                   ? `<p class="main__top-subscribed-author-role">${author.extra.job}</p>`
@@ -59,70 +60,44 @@ const renderTopAuthors = authors => {
     })
     .join('');
 
-  console.log('Generated HTML length:', authorsHTML.length);
   container.innerHTML = authorsHTML;
-  console.log('Container updated. New child count:', container.children.length);
 };
 
 const fetchTopAuthors = async () => {
   try {
-    console.log('Fetching authors...');
+    console.log('Fetching top authors...');
+
+    // 구독자 수가 1 이상인 작가만 조회하도록 query 수정
     const response = await axios.get('https://11.fesp.shop/users', {
+      params: {
+        sort: JSON.stringify({ 'bookmarkedBy.users': -1 }),
+        limit: 4,
+        type: 'user',
+        'bookmarkedBy.users': { $gt: 0 }, // 구독자 수가 0보다 큰 경우만 필터링
+      },
       headers: {
         'client-id': 'vanilla03',
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
     });
-    console.log('Raw API Response:', response.data);
 
-    if (!response.data?.item) {
-      throw new Error('Invalid API response structure');
+    if (!response.data?.ok || !response.data?.item) {
+      throw new Error('Invalid response from server');
     }
 
-    const allUsers = response.data.item;
-    console.log('All users:', allUsers);
-
-    const onlyUserTypes = allUsers.filter(item => item?.user?.type === 'user');
-    console.log('Only user types:', onlyUserTypes);
-
-    const withSubscriberCounts = onlyUserTypes.map(item => {
-      const subscriberCount = item.user.bookmarkedBy?.users || 0;
-      return {
-        ...item,
-        subscriberCount,
-      };
-    });
-    console.log('With subscriber counts:', withSubscriberCounts);
-
-    // 구독자 수로 정렬
-    const sorted = withSubscriberCounts.sort(
-      (a, b) => b.subscriberCount - a.subscriberCount,
-    );
-    console.log('Sorted by subscribers:', sorted);
-
-    // 모든 사용자의 구독자 수가 0인지 확인
-    const hasSubscribers = sorted.some(item => item.subscriberCount > 0);
-
-    const container = document.querySelector(
-      '.main__top-subscribed-authors-grid',
+    // 혹시 모를 구독자 0명인 데이터 한번 더 필터링
+    const topAuthors = response.data.item.filter(
+      author => author.bookmarkedBy?.users > 0,
     );
 
-    if (!container) {
-      console.error('Top authors container not found!');
-      return;
+    console.log('Fetched top authors:', topAuthors);
+
+    if (topAuthors.length === 0) {
+      throw new Error('No authors with subscribers found');
     }
 
-    if (!hasSubscribers) {
-      // 모든 구독자 수가 0일 경우 간단한 텍스트만 표시
-      container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
-      return;
-    }
-
-    // 구독자가 있는 경우 상위 4명 표시
-    const topFour = sorted.slice(0, 4).map(item => item.user);
-    console.log('Top 4 users:', topFour);
-    renderTopAuthors(topFour);
+    renderTopAuthors(topAuthors);
   } catch (error) {
     console.error('Error in fetchTopAuthors:', error);
     const container = document.querySelector(
@@ -152,6 +127,11 @@ const initializeTopAuthors = () => {
       padding: 20px 0;
       color: #666;
     }
+    .main__top-subscribed-author-subscribers {
+      color: #666;
+      font-size: 0.9em;
+      margin: 4px 0;
+    }
   `;
   document.head.appendChild(style);
 
@@ -159,5 +139,3 @@ const initializeTopAuthors = () => {
 };
 
 export default initializeTopAuthors;
-
-// 북마크 db를 수정해야함... 그래야 이걸 제대로 구현할 수 있음..
