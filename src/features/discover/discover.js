@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // 검색 수행하는 함수
-  function performSearch(searchTerm) {
+  function performSearch(keyword) {
     // 항상 "글" 탭이 기본 활성화 상태로 시작
     currentTab = 'post';
 
@@ -89,13 +89,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // "글" 탭 검색: 제목과 내용에서 검색
     const filteredPosts = posts.filter(function (post) {
       return (
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.content.toLowerCase().includes(searchTerm.toLowerCase())
+        post.title.toLowerCase().includes(keyword.toLowerCase()) ||
+        post.content.toLowerCase().includes(keyword.toLowerCase())
       );
     });
 
     if (filteredPosts.length > 0) {
-      displayPostResults(filteredPosts, searchTerm); // 글 검색 결과 표시
+      displayPostResults(filteredPosts, keyword); // 글 검색 결과 표시
       $searchCount.textContent = `글 검색 결과 ${filteredPosts.length}건`;
     } else {
       showNoResults(); // 결과 없음 표시
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 글 검색 결과 표시
-  function displayPostResults(posts, searchTerm) {
+  function displayPostResults(posts, keyword) {
     $postContent.innerHTML = posts
       .map(function (post, index) {
         let imageUrl = null;
@@ -138,19 +138,19 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="post__lists">
             <div>
               <h3 class="post__list-title">
-                ${highlightSearchTerm(post.title, searchTerm)}
+                ${highlightSearchTerm(post.title, keyword)}
               </h3>
             </div>
             <div class="post__list-content">
               <div class="content__text">
                 <div>
                   <p class="content__text-main">
-                    ${highlightSearchTerm(stripHtml(post.content).substring(0, 100) + '...', searchTerm)}
+                    ${highlightSearchTerm(stripHtml(post.content).substring(0, 100) + '...', keyword)}
                   </p>
                   <div class="content__text-info">
                     ${formatDate(post.createdAt)}
                     <div class="circle"></div>
-                    <em>by</em> ${highlightSearchTerm(post.user.name, searchTerm)}
+                    <em>by</em> ${highlightSearchTerm(post.user.name, keyword)}
                   </div>
                 </div>
               </div>
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 작가 검색 결과 표시
-  function displayAuthorResults(posts, searchTerm) {
+  function displayAuthorResults(posts, keyword) {
     const uniqueAuthors = [
       ...new Set(
         posts.map(function (post) {
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div>
               <h3 class="author__list-title">
-                ${highlightSearchTerm(author.name, searchTerm)}
+                ${highlightSearchTerm(author.name, keyword)}
               </h3>
               <p class="author__list-info">
                 ${stripHtml(
@@ -220,9 +220,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // 검색어 입력 이벤트 (Enter키로 검색 실행)
   $searchInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-      const searchTerm = $searchInput.value.trim();
-      if (searchTerm) {
-        performSearch(searchTerm);
+      const keyword = $searchInput.value.trim();
+      if (keyword) {
+        performSearch(keyword);
       }
     }
   });
@@ -240,8 +240,8 @@ document.addEventListener('DOMContentLoaded', function () {
   $navTabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
       // 현재 검색어가 있을 때만 탭 전환 수행
-      const searchTerm = $searchInput.value.trim();
-      if (!searchTerm) return;
+      const keyword = $searchInput.value.trim();
+      if (!keyword) return;
 
       // 탭 상태 초기화 후 현재 탭 활성화
       $navTabs.forEach(function (t) {
@@ -254,14 +254,14 @@ document.addEventListener('DOMContentLoaded', function () {
       // 탭에 따라 검색 결과 표시
       hideAllContent();
       if (currentTab === 'post') {
-        performSearch(searchTerm); // 글 검색 결과 표시
+        performSearch(keyword); // 글 검색 결과 표시
       } else {
         // 작가 검색 결과에서 중복 제거
         const uniqueAuthors = new Set();
         const authorFilteredPosts = posts.filter(function (post) {
           const authorName = post.user.name.toLowerCase();
           if (
-            authorName.includes(searchTerm.toLowerCase()) &&
+            authorName.includes(keyword.toLowerCase()) &&
             !uniqueAuthors.has(authorName)
           ) {
             uniqueAuthors.add(authorName); // 중복되지 않는 작가 이름 추가
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (authorFilteredPosts.length > 0) {
-          displayAuthorResults(authorFilteredPosts, searchTerm); // 작가 검색 결과 표시
+          displayAuthorResults(authorFilteredPosts, keyword); // 작가 검색 결과 표시
           $searchCount.textContent = `작가 검색 결과 ${authorFilteredPosts.length}건`;
         } else {
           showNoResults();
@@ -295,9 +295,9 @@ document.addEventListener('DOMContentLoaded', function () {
     return `${month} ${day}. ${year}`;
   }
 
-  function highlightSearchTerm(text, searchTerm) {
-    if (!searchTerm) return text;
-    const regex = new RegExp(searchTerm, 'gi');
+  function highlightSearchTerm(text, keyword) {
+    if (!keyword) return text;
+    const regex = new RegExp(keyword, 'gi');
     return text.replace(regex, function (match) {
       return `<span class="discover__keyword">${match}</span>`;
     });
