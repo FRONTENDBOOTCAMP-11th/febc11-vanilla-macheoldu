@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // 검색 결과 없음
   function showNoResults() {
     $noneContent.style.display = 'flex';
+    document.body.style.overflowY = 'hidden';
+  }
+
+  // 검색을 다시 한 경우 내용이 넘치면 스크롤 바 만들어주기
+  function showResults() {
+    document.body.style.overflowY = 'scroll';
   }
 
   // 게시물 데이터를 긁어와서 posts 배열에 저장
@@ -237,21 +243,6 @@ document.addEventListener('DOMContentLoaded', function () {
     tab.classList.remove('active');
   });
 
-  // 글/작가 탭을 전환하는 이벤트 리스너
-  // $navTabs.forEach(function (tab) {
-  //   tab.addEventListener('click', function () {
-  //     $navTabs.forEach(function (t) {
-  //       t.classList.remove('active');
-  //     }); // 모든 탭에서 'active' 클래스 제거
-  //     tab.classList.add('active'); // 클릭된 탭에 'active' 클래스 추가
-  //     currentTab = tab.textContent === '글' ? 'post' : 'author';
-
-  //     if ($searchInput.value) {
-  //       performSearch($searchInput.value);
-  //     }
-  //   });
-  // });
-
   $navTabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
       $navTabs.forEach(function (t) {
@@ -265,32 +256,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-
-  // function performSearch(searchTerm) {
-  //   const filteredPosts = posts.filter(function (post) {
-  //     return (
-  //       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //       post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //       post.user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //   });
-  //   // 기존 컨텐츠 숨김
-  //   hideAllContent();
-
-  //   if (filteredPosts.length === 0) {
-  //     showNoResults(); // 검색 결과가 없다면 "결과 없음" 메시지 표시
-  //     $searchCount.textContent = ''; // 검색 결과가 없을 때 카운트도 지우기
-  //     return;
-  //   }
-
-  //   if (currentTab === 'post') {
-  //     displayPostResults(filteredPosts, searchTerm);
-  //   } else {
-  //     displayAuthorResults(filteredPosts, searchTerm);
-  //   }
-
-  //   $searchCount.textContent = `${currentTab === 'post' ? '글' : '작가'} 검색 결과 ${filteredPosts.length}건`;
-  // }
 
   function stripHtml(html) {
     const tmp = document.createElement('div');
