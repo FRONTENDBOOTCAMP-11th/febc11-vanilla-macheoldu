@@ -71,6 +71,7 @@ export const initData = async (clientId, nextSeq) => {
           biography: '프롬프트 기획 전문가 & GPT전문강사, 강연자',
           keyword: ['AI', 'GPT', '프롬프트', '강사'],
         },
+        bookmark: 11,
       },
       {
         _id: await nextSeq('user'),
@@ -81,7 +82,8 @@ export const initData = async (clientId, nextSeq) => {
         loginType: 'kakao',
         image: `/files/${clientId}/user-heartping.webp`,
         createdAt: getTime(-20, -60 * 22),
-        updatedAt: getTime(-10, -60 * 11)
+        updatedAt: getTime(-10, -60 * 11),
+        bookmark: 11,
       },
       {
         _id: await nextSeq('user'),
@@ -95,7 +97,7 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-10, -60 * 10),
         posts: 2,
         bookmark: {
-          users: 9,
+          users: [9, 10, 12]
         },
         bookmarkedBy: {
           users: 11,
@@ -131,7 +133,7 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-8, -60 * 8),
         posts: 1,
         bookmark: {
-          users: 10,
+          users: 11,
         },
         bookmarkedBy: {
           users: 12,
@@ -152,7 +154,7 @@ export const initData = async (clientId, nextSeq) => {
           users: 3,
         },
         bookmarkedBy: {
-          users: 2,
+          users: 6,
         },
       },
       {
@@ -170,7 +172,7 @@ export const initData = async (clientId, nextSeq) => {
           users: 7,
         },
         bookmarkedBy: {
-          users: 12,
+          users: 6,
         },
       },
       {
@@ -185,10 +187,10 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-6, -60 * 5),
         posts: 1,
         bookmark: {
-          users: 12,
+          users: 6,
         },
         bookmarkedBy: {
-          users: 4,
+          users: [4, 5, 8]
         },
       },
       {
@@ -203,7 +205,7 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-5, -60 * 4),
         posts: 3,
         bookmark: {
-          users: 9,
+          users: 6,
         },
         bookmarkedBy: {
           users: 8,
