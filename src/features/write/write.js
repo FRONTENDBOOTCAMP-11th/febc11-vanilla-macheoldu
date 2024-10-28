@@ -88,11 +88,12 @@ window.addEventListener('load', function () {
     const content = $postContent.value;
     const userAccessToken = sessionStorage.getItem('userAccessToken');
 
-    // 업로드된 파일을 FormData 에 추가
+    // 업로드된 파일 객체를 배열로 변경
     const selectedFiles = Array.from($uploadFile.files);
     console.log(selectedFiles)
     const imageFormData = new FormData();
 
+    // 업로드된 파일을 FormData 에 추가
     selectedFiles.forEach((file) => {
       imageFormData.append(`attach`, file);
     })
