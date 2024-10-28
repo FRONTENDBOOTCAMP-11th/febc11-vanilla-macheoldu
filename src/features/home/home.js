@@ -349,91 +349,20 @@ const authorService = {
   },
 };
 
-// 주간 포스트 관리 클래스
+// 요일별 연재(이 부분 필요 없음)
 class WeeklyPostsManager {
   constructor() {
-    this.postsByDay = null;
-    this.currentSortOrder = 'latest';
     this.$tabButtons = document.querySelectorAll('.weekly-serial__tab');
     this.$postsList = document.querySelector('.weekly-serial__list');
   }
 
-  // 초기화
-  async initialize() {
-    await this.fetchPosts();
-    this.initializeTabs();
+  initialize() {
+    this.setCurrentDay();
     this.initializeEventListeners();
   }
 
-  // 게시글 데이터 가져오기
-  async fetchPosts() {
-    try {
-      // 최근 2주 날짜 계산
-      const today = new Date();
-      const twoWeeksAgo = new Date(today.getTime() - 14 * 24 * 60 * 60 * 1000);
-
-      // YYYY.MM.DD 형식으로 변환
-      const startDate = utils.formatDate(twoWeeksAgo);
-      const endDate = utils.formatDate(today);
-
-      // API 호출 시 날짜 필터 추가
-      const response = await api.get(
-        `${POSTS_API_ADDRESS}&custom={"createdAt":{"$gte":"${startDate}","$lt":"${endDate}"}}`,
-      );
-
-      this.postsByDay = this.categorizePostsByDay(response.data.item);
-      this.displayPosts(utils.getCurrentDay());
-    } catch (error) {
-      console.error('게시글 가져오기 실패:', error);
-      if (this.$postsList) {
-        this.$postsList.innerHTML =
-          '<li>게시글을 불러오는데 실패했습니다.</li>';
-      }
-    }
-  }
-
-  // 요일별 게시글 분류
-  categorizePostsByDay(posts) {
-    return posts.reduce((acc, post) => {
-      const weekday = utils.getWeekday(post.createdAt);
-      if (!acc[weekday]) acc[weekday] = [];
-      acc[weekday].push(post);
-      return acc;
-    }, {});
-  }
-
-  // 게시글 표시
-  displayPosts(day) {
-    if (
-      !this.postsByDay ||
-      !this.postsByDay[day] ||
-      this.postsByDay[day].length === 0
-    ) {
-      this.$postsList.innerHTML =
-        '<li class="weekly-serial__empty">최근 2주 내에 해당 요일에 작성된 글이 없습니다!</li>';
-      return;
-    }
-
-    const posts = this.sortPosts(this.postsByDay[day]);
-    this.$postsList.innerHTML = posts
-      .map((post, index) => renderService.renderWeeklyPost(post, index))
-      .join('');
-  }
-
-  // 게시글 정렬
-  sortPosts(posts) {
-    if (this.currentSortOrder === 'latest') {
-      return [...posts].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-      );
-    } else if (this.currentSortOrder === 'likeit') {
-      return [...posts].sort((a, b) => (b.likes || 0) - (a.likes || 0));
-    }
-    return posts;
-  }
-
-  // 탭 초기화
-  initializeTabs() {
+  // 현재 요일 설정
+  setCurrentDay() {
     const currentDay = utils.getCurrentDay();
     const $currentTab = document.querySelector(`[data-day="${currentDay}"]`);
     if ($currentTab) {
@@ -441,44 +370,43 @@ class WeeklyPostsManager {
     }
   }
 
-  // 탭 선택
+  // 탭 선택 시 스타일 변경
   selectTab($selectedButton) {
+    // 모든 탭의 선택 상태 해제
     this.$tabButtons.forEach($tab => {
       $tab.setAttribute('aria-selected', 'false');
       $tab.classList.remove('active');
+      $tab.style.borderBottom = 'none';
     });
+
+    // 선택된 탭 스타일 적용
     $selectedButton.setAttribute('aria-selected', 'true');
     $selectedButton.classList.add('active');
+    $selectedButton.style.borderBottom = '2px solid var(--point-color)';
   }
 
-  // 이벤트 리스너 초기화
+  // 이벤트 리스너 설정
   initializeEventListeners() {
+    // 탭 클릭 이벤트
     this.$tabButtons.forEach($button => {
       $button.addEventListener('click', () => {
         this.selectTab($button);
-        this.displayPosts($button.dataset.day);
       });
     });
 
+    // 정렬 옵션 버튼 클릭 이벤트
     const $optionButtons = document.querySelectorAll('.weekly-serial__option');
     $optionButtons.forEach($button => {
       $button.addEventListener('click', () => {
-        // 활성화된 버튼 스타일 처리
-        $optionButtons.forEach($btn => $btn.classList.remove('active'));
-        $button.classList.add('active');
+        // 모든 버튼 기본 스타일로
+        $optionButtons.forEach($btn => {
+          $btn.classList.remove('active');
+          $btn.style.fontWeight = 'normal';
+        });
 
-        const newOrder = $button.textContent.includes('최신순')
-          ? 'latest'
-          : 'likeit';
-        if (this.currentSortOrder !== newOrder) {
-          this.currentSortOrder = newOrder;
-          const $currentTab = document.querySelector(
-            '.weekly-serial__tab[aria-selected="true"]',
-          );
-          if ($currentTab) {
-            this.displayPosts($currentTab.dataset.day);
-          }
-        }
+        // 선택된 버튼 강조
+        $button.classList.add('active');
+        $button.style.fontWeight = 'bold';
       });
     });
   }
@@ -562,7 +490,7 @@ const initialize = async () => {
     console.log('Cover slider initialized');
 
     const weeklyPosts = new WeeklyPostsManager();
-    await weeklyPosts.initialize();
+    weeklyPosts.initialize();
 
     // 추천 도서 처리
     const $featuredBookSection = document.querySelector('.main__featured-book');

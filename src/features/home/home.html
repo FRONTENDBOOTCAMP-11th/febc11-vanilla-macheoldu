@@ -34,18 +34,19 @@
           <!--이 섹션은 구현 안 해도 되지만 다른 방식으로 구현 해보고 싶어서..-->
           <!-- 요일별 연재 -> 요일별 모아보기 섹션 시작 -->
           <section class="weekly-serial" aria-labelledby="weeklySerialTitle">
+            <!-- 요일별 연재 섹션 시작 -->
             <h2 class="weekly-serial__heading" id="weeklySerialTitle">
-              요일별 모아보기
+              요일별 연재
             </h2>
-            <!-- 모아보기 설명 문구 -->
+            <!-- 연재 설명 문구 -->
             <p class="weekly-serial__description">
-              해당 요일에 작성되었던 브런치북 글을 만나보세요!
+              브런치북 오리지널 연재를 만나 보세요.
             </p>
             <!-- 요일별 탭 네비게이션 -->
             <nav
               class="weekly-serial__tabs"
               role="tablist"
-              aria-label="요일별 모아보기"
+              aria-label="요일별 연재"
             >
               <button class="weekly-serial__tab" role="tab" data-day="monday">
                 월
@@ -60,7 +61,12 @@
               >
                 수
               </button>
-              <button class="weekly-serial__tab" role="tab" data-day="thursday">
+              <button
+                class="weekly-serial__tab"
+                role="tab"
+                data-day="thursday"
+                aria-selected="true"
+              >
                 목
               </button>
               <button class="weekly-serial__tab" role="tab" data-day="friday">
@@ -88,8 +94,65 @@
                 라이킷순
               </button>
             </div>
-            <!-- 작가 글 리스트 -->
-            <ul class="weekly-serial__list"></ul>
+            <!-- 연재 리스트 -->
+            <ul class="weekly-serial__list">
+              <li class="weekly-serial__item">
+                <article class="weekly-serial__info">
+                  <h3 class="weekly-serial__title">낙원</h3>
+                  <p class="weekly-serial__details">
+                    6 윤희 - 2
+                    <img
+                      src="/src/assets/icons/status/new.svg"
+                      alt="새 글"
+                      class="weekly-serial__new"
+                    />
+                  </p>
+                  <p class="weekly-serial__author"><em>by</em> 아무</p>
+                </article>
+              </li>
+
+              <li class="weekly-serial__item">
+                <article class="weekly-serial__info">
+                  <h3 class="weekly-serial__title">
+                    딸과 만나기까지 100일간의 기록
+                  </h3>
+                  <p class="weekly-serial__details">
+                    D-70, 30주
+                    <img
+                      src="/src/assets/icons/status/new.svg"
+                      alt="새 글"
+                      class="weekly-serial__new"
+                    />
+                  </p>
+                  <p class="weekly-serial__author"><em>by</em> Gigantes Yang</p>
+                </article>
+                <img
+                  src="/src/assets/images/home/serial1.png"
+                  alt="딸과 만나기까지 100일간의 기록"
+                  class="weekly-serial__image"
+                />
+              </li>
+
+              <li class="weekly-serial__item">
+                <article class="weekly-serial__info">
+                  <h3 class="weekly-serial__title">인류애 충전일기</h3>
+                  <p class="weekly-serial__details">
+                    열두 살 아이도 '나 몰라라'<img
+                      src="/src/assets/icons/status/new.svg"
+                      alt="새 글"
+                      class="weekly-serial__new"
+                    />
+                    하지는 않는다
+                  </p>
+                  <p class="weekly-serial__author"><em>by</em> 박단단</p>
+                </article>
+                <img
+                  src="/src/assets/images/home/serial2.png"
+                  alt="인류애 충전일기"
+                  class="weekly-serial__image"
+                />
+              </li>
+            </ul>
             <!-- 연재 작품 전체 보기 버튼 -->
             <button class="weekly-serial__view-all">
               <span>연재 작품 전체 보기</span>
@@ -99,7 +162,7 @@
                 class="icon-next"
               />
             </button>
-            <!-- 요일별 모아보기 섹션 끝 -->
+            <!-- 요일별 연재 섹션 끝 -->
           </section>
 
           <div class="divider"></div>
