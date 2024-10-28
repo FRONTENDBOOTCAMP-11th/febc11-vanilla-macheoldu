@@ -52,46 +52,54 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 검색 수행하는 함수
-  function performSearch(searchTerm) {
+  // "X" 버튼 클릭 시, 초기화
+  $resetButton.addEventListener('click', async function () {
+    $searchInput.value = ''; // 검색창 입력 초기화
     hideAllContent(); // 기존 콘텐츠 숨기기
+
+    // 모든 탭에서 'active' 클래스 제거
     $navTabs.forEach(function (tab) {
       tab.classList.remove('active');
-    }); // 모든 탭에서 'active' 클래스 제거
+    });
+    $navTabs[0].classList.add('active'); // 기본 탭인 글 탭 활성화
 
-    if (currentTab === 'post') {
-      // "글" 탭 검색: 제목과 내용에서만 검색
-      const filteredPosts = posts.filter(function (post) {
-        return (
-          post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          post.content.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      });
+    $searchCount.textContent = ''; // 검색 결과 개수 초기화
+    $mainContent.innerHTML = ''; // 검색 결과 내용 제거
+    $mainContent.style.overflowY = 'hidden'; // 스크롤바 숨기기
 
-      if (filteredPosts.length > 0) {
-        $navTabs[0].classList.add('active'); // "글" 탭 활성화
-        displayPostResults(filteredPosts, searchTerm); // 글 검색 결과 표시
-        $searchCount.textContent = `글 검색 결과 ${filteredPosts.length}건`;
-      } else {
-        $navTabs[0].classList.add('active'); // 검색 결과가 없어도 "글" 탭 활성화
-        showNoResults(); // 결과 없음 표시
-        $searchCount.textContent = '';
-      }
-    } else if (currentTab === 'author') {
-      // "작가" 탭 검색: 작가 이름에서만 검색
-      const authorFilteredPosts = posts.filter(function (post) {
-        return post.user.name.toLowerCase().includes(searchTerm.toLowerCase());
-      });
+    currentTab = 'post'; // 기본 탭을 'post'로 초기화
+    posts = []; // posts 배열 초기화
 
-      if (authorFilteredPosts.length > 0) {
-        $navTabs[1].classList.add('active'); // "작가" 탭 활성화
-        displayAuthorResults(authorFilteredPosts, searchTerm); // 작가 검색 결과 표시
-        $searchCount.textContent = `작가 검색 결과 ${authorFilteredPosts.length}건`;
-      } else {
-        $navTabs[0].classList.add('active'); // 검색 결과가 없어도 기본 "글" 탭 활성화
-        showNoResults(); // 결과 없음 표시
-        $searchCount.textContent = '';
-      }
+    await fetchPosts(); // X 버튼 클릭 후 데이터 다시 불러오기
+    $searchInput.focus(); // 검색창에 포커스 설정
+  });
+
+  // 검색 수행하는 함수
+  function performSearch(searchTerm) {
+    // 항상 "글" 탭이 기본 활성화 상태로 시작
+    currentTab = 'post';
+
+    // 기존 콘텐츠 숨기기 및 탭 초기화
+    hideAllContent();
+    $navTabs.forEach(function (tab) {
+      tab.classList.remove('active');
+    });
+    $navTabs[0].classList.add('active'); // "글" 탭 활성화
+
+    // "글" 탭 검색: 제목과 내용에서 검색
+    const filteredPosts = posts.filter(function (post) {
+      return (
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.content.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    });
+
+    if (filteredPosts.length > 0) {
+      displayPostResults(filteredPosts, searchTerm); // 글 검색 결과 표시
+      $searchCount.textContent = `글 검색 결과 ${filteredPosts.length}건`;
+    } else {
+      showNoResults(); // 결과 없음 표시
+      $searchCount.textContent = '';
     }
   }
 
@@ -101,17 +109,23 @@ document.addEventListener('DOMContentLoaded', function () {
       .map(function (post, index) {
         let imageUrl = null;
 
-        if (post.content) {
+        // 글에 포함된 이미지 배열의 첫 번째 이미지를 사용
+        if (post.image && Array.isArray(post.image) && post.image.length > 0) {
+          imageUrl = post.image[0];
+        } else if (post.content) {
+          // 내용에서 이미지 태그 찾기
           const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
           if (imgMatch) {
             imageUrl = imgMatch[1];
           }
         }
 
+        // product 이미지가 있을 경우 대체로 설정
         if (!imageUrl && post.product && post.product.image) {
           imageUrl = post.product.image;
         }
 
+        // 작성자 이미지가 있을 경우 대체로 설정
         if (!imageUrl && post.user && post.user.image) {
           imageUrl = post.user.image;
         }
@@ -203,27 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
     $authorContent.style.display = 'block';
   }
 
-  // "X" 버튼 클릭 시, 초기화
-  $resetButton.addEventListener('click', async function () {
-    $searchInput.value = ''; // 검색창 입력 초기화
-    hideAllContent(); // 기존 콘텐츠 숨기기
-
-    // 모든 탭에서 'active' 클래스 제거
-    $navTabs.forEach(function (tab) {
-      tab.classList.remove('active');
-    });
-
-    $searchCount.textContent = ''; // 검색 결과 개수 초기화
-    $mainContent.innerHTML = ''; // 검색 결과 내용 제거
-    $mainContent.style.overflowY = 'hidden'; // 스크롤바 숨기기
-
-    currentTab = 'post'; // 기본 탭을 'post'로 초기화
-    posts = []; // posts 배열 초기화
-
-    await fetchPosts(); // X 버튼 클릭 후 데이터 다시 불러오기
-    $searchInput.focus(); // 검색창에 포커스 설정
-  });
-
   // 검색어 입력 이벤트 (Enter키로 검색 실행)
   $searchInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
@@ -243,16 +236,47 @@ document.addEventListener('DOMContentLoaded', function () {
     tab.classList.remove('active');
   });
 
-  $navTabs.forEach(function (tab) {
+  // 작가 검색 시 중복된 작가 이름이 나타나지 않도록 설정
+  $navTabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
-      $navTabs.forEach(function (t) {
-        t.classList.remove('active'); // 모든 탭에서 'active' 클래스 제거
-      });
-      tab.classList.add('active'); // 클릭된 탭에 'active' 클래스 추가
-      currentTab = tab.textContent === '글' ? 'post' : 'author';
+      // 현재 검색어가 있을 때만 탭 전환 수행
+      const searchTerm = $searchInput.value.trim();
+      if (!searchTerm) return;
 
-      if ($searchInput.value) {
-        performSearch($searchInput.value);
+      // 탭 상태 초기화 후 현재 탭 활성화
+      $navTabs.forEach(function (t) {
+        t.classList.remove('active');
+      });
+      tab.classList.add('active');
+
+      currentTab = index === 0 ? 'post' : 'author';
+
+      // 탭에 따라 검색 결과 표시
+      hideAllContent();
+      if (currentTab === 'post') {
+        performSearch(searchTerm); // 글 검색 결과 표시
+      } else {
+        // 작가 검색 결과에서 중복 제거
+        const uniqueAuthors = new Set();
+        const authorFilteredPosts = posts.filter(function (post) {
+          const authorName = post.user.name.toLowerCase();
+          if (
+            authorName.includes(searchTerm.toLowerCase()) &&
+            !uniqueAuthors.has(authorName)
+          ) {
+            uniqueAuthors.add(authorName); // 중복되지 않는 작가 이름 추가
+            return true;
+          }
+          return false;
+        });
+
+        if (authorFilteredPosts.length > 0) {
+          displayAuthorResults(authorFilteredPosts, searchTerm); // 작가 검색 결과 표시
+          $searchCount.textContent = `작가 검색 결과 ${authorFilteredPosts.length}건`;
+        } else {
+          showNoResults();
+          $searchCount.textContent = '';
+        }
       }
     });
   });

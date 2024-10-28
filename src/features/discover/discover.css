@@ -53,6 +53,7 @@ body {
   background-color: #f8f8f8;
   color: var(--color-placeholder);
   padding-bottom: 49px;
+  position: relative;
 }
 
 .status-bar {
@@ -289,6 +290,16 @@ input:focus::placeholder {
   overflow: hidden;
 }
 
+.content__text-main,
+.author__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2; /* 2줄까지만 표시 */
+  line-clamp: 2;
+}
+
 .content__text-info {
   display: flex;
   gap: 2px;
@@ -375,6 +386,11 @@ em {
 
 /* 🚫 discover - null */
 .discover__none {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
