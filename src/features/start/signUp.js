@@ -57,7 +57,7 @@ window.addEventListener('load', () => {
           // 중복된 별명이 없는 경우 안내 메시지
           addMsg($checkNicknameResult, '사용할 수 있는 별명입니다.');
           isValidMsg($checkNicknameResult);
-          // 별명 인증 상태 변경
+          // 별명 인증 상태 true
           isNicknameValidated = true;
         }
       }).catch(error => {
@@ -66,12 +66,13 @@ window.addEventListener('load', () => {
           const errorMsg = error.response.data.message;
           addMsg($checkNicknameResult, errorMsg);
           isInvalidMsg($checkNicknameResult);
+          // 별명 인증 상태 false
           isNicknameValidated = false;
         } else if (error.response.status === 500) {
-          //
+          // 서버 에러(500) 시 얼럿
           alert(error.response.data.message);
+          // 별명 인증 상태 false
           isNicknameValidated = false;
-
         }
       })
 
@@ -121,7 +122,9 @@ window.addEventListener('load', () => {
             // 이메일 확인 상태값 false
             isEmailValidated = false;
           } else if (error.response.status === 500) {
-            alert(error.response.data.message)
+            // 서버 에러(500) 시 얼럿
+            alert(error.response.data.message);
+            isEmailValidated = false;
           }
         })
       } else {
@@ -228,7 +231,7 @@ window.addEventListener('load', () => {
           password: `${signUpPw}`,
           name: `${signUpNickname}`,
           type: 'user',
-          // 디폴트 이미지로 출력
+          // 최초 회원가입 시 디폴트 이미지 추가
           image: '/src/assets/images/no_profile.svg'
         }
       })
