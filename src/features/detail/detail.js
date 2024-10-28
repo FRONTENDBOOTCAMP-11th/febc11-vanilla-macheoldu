@@ -70,10 +70,6 @@ const getAuthorInfo = async function (authorId) {
 const printPost = async function () {
   try {
     const postId = getPostIdFromUrl();
-    if (!postId) {
-      console.error('게시물 ID가 없습니다');
-      return;
-    }
 
     // 1. 게시물 데이터 가져오기
     const postData = await getPost(postId);

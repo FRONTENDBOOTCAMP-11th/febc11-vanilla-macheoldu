@@ -12,7 +12,7 @@ const api = axios.create({
 // Utility 함수 - URL에서 userId 가져오는 함수
 const getUserIdFromUrl = function () {
   const params = new URLSearchParams(window.location.search);
-  return params.get('userId') || 12; // 없으면 기본 값 10으로 설정
+  return params.get('userId') || 10; // 없으면 기본 값 10으로 설정
 };
 
 //  Utility 함수 - 날짜 함수, 유저(작가)게시물 가져오는 함수 안에서 사용
@@ -49,7 +49,7 @@ const $profileImage = document.querySelector('.header__profile-image');
 const $subscriberCount = document.querySelector('.header__subscriber-count');
 const $followingCount = document.querySelector('.header__following-count');
 // const $subscribeButton = document.querySelector(
-//   'header__subscription-button-image',
+//   '.header__subscription-button-image',
 // );
 
 // DOM 요소 선택 - 유저(작가)의 게시물 관련 DOM 요소
@@ -64,12 +64,12 @@ const getUserInfo = async function () {
     // userId를 사용해 해당 유저(작가)의 정보를 API에서 가져옴
     const response = await api.get(`/users/${userId}`);
     const userData = response.data.item;
-    console.log(userData);
+    // console.log('유저(작가) 정보 :', userData);
 
     // 유저(작가)정보 넣기
     $userNickname.textContent = userData.name;
     $userOccupation.textContent = userData.extra?.job || '작가'; // 없으면 기본 값 작가로 설정
-    $subscriberCount.textContent = userData.bookmakedBy?.users || 123; // 없으면 기본 값으로 설정
+    $subscriberCount.textContent = userData.bookmarkedBy?.users || 123; // 없으면 기본 값으로 설정
     $followingCount.textContent = userData.bookmark?.users || 45; // 없으면 기본 값으로 설정
 
     // TODO: 이미지 비동기 처리로 변경 예정
@@ -102,7 +102,7 @@ const getUserPost = async function () {
     // userId를 사용해 해당 유저(작가)의 게시물 데이터를 API에서 가져옴
     const response = await api.get(`/posts/users/${userId}?type=info`);
     const posts = response.data?.item;
-    // console.log(posts);
+    // console.log('유저(작가)의 게시물 :', posts);
 
     // 게시물 목록 초기화
     $postList.innerHTML = '';
@@ -139,8 +139,65 @@ const getUserPost = async function () {
   }
 };
 
+// 🚨 구독 기능 구현
+sessionStorage.setItem('userEmail', 'sparkle@gmail.com');
+sessionStorage.setItem(
+  'userAccessToken',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAwOTU3NTYsImV4cCI6MTczMDE4MjE1NiwiaXNzIjoiRkVTUCJ9.ta3pHKiZxnABOVfUaYD3RwPv99fsfGI1xT-_AD1KfOw',
+);
+const token = sessionStorage.getItem('userAccessToken');
+
+// (현재 로그인한) 사용자 정보 가져오기
+const getLoginUser = async function () {
+  try {
+    // 세션에서 현재 로그인한 사용자 이메일 가져오기
+    const userEmail = sessionStorage.getItem('userEmail');
+    console.log('현재 로그인한 이메일:', userEmail);
+
+    // 전체 유저 목록 불러오기
+    const response = await api.get('/users');
+    const users = response.data.item;
+    console.log('전체 유저 목록 :', users);
+    // 전체 유저 중 현재 이메일로 로그인한 유저 찾기
+    const loginUser = users.find(function (user) {
+      return user.email === userEmail;
+    });
+    console.log('현재 로그인한 유저 정보:', loginUser);
+
+    return loginUser;
+  } catch (error) {
+    console.error('로그인 사용자 정보 가져오기 실패:', error);
+  }
+};
+
+// (사용자 아닌)현재 페이지의 유저 구독 상태 확인 함수
+const checkIsSubscribed = async function () {
+  // 토큰 체크 추가
+  if (!token) {
+    console.log('로그인이 필요합니다');
+    return false;
+  }
+
+  try {
+    // 현재 보고 있는 유저 Id 가져오기
+    const userId = getUserIdFromUrl();
+    // 현재 보고 있는 유저 구독 여부 확인
+    const response = await api.get(`/bookmarks/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data.ok === 1;
+  } catch (error) {
+    console.error('구독 상태 확인 실패:', error);
+    return false;
+  }
+};
+
 // 이벤트 리스너 - 페이지 로드 시 실행될 함수들
 document.addEventListener('DOMContentLoaded', function () {
   getUserInfo();
   getUserPost();
+  getLoginUser();
+  checkIsSubscribed();
 });
