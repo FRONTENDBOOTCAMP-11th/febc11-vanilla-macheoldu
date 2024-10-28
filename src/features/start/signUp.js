@@ -53,20 +53,26 @@ window.addEventListener('load', () => {
           name: `${userNickname}`
         }
       }).then(response => {
-        console.log(response);
         if (response.data.ok == 1) {
           // 중복된 별명이 없는 경우 안내 메시지
           addMsg($checkNicknameResult, '사용할 수 있는 별명입니다.');
           isValidMsg($checkNicknameResult);
           // 별명 인증 상태 변경
           isNicknameValidated = true;
-        } else {
-          // 중복된 별명이 있는 경우 안내 메시지
-          addMsg($checkNicknameResult, '이미 등록된 별명입니다.');
-          isInvalidMsg($checkNicknameResult);
         }
       }).catch(error => {
-        alert(error.response.data.message)
+        if (error.response.status == 409) {
+          // 중복된 이름이 있는 경우 에러 메시지
+          const errorMsg = error.response.data.message;
+          addMsg($checkNicknameResult, errorMsg);
+          isInvalidMsg($checkNicknameResult);
+          isNicknameValidated = false;
+        } else if (error.response.status === 500) {
+          //
+          alert(error.response.data.message);
+          isNicknameValidated = false;
+
+        }
       })
 
     } else {
@@ -222,6 +228,7 @@ window.addEventListener('load', () => {
           password: `${signUpPw}`,
           name: `${signUpNickname}`,
           type: 'user',
+          // 디폴트 이미지로 출력
           image: '/src/assets/images/no_profile.svg'
         }
       })
