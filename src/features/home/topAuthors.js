@@ -16,6 +16,9 @@ const renderTopAuthors = authors => {
     return;
   }
 
+  // 형식 검사 authors 변수가 배열인지 아닌지 검사하는 함수
+  // authors 배열이라면 -> !Array.isArray(authors) 거짓
+  // Array.isArray -> 배열이라면 참 아니라면 거짓
   if (!Array.isArray(authors) || authors.length === 0) {
     console.error('No authors data to render!');
     container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
@@ -24,6 +27,7 @@ const renderTopAuthors = authors => {
 
   const authorsHTML = authors
     .map((author, index) => {
+      // 안전 코드
       if (!author) {
         console.error('Invalid author data at index:', index);
         return '';
@@ -93,6 +97,7 @@ const fetchTopAuthors = async () => {
 
     console.log('Fetched top authors:', topAuthors);
 
+    // top 구독자 없을 때
     if (topAuthors.length === 0) {
       throw new Error('No authors with subscribers found');
     }
