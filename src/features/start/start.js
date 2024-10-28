@@ -116,6 +116,7 @@ window.addEventListener('load', () => {
             // 로그인 상태 변경
             loginStatus = true;
             const userEmail = response.data.item.email;
+            const userId = response.data.item._id
             const userAccessToken = response.data.item.token.accessToken;
             const userRefeshToken = response.data.item.token.refeshToken;
 
@@ -125,6 +126,7 @@ window.addEventListener('load', () => {
             // sessionStorage 에 로그인 상태, 사용자 _id, name 저장 -> 각 페이지 이동 시, sessionStorage 에 유지
             sessionStorage.setItem('login-status', loginStatus);
             sessionStorage.setItem('userEmail', userEmail);
+            sessionStorage.setItem('userIdNum', userId);
             sessionStorage.setItem('userAccessToken', userAccessToken);
             sessionStorage.setItem('userRefreshToken', userRefeshToken);
 
