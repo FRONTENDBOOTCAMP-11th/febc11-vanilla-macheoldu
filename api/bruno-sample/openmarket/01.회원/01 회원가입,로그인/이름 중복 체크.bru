@@ -1,0 +1,15 @@
+meta {
+  name: 이름 중복 체크
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{url}}/users/name?name=무지
+  body: none
+  auth: none
+}
+
+params:query {
+  name: 무지
+}
