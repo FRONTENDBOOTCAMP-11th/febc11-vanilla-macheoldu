@@ -64,53 +64,69 @@ window.addEventListener('load', function () {
 
   $postSave.addEventListener('click', function (e) {
     e.preventDefault();
-    const title = $postTitle.value;
-    const subtitle = $postSubtitle.value;
-    const content = $postContent.value;
-    const userAccessToken = sessionStorage.getItem('userAccessToken');
-    const userRefreshToken = sessionStorage.getItem('userRefreshToken');
+    // const title = $postTitle.value;
+    // const subtitle = $postSubtitle.value;
+    // const content = $postContent.value;
+    // const userAccessToken = sessionStorage.getItem('userAccessToken');
+    // const userRefreshToken = sessionStorage.getItem('userRefreshToken');
 
-    console.dir(window.selectedFiles);
+    const selectedFiles = window.selectedFiles
+    console.dir(selectedFiles);
 
     if ($postSave.classList.item('confirmSave')) {
       const save = confirm('저장하시겠습니까?');
       if (save) {
-        const formData = new FormData();
-        formData.append('type', 'info');
-        formData.append('title', `${title}`);
-        formData.append('extra[subTitle]', `${subtitle}`);
-        formData.append('content', `${content}`);
-
-        if (window.selectedFiles && window.selectedFiles.length > 0) {
-          for (let i = 0; i < window.selectedFiles.length; i++) {
-            formData.append('image', window.selectedFiles[i]);
-          }
-        }
-
         axios({
           method: 'post',
-          url: '/api/posts',
+          url: '/api/files',
           headers: {
             'client-id': 'vanilla03',
-            'Content-Type': 'application/json',
-            accept: 'application/json',
-            'Authorization': `Bearer ${userAccessToken}`
+            'Content-Type': 'multipart/form-data',
+            // accept: 'application/json'
           },
-          data: formData
+          attach: selectedFiles
         }).then(response => {
-          alert('저장을 완료했습니다');
-          console.log(window.selectedFiles);
+          console.dir(selectedFiles);
+          console.log(response.data);
         }).catch(error => {
-          if (error.response.status === 500) {
-            const errorMsg = error.response.data.message;
-            alert(errorMsg);
-          }
+          console.log(error.response.data.message);
         })
+        // const formData = new FormData();
+        // formData.append('type', 'info');
+        // formData.append('title', `${title}`);
+        // formData.append('extra[subTitle]', `${subtitle}`);
+        // formData.append('content', `${content}`);
 
-        console.log($postTitle.value);
-        console.log($postSubtitle.value);
-        console.log($postContent.value);
-        console.log(formData);
+        // if (window.selectedFiles && window.selectedFiles.length > 0) {
+        //   for (let i = 0; i < window.selectedFiles.length; i++) {
+        //     formData.append('image', window.selectedFiles[i]);
+        //   }
+        // }
+
+        // axios({
+        //   method: 'post',
+        //   url: '/api/posts',
+        //   headers: {
+        //     'client-id': 'vanilla03',
+        //     'Content-Type': 'application/json',
+        //     accept: 'application/json',
+        //     'Authorization': `Bearer ${userAccessToken}`
+        //   },
+        //   data: formData
+        // }).then(response => {
+        //   alert('저장을 완료했습니다');
+        //   console.log(window.selectedFiles);
+        // }).catch(error => {
+        //   if (error.response.status === 500) {
+        //     const errorMsg = error.response.data.message;
+        //     alert(errorMsg);
+        //   }
+        // })
+
+        // console.log($postTitle.value);
+        // console.log($postSubtitle.value);
+        // console.log($postContent.value);
+        // console.log(formData);
       } else {
         alert('저장을 취소하였습니다')
       }
