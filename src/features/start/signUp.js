@@ -232,7 +232,7 @@ window.addEventListener('load', () => {
           name: `${signUpNickname}`,
           type: 'user',
           // 최초 회원가입 시 디폴트 이미지 추가
-          image: '/src/assets/images/no_profile.svg'
+          image: 'https://11.fesp.shop/files/vanilla03/no_profile.svg'
         }
       })
         .then(response => {
