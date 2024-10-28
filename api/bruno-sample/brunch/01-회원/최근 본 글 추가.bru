@@ -1,0 +1,15 @@
+meta {
+  name: 최근 본 글 추가
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/users/:userId/recently-viewed
+  body: none
+  auth: none
+}
+
+params:path {
+  userId: 
+}
