@@ -379,14 +379,8 @@ em {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 100px;
-  /* 하단 내비 바 중첩되는 부분, 위에 두 개 합친 것이 96px */
-  height: calc(100vh - 96px);
-}
-
-.discover__none {
-  /* 하단 내비 바 중첩되는 부분 */
-  padding-bottom: 100px;
+  /* 헤더 52, 탭 42, 필터 24, 탭바 100 => 총 220 */
+  height: calc(100vh - 220px);
 }
 
 .discover__result-noneImg {
