@@ -5,14 +5,22 @@ meta {
 }
 
 post {
-  url: {{url}}/bookmarks/posts
+  url: {{url}}/bookmarks/post
   body: json
-  auth: none
+  auth: bearer
+}
+
+headers {
+  content-type: application/json
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjQsInR5cGUiOiJzZWxsZXIiLCJuYW1lIjoiQUnrn6wg7J207LGE66y4IiwiZW1haWwiOiJ3M0BnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1hcGVhY2gud2VicCIsImxvZ2luVHlwZSI6Imtha2FvIiwiaWF0IjoxNzMwMDgyMDA0LCJleHAiOjE3MzAxNjg0MDQsImlzcyI6IkZFU1AifQ.--Je93SP514WK9lYT0wFWXhKpVVPQl1TMsmON0YtX1g
 }
 
 body:json {
   {
-    "target_id": 131
+    "type": "post",
+    "target_id": 4
   }
-  
 }

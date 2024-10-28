@@ -1,7 +1,10 @@
 import moment from 'moment';
 
 function getTime(day = 0, second = 0) {
-  return moment().add(day, 'days').add(second, 'seconds').format('YYYY.MM.DD HH:mm:ss');
+  return moment()
+    .add(day, 'days')
+    .add(second, 'seconds')
+    .format('YYYY.MM.DD HH:mm:ss');
 }
 
 export const initData = async (clientId, nextSeq) => {
@@ -11,7 +14,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'admin@fesp.shop',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '무지',
         type: 'admin',
         loginType: 'email',
@@ -20,12 +24,13 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-100, -60 * 60 * 3),
         extra: {
           job: '관리자',
-        }
+        },
       },
       {
         _id: await nextSeq('user'),
         email: 'w1@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: 'AB',
         type: 'seller',
         loginType: 'email',
@@ -42,7 +47,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'w2@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '자기반성',
         type: 'seller',
         loginType: 'email',
@@ -51,14 +57,16 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-30, -60 * 20),
         extra: {
           job: '자기탐구인문학 크리에이터',
-          biography: '공상가, AB형, ENFP 성향을 똑 닮은 딸을 키우고 있는 해외맘. 세상의 모든 할머니, 엄마와 딸을 응원합니다. 열심히 일하며 생명체를 키워나가고 있습니다. 자기 탐구 인문학자',
+          biography:
+            '공상가, AB형, ENFP 성향을 똑 닮은 딸을 키우고 있는 해외맘. 세상의 모든 할머니, 엄마와 딸을 응원합니다. 열심히 일하며 생명체를 키워나가고 있습니다. 자기 탐구 인문학자',
           keyword: ['인문학', '공상가', '엄마'],
         },
       },
       {
         _id: await nextSeq('user'),
         email: 'w3@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: 'AI러 이채문',
         type: 'seller',
         loginType: 'kakao',
@@ -75,18 +83,20 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'heart@naver.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '하트핑',
         type: 'user',
         loginType: 'kakao',
         image: `/files/${clientId}/user-heartping.webp`,
         createdAt: getTime(-20, -60 * 22),
-        updatedAt: getTime(-10, -60 * 11)
+        updatedAt: getTime(-10, -60 * 11),
       },
       {
         _id: await nextSeq('user'),
         email: 'joy@daum.net',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '조이핑',
         type: 'user',
         loginType: 'email',
@@ -99,12 +109,13 @@ export const initData = async (clientId, nextSeq) => {
         },
         bookmarkedBy: {
           users: 11,
-        }
+        },
       },
       {
         _id: await nextSeq('user'),
         email: 'sparkle@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '스파클핑',
         type: 'user',
         loginType: 'kakao',
@@ -122,7 +133,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'love@hotmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '러브핑',
         type: 'user',
         loginType: 'email',
@@ -140,7 +152,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'twinkle@hanmail.net',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '트윙클핑',
         type: 'user',
         loginType: 'kakao',
@@ -158,7 +171,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'flower@yahoo.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '플라워핑',
         type: 'user',
         loginType: 'email',
@@ -176,7 +190,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'cook@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '쿡핑',
         type: 'user',
         loginType: 'kakao',
@@ -194,7 +209,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'dream@outlook.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '드림핑',
         type: 'user',
         loginType: 'email',
@@ -208,8 +224,7 @@ export const initData = async (clientId, nextSeq) => {
         bookmarkedBy: {
           users: 8,
         },
-      }
-
+      },
     ],
     // 상품
     product: [],
@@ -680,10 +695,10 @@ export const initData = async (clientId, nextSeq) => {
             user: {
               _id: 2,
               name: 'AB',
-              image: `/files/${clientId}/user-neo.webp`
+              image: `/files/${clientId}/user-neo.webp`,
             },
             createdAt: getTime(-2, -60 * 60 * 20),
-            updatedAt: getTime(-2, -60 * 60 * 2)
+            updatedAt: getTime(-2, -60 * 60 * 2),
           },
           {
             _id: await nextSeq('reply'),
@@ -691,14 +706,12 @@ export const initData = async (clientId, nextSeq) => {
             user: {
               _id: 3,
               name: '자기반성',
-              image: `/files/${clientId}/user-jayg.webp`
+              image: `/files/${clientId}/user-jayg.webp`,
             },
             createdAt: getTime(-2, -60 * 60 * 20),
-            updatedAt: getTime(-2, -60 * 60 * 20)
+            updatedAt: getTime(-2, -60 * 60 * 20),
           },
-
-
-        ]
+        ],
       },
       {
         _id: await nextSeq('post'),
@@ -748,10 +761,10 @@ export const initData = async (clientId, nextSeq) => {
             user: {
               _id: 2,
               name: 'AB',
-              image: `/files/${clientId}/user-neo.webp`
+              image: `/files/${clientId}/user-neo.webp`,
             },
             createdAt: getTime(-2, -60 * 60 * 20),
-            updatedAt: getTime(-2, -60 * 60 * 2)
+            updatedAt: getTime(-2, -60 * 60 * 2),
           },
           {
             _id: await nextSeq('reply'),
@@ -759,17 +772,17 @@ export const initData = async (clientId, nextSeq) => {
             user: {
               _id: 3,
               name: '자기반성',
-              image: `/files/${clientId}/user-jayg.webp`
+              image: `/files/${clientId}/user-jayg.webp`,
             },
             createdAt: getTime(-2, -60 * 60 * 20),
-            updatedAt: getTime(-2, -60 * 60 * 20)
+            updatedAt: getTime(-2, -60 * 60 * 20),
           },
-        ]
+        ],
       },
       {
         _id: await nextSeq('post'),
         type: 'info',
-        title: '덴마크의 \'꿀 하트\' 쿠키, Honninghjerter',
+        title: "덴마크의 '꿀 하트' 쿠키, Honninghjerter",
         extra: {
           subTitle: '달콤한 덴마크 디저트 이야기 (2)',
         },
@@ -807,7 +820,7 @@ export const initData = async (clientId, nextSeq) => {
       `,
         createdAt: getTime(-3, -60 * 60 * 20),
         updatedAt: getTime(-2, -60 * 60 * 10),
-        replies: []
+        replies: [],
       },
       {
         _id: await nextSeq('post'),
@@ -847,7 +860,7 @@ export const initData = async (clientId, nextSeq) => {
 자, 지금부터 애니메이션 ‘겨울왕국’에 나오는 눈사람 캐릭터 ‘올라프’가 가상으로 알려주는 ‘눈사람 잘 만드는 법’을 자세히 살펴보자.`,
         createdAt: getTime(-3, -60 * 60 * 20),
         updatedAt: getTime(-2, -60 * 60 * 10),
-        replies: []
+        replies: [],
       },
       {
         _id: await nextSeq('post'),
@@ -883,20 +896,20 @@ export const initData = async (clientId, nextSeq) => {
 국가는 농지에 관하여 경자유전의 원칙이 달성될 수 있도록 노력하여야 하며, 농지의 소작제도는 금지된다. 정부는 예산에 변경을 가할 필요가 있을 때에는 추가경정예산안을 편성하여 국회에 제출할 수 있다.`,
         createdAt: getTime(-3, -60 * 60 * 20),
         updatedAt: getTime(-2, -60 * 60 * 10),
-        replies: []
+        replies: [],
       },
       {
-        _id: await nextSeq("post"),
-        type: "info",
-        title: "보상은 없다",
+        _id: await nextSeq('post'),
+        type: 'info',
+        title: '보상은 없다',
         extra: {
           subTitle:
-            "한남3구역 동갑내기 빌라에 사는 어느 셀프 인테리어 중독자의 고백",
+            '한남3구역 동갑내기 빌라에 사는 어느 셀프 인테리어 중독자의 고백',
         },
         views: 7,
         user: {
           _id: 9,
-          name: "트윙클핑",
+          name: '트윙클핑',
           image: `/files/${clientId}/user-twinklingping.webp`,
         },
         content: `
@@ -942,19 +955,19 @@ export const initData = async (clientId, nextSeq) => {
 </div>`,
         createdAt: getTime(90, 60 * 60 * 21),
         updatedAt: getTime(91, 60 * 60 * 13),
-        replies: []
+        replies: [],
       },
       {
-        _id: await nextSeq("post"),
-        type: "info",
-        title: "하늘은 높고 고양이도 살찐다",
+        _id: await nextSeq('post'),
+        type: 'info',
+        title: '하늘은 높고 고양이도 살찐다',
         extra: {
-          subTitle: "천고마비 아니 천고묘비",
+          subTitle: '천고마비 아니 천고묘비',
         },
         views: 64,
         user: {
           _id: 11,
-          name: "쿡핑",
+          name: '쿡핑',
           image: `/files/${clientId}/user-cookping.webp`,
         },
         content: `
@@ -1000,19 +1013,19 @@ export const initData = async (clientId, nextSeq) => {
 </div>`,
         createdAt: getTime(90, 60 * 60 * 21),
         updatedAt: getTime(91, 60 * 60 * 13),
-        replies: []
+        replies: [],
       },
       {
-        _id: await nextSeq("post"),
-        type: "info",
-        title: "알아두면 쓸모 있는 px, em, rem",
+        _id: await nextSeq('post'),
+        type: 'info',
+        title: '알아두면 쓸모 있는 px, em, rem',
         extra: {
-          subTitle: "절대평가와 상대평가의 차이",
+          subTitle: '절대평가와 상대평가의 차이',
         },
         views: 5,
         user: {
           _id: 6,
-          name: "조이핑",
+          name: '조이핑',
           image: `/files/${clientId}/user-joyping.webp`,
         },
         content: `<div class="wrap_body text_align_left finish_txt">
@@ -1224,12 +1237,12 @@ export const initData = async (clientId, nextSeq) => {
 </div>`,
         replies: [
           {
-            _id: await nextSeq("reply"),
+            _id: await nextSeq('reply'),
             user: {
               _id: 3,
-              name: "한봄",
+              name: '한봄',
             },
-            content: "쉽게 잘 설명해주셔서 감사합니다~! 도움이 되었습니다.",
+            content: '쉽게 잘 설명해주셔서 감사합니다~! 도움이 되었습니다.',
             like: 5,
             createdAt: getTime(-2, -60 * 60 * 20),
             updatedAt: getTime(-2, -60 * 60 * 2),
@@ -1237,17 +1250,18 @@ export const initData = async (clientId, nextSeq) => {
         ],
         createdAt: getTime(-3, -60 * 60 * 2),
         updatedAt: getTime(-3, -60 * 60 * 2),
-      }, {
-        _id: await nextSeq("post"),
-        type: "info",
-        title: "회색 공동체, 사라진 나의 색",
+      },
+      {
+        _id: await nextSeq('post'),
+        type: 'info',
+        title: '회색 공동체, 사라진 나의 색',
         extra: {
-          subTitle: "밀크맨을 읽고",
+          subTitle: '밀크맨을 읽고',
         },
         views: 5,
         user: {
           _id: 10,
-          name: "플라워핑",
+          name: '플라워핑',
           image: `/files/${clientId}/user-flowerping.webp`,
         },
         content: `회색 지역에 회색 사람들이 살고 있다. 그들은 이름도 없고, 하늘에 밝은 연파랑만이 인정되듯 그들은 이름조 차 검열받았다. 그들은 이름 대신 보통 명사의 껍데기만 쓰며, 회색 가면을 쓰고 살아간다. 자신의 색깔을 드 러내는 순간, 주변의 눈과 귀가 그들을 주시한다. 심지어 가정조차 안전지대가 되지 못했다. 과거의 살구색이 었던 엄마와 초록색이었던 아빠는 결국 회색으로 변했고, 그들은 온전한 자아를 숨긴 채 회색의 모습을 하고 만나 정상적인 가정을 꾸리며 살아간다.
@@ -1263,12 +1277,12 @@ export const initData = async (clientId, nextSeq) => {
 그들의 사회는 우리의 사회와 다르다. 그래서 그들을 이상하게 보는 것일 수 있다. 내가 보는 내 공동체는 이 상적이지는 않더라도 상식적이다. 어쩔수없는 부조리들은 어디나 있으니 이정도면 된게 아닌가 라는 생각이 든다. 그러나 우리와 다른 배경에 다른 역사를 가진 누군가 이 사회를 들여다본다면, 이 속에서도 부당한 배제 를 당하는 누군가가 있지는 않을까? 나는 이 사회에서 행복 비슷한 것을 느끼며 살아간다. 이런 사실 자체가 내가 어느 정도 내 색깔을 잃고 회색이 되었음을 반증하는 것은 아닐까? 우리 사회가 완벽히 이상적인 공동체 가 아님을 직감할 수 있기에, 나의 말과 행동에 들어 있는 무의식적인 배제를 더 세심히 살피며 살아가야 함을 느낀다.`,
         replies: [
           {
-            _id: await nextSeq("reply"),
+            _id: await nextSeq('reply'),
             user: {
               _id: 3,
-              name: "한봄",
+              name: '한봄',
             },
-            content: "쉽게 잘 설명해주셔서 감사합니다~! 도움이 되었습니다.",
+            content: '쉽게 잘 설명해주셔서 감사합니다~! 도움이 되었습니다.',
             like: 5,
             createdAt: getTime(-2, -60 * 60 * 20),
             updatedAt: getTime(-2, -60 * 60 * 2),
@@ -1278,16 +1292,16 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-3, -60 * 60 * 2),
       },
       {
-        _id: await nextSeq("post"),
-        type: "info",
-        title: "[취업특강] 노션 포트폴리오 만들기",
+        _id: await nextSeq('post'),
+        type: 'info',
+        title: '[취업특강] 노션 포트폴리오 만들기',
         extra: {
-          subTitle: "with 노슈니, 슈크림 마을, 마포청년나루",
+          subTitle: 'with 노슈니, 슈크림 마을, 마포청년나루',
         },
         views: 5,
         user: {
           _id: 12,
-          name: "드림핑",
+          name: '드림핑',
           image: `/files/${clientId}/user-dreamping.webp`,
         },
         content: `
@@ -1310,17 +1324,17 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-9, -60 * 60 * 5),
       },
       {
-        _id: await nextSeq("post"),
-        type: "info",
-        title: "보상은 없다",
+        _id: await nextSeq('post'),
+        type: 'info',
+        title: '보상은 없다',
         extra: {
           subTitle:
-            "한남3구역 동갑내기 빌라에 사는 어느 셀프 인테리어 중독자의 고백",
+            '한남3구역 동갑내기 빌라에 사는 어느 셀프 인테리어 중독자의 고백',
         },
         views: 10,
         user: {
           _id: 12,
-          name: "드림핑",
+          name: '드림핑',
           image: `/files/${clientId}/user-dreamping.webp`,
         },
         content: `
@@ -1329,17 +1343,17 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-8, -60 * 60 * 5),
       },
       {
-        _id: await nextSeq("post"),
-        type: "info",
-        title: "집을 구한다",
+        _id: await nextSeq('post'),
+        type: 'info',
+        title: '집을 구한다',
         extra: {
           subTitle:
-            "한남3구역 동갑내기 빌라에 사는 어느 셀프 인테리어 중독자의 고백",
+            '한남3구역 동갑내기 빌라에 사는 어느 셀프 인테리어 중독자의 고백',
         },
         views: 65,
         user: {
           _id: 12,
-          name: "드림핑",
+          name: '드림핑',
           image: `/files/${clientId}/user-dreamping.webp`,
         },
         content: `
@@ -1368,40 +1382,35 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-7, -60 * 60 * 5),
         replies: [
           {
-            _id: await nextSeq("reply"),
+            _id: await nextSeq('reply'),
             user: {
               _id: 3,
-              name: "자기반성",
+              name: '자기반성',
             },
-            content: "좋은 집 구하셨으면 좋겠습니다",
+            content: '좋은 집 구하셨으면 좋겠습니다',
             like: 5,
             createdAt: getTime(-2, -60 * 60 * 20),
             updatedAt: getTime(-2, -60 * 60 * 2),
           },
           {
-            _id: await nextSeq("reply"),
+            _id: await nextSeq('reply'),
             user: {
               _id: 4,
-              name: "AI러 이채문",
+              name: 'AI러 이채문',
               image: `/files/${clientId}/user-apeach.webp`,
             },
-            content: "한 수 배웁니다.",
+            content: '한 수 배웁니다.',
             like: 7,
             createdAt: getTime(-2, -60 * 60 * 10),
             updatedAt: getTime(-2, -60 * 60 * 1),
           },
         ],
       },
-      {
-
-      }
+      {},
     ],
     // 코드
-    code: [
-    ],
+    code: [],
     // 설정
-    config: [
-
-    ],
-  }
+    config: [],
+  };
 };
