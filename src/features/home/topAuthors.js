@@ -1,125 +1,163 @@
 import axios from 'axios';
 
-// API 설정 상수
-const API_CONFIG = {
-  BASE_URL: 'https://11.fesp.shop',
-  HEADERS: {
-    'client-id': 'vanilla03',
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
+const getImgUrl = imgPath => {
+  if (!imgPath) return '/src/assets/images/home/author2.png';
+  return `https://11.fesp.shop${imgPath}`;
 };
 
-// API 인스턴스 생성
-const api = axios.create({
-  baseURL: API_CONFIG.BASE_URL,
-  headers: API_CONFIG.HEADERS,
-});
+const renderTopAuthors = authors => {
+  console.log('Rendering authors:', authors);
 
-// 유틸리티 함수
-const utils = {
-  // 이미지 URL 생성
-  getImgUrl: imgPath => `${API_CONFIG.BASE_URL}${imgPath}`,
+  const container = document.querySelector(
+    '.main__top-subscribed-authors-grid',
+  );
+  if (!container) {
+    console.error('Top authors container not found!');
+    return;
+  }
 
-  // 구독자 수 계산
-  getSubscriberCount: bookmarkedBy => {
-    return Array.isArray(bookmarkedBy?.users)
-      ? bookmarkedBy.users.length
-      : bookmarkedBy?.users || 0;
-  },
+  if (!Array.isArray(authors) || authors.length === 0) {
+    console.error('No authors data to render!');
+    container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
+    return;
+  }
 
-  // 텍스트 자르기
-  truncateText: (text, length) => `${text.slice(0, length)}...`,
-};
+  const authorsHTML = authors
+    .map((author, index) => {
+      if (!author) {
+        console.error('Invalid author data at index:', index);
+        return '';
+      }
 
-// 렌더링 서비스
-const renderService = {
-  // 작가 프로필 렌더링
-  createAuthorProfile: author => {
-    const imgUrl = utils.getImgUrl(author.image);
-
-    return `
-      <article class="main__top-subscribed-author">
-        <div class="author-content">
-          <img
-            src="${imgUrl}"
-            alt="${author.name}"
-            class="main__top-subscribed-author-image"
-            onerror="this.src='/src/assets/images/home/author2.png'"
-          />
-          <div class="author-text">
-            <h3 class="main__top-subscribed-author-name">${author.name}</h3>
-            ${
-              author.extra?.job
-                ? `<p class="main__top-subscribed-author-role">${author.extra.job}</p>`
-                : ''
-            }
-            ${
-              author.extra?.biography
-                ? `<p class="main__top-subscribed-author-description">
-                ${utils.truncateText(author.extra.biography, 50)}
-              </p>`
-                : ''
-            }
+      return `
+        <article class="main__top-subscribed-author">
+          <div class="author-content">
+            <img
+              src="${getImgUrl(author.image)}"
+              alt="${author.name || 'Author'}"
+              class="main__top-subscribed-author-image"
+              onerror="this.src='/src/assets/images/home/author2.png'"
+            />
+            <div class="author-text">
+              <h3 class="main__top-subscribed-author-name">${author.name || 'Unknown Author'}</h3>
+              ${
+                author.extra?.job
+                  ? `<p class="main__top-subscribed-author-role">${author.extra.job}</p>`
+                  : ''
+              }
+              ${
+                author.extra?.biography
+                  ? `<p class="main__top-subscribed-author-description">
+                  ${author.extra.biography.slice(0, 50)}...
+                </p>`
+                  : ''
+              }
+            </div>
           </div>
-        </div>
-      </article>
-    `;
-  },
+        </article>
+      `;
+    })
+    .join('');
 
-  // 전체 작가 목록 렌더링
-  renderTopAuthors: authors => {
-    const authorsHTML = authors
-      .map(author => renderService.createAuthorProfile(author))
-      .join('');
-
-    const $container = document.querySelector(
-      '.main__top-subscribed-authors-grid',
-    );
-    if ($container) {
-      $container.innerHTML = authorsHTML;
-    }
-  },
+  console.log('Generated HTML length:', authorsHTML.length);
+  container.innerHTML = authorsHTML;
+  console.log('Container updated. New child count:', container.children.length);
 };
 
-// 작가 데이터 서비스
-const authorService = {
-  // 작가 데이터 가져오기
-  fetchTopAuthors: async () => {
-    try {
-      const response = await api.get('/users');
-      return authorService.processAuthorsData(response.data.item);
-    } catch (error) {
-      console.error('top 구독작가 에러:', error);
-      return [];
-    }
-  },
+const fetchTopAuthors = async () => {
+  try {
+    console.log('Fetching authors...');
+    const response = await axios.get('https://11.fesp.shop/users', {
+      headers: {
+        'client-id': 'vanilla03',
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+    console.log('Raw API Response:', response.data);
 
-  // 작가 데이터 처리
-  processAuthorsData: users => {
-    // user 타입 필터링
-    const userAuthors = users.filter(user => user.type === 'user');
+    if (!response.data?.item) {
+      throw new Error('Invalid API response structure');
+    }
+
+    const allUsers = response.data.item;
+    console.log('All users:', allUsers);
+
+    const onlyUserTypes = allUsers.filter(item => item?.user?.type === 'user');
+    console.log('Only user types:', onlyUserTypes);
+
+    const withSubscriberCounts = onlyUserTypes.map(item => {
+      const subscriberCount = item.user.bookmarkedBy?.users || 0;
+      return {
+        ...item,
+        subscriberCount,
+      };
+    });
+    console.log('With subscriber counts:', withSubscriberCounts);
 
     // 구독자 수로 정렬
-    const sortedAuthors = userAuthors.sort((a, b) => {
-      const aCount = utils.getSubscriberCount(a.bookmarkedBy);
-      const bCount = utils.getSubscriberCount(b.bookmarkedBy);
-      return bCount - aCount;
-    });
+    const sorted = withSubscriberCounts.sort(
+      (a, b) => b.subscriberCount - a.subscriberCount,
+    );
+    console.log('Sorted by subscribers:', sorted);
 
-    // 상위 4명 반환
-    return sortedAuthors.slice(0, 4);
-  },
-};
+    // 모든 사용자의 구독자 수가 0인지 확인
+    const hasSubscribers = sorted.some(item => item.subscriberCount > 0);
 
-// 초기화 함수
-const initializeTopAuthors = async () => {
-  try {
-    const topAuthors = await authorService.fetchTopAuthors();
-    renderService.renderTopAuthors(topAuthors);
+    const container = document.querySelector(
+      '.main__top-subscribed-authors-grid',
+    );
+
+    if (!container) {
+      console.error('Top authors container not found!');
+      return;
+    }
+
+    if (!hasSubscribers) {
+      // 모든 구독자 수가 0일 경우 간단한 텍스트만 표시
+      container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
+      return;
+    }
+
+    // 구독자가 있는 경우 상위 4명 표시
+    const topFour = sorted.slice(0, 4).map(item => item.user);
+    console.log('Top 4 users:', topFour);
+    renderTopAuthors(topFour);
   } catch (error) {
-    console.error('Top Authors 초기화 에러:', error);
+    console.error('Error in fetchTopAuthors:', error);
+    const container = document.querySelector(
+      '.main__top-subscribed-authors-grid',
+    );
+    if (container) {
+      container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
+    }
   }
 };
 
+const initializeTopAuthors = () => {
+  console.log('Initializing top authors...');
+  const container = document.querySelector(
+    '.main__top-subscribed-authors-grid',
+  );
+  if (!container) {
+    console.error('Top authors container not found during initialization!');
+    return;
+  }
+
+  // 스타일 추가
+  const style = document.createElement('style');
+  style.textContent = `
+    .no-authors-message {
+      text-align: center;
+      padding: 20px 0;
+      color: #666;
+    }
+  `;
+  document.head.appendChild(style);
+
+  fetchTopAuthors();
+};
+
 export default initializeTopAuthors;
+
+// 북마크 db를 수정해야함... 그래야 이걸 제대로 구현할 수 있음..

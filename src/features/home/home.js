@@ -368,11 +368,27 @@ class WeeklyPostsManager {
   // 게시글 데이터 가져오기
   async fetchPosts() {
     try {
-      const response = await api.get(POSTS_API_ADDRESS);
+      // 최근 2주 날짜 계산
+      const today = new Date();
+      const twoWeeksAgo = new Date(today.getTime() - 14 * 24 * 60 * 60 * 1000);
+
+      // YYYY.MM.DD 형식으로 변환
+      const startDate = utils.formatDate(twoWeeksAgo);
+      const endDate = utils.formatDate(today);
+
+      // API 호출 시 날짜 필터 추가
+      const response = await api.get(
+        `${POSTS_API_ADDRESS}&custom={"createdAt":{"$gte":"${startDate}","$lt":"${endDate}"}}`,
+      );
+
       this.postsByDay = this.categorizePostsByDay(response.data.item);
       this.displayPosts(utils.getCurrentDay());
     } catch (error) {
       console.error('게시글 가져오기 실패:', error);
+      if (this.$postsList) {
+        this.$postsList.innerHTML =
+          '<li>게시글을 불러오는데 실패했습니다.</li>';
+      }
     }
   }
 
@@ -388,9 +404,13 @@ class WeeklyPostsManager {
 
   // 게시글 표시
   displayPosts(day) {
-    if (!this.postsByDay || !this.postsByDay[day]) {
+    if (
+      !this.postsByDay ||
+      !this.postsByDay[day] ||
+      this.postsByDay[day].length === 0
+    ) {
       this.$postsList.innerHTML =
-        '<li>해당 요일에 작성된 작가의 글이 없습니다!</li>';
+        '<li class="weekly-serial__empty">최근 2주 내에 해당 요일에 작성된 글이 없습니다!</li>';
       return;
     }
 
@@ -406,6 +426,8 @@ class WeeklyPostsManager {
       return [...posts].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
       );
+    } else if (this.currentSortOrder === 'likeit') {
+      return [...posts].sort((a, b) => (b.likes || 0) - (a.likes || 0));
     }
     return posts;
   }
@@ -423,8 +445,10 @@ class WeeklyPostsManager {
   selectTab($selectedButton) {
     this.$tabButtons.forEach($tab => {
       $tab.setAttribute('aria-selected', 'false');
+      $tab.classList.remove('active');
     });
     $selectedButton.setAttribute('aria-selected', 'true');
+    $selectedButton.classList.add('active');
   }
 
   // 이벤트 리스너 초기화
@@ -439,6 +463,10 @@ class WeeklyPostsManager {
     const $optionButtons = document.querySelectorAll('.weekly-serial__option');
     $optionButtons.forEach($button => {
       $button.addEventListener('click', () => {
+        // 활성화된 버튼 스타일 처리
+        $optionButtons.forEach($btn => $btn.classList.remove('active'));
+        $button.classList.add('active');
+
         const newOrder = $button.textContent.includes('최신순')
           ? 'latest'
           : 'likeit';
@@ -447,7 +475,9 @@ class WeeklyPostsManager {
           const $currentTab = document.querySelector(
             '.weekly-serial__tab[aria-selected="true"]',
           );
-          this.displayPosts($currentTab.dataset.day);
+          if ($currentTab) {
+            this.displayPosts($currentTab.dataset.day);
+          }
         }
       });
     });
