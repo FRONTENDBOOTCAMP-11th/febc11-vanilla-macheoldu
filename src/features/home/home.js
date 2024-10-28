@@ -3,6 +3,37 @@ import axios from 'axios';
 import initializeTopAuthors from './topAuthors.js';
 import { initializeCoverSlider } from './coverSlider.js';
 
+// 이미지 imports
+// home 폴더 이미지
+import author1Image from '../../assets/images/home/author1.png';
+import author2Image from '../../assets/images/home/author2.png';
+import author3Image from '../../assets/images/home/author3.png';
+import author4Image from '../../assets/images/home/author4.png';
+import author5Image from '../../assets/images/home/author5.png';
+import authorBook1Image from '../../assets/images/home/authorBook1.png';
+import authorBook2Image from '../../assets/images/home/authorBook2.png';
+import bestseller1Image from '../../assets/images/home/bestseller1.png';
+import hourglassImage from '../../assets/images/home/hourglass.png';
+import newAuthor1Image from '../../assets/images/home/newAuthor1.png';
+import newAuthor2Image from '../../assets/images/home/newAuthor2.png';
+import newAuthor3Image from '../../assets/images/home/newAuthor3.png';
+import pick1Image from '../../assets/images/home/pick1.png';
+import pick2Image from '../../assets/images/home/pick2.png';
+import pick3Image from '../../assets/images/home/pick3.png';
+import pick4Image from '../../assets/images/home/pick4.png';
+import pick5Image from '../../assets/images/home/pick5.png';
+import pick6Image from '../../assets/images/home/pick6.png';
+import pick7Image from '../../assets/images/home/pick7.png';
+import pick8Image from '../../assets/images/home/pick8.png';
+import pick9Image from '../../assets/images/home/pick9.png';
+import pick10Image from '../../assets/images/home/pick10.png';
+import serial1Image from '../../assets/images/home/serial1.png';
+import serial2Image from '../../assets/images/home/serial2.png';
+
+// icons import
+import newIcon from '../../assets/icons/status/new.svg';
+import logoSymbol from '../../assets/logos/logo_symbol.svg';
+
 // API 설정 및 상수
 const CONFIG = {
   API: {
@@ -31,9 +62,39 @@ const CONFIG = {
   ],
   ONE_DAY_MS: 24 * 60 * 60 * 1000,
   ASSETS: {
-    IMAGES_PATH: '/src/assets/images/home',
-    ICONS_PATH: '/src/assets/icons',
-    LOGOS_PATH: '/src/assets/logos',
+    IMAGES: {
+      // home 폴더 이미지들
+      'author1.png': author1Image,
+      'author2.png': author2Image,
+      'author3.png': author3Image,
+      'author4.png': author4Image,
+      'author5.png': author5Image,
+      'authorBook1.png': authorBook1Image,
+      'authorBook2.png': authorBook2Image,
+      'bestseller1.png': bestseller1Image,
+      'hourglass.png': hourglassImage,
+      'newAuthor1.png': newAuthor1Image,
+      'newAuthor2.png': newAuthor2Image,
+      'newAuthor3.png': newAuthor3Image,
+      'pick1.png': pick1Image,
+      'pick2.png': pick2Image,
+      'pick3.png': pick3Image,
+      'pick4.png': pick4Image,
+      'pick5.png': pick5Image,
+      'pick6.png': pick6Image,
+      'pick7.png': pick7Image,
+      'pick8.png': pick8Image,
+      'pick9.png': pick9Image,
+      'pick10.png': pick10Image,
+      'serial1.png': serial1Image,
+      'serial2.png': serial2Image,
+    },
+    LOGOS: {
+      'logo_symbol.svg': logoSymbol,
+    },
+    ICONS: {
+      'status/new.svg': newIcon,
+    },
   },
 };
 
@@ -86,7 +147,15 @@ const utils = {
     return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
   },
 
-  getImgUrl: imgPath => `${CONFIG.API.BASE_URL}${imgPath}`,
+  // API 이미지 URL 생성
+  getImgUrl: imgPath => {
+    if (imgPath && imgPath.startsWith('featuredBook')) {
+      return utils.getAssetUrl('image', imgPath);
+    }
+    return imgPath
+      ? `${CONFIG.API.BASE_URL}${imgPath}`
+      : CONFIG.ASSETS.IMAGES['author2.png'];
+  },
 
   getWeekday: dateString => CONFIG.DAYS[new Date(dateString).getDay()],
 
@@ -110,26 +179,31 @@ const utils = {
 
   // 동적 이미지 URL 생성 함수
   getAssetUrl: (type, filename) => {
-    let basePath;
     switch (type) {
       case 'image':
-        basePath = CONFIG.ASSETS.IMAGES_PATH;
-        break;
+        return (
+          CONFIG.ASSETS.IMAGES[filename] || CONFIG.ASSETS.IMAGES['author2.png']
+        );
       case 'icon':
-        basePath = CONFIG.ASSETS.ICONS_PATH;
-        break;
+        return CONFIG.ASSETS.ICONS[filename] || '';
       case 'logo':
-        basePath = CONFIG.ASSETS.LOGOS_PATH;
-        break;
+        return CONFIG.ASSETS.LOGOS[filename] || '';
       default:
         throw new Error('Invalid asset type');
     }
-    return new URL(`${basePath}/${filename}`, import.meta.url).href;
   },
 
+  // placeholder 이미지 URL 생성
   getPlaceholderImage: (type, index) => {
     const filename = `${type}${index}.png`;
-    return utils.getAssetUrl('image', filename);
+    return (
+      CONFIG.ASSETS.IMAGES[filename] || CONFIG.ASSETS.IMAGES['author2.png']
+    );
+  },
+
+  // fallback 이미지 URL 반환
+  getFallbackImageUrl: (type = '.png') => {
+    return CONFIG.ASSETS.IMAGES[type] || CONFIG.ASSETS.IMAGES['author2.png'];
   },
 };
 
@@ -239,6 +313,7 @@ const renderService = {
             src="${utils.getImgUrl(author.image)}"
             alt="${author.name}"
             class="main__featured-author__image"
+            onerror="this.src='${utils.getFallbackImageUrl('home/author2.png')}'"
           />
         </div>
         ${
@@ -259,10 +334,10 @@ const renderService = {
       <li class="main__featured-author__books-item">
         <div class="main__featured-author__books-image-wrapper">
           <img
-            src="${utils.getPlaceholderImage('authorBook', index + 1)}"
+            src="${utils.getAssetUrl('image', `authorBook${index + 1}.png`)}"
             alt="${post.title}"
             class="main__featured-author__books-image"
-            onerror="this.src='${utils.getAssetUrl('image', 'book1.png')}'"
+            onerror="this.src='${utils.getFallbackImageUrl('book1.png')}'"
           />
         </div>
         <div class="main__featured-author__books-info">
@@ -294,10 +369,10 @@ const renderService = {
           </p>
         </article>
         <img 
-          src="${utils.getPlaceholderImage('pick', (index % 10) + 1)}"
+          src="${utils.getAssetUrl('image', `pick${(index % 10) + 1}.png`)}"
           alt="${post.title}"
           class="weekly-serial__image"
-          onerror="this.src='${utils.getAssetUrl('image', 'serial1.png')}'"
+          onerror="this.src='${utils.getFallbackImageUrl('serial1.png')}'"
         />
       </li>
     `;
@@ -319,10 +394,10 @@ const renderService = {
                   <p class="main__todays-pick__description">${utils.truncateText(post.content, 100)}</p>
                 </div>
                 <img
-                  src="${post.image?.[0] ? utils.getImgUrl(post.image[0]) : utils.getPlaceholderImage('pick', Math.floor(Math.random() * 10) + 1)}"
+                  src="${post.image?.[0] ? utils.getImgUrl(post.image[0]) : utils.getAssetUrl('image', `pick${Math.floor(Math.random() * 10) + 1}.png`)}"
                   alt="${post.title}"
                   class="main__todays-pick__image"
-                  onerror="this.src='${utils.getAssetUrl('image', 'pick1.png')}'"
+                  onerror="this.src='${utils.getFallbackImageUrl('pick1.png')}'"
                 />
               </div>
             </a>
@@ -472,9 +547,10 @@ const featuredBookService = {
 
         <div class="main__featured-book-image-container">
           <img
-            src="${utils.getAssetUrl('image', 'featuredBook.png')}"
+            src="${utils.getAssetUrl('image', 'featuredBook2.png')}"  // featuredBook2.png로 수정
             alt="${bookData.title} 책 표지 이미지"
             class="main__featured-book-image"
+            onerror="this.src='${utils.getFallbackImageUrl('bestseller1.png')}'"  // fallback 이미지도 수정
           />
         </div>
       </div>
