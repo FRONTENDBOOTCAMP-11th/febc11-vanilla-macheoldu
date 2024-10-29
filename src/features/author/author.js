@@ -12,7 +12,7 @@ const api = axios.create({
 // Utility 함수 - URL에서 userId 가져오는 함수
 const getUserIdFromUrl = function () {
   const params = new URLSearchParams(window.location.search);
-  return params.get('userId') || 10; // 없으면 기본 값 10으로 설정
+  return params.get('userId') || 10;
 };
 
 //  Utility 함수 - 날짜 함수, 유저(작가)게시물 함수 안에서 사용
@@ -190,6 +190,7 @@ const checkIsSubscribed = async function () {
         Authorization: `Bearer ${token}`,
       },
     });
+
     // 구독 중이면 1(=true), 구독 아니면 0(=false)
     console.log('현재 페이지 유저에 대한 나의 구독 여부 정보: ', response.data);
     return response.data.ok === 1;
@@ -202,7 +203,7 @@ const checkIsSubscribed = async function () {
 // 구독 상태를 전환(구독/취소)하는 함수
 const toggleSubscribe = async function () {
   if (!token) {
-    alert('로그인이 필요합니다');
+    alert('로그인이 필요한 서비스입니다. 로그인하시겠습니까?');
     return;
   }
 
