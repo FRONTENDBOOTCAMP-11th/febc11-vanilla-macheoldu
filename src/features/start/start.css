@@ -30,6 +30,13 @@ input[type='checkbox'],
 button {
   all: unset;
 }
+/* chrome, edge 브라우저 비밀번호 표시 아이콘 숨김 처리 */
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear,
+input[type='password']::-webkit-textfield-decoration-container {
+  display: none;
+}
+
 input[type='text'],
 input[type='email'],
 input[type='password'] {
