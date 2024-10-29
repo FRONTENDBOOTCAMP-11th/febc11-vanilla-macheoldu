@@ -15,7 +15,7 @@ const getUserIdFromUrl = function () {
   return params.get('userId') || 10; // 없으면 기본 값 10으로 설정
 };
 
-//  Utility 함수 - 날짜 함수, 유저(작가)게시물 가져오는 함수 안에서 사용
+//  Utility 함수 - 날짜 함수, 유저(작가)게시물 함수 안에서 사용
 // cratedAt는 post.createdAt 값을 받음
 const getFormattedDate = function (createdAt) {
   // 날짜와 시간 분리해서 날짜만 가져오기
@@ -69,8 +69,8 @@ const getUserInfo = async function () {
     // 유저(작가)정보 넣기
     $userNickname.textContent = userData.name;
     $userOccupation.textContent = userData.extra?.job || '작가'; // 없으면 기본 값 작가로 설정
-    $subscriberCount.textContent = userData.bookmarkedBy?.users || 123; // 없으면 기본 값으로 설정
-    $followingCount.textContent = userData.bookmark?.users || 45; // 없으면 기본 값으로 설정
+    $subscriberCount.textContent = userData.bookmarkedBy.users;
+    $followingCount.textContent = userData.bookmark.users;
 
     // TODO: 이미지 비동기 처리로 변경 예정
     $profileImage.src = api.defaults.baseURL + userData.image;
@@ -172,7 +172,7 @@ const getLoginUser = async function () {
   }
 };
 
-// (현재 페이지의 유저에 대한)구독 상태 확인 함수
+// (현재 페이지 유저에 대한)구독 상태 확인 함수
 const checkIsSubscribed = async function () {
   // 토큰 체크 추가 - 회원만 구독 가능
   if (!token) {
@@ -209,10 +209,18 @@ const toggleSubscribe = async function () {
   try {
     // URL에서 페이지 유저 Id 가져오기
     const targetId = getUserIdFromUrl();
+
+    // 현재 로그인한 사용자 정보 가져오기
+    const loginUser = await getLoginUser();
+    // 현재 로그인 한 유저의 페이지인지도 확인 - 본인 구독 금지
+    if (loginUser._id === targetId) {
+      alert('본인을 구독 할 수 없습니다');
+      return;
+    }
+
     // 구독 상태 확인
     const isSubscribed = await checkIsSubscribed();
 
-    // 구독X 상태
     if (!isSubscribed) {
       // 구독하기
       await api.post(
@@ -225,26 +233,73 @@ const toggleSubscribe = async function () {
         },
       );
       // 구독 이미지 변경
-      $subscribeButton.src = 'src/assets/icons/like_sub/sub_green.svg';
+      $subscribeButton.src = '/src/assets/icons/like_sub/sub_green.svg';
     } else {
       // 구독 취소하기
-      await api.delete(`/bookmarks/${targetId}`, {
+      // 1. 로그인 한 유저의 북마크 목록 가져오기
+      const bookmarks = await api.get('/bookmarks/user', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      $subscribeButton.src = '../../assets/icons/like_sub/sub.svg';
+      console.log('로그인한 유저의 전체 북마크 목록:', bookmarks);
+
+      // 2. 현재 페이지의 유저와 매칭되는 북마크 찾기
+      const bookmark = bookmarks.data.item.find(function (bookmark) {
+        return bookmark.user._id === targetId;
+      });
+      console.log('현재 페이지 유저의 북마크:', bookmark);
+
+      if (bookmark) {
+        // 3. 찾은 북마크의 Id로 삭제 요청
+        await api.delete(`/bookmarks/${bookmark._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        // 구독 취소 이미지 변경
+        $subscribeButton.src = '/src/assets/icons/like_sub/sub.svg';
+      }
     }
+
+    // 서버와 동기화를 위해 작가 정보 갱신
+    await getUserInfo();
   } catch (error) {
     console.error('구독 상태 전환 실패:', error);
   }
 };
 
+// 구독 상태에 따라 버튼 이미지를 표시해주는 함수
+const setupSubscribeButton = async function () {
+  try {
+    // 현재 구독 상태 확인
+    const isSubscribed = await checkIsSubscribed();
+
+    // 구독 상태에 따라 초기 이미지 설정
+    if (isSubscribed) {
+      $subscribeButton.src = '/src/assets/icons/like_sub/sub_green.svg';
+    } else {
+      $subscribeButton.src = '/src/assets/icons/like_sub/sub.svg';
+    }
+  } catch (error) {
+    console.error('구독 버튼 이미지 초기화 실패:', error);
+  }
+};
+
 // 이벤트 리스너 - 페이지 로드 시 실행될 함수들
-document.addEventListener('DOMContentLoaded', function () {
-  getUserInfo();
-  getUserPost();
-  getLoginUser();
-  checkIsSubscribed();
-  toggleSubscribe();
+document.addEventListener('DOMContentLoaded', async function () {
+  try {
+    // 1. 페이지 로드 시 필요한 모든 데이터 병렬로 가져옴 - 모든 작업 시간 단축
+    await Promise.all([
+      getUserInfo(),
+      getUserPost(),
+      getLoginUser(),
+      setupSubscribeButton(), // 구독 버튼의 초기 상태 설정해주는 함수
+    ]);
+
+    // 구독 버튼 초기 상태 설정해주는 함수 때문에 위치 중요
+    $subscribeButton.addEventListener('click', toggleSubscribe);
+  } catch (error) {
+    console.error('페이지 로드 실패:', error);
+  }
 });
