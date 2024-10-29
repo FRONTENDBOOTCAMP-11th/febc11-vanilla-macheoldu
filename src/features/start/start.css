@@ -320,7 +320,7 @@ body {
   box-sizing: border-box;
 }
 .login-main__save.kakao:has(:checked) .checkbox {
-  background-image: url(/src/assets/icons/actions/check-kakao.svg);
+  background-image: url(/assets/icons/actions/check-kakao.svg);
   border: none;
 }
 .login-main__save.kakao:has(:focus) .checkbox {

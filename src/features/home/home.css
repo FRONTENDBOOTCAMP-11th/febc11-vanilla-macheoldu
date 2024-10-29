@@ -414,7 +414,7 @@ body {
 
 /* 베스트셀러 섹션 스타일 */
 .main__best-seller {
-  background-image: url('/src/assets/images/home/bestsellerBg.png');
+  background-image: url('/assets/images/home/bestsellerBg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -526,7 +526,7 @@ body {
   content: '';
   position: absolute;
   display: inline-block;
-  background-image: url('/src/assets/icons/etc/doubleQuotes.svg');
+  background-image: url('/assets/icons/etc/doubleQuotes.svg');
   background-size: contain;
   background-repeat: no-repeat;
   top: 5px;
@@ -709,7 +709,7 @@ body {
 }
 
 .main__featured-book-quote-text::before {
-  content: url('/src/assets/icons/etc/doubleQuotes.svg');
+  content: url('/assets/icons/etc/doubleQuotes.svg');
   position: absolute;
   left: 0;
   top: -5px;

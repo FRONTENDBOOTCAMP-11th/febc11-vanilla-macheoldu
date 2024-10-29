@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getImgUrl = imgPath => {
-  if (!imgPath) return '/src/assets/images/home/author2.png';
+  if (!imgPath) return '/assets/images/home/author2.png';
   return `https://11.fesp.shop${imgPath}`;
 };
 
@@ -40,7 +40,7 @@ const renderTopAuthors = authors => {
               src="${getImgUrl(author.image)}"
               alt="${author.name || 'Author'}"
               class="main__top-subscribed-author-image"
-              onerror="this.src='/src/assets/images/home/author2.png'"
+              onerror="this.src='/assets/images/home/author2.png'"
             />
             <div class="author-text">
               <h3 class="main__top-subscribed-author-name">${author.name || 'Unknown Author'}</h3>

@@ -22,27 +22,17 @@ const API_CONFIG = {
 
 class CoverSlider {
   constructor() {
-    // 슬라이더 상태 관련 속성
     this.currentSlide = 0;
     this.totalSlides = 6;
     this.isAnimating = false;
-    this.isDragging = false;
+    this.autoPlayInterval = null;
+    this.autoPlayDelay = 2000; // 2초 간격 .. 1초는 너무 빠른 것 같음
 
-    // DOM 요소
     this.$container = document.querySelector('.cover');
     this.$sliderContainer = null;
-
-    // 터치/마우스 이벤트 관련 속성
-    this.touchStartX = 0;
-    this.touchEndX = 0;
-    this.mouseStartX = 0;
-    this.mouseEndX = 0;
-
-    // 슬라이드 데이터
     this.slides = [];
   }
 
-  // 슬라이더 초기화
   async initialize() {
     try {
       console.log('Initializing CoverSlider...');
@@ -51,13 +41,13 @@ class CoverSlider {
       this.initializeStyles();
       this.addEventListeners();
       this.updateSlide();
+      this.startAutoPlay();
       console.log('Slider initialized successfully');
     } catch (error) {
       console.error('슬라이더 초기화 오류:', error);
     }
   }
 
-  // 슬라이드 데이터 가져오기
   async fetchSlideData() {
     const response = await axios.get(API_CONFIG.URL, {
       headers: API_CONFIG.HEADERS,
@@ -67,7 +57,7 @@ class CoverSlider {
     this.slides = response.data.item.slice(0, this.totalSlides);
   }
 
-  // 슬라이더 HTML 생성
+  // HTML 생성
   createSliderHTML() {
     return `
       <div class="cover__content">
@@ -80,18 +70,18 @@ class CoverSlider {
               <p class="cover__author"><em>by</em> ${slide.user.name}</p>
               <figure class="cover__image-wrapper">
                 <img 
-                  src="/src/assets/images/home/hourglass.png" 
+                  src="/assets/images/home/hourglass.png" 
                   alt="${slide.title}" 
                   class="cover__image"
                 />
                 <img 
-                  src="/src/assets/icons/etc/cheer.svg" 
+                  src="/assets/icons/etc/cheer.svg" 
                   class="cover__badge" 
                 />
               </figure>
               <div class="cover__support">
                 <img 
-                  src="/src/assets/icons/etc/won.svg" 
+                  src="/assets/icons/etc/won.svg" 
                   alt="응원 아이콘" 
                   class="cover__support-icon" 
                 />
@@ -118,25 +108,21 @@ class CoverSlider {
     `;
   }
 
-  // 슬라이더 렌더링
   renderSlider() {
     this.$container.innerHTML = this.createSliderHTML();
     this.$sliderContainer = this.$container.querySelector('.cover__slider');
   }
 
-  // 스타일 초기화
   initializeStyles() {
     this.applySlideStyles();
     this.applyContainerStyles();
     this.applyProgressStyles();
   }
 
-  // 슬라이드 요소 스타일 적용
   applySlideStyles() {
     const $slideElements = document.querySelectorAll('.cover__slide');
 
     $slideElements.forEach($slide => {
-      // 슬라이드 기본 스타일
       $slide.style.cssText = `
         flex: 0 0 360px;
         width: 360px;
@@ -147,14 +133,11 @@ class CoverSlider {
         color: white;
       `;
 
-      // 슬라이드 내부 요소 스타일 적용
       this.applySlideElementStyles($slide);
     });
   }
 
-  // 슬라이드 내부 요소 스타일 적용
   applySlideElementStyles($slide) {
-    // 제목 스타일
     const $title = $slide.querySelector('.cover__title');
     $title.style.cssText = `
       font-size: var(--font-size-xxl);
@@ -163,7 +146,6 @@ class CoverSlider {
       margin: 0;
     `;
 
-    // 작가 이름 스타일
     const $author = $slide.querySelector('.cover__author');
     $author.style.cssText = `
       font-size: 12px;
@@ -172,7 +154,6 @@ class CoverSlider {
       margin-bottom: 66px;
     `;
 
-    // 이미지 관련 스타일
     const $imageWrapper = $slide.querySelector('.cover__image-wrapper');
     $imageWrapper.style.cssText = `
       position: relative;
@@ -194,7 +175,6 @@ class CoverSlider {
       height: 32px;
     `;
 
-    // 응원 정보 스타일
     const $support = $slide.querySelector('.cover__support');
     $support.style.cssText = `
       display: flex;
@@ -217,9 +197,7 @@ class CoverSlider {
     `;
   }
 
-  // 컨테이너 스타일 적용
   applyContainerStyles() {
-    // 메인 컨테이너 스타일
     this.$container.style.cssText = `
       overflow: hidden;
       position: relative;
@@ -232,7 +210,6 @@ class CoverSlider {
       -ms-user-select: none;
     `;
 
-    // 슬라이더 컨테이너 스타일
     this.$sliderContainer.style.cssText = `
       position: relative;
       display: flex;
@@ -241,7 +218,6 @@ class CoverSlider {
     `;
   }
 
-  // 프로그레스 바 스타일 적용
   applyProgressStyles() {
     const $progress = document.querySelector('.cover__progress');
     $progress.style.cssText = `
@@ -269,143 +245,32 @@ class CoverSlider {
     `;
   }
 
-  // 프로그레스 스텝 스타일 업데이트
-  updateProgressStepStyles() {
-    const $progressStepElements = document.querySelectorAll(
-      '.cover__progress-step',
-    );
-    $progressStepElements.forEach($step => {
-      $step.style.cssText = `
-        width: 20px;
-        height: 1px;
-        background-color: white;
-        opacity: ${$step.classList.contains('active') ? '1' : '0.3'};
-      `;
-    });
-  }
-
-  // 이벤트 리스너 추가
-  addEventListeners() {
-    this.addTouchEventListeners();
-    this.addMouseEventListeners();
-  }
-
-  // 터치 이벤트 리스너
-  addTouchEventListeners() {
-    this.$container.addEventListener(
-      'touchstart',
-      e => {
-        this.touchStartX = e.touches[0].clientX;
-        this.touchEndX = e.touches[0].clientX;
-      },
-      { passive: true },
-    );
-
-    this.$container.addEventListener(
-      'touchmove',
-      e => {
-        if (this.isAnimating) return;
-        this.touchEndX = e.touches[0].clientX;
-        this.moveSlider(this.touchStartX - this.touchEndX);
-      },
-      { passive: true },
-    );
-
-    this.$container.addEventListener('touchend', () => {
-      if (this.isAnimating) return;
-      const diff = this.touchStartX - this.touchEndX;
-      this.handleTouchEnd(diff);
-    });
-  }
-
-  // 터치 종료 처리
-  handleTouchEnd(diff) {
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && this.currentSlide < this.totalSlides - 1) {
-        this.currentSlide++;
-      } else if (diff < 0 && this.currentSlide > 0) {
-        this.currentSlide--;
-      }
-    }
-    this.updateSlide();
-  }
-
-  // 마우스 이벤트 리스너
-  addMouseEventListeners() {
-    this.$container.addEventListener('mousedown', e => {
-      this.handleMouseDown(e);
-    });
-
-    this.$container.addEventListener('mousemove', e => {
-      this.handleMouseMove(e);
-    });
-
-    const handleMouseUp = () => {
-      this.handleMouseUp();
-    };
-
-    this.$container.addEventListener('mouseup', handleMouseUp);
-    this.$container.addEventListener('mouseleave', handleMouseUp);
-  }
-
-  // 마우스 다운 이벤트 처리
-  handleMouseDown(e) {
-    this.isDragging = true;
-    this.mouseStartX = e.clientX;
-    this.mouseEndX = e.clientX;
-    this.$container.style.cursor = 'grabbing';
-  }
-
-  // 마우스 이동 이벤트 처리
-  handleMouseMove(e) {
-    if (!this.isDragging || this.isAnimating) return;
-    e.preventDefault();
-    this.mouseEndX = e.clientX;
-    this.moveSlider(this.mouseStartX - this.mouseEndX);
-  }
-
-  // 마우스 업 이벤트 처리
-  handleMouseUp() {
-    if (!this.isDragging) return;
-    this.isDragging = false;
-    this.$container.style.cursor = 'grab';
-    this.handleSlideChange(this.mouseStartX - this.mouseEndX);
-  }
-
-  // 슬라이더 이동
-  moveSlider(diff) {
-    const movePercent = (diff / 360) * (100 / this.totalSlides);
-    const currentTransform = -this.currentSlide * (100 / this.totalSlides);
-
-    // 경계값 체크
-    if (
-      (this.currentSlide === -1 && movePercent < 0) ||
-      (this.currentSlide === this.totalSlides && movePercent > 0)
-    ) {
-      return;
+  startAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
     }
 
-    this.$sliderContainer.style.transform = `translateX(${currentTransform - movePercent}%)`;
-  }
-
-  // 슬라이드 변경 처리
-  handleSlideChange(diff) {
-    const threshold = 360 * 0.3;
-
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0 && this.currentSlide < this.totalSlides) {
+    this.autoPlayInterval = setInterval(() => {
+      if (!this.isAnimating) {
         this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-      } else if (diff < 0 && this.currentSlide >= 0) {
-        this.currentSlide =
-          this.currentSlide - 1 < 0 ? 5 : this.currentSlide - 1;
+        this.updateSlide();
+        this.updateCoverBackground();
       }
-      this.updateCoverBackground();
-    }
-
-    this.updateSlide();
+    }, this.autoPlayDelay);
   }
 
-  // 슬라이드 업데이트
+  stopAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
+    }
+  }
+
+  addEventListeners() {
+    this.$container.addEventListener('mouseenter', () => this.stopAutoPlay());
+    this.$container.addEventListener('mouseleave', () => this.startAutoPlay());
+  }
+
   updateSlide() {
     this.isAnimating = true;
     const translateX = -(this.currentSlide * (100 / this.totalSlides));
@@ -420,7 +285,6 @@ class CoverSlider {
     }, 500);
   }
 
-  // 프로그레스 업데이트
   updateProgress() {
     const $steps = document.querySelectorAll('.cover__progress-step');
     $steps.forEach(($step, index) => {
@@ -433,10 +297,27 @@ class CoverSlider {
     $progressText.textContent = `${this.currentSlide + 1} / ${this.totalSlides}`;
   }
 
-  // 배경색 업데이트
+  updateProgressStepStyles() {
+    const $progressStepElements = document.querySelectorAll(
+      '.cover__progress-step',
+    );
+    $progressStepElements.forEach($step => {
+      $step.style.cssText = `
+        width: 20px;
+        height: 1px;
+        background-color: white;
+        opacity: ${$step.classList.contains('active') ? '1' : '0.3'};
+      `;
+    });
+  }
+
   updateCoverBackground() {
-    this.$sliderContainer.style.backgroundColor =
+    this.$container.style.backgroundColor =
       BACKGROUND_COLORS[this.currentSlide];
+  }
+
+  destroy() {
+    this.stopAutoPlay();
   }
 }
 

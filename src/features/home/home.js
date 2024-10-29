@@ -31,9 +31,9 @@ const CONFIG = {
   ],
   ONE_DAY_MS: 24 * 60 * 60 * 1000,
   ASSETS: {
-    IMAGES_PATH: '/src/assets/images/home',
-    ICONS_PATH: '/src/assets/icons',
-    LOGOS_PATH: '/src/assets/logos',
+    IMAGES_PATH: '/assets/images/home',
+    ICONS_PATH: '/assets/icons',
+    LOGOS_PATH: '/assets/logos',
   },
 };
 
@@ -319,7 +319,7 @@ const renderService = {
                   <p class="main__todays-pick__description">${utils.truncateText(post.content, 100)}</p>
                 </div>
                 <img
-                  src="a.svg"
+                  src="${post.image?.[0] ? utils.getImgUrl(post.image[0]) : utils.getPlaceholderImage('pick', Math.floor(Math.random() * 10) + 1)}"
                   alt="${post.title}"
                   class="main__todays-pick__image"
                   onerror="this.src='${utils.getAssetUrl('image', 'pick1.png')}'"
