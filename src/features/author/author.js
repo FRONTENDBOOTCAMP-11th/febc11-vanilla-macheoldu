@@ -101,8 +101,8 @@ const getUserPost = async function () {
 
     // userId를 사용해 해당 유저(작가)의 게시물 데이터를 API에서 가져옴
     const response = await api.get(`/posts/users/${userId}?type=info`);
-    const posts = response.data?.item;
-    // console.log('유저(작가)의 게시물 :', posts);
+    const posts = response.data.item;
+    console.log('유저(작가)의 게시물 :', posts);
 
     // 게시물 목록 초기화
     $postList.innerHTML = '';
@@ -143,7 +143,7 @@ const getUserPost = async function () {
 sessionStorage.setItem('userEmail', 'sparkle@gmail.com');
 sessionStorage.setItem(
   'userAccessToken',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAwOTU3NTYsImV4cCI6MTczMDE4MjE1NiwiaXNzIjoiRkVTUCJ9.ta3pHKiZxnABOVfUaYD3RwPv99fsfGI1xT-_AD1KfOw',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAyMDIzNjYsImV4cCI6MTczMDI4ODc2NiwiaXNzIjoiRkVTUCJ9.Lf6IhIASj8WdBf6YcBzy7q79HKYxq26KUfse2BxFdUM',
 );
 
 const token = sessionStorage.getItem('userAccessToken');
