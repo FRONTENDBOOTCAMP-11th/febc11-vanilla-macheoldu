@@ -233,7 +233,7 @@ const toggleSubscribe = async function () {
         },
       );
       // 구독 이미지 변경
-      $subscribeButton.src = '/src/assets/icons/like_sub/sub_green.svg';
+      $subscribeButton.src = '/assets/icons/like_sub/sub_green.svg';
     } else {
       // 구독 취소하기
       // 1. 로그인 한 유저의 북마크 목록 가져오기
@@ -258,7 +258,7 @@ const toggleSubscribe = async function () {
           },
         });
         // 구독 취소 이미지 변경
-        $subscribeButton.src = '/src/assets/icons/like_sub/sub.svg';
+        $subscribeButton.src = '/assets/icons/like_sub/sub.svg';
       }
     }
 
@@ -277,9 +277,9 @@ const setupSubscribeButton = async function () {
 
     // 구독 상태에 따라 초기 이미지 설정
     if (isSubscribed) {
-      $subscribeButton.src = '/src/assets/icons/like_sub/sub_green.svg';
+      $subscribeButton.src = '/assets/icons/like_sub/sub_green.svg';
     } else {
-      $subscribeButton.src = '/src/assets/icons/like_sub/sub.svg';
+      $subscribeButton.src = '/assets/icons/like_sub/sub.svg';
     }
   } catch (error) {
     console.error('구독 버튼 이미지 초기화 실패:', error);

@@ -118,7 +118,7 @@ const printPost = async function () {
               <button class="comments__option-button" aria-label="옵션 메뉴 열기">
                 <img
                   class="comments__option-icon"
-                  src="../../assets/icons/like_sub/addmore.svg"
+                  src="/assets/icons/like_sub/addmore.svg"
                   alt="옵션 버튼 아이콘"
                 />
               </button>
