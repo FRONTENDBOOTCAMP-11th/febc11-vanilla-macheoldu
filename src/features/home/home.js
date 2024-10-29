@@ -345,7 +345,7 @@ const renderService = {
       .map(
         (post, index) => `
           <li class="main__todays-pick__item">
-            <a href="./detail/detail.html?postId=${post._id}">
+            <a href="/src/features/detail/detail.html?postId=${post._id}">
               <div class="main__todays-pick__info">
                 <div class="main__todays-pick__text">
                   <h3 class="main__todays-pick__item-title">${post.title}</h3>

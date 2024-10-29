@@ -11,10 +11,10 @@ const initializeTopAuthors = () => {
   console.log('Initializing top authors...');
 
   // 작가 목록을 표시할 영역이 있는지 확인
-  const container = document.querySelector(
+  const $container = document.querySelector(
     '.main__top-subscribed-authors-grid',
   );
-  if (!container) {
+  if (!$container) {
     console.error('Top authors container not found during initialization!');
     return;
   }
@@ -25,8 +25,8 @@ const initializeTopAuthors = () => {
    * 2. CSS 코드를 작성하여
    * 3. HTML의 head 태그에 추가
    */
-  const style = document.createElement('style');
-  style.textContent = `
+  const $style = document.createElement('style');
+  $style.textContent = `
     .no-authors-message {
       text-align: center;
       padding: 20px 0;
@@ -38,7 +38,7 @@ const initializeTopAuthors = () => {
       margin: 4px 0;
     }
   `;
-  document.head.appendChild(style);
+  document.head.appendChild($style);
 
   // 작가 데이터 가져오기 시작
   fetchTopAuthors();
@@ -75,10 +75,10 @@ const renderTopAuthors = authors => {
   console.log('authors 렌더링:', authors);
 
   // 작가 목록을 표시할 영역 찾기
-  const container = document.querySelector(
+  const $container = document.querySelector(
     '.main__top-subscribed-authors-grid',
   );
-  if (!container) {
+  if (!$container) {
     console.error('Top authors container를 찾을 수 없습니다.');
     return;
   }
@@ -92,7 +92,7 @@ const renderTopAuthors = authors => {
    */
   if (!Array.isArray(authors) || authors.length === 0) {
     console.error('No authors data to render!');
-    container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
+    $container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
     return;
   }
 
@@ -150,7 +150,7 @@ const renderTopAuthors = authors => {
     .join('');
 
   // 만든 HTML을 화면에 표시
-  container.innerHTML = authorsHTML;
+  $container.innerHTML = authorsHTML;
 };
 
 /**
@@ -218,11 +218,11 @@ const fetchTopAuthors = async () => {
   } catch (error) {
     // 오류가 발생하면 화면에 메시지를 표시
     console.error('Error in fetchTopAuthors:', error);
-    const container = document.querySelector(
+    const $container = document.querySelector(
       '.main__top-subscribed-authors-grid',
     );
-    if (container) {
-      container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
+    if ($container) {
+      $container.innerHTML = `<p class="no-authors-message">현재 TOP 구독 작가가 없습니다.</p>`;
     }
   }
 };

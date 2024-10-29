@@ -1,4 +1,5 @@
 import axios from 'axios';
+import CONFIG from './config.js';
 
 /**
  * 슬라이더의 각 슬라이드 배경색 목록
@@ -14,6 +15,15 @@ const BACKGROUND_COLORS = [
 ];
 
 /**
+ * API 인스턴스 생성
+ * home.js와 동일한 설정 사용
+ */
+const api = axios.create({
+  baseURL: CONFIG.API.BASE_URL,
+  headers: CONFIG.API.HEADERS,
+});
+
+/**
  * API 통신에 필요한 설정 정보
  * - URL: server에서 슬라이더 데이터를 가져올 주소
  * - HEADERS : sever와 통신할 때 필요한 인증 정보와 data 형식
@@ -25,6 +35,10 @@ const API_CONFIG = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
+};
+
+const utils = {
+  getImgUrl: imgPath => `${API_CONFIG.BASE_URL}${imgPath}`,
 };
 
 /**
@@ -105,9 +119,7 @@ class CoverSlider {
    * axios를 사용해 API를 호출하고 결과를 받아옴
    */
   async fetchSlideData() {
-    const response = await axios.get(API_CONFIG.URL, {
-      headers: API_CONFIG.HEADERS,
-    });
+    const response = await api.get('/posts?type=info');
 
     if (!response.data) throw new Error('API 응답 오류');
 
@@ -131,20 +143,23 @@ class CoverSlider {
               <p class="cover__author"><em>by</em> ${slide.user.name}</p>
               <figure class="cover__image-wrapper">
                 <img 
-                  src="/assets/images/home/hourglass.png" 
+                  src="${slide.image?.[0] ? `${CONFIG.API.BASE_URL}${slide.image[0]}` : '/assets/images/home/hourglass.png'}" 
                   alt="${slide.title}" 
                   class="cover__image"
+                  onerror="this.src='/assets/images/home/hourglass.png'"
                 />
                 <img 
                   src="/assets/icons/etc/cheer.svg" 
-                  class="cover__badge" 
+                  class="cover__badge"
+                  onerror="this.style.display='none'"
                 />
               </figure>
               <div class="cover__support">
                 <img 
                   src="/assets/icons/etc/won.svg" 
                   alt="응원 아이콘" 
-                  class="cover__support-icon" 
+                  class="cover__support-icon"
+                  onerror="this.style.display='none'"
                 />
                 <span class="cover__support-count">${slide.repliesCount}명이 응원</span>
               </div>
