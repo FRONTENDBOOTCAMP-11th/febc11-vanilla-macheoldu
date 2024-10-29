@@ -113,16 +113,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (post.image && Array.isArray(post.image) && post.image.length > 0) {
           imageUrl = post.image[0];
         } else if (post.content) {
-          // 내용에서 이미지 태그 찾기
+          // 이미지 태그의 src 속성에 포함된 이미지 url 추출
           const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
           if (imgMatch) {
             imageUrl = imgMatch[1];
           }
-        }
-
-        // product 이미지가 있을 경우 대체로 설정
-        if (!imageUrl && post.product && post.product.image) {
-          imageUrl = post.product.image;
         }
 
         // 작성자 이미지가 있을 경우 대체로 설정
@@ -182,35 +177,18 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     $authorContent.innerHTML = uniqueAuthors
-      .map(function (author, index) {
-        const defaultImagePath = '/assets/images/home/pick1.png';
-        const imageNumber = (index % 10) + 1;
-        const fallbackImagePath = `/assets/images/home/pick${imageNumber}.png`;
-
+      .map(author => {
         return `
-          <div class="author__list">
-            <div>
-              <img 
-                class="author__list-cover" 
-                src="${author.image || fallbackImagePath}" 
-                alt="작가 이미지"
-                onerror="this.src='${defaultImagePath}'"
-              />
-            </div>
-            <div>
-              <h3 class="author__list-title">
-                ${highlightSearchTerm(author.name, keyword)}
-              </h3>
-              <p class="author__list-info">
-                ${stripHtml(
-                  posts.find(function (post) {
-                    return post.user._id === author._id;
-                  }).content,
-                ).substring(0, 50)}...
-              </p>
-            </div>
+        <div class="author__list">
+          <div>
+            <img class="author__list-cover" src="${author.image || '/assets/images/home/pick1.png'}" alt="작가 이미지" onerror="this.src='/assets/images/home/pick1.png'"/>
           </div>
-        `;
+          <div>
+            <h3 class="author__list-title">${highlightSearchTerm(author.name, keyword)}</h3>
+            <p class="author__list-info">${stripHtml(author.info || '')}</p>
+          </div>
+        </div>
+      `;
       })
       .join('');
 

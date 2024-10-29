@@ -382,6 +382,11 @@ em {
   font-weight: 300;
   line-height: 1.6;
   padding-right: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 두 줄로 제한 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 🚫 discover - null */
