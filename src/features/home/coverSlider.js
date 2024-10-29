@@ -137,22 +137,24 @@ class CoverSlider {
         <div class="cover__slider" role="region" aria-label="책 표지 슬라이더">
           ${this.slides
             .map(
-              (slide, index) => `
+              (slide, post, index) => `
             <div class="cover__slide" data-index="${index}">
               <h1 class="cover__title">${slide.title}</h1>
               <p class="cover__author"><em>by</em> ${slide.user.name}</p>
               <figure class="cover__image-wrapper">
-                <img 
-                  src="${slide.image?.[0] ? `${CONFIG.API.BASE_URL}${slide.image[0]}` : '/assets/images/home/hourglass.png'}" 
-                  alt="${slide.title}" 
-                  class="cover__image"
-                  onerror="this.src='/assets/images/home/hourglass.png'"
-                />
-                <img 
-                  src="/assets/icons/etc/cheer.svg" 
-                  class="cover__badge"
-                  onerror="this.style.display='none'"
-                />
+                <a href="/src/features/detail/detail.html?postId=${post._id}">
+                  <img 
+                    src="${slide.image?.[0] ? `${CONFIG.API.BASE_URL}${slide.image[0]}` : '/assets/images/home/hourglass.png'}" 
+                    alt="${slide.title}" 
+                    class="cover__image"
+                    onerror="this.src='/assets/images/home/hourglass.png'"
+                  />
+                  <img 
+                    src="/assets/icons/etc/cheer.svg" 
+                    class="cover__badge"
+                    onerror="this.style.display='none'"
+                  />
+                </a>
               </figure>
               <div class="cover__support">
                 <img 

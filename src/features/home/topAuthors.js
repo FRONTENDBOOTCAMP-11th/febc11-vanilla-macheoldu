@@ -118,32 +118,34 @@ const renderTopAuthors = authors => {
       // 작가 정보를 담은 article 요소 생성
       return `
         <article class="main__top-subscribed-author">
-          <div class="author-content">
-            <img
-              src="${getImgUrl(author.image)}"
-              alt="${author.name || 'Author'}"
-              class="main__top-subscribed-author-image"
-              onerror="this.src='/assets/images/home/author2.png'"
-            />
-            <div class="author-text">
-              <p class="main__top-subscribed-author-subscribers">구독자 ${author.bookmarkedBy?.users || 0}명</p>
-              <h3 class="main__top-subscribed-author-name">${author.name || 'Unknown Author'}</h3>
-              ${
-                // 직업 정보가 있는 경우에만 표시
-                author.extra?.job
-                  ? `<p class="main__top-subscribed-author-role">${author.extra.job}</p>`
-                  : ''
-              }
-              ${
-                // 자기소개가 있는 경우에만 표시 (50자로 제한)
-                author.extra?.biography
-                  ? `<p class="main__top-subscribed-author-description">
-                  ${author.extra.biography.slice(0, 50)}...
-                </p>`
-                  : ''
-              }
+          <a href="/src/features/author/author.html?userId=${author._id}">
+            <div class="author-content">
+              <img
+                src="${getImgUrl(author.image)}"
+                alt="${author.name || 'Author'}"
+                class="main__top-subscribed-author-image"
+                onerror="this.src='/assets/images/home/author2.png'"
+              />
+              <div class="author-text">
+                <p class="main__top-subscribed-author-subscribers">구독자 ${author.bookmarkedBy?.users || 0}명</p>
+                <h3 class="main__top-subscribed-author-name">${author.name || 'Unknown Author'}</h3>
+                ${
+                  // 직업 정보가 있는 경우에만 표시
+                  author.extra?.job
+                    ? `<p class="main__top-subscribed-author-role">${author.extra.job}</p>`
+                    : ''
+                }
+                ${
+                  // 자기소개가 있는 경우에만 표시 (50자로 제한)
+                  author.extra?.biography
+                    ? `<p class="main__top-subscribed-author-description">
+                    ${author.extra.biography.slice(0, 50)}...
+                  </p>`
+                    : ''
+                }
+              </div>
             </div>
-          </div>
+            </a>
         </article>
       `;
     })

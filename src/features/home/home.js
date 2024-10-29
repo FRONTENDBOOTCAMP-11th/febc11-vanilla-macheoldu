@@ -271,11 +271,13 @@ const renderService = {
             <h3 class="main__featured-author__name">${author.name}</h3>
             ${author.extra?.job ? `<p class="main__featured-author__role">${author.extra.job}</p>` : ''}
           </div>
-          <img
-            src="${utils.getImgUrl(author.image)}"
-            alt="${author.name}"
-            class="main__featured-author__image"
-          />
+          <a href="/src/features/author/author.html?userId=${author._id}">
+            <img
+              src="${utils.getImgUrl(author.image)}"
+              alt="${author.name}"
+              class="main__featured-author__image"
+            />
+          </a>
         </div>
         ${
           author.extra?.biography
@@ -294,12 +296,14 @@ const renderService = {
         (post, index) => `
       <li class="main__featured-author__books-item">
         <div class="main__featured-author__books-image-wrapper">
-          <img
-            src="${utils.getPlaceholderImage('authorBook', index + 1)}"
-            alt="${post.title}"
-            class="main__featured-author__books-image"
-            onerror="this.src='${utils.getAssetUrl('image', 'book1.png')}'"
-          />
+          <a href="/src/features/detail/detail.html?postId=${post._id}">
+            <img
+              src="${utils.getPlaceholderImage('authorBook', index + 1)}"
+              alt="${post.title}"
+              class="main__featured-author__books-image"
+              onerror="this.src='${utils.getAssetUrl('image', 'book1.png')}'"
+            />
+          </a>
         </div>
         <div class="main__featured-author__books-info">
           <h3 class="main__featured-author__books-title">${post.title}</h3>
