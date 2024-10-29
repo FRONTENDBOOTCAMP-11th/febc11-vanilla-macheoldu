@@ -1,53 +1,40 @@
-// 외부 라이브러리 import
+// 외부 라이브러리와 컴포넌트 import
 import axios from 'axios';
 import initializeTopAuthors from './topAuthors.js';
 import { initializeCoverSlider } from './coverSlider.js';
+import CONFIG from './config.js';
 
-// API 설정 및 상수
-const CONFIG = {
-  API: {
-    BASE_URL: 'https://11.fesp.shop',
-    HEADERS: {
-      'client-id': 'vanilla03',
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-  },
-  STORAGE_KEYS: {
-    AUTHOR: 'todaysAuthor',
-    POSTS: 'todaysAuthorPosts',
-    TIMESTAMP: 'todaysAuthorTimestamp',
-    FEATURED_BOOK: 'todaysFeaturedBook',
-    FEATURED_BOOK_TIMESTAMP: 'todaysFeaturedBookTimestamp',
-  },
-  DAYS: [
-    'sunday',
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-  ],
-  ONE_DAY_MS: 24 * 60 * 60 * 1000,
-  ASSETS: {
-    IMAGES_PATH: '/assets/images/home',
-    ICONS_PATH: '/assets/icons',
-    LOGOS_PATH: '/assets/logos',
-  },
-};
-
+// 게시글 API 주소 상수
 const POSTS_API_ADDRESS = '/posts?type=info';
 
-// API 인스턴스 생성
+/**
+ * axios 인스턴스 생성
+ * - baseURL: 모든 요청의 기본이 되는 서버 주소
+ * - headers: 서버와 통신할 때 필요한 인증 정보
+ */
 const api = axios.create({
   baseURL: CONFIG.API.BASE_URL,
   headers: CONFIG.API.HEADERS,
 });
 
-// 유틸리티 함수 객체
+/**
+ * 유틸리티 함수들을 모아둔 객체
+ * 자주 사용되는 편리한 기능들을 모아놓은 도구 상자와 같음.
+ */
 const utils = {
-  // 날짜 계산 함수
+  /**
+   * 날짜를 계산하는 함수
+   * @param {string} type - 계산할 단위 (year/month/day)
+   * @param {number} value - 더하거나 뺄 값
+   * @param {number} year - 특정 연도 (선택사항)
+   * @param {number} month - 특정 월 (선택사항)
+   * @param {number} day - 특정 일 (선택사항)
+   * @returns {string} 계산된 날짜를 형식화한 문자열
+   *
+   * 예시:
+   * calculateDate('day', -3) // 3일 전 날짜
+   * calculateDate('month', 1) // 1달 후 날짜
+   */
   calculateDate: (type, value, year, month, day) => {
     const baseDate = new Date();
 
@@ -76,6 +63,10 @@ const utils = {
     return utils.formatDate(baseDate);
   },
 
+  /**
+   * 날짜를 형식화하는 함수
+   * 날짜 객체를 'YYYY.MM.DD HH:mm:ss' 형식의 문자열로 반환
+   */
   formatDate: date => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -86,12 +77,24 @@ const utils = {
     return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
   },
 
+  /**
+   * 이미지 URL을 생성하는 함수
+   * sever 이미지 경로를 전체 URL로 반환
+   */
   getImgUrl: imgPath => `${CONFIG.API.BASE_URL}${imgPath}`,
 
+  /**
+   * 요일을 가져오는 함수들
+   * - getWeekDay : 주어진 날짜의 요일을 반환
+   * - getCurrentDay : 오늘의 요일을 반환
+   */
   getWeekday: dateString => CONFIG.DAYS[new Date(dateString).getDay()],
-
   getCurrentDay: () => CONFIG.DAYS[new Date().getDay()],
 
+  /**
+   * 새 글인지 확인하는 함수
+   * 게시글이 48시간(2일) 이내에 작성되었는지 확인
+   */
   isNewPost: createdAt => {
     const postDate = new Date(createdAt);
     const now = new Date();
@@ -99,16 +102,24 @@ const utils = {
     return diffHours <= 48;
   },
 
+  /**
+   * 긴 텍스트를 지정된 길이로 자르는 함수
+   * HTML 태그를 제거하고 텍스트만 추출해서 자름
+   */
   truncateText: (text, length) => {
     return (
       text
-        .replace(/<[^>]*>/g, '')
-        .trim()
-        .slice(0, length) + '...'
+        .replace(/<[^>]*>/g, '') // HTML 태그 제거
+        .trim() // 앞뒤 공백 제거
+        .slice(0, length) + '...' // 지정된 길이만큼 자르고 ... 추가
     );
   },
 
-  // 동적 이미지 URL 생성 함수
+  /**
+   * 정적 자산(이미지/아이콘 등)의 URL을 생성하는 함수
+   * @param {string} type - 자산 유형 (image/icon/logo)
+   * @param {string} filename - 파일 이름
+   */
   getAssetUrl: (type, filename) => {
     let basePath;
     switch (type) {
@@ -127,20 +138,35 @@ const utils = {
     return new URL(`${basePath}/${filename}`, import.meta.url).href;
   },
 
+  /**
+   * 플레이스 홀더 이미지 URL을 생성하는 함수
+   * 이미지가 없을 때 사용할 대체 이미지 주소를 반환
+   */
   getPlaceholderImage: (type, index) => {
     const filename = `${type}${index}.png`;
     return utils.getAssetUrl('image', filename);
   },
 };
 
-// 스토리지 서비스 객체
+/**
+ * Local Storage 관리 서비스
+ * browser의 Local Storage에 data를 저장하고 불러오는 기능을 담당
+ *
+ * Local Storage?
+ * - browser에서 제공하는 data 저장소
+ * - page를 닫았다 열어도 데이터가 유지 됨
+ * - 문자열 형태로 data를 저장
+ */
 const storageService = {
-  // 저장된 작가 정보 유효성 검사
+  /**
+   * 지정된 작가 정보가 유효한지 검사하는 함수
+   * 오늘 자정을 기준으로 data의 유효성을 판단
+   */
   isStoredAuthorValid: () => {
     const timestamp = localStorage.getItem(CONFIG.STORAGE_KEYS.TIMESTAMP);
     if (!timestamp) return false;
 
-    // 현재 날짜의 자정 시간 구하기
+    // 현재 날짜와 자정 시간 구하기
     const now = new Date();
     const todayMidnight = new Date(
       now.getFullYear(),
@@ -167,7 +193,10 @@ const storageService = {
     return storedMidnight >= todayMidnight;
   },
 
-  // 작가 데이터 저장
+  /**
+   * 작가 데이터를 Local Storage에 저장하는 함수
+   * 작가 정보, 게시글, 저장 시간을 함께 저장
+   */
   storeAuthorData: (author, posts) => {
     localStorage.setItem(CONFIG.STORAGE_KEYS.AUTHOR, JSON.stringify(author));
     localStorage.setItem(CONFIG.STORAGE_KEYS.POSTS, JSON.stringify(posts));
@@ -225,8 +254,15 @@ const storageService = {
   },
 };
 
-// 렌더링 서비스 객체
+/**
+ * 화면 렌더링 서비스
+ * HTML 요소들을 생성하고 화면에 표시하는 기능을 담당
+ */
 const renderService = {
+  /**
+   * 작가 정보를 HTML로 변환하는 함수
+   * 작가의 이름, 직업, 이미지, 소개 등을 포함한 카드를 생성
+   */
   renderAuthorInfo: author => {
     return `
       <article class="main__featured-author__content">
@@ -338,10 +374,18 @@ const renderService = {
   },
 };
 
-// 작가 서비스 객체
+/**
+ * 작가 관리 서비스
+ * 작가 데이터를 처리하고 관리하는 기능을 담당
+ */
 const authorService = {
-  // 랜덤 작가 선택
+  /**
+   * 오늘의 작가를 랜덤하게 선택하는 함수
+   * - 게시글이 있는 작가들 중에서만 선택
+   * - type이 user인 작가만 선택 대상이 됨
+   */
   getRandomTodaysAuthor: (authors, posts) => {
+    // 게시글이 있는 type이 user인 작가만 필터링
     const userAuthors = authors.filter(
       author =>
         typeof author.posts !== 'undefined' &&
@@ -349,6 +393,7 @@ const authorService = {
         author.type === 'user',
     );
 
+    // 실제로 게시글이 있는 작가만 선택
     const authorsWithPosts = userAuthors.filter(author =>
       posts.some(post => post.user._id === author._id),
     );
@@ -358,79 +403,20 @@ const authorService = {
       return null;
     }
 
+    // 랜덤하게 한 명의 작가 선택
     return authorsWithPosts[
       Math.floor(Math.random() * authorsWithPosts.length)
     ];
   },
 
-  // 작가의 게시글 조회
+  /**
+   * 특정 작가의 게시글을 가져오는 함수
+   * 최대 2개의 게시글만 반환
+   */
   getAuthorsPosts: (posts, authorId) => {
     return posts.filter(post => post.user._id === authorId).slice(0, 2);
   },
 };
-
-// 요일별 연재
-class WeeklyPostsManager {
-  constructor() {
-    this.$tabButtons = document.querySelectorAll('.weekly-serial__tab');
-    this.$postsList = document.querySelector('.weekly-serial__list');
-  }
-
-  initialize() {
-    this.setCurrentDay();
-    this.initializeEventListeners();
-  }
-
-  // 현재 요일 설정
-  setCurrentDay() {
-    const currentDay = utils.getCurrentDay();
-    const $currentTab = document.querySelector(`[data-day="${currentDay}"]`);
-    if ($currentTab) {
-      this.selectTab($currentTab);
-    }
-  }
-
-  // 탭 선택 시 스타일 변경
-  selectTab($selectedButton) {
-    // 모든 탭의 선택 상태 해제
-    this.$tabButtons.forEach($tab => {
-      $tab.setAttribute('aria-selected', 'false');
-      $tab.classList.remove('active');
-      $tab.style.borderBottom = 'none';
-    });
-
-    // 선택된 탭 스타일 적용
-    $selectedButton.setAttribute('aria-selected', 'true');
-    $selectedButton.classList.add('active');
-    $selectedButton.style.borderBottom = '2px solid var(--point-color)';
-  }
-
-  // 이벤트 리스너 설정
-  initializeEventListeners() {
-    // 탭 클릭 이벤트
-    this.$tabButtons.forEach($button => {
-      $button.addEventListener('click', () => {
-        this.selectTab($button);
-      });
-    });
-
-    // 정렬 옵션 버튼 클릭 이벤트
-    const $optionButtons = document.querySelectorAll('.weekly-serial__option');
-    $optionButtons.forEach($button => {
-      $button.addEventListener('click', () => {
-        // 모든 버튼 기본 스타일로
-        $optionButtons.forEach($btn => {
-          $btn.classList.remove('active');
-          $btn.style.fontWeight = 'normal';
-        });
-
-        // 선택된 버튼 강조
-        $button.classList.add('active');
-        $button.style.fontWeight = 'bold';
-      });
-    });
-  }
-}
 
 // 추천 도서 서비스 객체
 const featuredBookService = {
@@ -498,12 +484,92 @@ const featuredBookService = {
   },
 };
 
-// 초기화 함수들
+/**
+ * 요일별 연재 관리 클래스
+ * 요일 탭을 관리하고 연재 컨텐츠를 표시하는 기능을 담당
+ */
+class WeeklyPostsManager {
+  constructor() {
+    this.$tabButtons = document.querySelectorAll('.weekly-serial__tab');
+    this.$postsList = document.querySelector('.weekly-serial__list');
+  }
+
+  /**
+   * 초기화 함수
+   * - 현재 요일 설정
+   * - 이벤트 리스너 등록
+   */
+  init() {
+    this.setCurrentDay();
+    this.setupEventListeners();
+  }
+
+  // 현재 요일 설정
+  setCurrentDay() {
+    const currentDay = utils.getCurrentDay();
+    const $currentTab = document.querySelector(`[data-day="${currentDay}"]`);
+    if ($currentTab) {
+      this.selectTab($currentTab);
+    }
+  }
+
+  // 탭 선택 시 스타일 변경
+  selectTab($selectedButton) {
+    // 모든 탭의 선택 상태 해제
+    this.$tabButtons.forEach($tab => {
+      $tab.setAttribute('aria-selected', 'false');
+      $tab.classList.remove('active');
+      $tab.style.borderBottom = 'none';
+    });
+
+    // 선택된 탭 스타일 적용
+    $selectedButton.setAttribute('aria-selected', 'true');
+    $selectedButton.classList.add('active');
+    $selectedButton.style.borderBottom = '2px solid var(--point-color)';
+  }
+
+  // 이벤트 리스너 설정
+  setupEventListeners() {
+    // 탭 클릭 이벤트
+    this.$tabButtons.forEach($button => {
+      $button.addEventListener('click', () => {
+        this.selectTab($button);
+      });
+    });
+
+    // 정렬 옵션 버튼 클릭 이벤트
+    const $optionButtons = document.querySelectorAll('.weekly-serial__option');
+    $optionButtons.forEach($button => {
+      $button.addEventListener('click', () => {
+        // 모든 버튼 기본 스타일로
+        $optionButtons.forEach($btn => {
+          $btn.classList.remove('active');
+          $btn.style.fontWeight = 'normal';
+        });
+
+        // 선택된 버튼 강조
+        $button.classList.add('active');
+        $button.style.fontWeight = 'bold';
+      });
+    });
+  }
+}
+
+/**
+ * 저장된 작가 데이터를 처리하는 함수
+ * 로컬 스토리지에 저장된 작가 정보를 화면에 표시하고,
+ * 추가로 필요한 데이터를 서버에서 가져옴
+ *
+ * @param {Object} storedData - 저장된 작가 데이터
+ * @param {Object} featuredBook - 추천 도서 정보
+ * @param {Element} $featuredBookSection - 추천 도서를 표시할 DOM 요소
+ */
 const handleStoredAuthorData = async (
   storedData,
   featuredBook,
   $featuredBookSection,
 ) => {
+  // 1. 저장된 작가 정보를 화면에 표시
   const $featuredAuthor = document.querySelector('.main__featured-author');
   $featuredAuthor.innerHTML = `
     <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">오늘의 작가</h2>
@@ -511,12 +577,14 @@ const handleStoredAuthorData = async (
     ${renderService.renderAuthorPosts(storedData.posts)}
   `;
 
+  // 2. 최근 2주간의 인기 게시글 데이터 요청
   const apiUrl = `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -14)}","$lt":"${utils.calculateDate()}"}}`;
   console.log('API URL:', apiUrl);
 
   const response = await api.get(apiUrl);
   console.log('API Response:', response.data);
 
+  // 3. 추천 도서가 없는 경우 새로 선택
   if (!featuredBook) {
     featuredBook = featuredBookService.getRandomBook(response.data.item);
     if (featuredBook && $featuredBookSection) {
@@ -526,11 +594,20 @@ const handleStoredAuthorData = async (
     }
   }
 
+  // 4. 인기 게시글과 구독 작가 목록 표시
   renderService.renderTodaysPick(response.data.item);
   await initializeTopAuthors();
 };
 
+/**
+ * 새로운 데이터를 처리하는 함수
+ * 서버에서 새로운 데이터를 가져와 화면을 구성
+ *
+ * @param {Element} $featuredBookSection - 추천 도서 섹션 요소
+ * @param {Object} featuredBook - 추천 도서 정보
+ */
 const handleNewData = async ($featuredBookSection, featuredBook) => {
+  // 1. 작가와 게시글 데이터를 동시에 요청
   const [usersResponse, postsResponse] = await Promise.all([
     api.get('/users'),
     api.get(POSTS_API_ADDRESS),
@@ -538,6 +615,7 @@ const handleNewData = async ($featuredBookSection, featuredBook) => {
 
   const posts = postsResponse.data.item;
 
+  // 2. 추천 도서 처리
   if (!featuredBook) {
     featuredBook = featuredBookService.getRandomBook(posts);
     if (featuredBook && $featuredBookSection) {
@@ -547,6 +625,7 @@ const handleNewData = async ($featuredBookSection, featuredBook) => {
     }
   }
 
+  // 3. 랜덤 작가 선택 및 처리
   const randomAuthor = authorService.getRandomTodaysAuthor(
     usersResponse.data.item,
     posts,
@@ -559,6 +638,7 @@ const handleNewData = async ($featuredBookSection, featuredBook) => {
     }
   }
 
+  // 4. 인기 게시글 데이터 요청 및 표시
   const todaysPickResponse = await api.get(
     `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -14)}","$lt":"${utils.calculateDate()}"}}`,
   );
@@ -567,8 +647,18 @@ const handleNewData = async ($featuredBookSection, featuredBook) => {
   await initializeTopAuthors();
 };
 
+/**
+ * 새로운 작가 데이터를 처리하는 함수
+ * 작가 정보를 저장하고 화면에 표시
+ *
+ * @param {Object} author - 작가 정보
+ * @param {Array} posts - 작가의 게시글 목록
+ */
 const handleNewAuthorData = (author, posts) => {
+  // 1. 작가 데이터를 로컬 스토리지에 저장
   storageService.storeAuthorData(author, posts);
+
+  // 2. 화면에 작가 정보 표시
   const $featuredAuthor = document.querySelector('.main__featured-author');
   $featuredAuthor.innerHTML = `
     <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">오늘의 작가</h2>
@@ -577,18 +667,33 @@ const handleNewAuthorData = (author, posts) => {
   `;
 };
 
+/**
+ * 페이지 초기화 함수
+ * 페이지에 필요한 모든 데이터를 가져오고 화면을 구성
+ *
+ * 초기화 순서:
+ * 1. 커버 슬라이더 초기화
+ * 2. 요일별 연재 섹션 초기화
+ * 3. 추천 도서 처리
+ * 4. 작가 데이터 처리
+ */
 const initialize = async () => {
   try {
     console.log('Starting initialization...');
+
+    // 1. 커버 슬라이더 초기화
     await initializeCoverSlider();
     console.log('Cover slider initialized');
 
+    // 2. 요일별 연재 초기화
     const weeklyPosts = new WeeklyPostsManager();
-    weeklyPosts.initialize();
+    weeklyPosts.init();
 
+    // 3. 추천 도서
     const $featuredBookSection = document.querySelector('.main__featured-book');
     let featuredBook;
 
+    // 4. 저장된 추천 도서 확인
     if (storageService.isStoredFeaturedBookValid()) {
       featuredBook = storageService.getStoredFeaturedBook();
       if (featuredBook && $featuredBookSection) {
@@ -597,6 +702,7 @@ const initialize = async () => {
       }
     }
 
+    // 5. 저장된 작가 데이터 확인 및 처리
     if (storageService.isStoredAuthorValid()) {
       const storedData = storageService.getStoredAuthorData();
       if (storedData?.author && storedData?.posts) {
@@ -609,19 +715,26 @@ const initialize = async () => {
       }
     }
 
+    // 6. 새로운 데이터 가져오기
     await handleNewData($featuredBookSection, featuredBook);
   } catch (error) {
     console.error('초기화 오류:', error);
   }
 };
 
-// 페이지 로드 시 초기화
+/**
+ * 페이지 로드 시 초기화 실행
+ * DOM이 완전히 로드된 후 초기화를 시작합
+ */
 if (document.readyState === 'loading') {
+  // 아직 DOM이 로드 중인 경우
   document.addEventListener('DOMContentLoaded', initialize);
 } else {
+  // 이미 DOM이 로드된 경우
   initialize();
 }
 
+// 필요한 기능들을 외부로 내보내기
 export {
   WeeklyPostsManager,
   utils,
