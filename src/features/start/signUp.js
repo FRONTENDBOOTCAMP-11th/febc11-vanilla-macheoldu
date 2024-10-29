@@ -1,12 +1,13 @@
 import axios from 'axios';
 
 window.addEventListener('load', () => {
-
   // 필요한 DOM 노드 획득
   // 별명(이름) 영역 DOM 노드
   const $signUpNickname = document.getElementById('signUpNickname');
   const $checkNicknameBtn = document.getElementById('checkNickname');
-  const $checkNicknameResult = document.querySelector('.sign-up__valid.nickname');
+  const $checkNicknameResult = document.querySelector(
+    '.sign-up__valid.nickname',
+  );
 
   // 이메일 영역 DOM 노드
   const $signUpEmail = document.getElementById('signUpEmail');
@@ -18,6 +19,11 @@ window.addEventListener('load', () => {
   const $signUpPwCheck = document.getElementById('signUpPwCheck');
   const $checkPwResult = document.querySelector('.sign-up__valid.pw');
 
+  // 비밀번호 보기/숨기기 아이콘 DOM 노드
+  const $pwVisibilityToggles = document.querySelectorAll('.type--visibility');
+  const $hideIcons = document.querySelectorAll('.type--visibility__icon-hide');
+  const $showIcons = document.querySelectorAll('.type--visibility__icon-show');
+
   // 회원가입 버튼 노드
   const $signUpBtn = document.querySelector('.type--long:has(#signUpComplete)');
 
@@ -27,11 +33,21 @@ window.addEventListener('load', () => {
   let isPwValidated = false;
 
   // 안내 메시지 출력 함수
-  const addMsg = function (node, msg) { node.textContent = msg };
-  const hideMsg = function (node) { node.classList.add('hidden') };
-  const showMsg = function (node) { node.classList.remove('hidden') };
-  const isInvalidMsg = function (node) { node.classList.add('invalid') };
-  const isValidMsg = function (node) { node.classList.remove('invalid') };
+  const addMsg = function (node, msg) {
+    node.textContent = msg;
+  };
+  const hideMsg = function (node) {
+    node.classList.add('hidden');
+  };
+  const showMsg = function (node) {
+    node.classList.remove('hidden');
+  };
+  const isInvalidMsg = function (node) {
+    node.classList.add('invalid');
+  };
+  const isValidMsg = function (node) {
+    node.classList.remove('invalid');
+  };
 
   // 로그인 상태 및 버튼 활성화 상태 업데이트 함수
   const updateBtnState = function () {
@@ -42,7 +58,30 @@ window.addEventListener('load', () => {
       // 별명, 이메일, 비밀번호 확인 상태값 중 하나라도 false 인 경우, 버튼 비활성화 상태로 변경
       $signUpBtn.classList.remove('active');
     }
-  }
+  };
+
+  // 비밀번호 가시성 토글 설정
+  const passwordFields = [$signUpPw, $signUpPwCheck];
+
+  // 각 비밀번호 토글 버튼에 이벤트 리스너 추가
+  $pwVisibilityToggles.forEach((toggle, index) => {
+    toggle.addEventListener('click', () => {
+      // 현재 비밀번호 필드의 type 확인
+      const isPasswordVisible = passwordFields[index].type === 'text';
+
+      // 비밀번호 필드 type 토글
+      passwordFields[index].type = isPasswordVisible ? 'password' : 'text';
+
+      // 아이콘 토글
+      $hideIcons[index].classList.toggle('hidden');
+      $showIcons[index].classList.toggle('hidden');
+    });
+  });
+
+  // 초기 상태 설정 - 비밀번호 숨김
+  passwordFields.forEach(field => {
+    field.type = 'password';
+  });
 
   // 별명 중복확인 버튼 클릭 이벤트 발생 시 실행 코드
   $checkNicknameBtn.addEventListener('click', function () {
@@ -60,8 +99,8 @@ window.addEventListener('load', () => {
           accept: 'application/json',
         },
         params: {
-          name: `${userNickname}`
-        }
+          name: `${userNickname}`,
+        },
       })
         .then(response => {
           if (response.data.ok == 1) {
@@ -92,8 +131,7 @@ window.addEventListener('load', () => {
             // 버튼 활성화 상태 업데이트
             updateBtnState();
           }
-        })
-
+        });
     } else {
       // 별명이 입력되지 않은 경우, 버튼 클릭 시 안내 메시지 출력
       addMsg($checkNicknameResult, '별명을 입력해주세요.');
@@ -104,7 +142,7 @@ window.addEventListener('load', () => {
       // 버튼 활성화 상태 업데이트
       updateBtnState();
     }
-  })
+  });
 
   // 이메일 중복확인 버튼 클릭 이벤트 발생 시 실행 코드
   $checkEmailBtn.addEventListener('click', function () {
@@ -121,12 +159,12 @@ window.addEventListener('load', () => {
           headers: {
             'client-id': 'vanilla03',
             'content-type': 'application/json',
-            accept: 'application/json'
+            accept: 'application/json',
           },
           // 이메일 입력란에 입력된 데이터 서버 전송
           params: {
             email: `${userEmail}`,
-          }
+          },
         })
           .then(response => {
             // 중복된 이메일 없는 경우, 사용 가능 이메일 안내 메시지 출력
@@ -154,7 +192,7 @@ window.addEventListener('load', () => {
               // 버튼 활성화 상태 업데이트
               updateBtnState();
             }
-          })
+          });
       } else {
         // 올바르지 않은 형식의 이메일이 입력된 경우, 안내 메시지 출력
         addMsg($checkEmailResult, '유효하지 않은 이메일 형식입니다');
@@ -164,12 +202,11 @@ window.addEventListener('load', () => {
         // 버튼 활성화 상태 업데이트
         updateBtnState();
       }
-
     } else {
       // 이메일 입력란에 입력값 없는 경우 안내 메시지 출력
       addMsg($checkEmailResult, '이메일을 입력해주세요.');
       isInvalidMsg($checkEmailResult);
-      // 이메일 확인 상태값 false 
+      // 이메일 확인 상태값 false
       isEmailValidated = false;
       // 버튼 활성화 상태 업데이트
       updateBtnState();
@@ -207,7 +244,7 @@ window.addEventListener('load', () => {
           // 버튼 활성화 상태 업데이트
           updateBtnState();
         }
-      })
+      });
     } else {
       // 비밀번호 입력값이 정규 표현식의 조건을 만족하지 않는 경우, 안내 메시지 출력
       addMsg($checkPwResult, '대소문자, 숫자 조합 8자 이상이어야 합니다.');
@@ -217,8 +254,8 @@ window.addEventListener('load', () => {
       isPwValidated = false;
       // 버튼 활성화 상태 업데이트
       updateBtnState();
-    };
-  })
+    }
+  });
 
   // 회원가입 버튼 클릭 이벤트 발생 시 실행 코드
   $signUpBtn.addEventListener('click', function (e) {
@@ -252,7 +289,7 @@ window.addEventListener('load', () => {
         headers: {
           'client-id': 'vanilla03',
           'content-type': 'application/json',
-          accept: 'application/json'
+          accept: 'application/json',
         },
         // 전송 데이터
         data: {
@@ -261,8 +298,8 @@ window.addEventListener('load', () => {
           name: `${signUpNickname}`,
           type: 'user',
           // 최초 회원가입 시 디폴트 이미지 추가
-          image: 'https://11.fesp.shop/files/vanilla03/no_profile.svg'
-        }
+          image: 'https://11.fesp.shop/files/vanilla03/no_profile.svg',
+        },
       })
         .then(response => {
           // 회원가입 성공 시, 시작하기 메인 화면으로 이동
@@ -274,7 +311,7 @@ window.addEventListener('load', () => {
             // alert 로 에러 메시지 출력
             alert(error.response.message);
           }
-        })
+        });
     }
-  })
-})
+  });
+});
