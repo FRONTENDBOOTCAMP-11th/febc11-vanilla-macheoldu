@@ -75,6 +75,15 @@ class CoverSlider {
 
     // 슬라이드 데이터를 저장할 배열
     this.slides = [];
+
+    // 터치 이벤트 관련 속성
+    this.touchStartX = 0; // 터치 시작 지점의 X 좌표
+    this.touchEndX = 0; // 터치 끝 지점의 X 좌표
+
+    // 마우스 이벤트 관련 속성
+    this.mouseStartX = 0; // 마우스 드래그 시작 지점의 X 좌표
+    this.mouseEndX = 0; // 마우스 드래그 끝 지점의 X 좌표
+    this.isDragging = false; // 현재 마우스 드래그 중인지 여부
   }
 
   /**
@@ -371,14 +380,151 @@ class CoverSlider {
   }
 
   /**
-   * Event Listeners를 추가하는 함수
-   * 마우스가 슬라이더 위에 있을 때와 벗어났을 때의 동작을 정의
+   * 이벤트 리스너 설정 함수
+   * - 터치 이벤트 (모바일)
+   * - 마우스 이벤트 (데스크톱)
+   * - 자동 재생 관련 이벤트
+   *
+   * 각 이벤트는 다음과 같은 상황을 처리:
+   * 1. 터치/드래그 시작: 자동 재생 중지
+   * 2. 이동 중: 슬라이더 위치 업데이트
+   * 3. 터치/드래그 끝: 다음/이전 슬라이드 결정 후 자동 재생 재개
    */
   addEventListeners() {
     // 마우스가 슬라이더 위로 오면 자동 재생 멈춤
     this.$container.addEventListener('mouseenter', () => this.stopAutoPlay());
     // 마우스가 슬라이더를 벗어나면 자동 재생 시작
     this.$container.addEventListener('mouseleave', () => this.startAutoPlay());
+
+    // 터치 이벤트 리스너 설정 (모바일 환경)
+    this.addTouchEventListeners();
+
+    // 마우스 이벤트 리스너 설정 (데스크톱 환경)
+    this.addMouseEventListeners();
+  }
+
+  /**
+   * 터치 이벤트 리스너 설정
+   * 모바일 환경에서 사용자의 터치 동작을 처리
+   */
+  addTouchEventListeners() {
+    // 터치 시작 시
+    this.$container.addEventListener(
+      'touchstart',
+      e => {
+        this.stopAutoPlay(); // 자동 재생 중지
+        this.touchStartX = e.touches[0].clientX; // 시작 지점 저장
+        this.touchEndX = e.touches[0].clientX; // 끝 지점 초기화
+      },
+      { passive: true }, // 스크롤 성능 최적화
+    );
+
+    // 터치 이동 중
+    this.$container.addEventListener(
+      'touchmove',
+      e => {
+        if (this.isAnimating) return; // 애니메이션 중이면 무시
+        this.touchEndX = e.touches[0].clientX; // 현재 터치 위치 업데이트
+        this.moveSlider(this.touchStartX - this.touchEndX); // 슬라이더 이동
+      },
+      { passive: true },
+    );
+
+    // 터치 끝났을 때
+    this.$container.addEventListener('touchend', () => {
+      if (this.isAnimating) return; // 애니메이션 중이면 무시
+      const diff = this.touchStartX - this.touchEndX; // 이동 거리 계산
+      this.handleSlideChange(diff); // 슬라이드 변경 여부 결정
+      this.startAutoPlay(); // 자동 재생 재개
+    });
+  }
+
+  /**
+   * 마우스 이벤트 리스너 설정
+   * 데스크톱 환경에서 사용자의 마우스 드래그 동작을 처리
+   */
+  addMouseEventListeners() {
+    // 마우스 버튼을 눌렀을 때
+    this.$container.addEventListener('mousedown', e => {
+      this.stopAutoPlay(); // 자동 재생 중지
+      this.isDragging = true; // 드래그 시작
+      this.mouseStartX = e.clientX; // 시작 지점 저장
+      this.mouseEndX = e.clientX; // 끝 지점 초기화
+      this.$container.style.cursor = 'grabbing'; // 커서 스타일 변경
+    });
+
+    // 마우스 이동 중
+    this.$container.addEventListener('mousemove', e => {
+      if (!this.isDragging || this.isAnimating) return; // 드래그 중이 아니거나 애니메이션 중이면 무시
+      e.preventDefault(); // 기본 동작 방지
+      this.mouseEndX = e.clientX; // 현재 마우스 위치 업데이트
+      this.moveSlider(this.mouseStartX - this.mouseEndX); // 슬라이더 이동
+    });
+
+    // 마우스 버튼을 뗐을 때 또는 마우스가 영역을 벗어났을 때의 공통 처리
+    const handleMouseUp = () => {
+      if (!this.isDragging) return; // 드래그 중이 아니면 무시
+      this.isDragging = false; // 드래그 종료
+      this.$container.style.cursor = 'grab'; // 커서 스타일 복귀
+      this.handleSlideChange(this.mouseStartX - this.mouseEndX); // 슬라이드 변경 여부 결정
+      this.startAutoPlay(); // 자동 재생 재개
+    };
+
+    // 마우스 버튼을 뗐을 때와 마우스가 영역을 벗어났을 때 이벤트 등록
+    this.$container.addEventListener('mouseup', handleMouseUp);
+    this.$container.addEventListener('mouseleave', handleMouseUp);
+  }
+
+  /**
+   * 슬라이더 이동 처리 함수
+   * 터치나 드래그로 이동한 거리에 따라 슬라이더의 위치를 계산하고 적용
+   *
+   * @param {number} diff - 이동 거리 (시작 지점 - 현재 지점)
+   */
+  moveSlider(diff) {
+    // 이동할 비율 계산 (전체 너비 대비 이동 거리의 비율)
+    const movePercent = (diff / 360) * (100 / this.totalSlides);
+    // 현재 슬라이드의 기본 위치
+    const currentTransform = -this.currentSlide * (100 / this.totalSlides);
+
+    // 경계 조건 체크 (첫 번째나 마지막 슬라이드에서 더 이상 이동하지 않도록)
+    if (
+      (this.currentSlide === 0 && movePercent < 0) || // 첫 번째 슬라이드에서 왼쪽으로 이동 시도
+      (this.currentSlide === this.totalSlides - 1 && movePercent > 0) // 마지막 슬라이드에서 오른쪽으로 이동 시도
+    ) {
+      return;
+    }
+
+    // 계산된 위치로 슬라이더 이동
+    this.$sliderContainer.style.transform = `translateX(${
+      currentTransform - movePercent
+    }%)`;
+  }
+
+  /**
+   * 슬라이드 변경 여부를 결정하고 처리하는 함수
+   * 이동 거리가 임계값을 넘었을 때만 슬라이드를 변경
+   *
+   * @param {number} diff - 전체 이동 거리
+   */
+  handleSlideChange(diff) {
+    const threshold = 360 * 0.3; // 슬라이드 너비의 30%를 임계값으로 설정
+
+    // 임계값을 넘은 경우에만 슬라이드 변경
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && this.currentSlide < this.totalSlides - 1) {
+        // 오른쪽으로 충분히 이동했고, 마지막 슬라이드가 아닌 경우
+        this.currentSlide++;
+        this.updateCoverBackground(); // 배경색 업데이트
+      } else if (diff < 0 && this.currentSlide > 0) {
+        // 왼쪽으로 충분히 이동했고, 첫 번째 슬라이드가 아닌 경우
+        this.currentSlide--;
+        this.updateCoverBackground(); // 배경색 업데이트
+      }
+    }
+
+    // 슬라이드 위치 및 관련 요소들 업데이트
+    this.updateSlide();
   }
 
   /**
