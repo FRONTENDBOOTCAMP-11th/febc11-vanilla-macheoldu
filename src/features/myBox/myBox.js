@@ -57,114 +57,153 @@ sliders.forEach(slider => initializeSlider(slider));
 const authorSliders = document.querySelectorAll('.interested-authors__ul');
 authorSliders.forEach(slider => initializeSlider(slider));
 
+function loadMyBoxData() {
+  const userId = sessionStorage.getItem('userIdNum'); // 사용자 ID 가져오기
+
+  // 사용자의 북마크 목록 조회
+
+  // ===============tset=========================
+  axios
+    .get(`/api/users/${userId}/bookmarks`, {
+      headers: {
+        'client-id': 'vanilla03',
+      },
+    })
+    .then(response => {
+      console.log(response.data);
+      // if (response.data.ok) {
+      //   renderBookmarks(response.data.item); // 데이터 렌더링
+      // } else {
+      //   console.error("북마크 로드 실패:", response.data.message);
+      // }
+    })
+    .catch(error => {
+      console.log(error.response.data);
+      // if (error.response?.status === 401) {
+      //   sessionStorage.clear();
+      //   window.location.href = "/src/features/start/start.html";
+      // }
+    });
+}
+loadMyBoxData();
 /**
  * ----------------
  * 기능구현 코드
  * ----------------
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  const accessToken = localStorage.getItem('accessToken');
+// 내 북마크 데이터 로드
+document.addEventListener('DOMContentLoaded', function () {
+  const loginStatus = sessionStorage.getItem('login-status');
+  const userId = sessionStorage.getItem('userIdNum');
 
-  if (!accessToken) {
-    alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
-    window.location.href = '/src/features/login/login.html';
-  } else {
-    loadMyBoxData(accessToken);
-    loadRecentlyViewedPosts(); // 세션에서 최근 본 글 불러오기
+  // 로그인 상태 확인
+  if (!loginStatus || !userAccessToken) {
+    alert('로그인이 필요한 서비스입니다.');
+    window.location.href = '/src/features/start/start.html';
+    return;
   }
+
+  loadMyBoxData(userId);
 });
 
-function loadMyBoxData(token) {
-  // 관심 작가 북마크 데이터 요청
-  axios({
-    method: 'get',
-    url: '/post/bookmarks/user', // 사용자 북마크 데이터
-    headers: { Authorization: `Bearer ${token}` },
-  })
-    .then(response => {
-      const bookmarkedAuthors = response.data.item;
-      renderInterestedAuthors(bookmarkedAuthors);
+// 내 북마크 데이터 로드
+function loadMyBoxData(userId) {
+  const userId = sessionStorage.getItem('userId'); // 사용자 ID 가져오기
+
+  // 사용자의 북마크 목록 조회
+  axios
+    .get(`/api/users/${userId}/bookmarks`, {
+      headers: {
+        'client-id': 'vanilla03',
+      },
     })
-    .catch(error => console.error('관심 작가 로드 오류:', error));
-
-  // 관심 글 북마크 데이터 요청
-  axios({
-    method: 'get',
-    url: '/post/bookmarks/post', // 게시글 북마크 데이터
-    headers: { Authorization: `Bearer ${token}` },
-  })
     .then(response => {
-      const likedPosts = response.data.item;
-      renderInterestedPosts(likedPosts);
+      console.log(response.data);
+      if (response.data.ok) {
+        renderBookmarks(response.data.item); // 데이터 렌더링
+      } else {
+        console.error('북마크 로드 실패:', response.data.message);
+      }
     })
-    .catch(error => console.error('관심 글 로드 오류:', error));
+    .catch(error => {
+      console.log(error.response.data);
+      if (error.response?.status === 401) {
+        sessionStorage.clear();
+        window.location.href = '/src/features/start/start.html';
+      }
+    });
 }
 
-// 세션 스토리지에서 최근 본 글 불러오는 함수
-function loadRecentlyViewedPosts() {
-  const recentPosts =
-    JSON.parse(sessionStorage.getItem('recentlyViewedPosts')) || [];
-  renderRecentlyViewed(recentPosts);
-}
+// 북마크 렌더링
+function renderBookmarks(bookmarks) {
+  const bookmarksContainer = document.querySelector('.bookmarks-container');
+  bookmarksContainer.innerHTML = '';
 
-// 관심 작가, 최근 본 글, 관심 글 데이터를 페이지에 렌더링하는 함수들
-function renderInterestedAuthors(authors) {
-  const ulElement = document.querySelector('.interested-authors__ul');
-  ulElement.innerHTML = '';
-
-  authors.forEach(author => {
-    const li = document.createElement('li');
-    li.classList.add('interested-author-item');
-    li.innerHTML = `
-      <img src="${author.image}" alt="${author.name}의 이미지" />
-      <p>${author.name}</p>
-    `;
-    ulElement.appendChild(li);
+  // 각 북마크 타입에 따라 분기
+  ['user', 'product', 'post'].forEach(type => {
+    if (bookmarks[type]) {
+      bookmarks[type].forEach(item => {
+        let html = '';
+        switch (type) {
+          case 'user':
+            html = `
+              <div class="bookmark-item">
+                <img src="${item.user.image}" alt="${item.user.name}">
+                <span>${item.user.name}</span>
+                <p>${item.memo}</p>
+              </div>`;
+            break;
+          case 'product':
+            html = `
+              <div class="bookmark-item">
+                <img src="${item.product.mainImages[0].path}" alt="${item.product.name}">
+                <span>${item.product.name}</span>
+                <p>${item.memo}</p>
+              </div>`;
+            break;
+          case 'post':
+            html = `
+              <div class="bookmark-item">
+                <h3>${item.post.title}</h3>
+                <p>${item.memo}</p>
+              </div>`;
+            break;
+        }
+        bookmarksContainer.innerHTML += html;
+      });
+    }
   });
 }
 
-function renderRecentlyViewed(posts) {
-  const cardsElement = document.querySelector('.recently-viewed .cards');
-  cardsElement.innerHTML = '';
+// 북마크 추가 예시 함수
+function addBookmark(type, targetId, memo) {
+  const token = sessionStorage.getItem('userAccessToken');
+  const clientId = sessionStorage.getItem('userClientId');
 
-  posts.forEach(post => {
-    const card = document.createElement('article');
-    card.classList.add('card');
-    card.innerHTML = `
-      <a href="${post.url}">
-        <img src="${post.image}" alt="${post.title}" />
-      </a>
-      <h3>${post.title}</h3>
-      <p><em>by</em> ${post.author}</p>
-    `;
-    cardsElement.appendChild(card);
-  });
-}
-
-function renderInterestedPosts(posts) {
-  const cardsElement = document.querySelector('.interested-posts .cards');
-  cardsElement.innerHTML = '';
-
-  posts.forEach(post => {
-    const card = document.createElement('article');
-    card.classList.add('card');
-    card.innerHTML = `
-      <a href="${post.url}">
-        <img src="${post.image}" alt="${post.title}" />
-      </a>
-      <h3>${post.title}</h3>
-      <p><em>by</em> ${post.author}</p>
-    `;
-    cardsElement.appendChild(card);
-  });
-}
-
-// 최근 본 글을 세션 스토리지에 저장하는 함수
-function saveToRecentlyViewed(post) {
-  let recentPosts =
-    JSON.parse(sessionStorage.getItem('recentlyViewedPosts')) || [];
-  recentPosts.unshift(post); // 최근에 본 글이 맨 앞에 위치하도록 추가
-  if (recentPosts.length > 10) recentPosts.pop(); // 최대 10개까지만 유지
-  sessionStorage.setItem('recentlyViewedPosts', JSON.stringify(recentPosts));
+  axios
+    .post(
+      `https://11.fesp.shop/bookmarks/${type}`,
+      {
+        target_id: targetId,
+        memo: memo,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'client-id': clientId,
+        },
+      },
+    )
+    .then(response => {
+      if (response.data.ok) {
+        console.log('북마크 추가 성공:', response.data.item);
+        loadMyBoxData(token, clientId); // 북마크 목록 새로고침
+      } else {
+        console.error('북마크 추가 실패:', response.data.message);
+      }
+    })
+    .catch(error => {
+      console.error('북마크 추가 실패:', error);
+    });
 }
