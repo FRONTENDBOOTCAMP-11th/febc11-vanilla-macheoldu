@@ -42,10 +42,10 @@ fetch('/src/features/components/top-menu/top-menu.html')
       $profileButton.classList.add('hidden');
     }
 
-    // 로그인이 되어 있는 상태에서 프로필 버튼 선택 시 로그아웃 처리
+    // 로그인이 되어 있는 상태에서 프로필 버튼 선택 시 로그아웃 처리, 홈으로 이동
     $profileButton.addEventListener('click', function () {
       alert('로그아웃 되었습니다.');
       sessionStorage.clear();
-      location.reload();
+      location.replace('/src/features/home/home.html');
     })
   });
