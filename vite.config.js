@@ -10,6 +10,9 @@ export default defineConfig({
         home: resolve(__dirname, 'src/features/home/home.html'),
         homeJS: resolve(__dirname, 'src/features/home/home.js'),
         homeCSS: resolve(__dirname, 'src/features/home/home.css'),
+        homeConfigJS: resolve(__dirname, 'src/features/home/config.js'),
+        coverSliderJS: resolve(__dirname, 'src/features/home/coverSlider.js'),
+        topAuthorsJS: resolve(__dirname, 'src/features/home/topAuthors.js'),
 
         // discover
         discover: resolve(__dirname, 'src/features/discover/discover.html'),
