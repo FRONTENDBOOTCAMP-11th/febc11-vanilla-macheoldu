@@ -319,7 +319,7 @@ const renderService = {
                   <p class="main__todays-pick__description">${utils.truncateText(post.content, 100)}</p>
                 </div>
                 <img
-                  src="${post.image?.[0] ? utils.getImgUrl(post.image[0]) : utils.getPlaceholderImage('pick', Math.floor(Math.random() * 10) + 1)}"
+                  src="a.svg"
                   alt="${post.title}"
                   class="main__todays-pick__image"
                   onerror="this.src='${utils.getAssetUrl('image', 'pick1.png')}'"
