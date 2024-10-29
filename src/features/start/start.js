@@ -38,23 +38,6 @@ window.addEventListener('load', () => {
     const userEmail = localStorage.getItem('userEmail');
     $email.value = userEmail;
     $saveIdPw.checked = true;
-    // const userAccessToken = localStorage.getItem('userAccessToken');
-    // axios({
-    //   method: 'get',
-    //   url: '/api/users',
-    //   headers: {
-    //     'client-id': 'vanilla03',
-    //     'content-type': 'application/json',
-    //     accept: 'application/json',
-    //   }
-    // }).then(response => {
-    //   $email.textContent = response.data.item.email;
-    //   $password.textContent = response.data.item.password;
-    //   $saveIdPw.checked;
-    //   console.log(response.data.item);
-    // }).catch(error => {
-    //   alert(error.response.data.message);
-    // })
   }
 
   // 로그인 버튼 클릭 이벤트 발생 시 실행 함수
@@ -154,10 +137,9 @@ window.addEventListener('load', () => {
             }
           })
       }
-
+      // 로그인 함수 실행
       login(emailValue, passwordValue);
     }
-    console.log($saveIdPw.checked);
   });
 
   // 회원가입 버튼 선택 시 회원가입 화면으로 이동

@@ -33,6 +33,16 @@ window.addEventListener('load', () => {
   const isInvalidMsg = function (node) { node.classList.add('invalid') };
   const isValidMsg = function (node) { node.classList.remove('invalid') };
 
+  // 로그인 상태 및 버튼 활성화 상태 업데이트 함수
+  const updateBtnState = function () {
+    if (isNicknameValidated && isEmailValidated && isPwValidated) {
+      // 별명, 이메일, 비밀번호 확인 상태값이 모두 true 인 경우, 버튼 활성화 상태로 변경
+      $signUpBtn.classList.add('active');
+    } else {
+      // 별명, 이메일, 비밀번호 확인 상태값 중 하나라도 false 인 경우, 버튼 비활성화 상태로 변경
+      $signUpBtn.classList.remove('active');
+    }
+  }
 
   // 별명 중복확인 버튼 클릭 이벤트 발생 시 실행 코드
   $checkNicknameBtn.addEventListener('click', function () {
@@ -52,29 +62,37 @@ window.addEventListener('load', () => {
         params: {
           name: `${userNickname}`
         }
-      }).then(response => {
-        if (response.data.ok == 1) {
-          // 중복된 별명이 없는 경우 안내 메시지
-          addMsg($checkNicknameResult, '사용할 수 있는 별명입니다.');
-          isValidMsg($checkNicknameResult);
-          // 별명 인증 상태 true
-          isNicknameValidated = true;
-        }
-      }).catch(error => {
-        if (error.response.status == 409) {
-          // 중복된 이름이 있는 경우 에러 메시지
-          const errorMsg = error.response.data.message;
-          addMsg($checkNicknameResult, errorMsg);
-          isInvalidMsg($checkNicknameResult);
-          // 별명 인증 상태 false
-          isNicknameValidated = false;
-        } else if (error.response.status === 500) {
-          // 서버 에러(500) 시 얼럿
-          alert(error.response.data.message);
-          // 별명 인증 상태 false
-          isNicknameValidated = false;
-        }
       })
+        .then(response => {
+          if (response.data.ok == 1) {
+            // 중복된 별명이 없는 경우 안내 메시지
+            addMsg($checkNicknameResult, '사용할 수 있는 별명입니다.');
+            isValidMsg($checkNicknameResult);
+            // 별명 인증 상태 true
+            isNicknameValidated = true;
+          }
+          // 버튼 활성화 상태 업데이트
+          updateBtnState();
+        })
+        .catch(error => {
+          if (error.response.status == 409) {
+            // 중복된 이름이 있는 경우 에러 메시지
+            const errorMsg = error.response.data.message;
+            addMsg($checkNicknameResult, errorMsg);
+            isInvalidMsg($checkNicknameResult);
+            // 별명 인증 상태 false
+            isNicknameValidated = false;
+            // 버튼 활성화 상태 업데이트
+            updateBtnState();
+          } else if (error.response.status === 500) {
+            // 서버 에러(500) 시 얼럿
+            alert(error.response.data.message);
+            // 별명 인증 상태 false
+            isNicknameValidated = false;
+            // 버튼 활성화 상태 업데이트
+            updateBtnState();
+          }
+        })
 
     } else {
       // 별명이 입력되지 않은 경우, 버튼 클릭 시 안내 메시지 출력
@@ -83,6 +101,8 @@ window.addEventListener('load', () => {
 
       //별명이 입력되지 않은 경우 인증 상태는 false
       isNicknameValidated = false;
+      // 버튼 활성화 상태 업데이트
+      updateBtnState();
     }
   })
 
@@ -107,30 +127,42 @@ window.addEventListener('load', () => {
           params: {
             email: `${userEmail}`,
           }
-        }).then(response => {
-          // 중복된 이메일 없는 경우, 사용 가능 이메일 안내 메시지 출력
-          addMsg($checkEmailResult, '사용할 수 있는 이메일입니다.');
-          isValidMsg($checkEmailResult);
-          // 이메일 확인 상태값 true 로 변경
-          isEmailValidated = true;
-        }).catch(error => {
-          if (error.response.status === 409) {
-            // 중복된 이메일이 존재하는 경우, 에러 메시지 출력
-            const invalidEmail = error.response.data.message;
-            addMsg($checkEmailResult, invalidEmail);
-            isInvalidMsg($checkEmailResult);
-            // 이메일 확인 상태값 false
-            isEmailValidated = false;
-          } else if (error.response.status === 500) {
-            // 서버 에러(500) 시 얼럿
-            alert(error.response.data.message);
-            isEmailValidated = false;
-          }
         })
+          .then(response => {
+            // 중복된 이메일 없는 경우, 사용 가능 이메일 안내 메시지 출력
+            addMsg($checkEmailResult, '사용할 수 있는 이메일입니다.');
+            isValidMsg($checkEmailResult);
+            // 이메일 확인 상태값 true 로 변경
+            isEmailValidated = true;
+            // 버튼 활성화 상태 업데이트
+            updateBtnState();
+          })
+          .catch(error => {
+            if (error.response.status === 409) {
+              // 중복된 이메일이 존재하는 경우, 에러 메시지 출력
+              const invalidEmail = error.response.data.message;
+              addMsg($checkEmailResult, invalidEmail);
+              isInvalidMsg($checkEmailResult);
+              // 이메일 확인 상태값 false
+              isEmailValidated = false;
+              // 버튼 활성화 상태 업데이트
+              updateBtnState();
+            } else if (error.response.status === 500) {
+              // 서버 에러(500) 시 얼럿
+              alert(error.response.data.message);
+              isEmailValidated = false;
+              // 버튼 활성화 상태 업데이트
+              updateBtnState();
+            }
+          })
       } else {
         // 올바르지 않은 형식의 이메일이 입력된 경우, 안내 메시지 출력
         addMsg($checkEmailResult, '유효하지 않은 이메일 형식입니다');
         isInvalidMsg($checkEmailResult);
+        // 이메일 확인 상태값 false
+        isEmailValidated = false;
+        // 버튼 활성화 상태 업데이트
+        updateBtnState();
       }
 
     } else {
@@ -139,6 +171,8 @@ window.addEventListener('load', () => {
       isInvalidMsg($checkEmailResult);
       // 이메일 확인 상태값 false 
       isEmailValidated = false;
+      // 버튼 활성화 상태 업데이트
+      updateBtnState();
     }
   });
 
@@ -161,6 +195,8 @@ window.addEventListener('load', () => {
           isInvalidMsg($checkPwResult);
           // 비밀번호 확인 상태값 false
           isPwValidated = false;
+          // 버튼 활성화 상태 업데이트
+          updateBtnState();
         } else {
           // 비밀번호와 비밀번화 확인란 입력값 일치 시, 안내 메시지 출력
           addMsg($checkPwResult, '비밀번호가 일치합니다.');
@@ -168,6 +204,8 @@ window.addEventListener('load', () => {
           isValidMsg($checkPwResult);
           // 비밀번호 확인 상태값 true
           isPwValidated = true;
+          // 버튼 활성화 상태 업데이트
+          updateBtnState();
         }
       })
     } else {
@@ -177,18 +215,9 @@ window.addEventListener('load', () => {
       isInvalidMsg($checkPwResult);
       // 비밀번호 확인 상태값 false
       isPwValidated = false;
+      // 버튼 활성화 상태 업데이트
+      updateBtnState();
     };
-  })
-
-  // 회원가입 버튼 활성화 코드
-  window.addEventListener('input', function () {
-    if (isNicknameValidated && isEmailValidated && isPwValidated) {
-      // 별명, 이메일, 비밀번호 확인 상태값이 모두 true 인 경우, 버튼 활성화 상태로 변경
-      $signUpBtn.classList.add('active');
-    } else {
-      // 별명, 이메일, 비밀번호 확인 상태값 중 하나라도 false 인 경우, 버튼 비활성화 상태로 변경
-      $signUpBtn.classList.remove('active');
-    }
   })
 
   // 회원가입 버튼 클릭 이벤트 발생 시 실행 코드
