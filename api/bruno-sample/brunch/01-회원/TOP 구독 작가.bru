@@ -1,0 +1,16 @@
+meta {
+  name: TOP 구독 작가
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/users?sort={"bookmarkedBy.users": -1}&limit=3
+  body: none
+  auth: none
+}
+
+params:query {
+  sort: {"bookmarkedBy.users": -1}
+  limit: 3
+}
