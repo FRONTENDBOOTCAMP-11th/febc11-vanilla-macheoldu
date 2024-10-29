@@ -130,9 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
           imageUrl = post.user.image;
         }
 
-        const defaultImagePath = '/src/assets/images/home/pick1.png';
+        const defaultImagePath = '/assets/images/home/pick1.png';
         const imageNumber = (index % 10) + 1;
-        const fallbackImagePath = `/src/assets/images/home/pick${imageNumber}.png`;
+        const fallbackImagePath = `/assets/images/home/pick${imageNumber}.png`;
 
         return `
           <div class="post__lists">
@@ -183,9 +183,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $authorContent.innerHTML = uniqueAuthors
       .map(function (author, index) {
-        const defaultImagePath = '/src/assets/images/home/pick1.png';
+        const defaultImagePath = '/assets/images/home/pick1.png';
         const imageNumber = (index % 10) + 1;
-        const fallbackImagePath = `/src/assets/images/home/pick${imageNumber}.png`;
+        const fallbackImagePath = `/assets/images/home/pick${imageNumber}.png`;
 
         return `
           <div class="author__list">
