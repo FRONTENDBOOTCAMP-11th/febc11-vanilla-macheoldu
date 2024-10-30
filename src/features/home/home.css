@@ -233,15 +233,20 @@ body {
   line-height: 1.53;
   margin-right: 7px;
   margin-bottom: 10px;
+
+  /* 컨텐츠를 위한 flex container 설정 */
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .weekly-serial__new {
   width: 14px;
   height: 14px;
 
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 2px;
+  /* vertical-align 제거하고 flex item으로 정렬 */
+  display: inline-flex;
+  align-items: center;
 }
 
 .weekly-serial__author {

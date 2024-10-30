@@ -1,5 +1,5 @@
 import axios from 'axios';
-import CONFIG from './config.js';
+import CONFIG from '../config.js';
 
 /**
  * 슬라이더의 각 슬라이드 배경색 목록
@@ -35,10 +35,6 @@ const API_CONFIG = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
-};
-
-const utils = {
-  getImgUrl: imgPath => `${API_CONFIG.BASE_URL}${imgPath}`,
 };
 
 /**
@@ -146,12 +142,12 @@ class CoverSlider {
         <div class="cover__slider" role="region" aria-label="책 표지 슬라이더">
           ${this.slides
             .map(
-              (slide, post, index) => `
+              (slide, index) => `
             <div class="cover__slide" data-index="${index}">
               <h1 class="cover__title">${slide.title}</h1>
               <p class="cover__author"><em>by</em> ${slide.user.name}</p>
               <figure class="cover__image-wrapper">
-                <a href="/src/features/detail/detail.html?postId=${post._id}">
+                <a href="/src/features/detail/detail.html?postId=${slide._id}" target="_blank">
                   <img 
                     src="${slide.image?.[0] ? `${CONFIG.API.BASE_URL}${slide.image[0]}` : '/assets/images/home/hourglass.png'}" 
                     alt="${slide.title}" 

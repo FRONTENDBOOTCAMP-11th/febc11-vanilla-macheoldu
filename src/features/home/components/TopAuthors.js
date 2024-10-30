@@ -7,7 +7,7 @@ import axios from 'axios';
  * 2. 작가 정보를 가져오는 작업을 시작
  */
 
-const initializeTopAuthors = () => {
+export const initializeTopAuthors = () => {
   console.log('Initializing top authors...');
 
   // 작가 목록을 표시할 영역이 있는지 확인
@@ -15,7 +15,7 @@ const initializeTopAuthors = () => {
     '.main__top-subscribed-authors-grid',
   );
   if (!$container) {
-    console.error('Top authors container not found during initialization!');
+    console.error('초기화 중에 Top 구독 작가 container를 찾을 수 없습니다!');
     return;
   }
 
@@ -79,7 +79,7 @@ const renderTopAuthors = authors => {
     '.main__top-subscribed-authors-grid',
   );
   if (!$container) {
-    console.error('Top authors container를 찾을 수 없습니다.');
+    console.error('Top 구독 작가 container를 찾을 수 없습니다.');
     return;
   }
 
@@ -118,7 +118,7 @@ const renderTopAuthors = authors => {
       // 작가 정보를 담은 article 요소 생성
       return `
         <article class="main__top-subscribed-author">
-          <a href="/src/features/author/author.html?userId=${author._id}">
+          <a href="/src/features/author/author.html?userId=${author._id}" target="_blank">
             <div class="author-content">
               <img
                 src="${getImgUrl(author.image)}"
@@ -165,7 +165,7 @@ const renderTopAuthors = authors => {
  */
 const fetchTopAuthors = async () => {
   try {
-    console.log('Fetching top authors...');
+    console.log('Top 구독작가 가져오는 중...');
 
     /**
      * axios로 서버에 데이터를 요청
@@ -196,7 +196,7 @@ const fetchTopAuthors = async () => {
 
     // 서버에서 받은 데이터가 올바른지 확인
     if (!response.data?.ok || !response.data?.item) {
-      throw new Error('Invalid response from server');
+      throw new Error('잘못된 sever 응답');
     }
 
     /**
@@ -208,11 +208,11 @@ const fetchTopAuthors = async () => {
       author => author.bookmarkedBy?.users > 0,
     );
 
-    console.log('Fetched top authors:', topAuthors);
+    console.log('Top 구독 작가 가져오기:', topAuthors);
 
     // 구독자가 있는 작가가 하나도 없다면 오류 메시지를 표시
     if (topAuthors.length === 0) {
-      throw new Error('No authors with subscribers found');
+      throw new Error('구독자가 있는 Top 작가를 찾을 수 없습니다.');
     }
 
     // 작가 목록을 화면에 표시
