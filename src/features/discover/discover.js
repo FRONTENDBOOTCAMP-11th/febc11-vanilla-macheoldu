@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-/*
+/**
  * API 통신을 위한 axios 인스턴스 생성
  * - baseURL: API 서버의 기본 주소
  * - headers: 서버 통신에 필요한 인증 및 데이터 형식 정보
@@ -14,16 +14,15 @@ const api = axios.create({
   },
 });
 
-/*
+/**
  * DOM이 로드된 후 검색 기능 초기화
  * 페이지 내의 모든 주요 요소들을 찾아 변수에 할당하고
  * 이벤트 리스너와 기본 기능들을 설정
  */
 document.addEventListener('DOMContentLoaded', function () {
-  /*
-   * DOM 노드 획득
+  /**
+   * DOM 요소 참조 저장
    * 페이지 내의 주요 요소들을 쿼리셀렉터로 찾아 변수에 할당
-   * $로 시작: 노드 획득 팀 컨벤션
    */
   const $searchInput = document.querySelector('.discover__header-input');
   const $mainContent = document.querySelector('.discover__main');
@@ -34,26 +33,26 @@ document.addEventListener('DOMContentLoaded', function () {
   const $searchCount = document.querySelector('.discover__count-results');
   const $resetButton = document.querySelector('.discover__header-close');
 
-  /*
+  /**
    * 상태 관리 변수
-   * currentTab: 현재 선택된 탭('post' 또는 'author', 디폴트는 'post')
+   * currentTab: 현재 선택된 탭('post' 또는 'author')
    * posts: API로부터 받아온 게시물 데이터 저장 배열
    */
   let currentTab = 'post';
   let posts = [];
 
-  /*
+  /**
    * 모든 콘텐츠 영역을 숨기는 함수
    * 새로운 검색이나 탭 전환 시 호출되어 화면을 초기화
    */
   function hideAllContent() {
-    $postContent.style.display = 'none'; // 글 검색 결과 초기화
-    $authorContent.style.display = 'none'; // 작가 검색 결과 초기화
-    $noneContent.style.display = 'none'; // 검색 결과 없음 화면 초기화
-    $searchCount.textContent = ''; // 검색 결과 건수 초기화
+    $postContent.style.display = 'none';
+    $authorContent.style.display = 'none';
+    $noneContent.style.display = 'none';
+    $searchCount.textContent = '';
   }
 
-  /*
+  /**
    * 검색 결과가 없을 때 표시할 UI를 생성하고 보여주는 함수
    * - 브런치 로고 이미지와 "검색 결과가 없습니다" 메시지를 표시
    * - 스크롤을 비활성화하여 UX 개선
@@ -78,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return noResultsHtml;
   }
 
-  /*
-   * 서버에서 '게시물' 데이터를 가져오는 함수
+  /**
+   * 서버에서 게시물 데이터를 가져오는 함수
    * @param {string} keyword - 검색어
    * @returns {Promise<Array>} 검색된 게시물 배열
    */
@@ -94,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /*
-   * 서버에서 '작가' 데이터를 가져오고 필터링하는 함수
+  /**
+   * 서버에서 작가 데이터를 가져오고 필터링하는 함수
    * @param {string} keyword - 검색할 작가 이름
    * @returns {Promise<Array>} 필터링된 작가 정보 배열
    */
@@ -133,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /*
+  /**
    * 작가 검색을 수행하는 함수
    * - 입력된 키워드로 작가를 검색하고 결과를 화면에 표시
    * - '작가' 탭을 활성화 상태로 변경
@@ -157,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /*
+  /**
    * 검색 결과를 초기화하는 함수
    * 'X' 버튼 클릭 시 호출되어 모든 상태를 초기 상태로 되돌림
    */
@@ -178,9 +177,10 @@ document.addEventListener('DOMContentLoaded', function () {
     currentTab = '';
   });
 
-  /*
+  /**
    * 통합 검색 수행 함수
    * 키워드를 받아 검색을 실행하고 결과를 표시하는 메인 함수
+   *
    * @param {string} keyword - 검색할 키워드
    */
   async function performSearch(keyword) {
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /*
+  /**
    * 글 검색 결과를 화면에 표시하는 함수
    * @param {Array} posts - 표시할 게시물 배열
    * @param {string} keyword - 하이라이트할 검색 키워드
@@ -256,11 +256,10 @@ document.addEventListener('DOMContentLoaded', function () {
     $postContent.style.display = 'block';
   }
 
-  /*
+  /**
    * 작가 검색 결과를 화면에 표시하는 함수
    * @param {Array} authors - 표시할 작가 정보 배열
-   * @param {string} keyword - 하이라이트 할 검색 키워드
-   * author.extra?.biography - 작가 소개는 필수가 아니지만 데이터에 있다면 표시
+   * @param {string} keyword - 하이라이트할 검색 키워드
    */
   function displayAuthorResults(authors, keyword) {
     if (!authors || authors.length === 0) {
@@ -303,9 +302,10 @@ document.addEventListener('DOMContentLoaded', function () {
     $searchCount.textContent = `작가 검색 결과 ${authors.length}건`;
   }
 
-  /*
+  /**
    * 이벤트 리스너 설정
    * - 검색창 엔터 키 이벤트
+   * - 탭 전환 이벤트
    */
   $searchInput.addEventListener('keypress', async function (e) {
     if (e.key === 'Enter') {
@@ -316,7 +316,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // 탭 전환 이벤트
   $navTab.forEach(function (tab) {
     tab.classList.remove('active');
   });
@@ -337,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /*
+  /**
    * HTML 태그를 제거하고 순수 텍스트만 추출하는 함수
    * @param {string} html - HTML 문자열
    * @returns {string} 태그가 제거된 순수 텍스트
@@ -348,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return tmp.textContent || tmp.innerText || '';
   }
 
-  /*
+  /**
    * 날짜를 'Apr 16. 2024' 형식으로 포맷팅하는 함수
    * @param {string} dateString - ISO 형식의 날짜 문자열
    * @returns {string} 포맷팅된 날짜 문자열
@@ -361,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return `${month} ${day}. ${year}`;
   }
 
-  /*
+  /**
    * 검색어를 하이라이트 처리하는 함수
    * 검색어와 일치하는 부분을 특별한 스타일의 span 태그로 감싸서 강조
    *
