@@ -1,70 +1,56 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>발견</title>
-    <link
-      rel="stylesheet"
-      as="style"
-      crossorigin
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
-    />
-    <link rel="stylesheet" href="discover.css" />
-    <link
-      rel="stylesheet"
-      href="/src/features/components/top-menu/top-menu.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/src/features/components/navigation/navigation.css"
-    />
-    <script type="module" src="discover.js"></script>
-  </head>
-  <body>
-    <div class="wrapper discover">
-      <!-- Header -->
-      <header class="discover__header">
-        <input type="text" class="discover__header-input" />
-        <button class="discover__header-close" aria-label="검색창 닫기">
-          <img
-            class="discover__reset"
-            src="/src/assets/icons/etc/reset.svg"
-            alt="관련 이미지"
-          />
-        </button>
-      </header>
 
-      <!-- Navigation -->
-      <nav class="discover__nav">
-        <div class="discover__nav-wrapper">
-          <button class="discover__nav-tab active">글</button>
-          <button class="discover__nav-tab">작가</button>
-        </div>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>발견</title>
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link rel="stylesheet" href="discover.css" />
+  <link rel="stylesheet" href="/src/features/components/top-menu/top-menu.css" />
+  <link rel="stylesheet" href="/src/features/components/navigation/navigation.css" />
+  <script type="module" src="discover.js"></script>
+</head>
 
-      <!-- Main Content -->
-      <main class="discover__main null">
-        <div class="discover__header author">
-          <span class="discover__count-results"></span>
-        </div>
+<body>
+  <div class="wrapper discover">
+    <!-- Header -->
+    <header class="discover__header">
+      <input type="text" class="discover__header-input" />
+      <button class="discover__header-close" aria-label="검색창 닫기">
+        <img class="discover__reset" src="/src/assets/icons/etc/reset.svg" alt="관련 이미지" />
+      </button>
+    </header>
 
-        <!-- 📖 discover - post -->
-        <div class="post"></div>
+    <!-- Navigation -->
+    <nav class="discover__nav">
+      <div class="discover__nav-wrapper">
+        <button class="discover__nav-tab">글</button>
+        <button class="discover__nav-tab">작가</button>
+      </div>
+    </nav>
 
-        <!-- 🧑‍🦲 discover - author -->
-        <div class="author"></div>
+    <!-- Main Content -->
+    <main class="discover__main null">
+      <div class="discover__header">
+        <span class="discover__count-results"></span>
+      </div>
 
-        <!-- 🚫 discover - null -->
-        <div class="discover__none"></div>
-      </main>
-      <div id="navigation"></div>
-    </div>
+      <!-- 📖 discover - post -->
+      <div class="post"></div>
 
-    <!-- 🧭 bottom navigation -->
-    <script
-      type="module"
-      src="/src/features/components/navigation/navigation.js"
-    ></script>
-  </body>
+      <!-- 🧑‍🦲 discover - author -->
+      <div class="author"></div>
+
+      <!-- 🚫 discover - null -->
+      <div class="discover__none"></div>
+    </main>
+    <div id="navigation"></div>
+  </div>
+
+  <!-- 🧭 bottom navigation -->
+  <script type="module" src="/src/features/components/navigation/navigation.js"></script>
+</body>
+
 </html>

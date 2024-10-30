@@ -17,16 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const $postContent = document.querySelector('.post'); // 글 탭 콘텐츠
   const $authorContent = document.querySelector('.author'); // 작가 탭 콘텐츠
   const $noneContent = document.querySelector('.discover__none'); // '결과 없음' 표시 영역
-  const $navTab = document.querySelectorAll('.discover__nav-tab'); // 글/작가 탭 버튼
+  const $postTab = document.querySelectorAll('.discover__nav-tab')[0]; // 글/작가 탭 버튼
+  const $authorTab = document.querySelectorAll('.discover__nav-tab')[1]; // 글/작가 탭 버튼
   const $searchCount = document.querySelector('.discover__count-results'); // 검색 결과 카운트
   const $resetButton = document.querySelector('.discover__header-close'); // X 버튼
 
   let currentTab = 'post'; // 현재 활성화된 탭을 저장 (기본은 '글' 탭)
   let posts = []; // API로부터 받아온 게시물들을 저장할 배열
 
-  // 처음 화면에서 모든 탭에서 active 클래스 제거
-  $navTab[0].classList.remove('active');
-  $navTab[1].classList.remove('active');
+
 
   // 게시물 데이터를 긁어와서 posts 배열에 저장
   async function fetchPosts(keyword) {
@@ -59,12 +58,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (keyword) {
       const posts = await fetchPosts(keyword);
 
+      hideAllContent();
+
       // 글 목록 화면에 출력
       displayPostResults(posts, keyword);
 
       // 탭 활성화
-      $navTab[0].classList.add('active'); // "글" 탭 활성화
-      $navTab[1].classList.remove('active'); // "작가" 탭 active 제거
+      $postTab.classList.add('active'); // "글" 탭 활성화
+      $authorTab.classList.remove('active'); // "작가" 탭 active 제거
+
     }
   }
 
@@ -75,14 +77,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (keyword) {
       const posts = await fetchAuthor(keyword);
 
+      hideAllContent();
+
       // 작가 목록 화면에 출력
       displayAuthorResults(posts, keyword);
 
       // 탭 활성화
-      $navTab[0].classList.remove('active'); // "글" 탭 active 제거
-      $navTab[1].classList.add('active'); // "글" 탭 활성화
+      $postTab.classList.remove('active'); // "글" 탭 active 제거
+      $authorTab.classList.add('active'); // "글" 탭 활성화
+
     }
   }
+
+  $postTab.addEventListener('click', searchPost);
+  $authorTab.addEventListener('click', searchAuthor);
 
   // 검색어 입력 이벤트 (Enter키로 검색 실행)
   $searchInput.addEventListener('keypress', async function (e) {
@@ -90,9 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const keyword = $searchInput.value.trim();
 
       if (keyword) {
-        const posts = await fetchPosts(keyword);
-        performSearch(keyword);
-        displayPostResults(posts, keyword);
+        searchPost(keyword)
       }
     }
   });
@@ -111,37 +117,14 @@ document.addEventListener('DOMContentLoaded', function () {
     $searchCount.textContent = '';
   }
 
-  // 검색을 수행하는 함수
-  function performSearch(keyword) {
-    // 항상 "글" 탭이 기본 활성화 상태로 시작
-    currentTab = 'post';
-
-    // 기존 콘텐츠 숨기기 및 탭 초기화
-    hideAllContent();
-    $navTabs.forEach(function (tab) {
-      tab.classList.remove('active');
-    });
-    $navTabs[0].classList.add('active'); // "글" 탭 활성화
-
-    // "글" 탭 검색: 제목과 내용에서 검색
-    const filteredPosts = posts.filter(function (post) {
-      return (
-        post.title.toLowerCase().includes(keyword.toLowerCase()) ||
-        post.content.toLowerCase().includes(keyword.toLowerCase())
-      );
-    });
-
-    if (filteredPosts.length > 0) {
-      displayPostResults(filteredPosts, keyword); // 글 검색 결과 표시
-      $searchCount.textContent = `글 검색 결과 ${filteredPosts.length}건`;
-    } else {
-      showNoResults(); // 결과 없음 표시
-      $searchCount.textContent = '';
-    }
-  }
-
   // 글 목록 화면에 출력
   function displayPostResults(posts, keyword) {
+    if (posts.length === 0) {
+      return showNoResults();
+    } else {
+      $searchCount.textContent = `글 검색 결과 ${posts.length}건`;
+    }
+
     $postContent.innerHTML = posts
       .map(function (post) {
         // 이미지 URL 설정
@@ -187,32 +170,28 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 작가 목록 화면에 출력
-  function displayAuthorResults(posts, keyword) {
-    const uniqueAuthors = [
-      ...new Set(
-        posts.map(function (post) {
-          return post.user;
-        }),
-      ),
-    ];
+  function displayAuthorResults(authors, keyword) {
+    if (authors.length === 0) {
+      return showNoResults();
+    } else {
+      $searchCount.textContent = `작가 검색 결과 ${authors.length}건`;
+    }
 
-    $authorContent.innerHTML = uniqueAuthors
+    $authorContent.innerHTML = authors
       .map(author => {
         return `
         <div class="author__list">
-          <a src="https://11.fesp.shop/src/features/author/author.html?no'+ ${
-            author._id
+          <a src="https://11.fesp.shop/src/features/author/author.html?no'+ ${author._id
           }">
             <div>
-              <img class="author__list-cover" src="${
-                author.image || '/src/assets/images/no_profile.svg'
-              }" alt="작가 이미지" />
+              <img class="author__list-cover" src="${author.image || '/src/assets/images/no_profile.svg'
+          }" alt="작가 이미지" />
             </div>
             <div>
               <h3 class="author__list-title">${highlightSearchTerm(
-                author.name,
-                keyword,
-              )}</h3>
+            author.name,
+            keyword,
+          )}</h3>
               <p class="author__list-info"></p>
             </div>
           </a>
@@ -230,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $searchCount.textContent = '';
     document.body.style.overflowY = 'hidden';
 
-    return `
+    $noneContent.innerHTML = `
       <div class="discover__result-noneImg">
         <img
           src="/src/assets/icons/etc/logo_brunch_italic.svg"
