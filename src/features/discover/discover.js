@@ -1,8 +1,12 @@
 import axios from 'axios';
 
-// 기본 URL 및 필요한 헤더와 함께 Axios 인스턴스를 생성
+/*
+ * API 통신을 위한 axios 인스턴스 생성
+ * - baseURL: API 서버의 기본 주소
+ * - headers: 서버 통신에 필요한 인증 및 데이터 형식 정보
+ */
 const api = axios.create({
-  baseURL: 'https://11.fesp.shop', // API 요청의 기본 URL
+  baseURL: 'https://11.fesp.shop',
   headers: {
     'client-id': 'vanilla03',
     'Content-Type': 'application/json',
@@ -10,25 +14,75 @@ const api = axios.create({
   },
 });
 
-// 검색, 결과 및 여러 DOM 노드 획득
+/*
+ * DOM이 로드된 후 검색 기능 초기화
+ * 페이지 내의 모든 주요 요소들을 찾아 변수에 할당하고
+ * 이벤트 리스너와 기본 기능들을 설정
+ */
 document.addEventListener('DOMContentLoaded', function () {
-  const $searchInput = document.querySelector('.discover__header-input'); // 검색 입력창
-  const $mainContent = document.querySelector('.discover__main'); // 메인 콘텐츠 영역
-  const $postContent = document.querySelector('.post'); // 글 탭 콘텐츠
-  const $authorContent = document.querySelector('.author'); // 작가 탭 콘텐츠
-  const $noneContent = document.querySelector('.discover__none'); // '결과 없음' 표시 영역
-  const $navTab = document.querySelectorAll('.discover__nav-tab'); // 글/작가 탭 버튼
-  const $searchCount = document.querySelector('.discover__count-results'); // 검색 결과 카운트
-  const $resetButton = document.querySelector('.discover__header-close'); // X 버튼
+  /*
+   * DOM 노드 획득
+   * 페이지 내의 주요 요소들을 쿼리셀렉터로 찾아 변수에 할당
+   * $로 시작: 노드 획득 팀 컨벤션
+   */
+  const $searchInput = document.querySelector('.discover__header-input');
+  const $mainContent = document.querySelector('.discover__main');
+  const $postContent = document.querySelector('.post');
+  const $authorContent = document.querySelector('.author');
+  const $noneContent = document.querySelector('.discover__none');
+  const $navTab = document.querySelectorAll('.discover__nav-tab');
+  const $searchCount = document.querySelector('.discover__count-results');
+  const $resetButton = document.querySelector('.discover__header-close');
 
-  let currentTab = 'post'; // 현재 활성화된 탭을 저장 (기본은 '글' 탭)
-  let posts = []; // API로부터 받아온 게시물들을 저장할 배열
+  /*
+   * 상태 관리 변수
+   * currentTab: 현재 선택된 탭('post' 또는 'author', 디폴트는 'post')
+   * posts: API로부터 받아온 게시물 데이터 저장 배열
+   */
+  let currentTab = 'post';
+  let posts = [];
 
-  // 처음 화면에서 모든 탭에서 active 클래스 제거
-  $navTab[0].classList.remove('active');
-  $navTab[1].classList.remove('active');
+  /*
+   * 모든 콘텐츠 영역을 숨기는 함수
+   * 새로운 검색이나 탭 전환 시 호출되어 화면을 초기화
+   */
+  function hideAllContent() {
+    $postContent.style.display = 'none'; // 글 검색 결과 초기화
+    $authorContent.style.display = 'none'; // 작가 검색 결과 초기화
+    $noneContent.style.display = 'none'; // 검색 결과 없음 화면 초기화
+    $searchCount.textContent = ''; // 검색 결과 건수 초기화
+  }
 
-  // 게시물 데이터를 긁어와서 posts 배열에 저장
+  /*
+   * 검색 결과가 없을 때 표시할 UI를 생성하고 보여주는 함수
+   * - 브런치 로고 이미지와 "검색 결과가 없습니다" 메시지를 표시
+   * - 스크롤을 비활성화하여 UX 개선
+   *
+   * @returns {string} 생성된 HTML 문자열
+   */
+  function showNoResults() {
+    $noneContent.style.display = 'flex';
+    $searchCount.textContent = '';
+    document.body.style.overflowY = 'hidden';
+
+    const noResultsHtml = `
+      <div class="discover__result-noneImg">
+        <img
+          src="/src/assets/icons/etc/logo_brunch_italic.svg"
+          alt="관련 이미지"
+        />
+      </div>
+      <p class="discover__result-none">검색 결과가 없습니다.</p>`;
+
+    $noneContent.innerHTML = noResultsHtml;
+    return noResultsHtml;
+  }
+
+  /*
+   * 서버에서 '게시물' 데이터를 가져오는 함수
+   * @param {string} keyword - 검색어
+   * @returns {Promise<Array>} 검색된 게시물 배열
+   */
   async function fetchPosts(keyword) {
     try {
       const response = await api.get('/posts?type=info', {
@@ -40,115 +94,131 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 작가 데이터 긁어오기
-  async function fetchAuthor(keyword) {
+  /*
+   * 서버에서 '작가' 데이터를 가져오고 필터링하는 함수
+   * @param {string} keyword - 검색할 작가 이름
+   * @returns {Promise<Array>} 필터링된 작가 정보 배열
+   */
+  async function fetchWriter(keyword) {
     try {
-      const response = await api.get('/users', {
-        params: { name: keyword },
-      });
-      return response.data.item;
+      const response = await api.get('/users');
+
+      if (response.data && response.data.item) {
+        const authors = response.data.item.filter(user =>
+          user.name.toLowerCase().includes(keyword.toLowerCase()),
+        );
+        return authors;
+      }
+      return [];
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching writers:', error);
+      return [];
     }
   }
 
-  // 글 검색 함수
+  /**
+   * 글 검색을 수행하는 함수
+   * - 입력된 키워드로 게시물을 검색하고 결과를 화면에 표시
+   * - '글' 탭을 활성화 상태로 변경
+   */
   async function searchPost() {
     const keyword = $searchInput.value.trim();
 
     if (keyword) {
       const posts = await fetchPosts(keyword);
-
-      // 글 목록 화면에 출력
       displayPostResults(posts, keyword);
 
-      // 탭 활성화
-      $navTab[0].classList.add('active'); // "글" 탭 활성화
-      $navTab[1].classList.remove('active'); // "작가" 탭 active 제거
+      $navTab[0].classList.add('active');
+      $navTab[1].classList.remove('active');
     }
   }
 
-  // 작가 검색 함수
-  async function searchAuthor() {
+  /*
+   * 작가 검색을 수행하는 함수
+   * - 입력된 키워드로 작가를 검색하고 결과를 화면에 표시
+   * - '작가' 탭을 활성화 상태로 변경
+   */
+  async function searchWriter() {
     const keyword = $searchInput.value.trim();
 
     if (keyword) {
-      const posts = await fetchAuthor(keyword);
+      hideAllContent();
 
-      // 작가 목록 화면에 출력
-      displayAuthorResults(posts, keyword);
+      const authors = await fetchWriter(keyword);
 
-      // 탭 활성화
-      $navTab[0].classList.remove('active'); // "글" 탭 active 제거
-      $navTab[1].classList.add('active'); // "글" 탭 활성화
+      if (authors && authors.length > 0) {
+        displayAuthorResults(authors, keyword);
+      } else {
+        showNoResults();
+      }
+
+      $navTab[0].classList.remove('active');
+      $navTab[1].classList.add('active');
     }
   }
 
-  // 검색어 입력 이벤트 (Enter키로 검색 실행)
-  $searchInput.addEventListener('keypress', async function (e) {
-    if (e.key === 'Enter') {
-      const keyword = $searchInput.value.trim();
-
-      if (keyword) {
-        const posts = await fetchPosts(keyword);
-        performSearch(keyword);
-        displayPostResults(posts, keyword);
-      }
-    }
-  });
-
-  // "X" 버튼 클릭 시, 초기화
+  /*
+   * 검색 결과를 초기화하는 함수
+   * 'X' 버튼 클릭 시 호출되어 모든 상태를 초기 상태로 되돌림
+   */
   $resetButton.addEventListener('click', async function () {
-    $searchInput.value = ''; // 검색창 입력 초기화
-    $postContent.innerHTML = ''; // 글 목록 초기화
-  });
+    $searchInput.value = '';
+    $postContent.innerHTML = '';
+    $authorContent.innerHTML = '';
+    $searchCount.textContent = '';
 
-  // 결과 화면 비우는 함수
-  function hideAllContent() {
+    $navTab.forEach(function (tab) {
+      tab.classList.remove('active');
+    });
+
     $postContent.style.display = 'none';
     $authorContent.style.display = 'none';
     $noneContent.style.display = 'none';
-    $searchCount.textContent = '';
-  }
 
-  // 검색을 수행하는 함수
-  function performSearch(keyword) {
-    // 항상 "글" 탭이 기본 활성화 상태로 시작
+    currentTab = '';
+  });
+
+  /*
+   * 통합 검색 수행 함수
+   * 키워드를 받아 검색을 실행하고 결과를 표시하는 메인 함수
+   * @param {string} keyword - 검색할 키워드
+   */
+  async function performSearch(keyword) {
     currentTab = 'post';
-
-    // 기존 콘텐츠 숨기기 및 탭 초기화
     hideAllContent();
-    $navTabs.forEach(function (tab) {
+
+    $navTab.forEach(function (tab) {
       tab.classList.remove('active');
     });
-    $navTabs[0].classList.add('active'); // "글" 탭 활성화
+    $navTab[0].classList.add('active');
 
-    // "글" 탭 검색: 제목과 내용에서 검색
-    const filteredPosts = posts.filter(function (post) {
-      return (
-        post.title.toLowerCase().includes(keyword.toLowerCase()) ||
-        post.content.toLowerCase().includes(keyword.toLowerCase())
-      );
-    });
+    try {
+      posts = await fetchPosts(keyword);
 
-    if (filteredPosts.length > 0) {
-      displayPostResults(filteredPosts, keyword); // 글 검색 결과 표시
-      $searchCount.textContent = `글 검색 결과 ${filteredPosts.length}건`;
-    } else {
-      showNoResults(); // 결과 없음 표시
-      $searchCount.textContent = '';
+      if (posts && posts.length > 0) {
+        displayPostResults(posts, keyword);
+        $searchCount.textContent = `글 검색 결과 ${posts.length}건`;
+      } else {
+        showNoResults();
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      showNoResults();
     }
   }
 
-  // 글 목록 화면에 출력
+  /*
+   * 글 검색 결과를 화면에 표시하는 함수
+   * @param {Array} posts - 표시할 게시물 배열
+   * @param {string} keyword - 하이라이트할 검색 키워드
+   */
   function displayPostResults(posts, keyword) {
     $postContent.innerHTML = posts
       .map(function (post) {
-        // 이미지 URL 설정
         const imageUrl =
           post.image && Array.isArray(post.image) && post.image.length > 0
-            ? 'https://11.fesp.shop' + post.image[0] // 첫 번째 이미지 사용
-            : '/src/assets/images/no_profile.svg'; // post.image가 없으면 기본 이미지 설정
+            ? 'https://11.fesp.shop' + post.image[0]
+            : '/src/assets/images/no_profile.svg';
 
         return `
           <div class="post__lists">
@@ -186,68 +256,103 @@ document.addEventListener('DOMContentLoaded', function () {
     $postContent.style.display = 'block';
   }
 
-  // 작가 목록 화면에 출력
-  function displayAuthorResults(posts, keyword) {
-    const uniqueAuthors = [
-      ...new Set(
-        posts.map(function (post) {
-          return post.user;
-        }),
-      ),
-    ];
+  /*
+   * 작가 검색 결과를 화면에 표시하는 함수
+   * @param {Array} authors - 표시할 작가 정보 배열
+   * @param {string} keyword - 하이라이트 할 검색 키워드
+   * author.extra?.biography - 작가 소개는 필수가 아니지만 데이터에 있다면 표시
+   */
+  function displayAuthorResults(authors, keyword) {
+    if (!authors || authors.length === 0) {
+      showNoResults();
+      return;
+    }
 
-    $authorContent.innerHTML = uniqueAuthors
+    $authorContent.innerHTML = authors
       .map(author => {
         return `
-        <div class="author__list">
-          <a src="https://11.fesp.shop/src/features/author/author.html?no'+ ${
-            author._id
-          }">
-            <div>
-              <img class="author__list-cover" src="${
-                author.image || '/src/assets/images/no_profile.svg'
-              }" alt="작가 이미지" />
-            </div>
-            <div>
-              <h3 class="author__list-title">${highlightSearchTerm(
-                author.name,
-                keyword,
-              )}</h3>
-              <p class="author__list-info"></p>
-            </div>
-          </a>
-        </div>
-      `;
+          <div class="author__list">
+            <a href="/src/features/author/author.html?no=${author._id}">
+              <div class="author__info-wrapper">
+                <img 
+                  class="author__list-cover" 
+                  src="${author.image ? 'https://11.fesp.shop' + author.image : '/src/assets/images/no_profile.svg'}" 
+                  alt="작가 이미지" 
+                />
+                <div class="author__text-wrapper">
+                  <h3 class="author__list-title">${highlightSearchTerm(author.name, keyword)}</h3>
+                  <p class="author__list-info">${author.extra?.biography || author.extra?.job || ''}</p>
+                </div>
+              </div>
+              <div class="author__keywords">
+                ${
+                  author.extra?.keyword
+                    ? author.extra.keyword
+                        .map(tag => `<span class="keyword">${tag}</span>`)
+                        .join('')
+                    : ''
+                }
+              </div>
+            </a>
+          </div>
+        `;
       })
       .join('');
 
     $authorContent.style.display = 'block';
+    $searchCount.textContent = `작가 검색 결과 ${authors.length}건`;
   }
 
-  // 검색 결과 없음 화면에 출력
-  function showNoResults() {
-    $noneContent.style.display = 'flex';
-    $searchCount.textContent = '';
-    document.body.style.overflowY = 'hidden';
+  /*
+   * 이벤트 리스너 설정
+   * - 검색창 엔터 키 이벤트
+   */
+  $searchInput.addEventListener('keypress', async function (e) {
+    if (e.key === 'Enter') {
+      const keyword = $searchInput.value.trim();
+      if (keyword) {
+        await performSearch(keyword);
+      }
+    }
+  });
 
-    return `
-      <div class="discover__result-noneImg">
-        <img
-          src="/src/assets/icons/etc/logo_brunch_italic.svg"
-          alt="관련 이미지"
-        />
-      </div>
-      <p class="discover__result-none">검색 결과가 없습니다.</p>`;
-  }
+  // 탭 전환 이벤트
+  $navTab.forEach(function (tab) {
+    tab.classList.remove('active');
+  });
 
-  // 태그 제외하고 순수 텍스트만 보여주는 함수
+  $navTab.forEach(function (tab, index) {
+    tab.addEventListener('click', async function () {
+      const keyword = $searchInput.value.trim();
+      if (!keyword) return;
+
+      $navTab.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      if (index === 0) {
+        await performSearch(keyword);
+      } else {
+        await searchWriter();
+      }
+    });
+  });
+
+  /*
+   * HTML 태그를 제거하고 순수 텍스트만 추출하는 함수
+   * @param {string} html - HTML 문자열
+   * @returns {string} 태그가 제거된 순수 텍스트
+   */
   function stripHtml(html) {
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || '';
   }
 
-  // 날짜를 Apr 16. 2024 형태로 만들어주는 함수
+  /*
+   * 날짜를 'Apr 16. 2024' 형식으로 포맷팅하는 함수
+   * @param {string} dateString - ISO 형식의 날짜 문자열
+   * @returns {string} 포맷팅된 날짜 문자열
+   */
   function formatDate(dateString) {
     const date = new Date(dateString);
     const month = date.toLocaleString('en-US', { month: 'short' });
@@ -256,13 +361,18 @@ document.addEventListener('DOMContentLoaded', function () {
     return `${month} ${day}. ${year}`;
   }
 
-  // 키워드 포인트 컬러로 변경
+  /*
+   * 검색어를 하이라이트 처리하는 함수
+   * 검색어와 일치하는 부분을 특별한 스타일의 span 태그로 감싸서 강조
+   *
+   * @param {string} text - 원본 텍스트
+   * @param {string} keyword - 강조할 검색어
+   * @returns {string} 검색어가 하이라이트된 HTML 문자열
+   */
   function highlightSearchTerm(text, keyword) {
     if (!keyword) return text;
-    // 정규 표현식, g플래그: 전체 검색 / i플래그: 대소문자 구분 X
     const regex = new RegExp(keyword, 'gi');
     return text.replace(regex, function (match) {
-      // keyword에 해당하는 인스턴스를 찾아 수정한 버전을 span태그로 감싸서 반환
       return `<span class="discover__keyword">${match}</span>`;
     });
   }

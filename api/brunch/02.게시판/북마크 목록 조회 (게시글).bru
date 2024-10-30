@@ -1,0 +1,21 @@
+meta {
+  name: 북마크 목록 조회 (게시글)
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/bookmarks/post
+  body: json
+  auth: inherit
+}
+
+headers {
+  client-id: vanilla03
+}
+
+body:json {
+  {
+    "type": "post"
+  }
+}

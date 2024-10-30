@@ -159,24 +159,12 @@ input:focus::placeholder {
   border-bottom: 1px solid #00c6be; /* 활성화된 탭에만 하단 선 추가 */
 }
 
-/* .discover__nav-tab--active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-point);
-} */
-
-/* 검색 결과 헤더 */
-/* .discover__main {
-  max-height: calc(
-    100vh - 160px
-  ); 상단 탭과 하단 내비게이션 바 높이를 제외한 영역
-  overflow-y: hidden; 기본적으로 스크롤바를 숨김
-  padding: 16px;
-} */
+/* 메인 */
+.discover__main {
+  /* 상단 요소들의 높이만 제외 */
+  height: calc(100vh - 94px); /* 헤더(52px) + 탭(42px) = 94px */
+  overflow: hidden;
+}
 
 .discover__main .discover__search-header + .post__lists {
   margin-top: 0;
@@ -194,13 +182,6 @@ input:focus::placeholder {
   box-sizing: border-box;
 }
 
-.disdover__search-header.author {
-  padding: 0;
-  margin: 12px auto;
-  font-size: 12px;
-  font-weight: 300;
-}
-
 .discover__count-results {
   margin: 12px 0;
   font-size: 0.75rem;
@@ -210,34 +191,6 @@ input:focus::placeholder {
 .discover__search-filters {
   margin: 0;
   display: flex;
-}
-
-.circle__active {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--color-point);
-}
-
-.discover__filter-btn {
-  background: none;
-  border: none;
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-weight: 300;
-  gap: 5px; /* 원과 텍스트 사이 5px의 간격 */
-  font-size: 13px;
-}
-
-.discover__filter-btn.recent {
-  color: var(--color-content);
-}
-
-/* discover - home을 보기 위한 임시 코드 */
-.discover__home {
-  margin-left: 35%;
-  height: 300px;
 }
 
 /* 📖 discover - post */
@@ -272,11 +225,6 @@ input:focus::placeholder {
   margin-right: 12px;
 }
 
-.discover__keyword {
-  color: #00c6be;
-  font-weight: 400;
-}
-
 .content__text-main {
   font-size: 12px;
   color: var(--color-content);
@@ -290,16 +238,6 @@ input:focus::placeholder {
   overflow: hidden;
 }
 
-.content__text-main,
-.author__text {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2; /* 2줄까지만 표시 */
-  line-clamp: 2;
-}
-
 .content__text-info {
   display: flex;
   gap: 2px;
@@ -308,21 +246,6 @@ input:focus::placeholder {
   font-weight: 300;
   line-height: 1.6;
   color: var(--color-content);
-}
-em {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.circle {
-  display: inline;
-  width: 2px;
-  height: 2px;
-  justify-content: center;
-  margin-left: 7px;
-  margin-right: 5px;
-  align-items: center;
-  border-radius: 50%;
-  background: var(--color-border);
 }
 
 .content__cover {
@@ -344,10 +267,19 @@ em {
 }
 
 .author__list {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.author__list a {
+  text-decoration: none;
+  display: block;
+}
+
+.author__info-wrapper {
   display: flex;
-  padding: 16px 20px 18px 20px;
-  border-bottom: 1px solid #eee;
-  min-height: 80px;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
 .author__list:first-child {
@@ -355,38 +287,99 @@ em {
 }
 
 .author__list-cover {
-  margin-top: 2px;
-  margin-right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .author__list-title {
   color: var(--color-title);
-  margin: 0;
   font-size: 16px;
-  font-weight: 300;
-  line-height: 1.6;
+  font-weight: 400;
+  margin: 0 0 4px 0;
 }
 
+.author__text-wrapper {
+  flex: 1;
+}
+
+.author__list-info {
+  color: var(--color-content);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.author__keywords {
+  margin-left: 64px;
+}
+
+.author__keywords .keyword {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: #f8f8f8;
+  border-radius: 15px;
+  color: var(--color-content);
+  font-size: 13px;
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+/* 공통 요소 */
 .discover__keyword {
   color: #00c6be;
   font-weight: 400;
 }
 
-.author__list-info {
-  color: var(--color-content);
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1.6;
-  padding-right: 10px;
+.content__text-main,
+.author__text {
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 두 줄로 제한 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-line-clamp: 2; /* 2줄까지만 표시 */
+  line-clamp: 2;
+}
+
+em {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.circle {
+  display: inline;
+  width: 2px;
+  height: 2px;
+  justify-content: center;
+  margin-left: 7px;
+  margin-right: 5px;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+/* 스크롤바 스타일링 */
+.post,
+.author {
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 100px; /* 하단 네비게이션 바 공간 */
+}
+
+.post::-webkit-scrollbar,
+.author::-webkit-scrollbar {
+  width: 6px;
+}
+
+.post::-webkit-scrollbar-thumb,
+.author::-webkit-scrollbar-thumb {
+  background-color: var(--color-content);
+  border-radius: 3px;
+}
+
+.post::-webkit-scrollbar-track,
+.author::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 /* 🚫 discover - null */
@@ -420,4 +413,9 @@ em {
   color: var(--color-content);
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.discover__keyword {
+  color: #00c6be;
+  font-weight: 400;
 }

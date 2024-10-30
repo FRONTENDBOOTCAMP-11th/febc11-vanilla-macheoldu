@@ -1,0 +1,17 @@
+meta {
+  name: 게시글에 좋아요 추가
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/bookmarks/post
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "target_id": 43
+  }
+}
