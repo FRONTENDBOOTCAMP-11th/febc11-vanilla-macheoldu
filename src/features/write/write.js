@@ -151,7 +151,7 @@ window.addEventListener('load', function () {
             }).then(response => {
               // 요청 성공 시 안내 alert 출력, 홈 페이지로 이동
               alert('저장을 완료했습니다');
-              window.open('/src/features/home/home.html')
+              window.open('/src/features/home/home.html', '_self')
             }).catch(error => {
               // 서버 에러(500) 출력 메시지
               if (error.response.status === 500) {
