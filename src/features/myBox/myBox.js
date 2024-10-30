@@ -51,7 +51,12 @@ sliders.forEach(slider => initializeSlider(slider));
 const authorSliders = document.querySelectorAll('.interested-authors__ul');
 authorSliders.forEach(slider => initializeSlider(slider));
 
-//기능 구현
+/**
+ * ==================
+ * =====기능구현=====
+ * ==================
+ */
+
 // 사용 DOM 노드 획득
 const ulElement = document.querySelector('.interested-authors__ul');
 
@@ -79,18 +84,35 @@ const renderInterestedAuthors = function (bookmarkedAuthors) {
     ulElement.appendChild(li);
   }
 };
+//관심글 랜더링 함수
+const renderInterestedPosts = function (post) {
+  const cardsElement = document.querySelector('.interested-posts .cards');
+  cardsElement.innerHTML = '';
 
-// 좋아요 누른 글 표시
+  for (let i = 0; i < post.length; i++) {
+    const Interestedinfo = post[i];
+    const card = document.createElement('article');
+    card.classList.add('card');
+    card.innerHTML = `
+      <a href="/src/features/detail/detail.html?postId=${Interestedinfo.post._id}"> 
+        <img src="${Interestedinfo.post.image || 'https://11.fesp.shop/files/vanilla03/no_profile.svg'}" alt="${Interestedinfo.post.title}" />
+      </a>
+      <h3>${Interestedinfo.post.title}</h3>
+      <p><em>by</em> ${Interestedinfo.post.user.name}</p>
+    `;
+    cardsElement.appendChild(card);
+  }
+};
 
-//
 if (!userId) {
   //
   alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');
   window.location.href = '/src/features/start/start.html';
 } else {
   loadMyBoxData(userId);
-  // loadRecentlyViewedPosts(); // 세션에서 최근 본 글 불러오기
+  loadInterestedPosts(userId);
 }
+
 function loadMyBoxData(userId) {
   // 관심 작가 북마크 데이터 요청
   axios({
@@ -112,11 +134,70 @@ function loadMyBoxData(userId) {
     })
     .catch(error => alert('관심 작가 로드 오류:', error));
 }
-// // 세션 스토리지에서 최근 본 글 불러오는 함수
-// function loadRecentlyViewedPosts() {
-//   const recentPosts =
-//     JSON.parse(sessionStorage.getItem('recentlyViewedPosts')) || []; //구현 될지 모르겟음
-//   renderRecentlyViewed(recentPosts);
-// }
 
-// 관심 작가, 최근 본 글, 관심 글 데이터를 페이지에 렌더링하는 함수들
+// 최근 본 게시글을 렌더링하는 함수
+function loadInterestedPosts(userId) {
+  axios({
+    method: 'get',
+    url: `/api/users/${userId}/bookmarks`, // 사용자의 관심 글 API
+    headers: { 'client-id': 'vanilla03' },
+  })
+    .then(response => {
+      const interestedPosts = response.data.item.post; // 관심 글 데이터
+      console.log(interestedPosts); // 데이터 구조 확인용
+      renderInterestedPosts(interestedPosts); // 관심 글 렌더링
+    })
+    .catch(error => alert('관심 글 로드 오류:', error));
+}
+
+// 각 postId에 해당하는 게시글 정보를 불러와 화면에 표시하는 함수
+function renderRecentlyViewedPosts() {
+  const cardsElement = document.querySelector('.recently-viewed .cards');
+  cardsElement.innerHTML = ''; // 기존 내용을 초기화
+
+  // 세션 스토리지에서 최근 본 postId 배열 가져오기
+  const postIds = JSON.parse(sessionStorage.getItem('postIds')) || [];
+  // 배열 확인
+  console.log('최근 본 postIds 배열:', postIds);
+
+  let postId;
+  // 각 postId로 게시글 정보를 가져와 렌더링
+  for (let i = 0; i < postIds.length; i++) {
+    postId = postIds[i];
+
+    // 서버나 API로부터 게시글 정보를 가져오는 예시
+    axios({
+      method: 'get',
+      url: `/api/posts/${postId}`,
+      headers: {
+        'client-id': 'vanilla03',
+      },
+    })
+      .then(response => {
+        const post = response.data;
+
+        console.log(post);
+        // 새로운 카드 요소 생성 및 내용 추가
+        const card = document.createElement('article');
+        card.classList.add('card');
+        card.innerHTML = `
+          <a href="/src/features/detail/detail.html?postId=${post.item._id}">
+            <img src="https://11.fesp.shop${post.item.image[0]}" alt="${post.item.title}" />
+          </a>
+          <div class="cards__text">
+            <h3>${post.item.title}</h3>
+            <p><em>by</em> ${post.item.user.name}</p>
+          </div>
+        `;
+
+        // <div class="cards">에 카드 추가
+        cardsElement.appendChild(card);
+      })
+      .catch(error => console.error(`Error loading post ${postId}:`, error));
+  }
+}
+
+// 페이지 로드 시 최근 본 게시글 렌더링
+document.addEventListener('DOMContentLoaded', () => {
+  renderRecentlyViewedPosts();
+});
