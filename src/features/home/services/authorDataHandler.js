@@ -7,8 +7,21 @@ import { authorService } from './authorService.js';
 import { featuredBookService } from './featuredBookService.js';
 import { initializeTopAuthors } from '../components/topAuthors.js';
 
-// 게시글 API 주소 상수
-const POSTS_API_ADDRESS = '/posts?type=info';
+/**
+ * 게시글 API 기본 주소와 인기 게시글 필터 옵션
+ */
+const POSTS_API = {
+  BASE: '/posts?type=info',
+  POPULAR: {
+    sort: { views: -1 },
+    custom: {
+      createdAt: {
+        $gte: utils.calculateDate('day', -7),
+        $lt: utils.calculateDate(),
+      },
+    },
+  },
+};
 
 /**
  * axios 인스턴스 생성
@@ -42,12 +55,13 @@ export const handleStoredAuthorData = async (
       ${renderService.renderAuthorPosts(storedData.posts)}
     `;
 
-  // 2. 최근 2주간의 인기 게시글 데이터 요청
-  const apiUrl = `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -14)}","$lt":"${utils.calculateDate()}"}}`;
-  console.log('API URL:', apiUrl);
-
-  const response = await api.get(apiUrl);
-  console.log('API Response:', response.data);
+  // 2. 최근 7일간의 인기 게시글 데이터 요청
+  const response = await api.get(POSTS_API.BASE, {
+    params: {
+      sort: JSON.stringify(POSTS_API.POPULAR.sort),
+      custom: JSON.stringify(POSTS_API.POPULAR.custom),
+    },
+  });
 
   // 3. 추천 도서가 없는 경우 새로 선택
   if (!featuredBook) {
@@ -72,10 +86,15 @@ export const handleStoredAuthorData = async (
  * @param {Object} featuredBook - 추천 도서 정보
  */
 export const handleNewData = async ($featuredBookSection, featuredBook) => {
-  // 1. 작가와 게시글 데이터를 동시에 요청
+  // 1. 작가 데이터와 인기 게시글 데이터를 동시에 요청
   const [usersResponse, postsResponse] = await Promise.all([
     api.get('/users'),
-    api.get(POSTS_API_ADDRESS),
+    api.get(POSTS_API.BASE, {
+      params: {
+        sort: JSON.stringify(POSTS_API.POPULAR.sort),
+        custom: JSON.stringify(POSTS_API.POPULAR.custom),
+      },
+    }),
   ]);
 
   const posts = postsResponse.data.item;
@@ -103,12 +122,8 @@ export const handleNewData = async ($featuredBookSection, featuredBook) => {
     }
   }
 
-  // 4. 인기 게시글 데이터 요청 및 표시
-  const todaysPickResponse = await api.get(
-    `${POSTS_API_ADDRESS}&sort={"views":-1}&custom={"createdAt":{"$gte":"${utils.calculateDate('day', -14)}","$lt":"${utils.calculateDate()}"}}`,
-  );
-
-  renderService.renderTodaysPick(todaysPickResponse.data.item);
+  // 4. 인기 게시글 표시
+  renderService.renderTodaysPick(posts);
   await initializeTopAuthors();
 };
 

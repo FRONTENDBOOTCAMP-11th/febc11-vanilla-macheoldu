@@ -298,6 +298,7 @@ body {
   font-size: var(--font-size-lg);
   flex-direction: column;
   color: var(--grey-90);
+  margin-bottom: 30px;
 }
 
 .main__todays-pick-title--english {
@@ -310,11 +311,6 @@ body {
 .main__todays-pick-title--korean {
   font-weight: 600;
   font-size: var(--font-size-xl);
-}
-
-.main__todays-pick__title {
-  font-size: var(--font-size-lg);
-  margin-bottom: 30px;
 }
 
 /* 오늘의 추천 리스트 스타일 */
@@ -334,6 +330,14 @@ body {
   gap: 8px; /* 제목, 작성자, 설명 사이의 간격 */
 }
 
+/* 텍스트 영역 */
+.main__todays-pick__item-title {
+  font-size: var(--font-size-lg);
+  color: var(--grey-90);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
 .main__todays-pick__item:last-child {
   position: relative;
   margin-bottom: 20px;
@@ -341,6 +345,7 @@ body {
   border-bottom: none;
 }
 
+/* 순위 숫자 */
 .main__todays-pick__item::before {
   counter-increment: main__todays-pick-counter;
   content: counter(main__todays-pick-counter);
@@ -352,16 +357,24 @@ body {
   color: var(--grey-90);
 }
 
-.number-wrapper {
-  position: relative;
-}
-
-.up-triangle {
+/* NEW 및 순위 상승 표시 */
+.rank-indicator {
   position: absolute;
   left: -25px;
-  top: 25px;
+  top: 28px; /* 숫자 바로 아래에 위치 */
+  font-size: var(--font-size-xs);
+  line-height: 1;
+}
+
+.rank-indicator--new {
+  color: var(--grey-90);
+  font-weight: bold;
+}
+
+.rank-up-icon {
   width: 10px;
   height: 10px;
+  display: block;
 }
 
 .main__todays-pick__info {
@@ -370,23 +383,11 @@ body {
   align-items: flex-start;
 }
 
-.main__todays-pick__text {
-  flex: 1;
-  padding-right: 15px;
-}
-
 .main__todays-pick__author {
   font-size: var(--font-size-md);
   color: var(--grey-35);
   margin-bottom: 10px;
 }
-
-/* .main__todays-pick__description {
-  font-size: 13px;
-  color: var(--grey-50);
-  font-weight: 300;
-  line-height: 1.4;
-} */
 
 .main__todays-pick__description {
   font-size: 13px;
