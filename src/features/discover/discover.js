@@ -34,19 +34,37 @@ document.addEventListener('DOMContentLoaded', function () {
   // 검색 결과 없음
   function showNoResults() {
     $noneContent.style.display = 'flex';
+    $searchCount.textContent = '';
     document.body.style.overflowY = 'hidden';
+
+    // 검색 결과 없음 메시지 생성
+    const noResultsHtml = `
+      <div class="discover__result-noneImg">
+        <img
+          src="/src/assets/icons/etc/logo_brunch_italic.svg"
+          alt="관련 이미지"
+        />
+      </div>
+      <p class="discover__result-none">검색 결과가 없습니다.</p>`;
+
+    // 결과 없음 메시지를 DOM에 추가
+    $noneContent.innerHTML = noResultsHtml;
+
+    return noResultsHtml;
   }
 
   // 검색을 다시 한 경우 내용이 넘치면 스크롤 바 만들어주기
-  function showResults() {
-    document.body.style.overflowY = 'scroll';
-  }
+  // function showResults() {
+  //   document.body.style.overflowY = 'scroll';
+  // }
 
   // 게시물 데이터를 긁어와서 posts 배열에 저장
-  async function fetchPosts() {
+  async function fetchPosts(keyword) {
     try {
-      const response = await api.get('/posts?type=info');
-      posts = response.data.item;
+      const response = await api.get('/posts?type=info', {
+        params: { keyword },
+      });
+      return response.data.item;
     } catch (error) {
       console.error('Error:', error);
     }
@@ -55,23 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // "X" 버튼 클릭 시, 초기화
   $resetButton.addEventListener('click', async function () {
     $searchInput.value = ''; // 검색창 입력 초기화
-    hideAllContent(); // 기존 콘텐츠 숨기기
-
-    // 모든 탭에서 'active' 클래스 제거
-    $navTabs.forEach(function (tab) {
-      tab.classList.remove('active');
-    });
-    $navTabs[0].classList.add('active'); // 기본 탭인 글 탭 활성화
-
-    $searchCount.textContent = ''; // 검색 결과 개수 초기화
-    $mainContent.innerHTML = ''; // 검색 결과 내용 제거
-    $mainContent.style.overflowY = 'hidden'; // 스크롤바 숨기기
-
-    currentTab = 'post'; // 기본 탭을 'post'로 초기화
-    posts = []; // posts 배열 초기화
-
-    await fetchPosts(); // X 버튼 클릭 후 데이터 다시 불러오기
-    $searchInput.focus(); // 검색창에 포커스 설정
+    $postContent.innerHTML = ''; // 글 목록 초기화
   });
 
   // 검색 수행하는 함수
@@ -99,35 +101,18 @@ document.addEventListener('DOMContentLoaded', function () {
       $searchCount.textContent = `글 검색 결과 ${filteredPosts.length}건`;
     } else {
       showNoResults(); // 결과 없음 표시
-      $searchCount.textContent = '';
     }
   }
 
   // 글 검색 결과 표시
   function displayPostResults(posts, keyword) {
     $postContent.innerHTML = posts
-      .map(function (post, index) {
-        let imageUrl = null;
-
-        // 글에 포함된 이미지 배열의 첫 번째 이미지를 사용
-        if (post.image && Array.isArray(post.image) && post.image.length > 0) {
-          imageUrl = post.image[0];
-        } else if (post.content) {
-          // 이미지 태그의 src 속성에 포함된 이미지 url 추출
-          const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
-          if (imgMatch) {
-            imageUrl = imgMatch[1];
-          }
-        }
-
-        // 작성자 이미지가 있을 경우 대체로 설정
-        if (!imageUrl && post.user && post.user.image) {
-          imageUrl = post.user.image;
-        }
-
-        const defaultImagePath = '/assets/images/home/pick1.png';
-        const imageNumber = (index % 10) + 1;
-        const fallbackImagePath = `/assets/images/home/pick${imageNumber}.png`;
+      .map(function (post) {
+        // 이미지 URL 설정
+        const imageUrl =
+          post.image && Array.isArray(post.image) && post.image.length > 0
+            ? `${post.image[0]}` // 첫 번째 이미지 사용
+            : '/assets/images/no_profile.svg'; // post.image가 없으면 기본 이미지 설정
 
         return `
           <div class="post__lists">
@@ -140,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <div class="content__text">
                 <div>
                   <p class="content__text-main">
-                    ${highlightSearchTerm(stripHtml(post.content).substring(0, 100) + '...', keyword)}
+                    ${highlightSearchTerm(stripHtml(post.content), keyword)}
                   </p>
                   <div class="content__text-info">
                     ${formatDate(post.createdAt)}
@@ -151,10 +136,9 @@ document.addEventListener('DOMContentLoaded', function () {
               </div>
               <div class="content__cover">
                 <img 
-                  src="${imageUrl || fallbackImagePath}" 
+                  src="${imageUrl}" 
                   alt="포스트 이미지" 
                   loading="lazy"
-                  onerror="this.src='${defaultImagePath}'"
                 />
               </div>
             </div>
@@ -180,13 +164,15 @@ document.addEventListener('DOMContentLoaded', function () {
       .map(author => {
         return `
         <div class="author__list">
-          <div>
-            <img class="author__list-cover" src="${author.image || '/assets/images/home/pick1.png'}" alt="작가 이미지" onerror="this.src='/assets/images/home/pick1.png'"/>
-          </div>
-          <div>
-            <h3 class="author__list-title">${highlightSearchTerm(author.name, keyword)}</h3>
-            <p class="author__list-info">${stripHtml(author.info || '')}</p>
-          </div>
+          <a src="https://11.fesp.shop/src/features/author/author.html?no'+ ${author._id}">
+            <div>
+              <img class="author__list-cover" src="${author.image || '/src/assets/images/no_profile.svg'}" alt="작가 이미지" />
+            </div>
+            <div>
+              <h3 class="author__list-title">${highlightSearchTerm(author.name, keyword)}</h3>
+              <p class="author__list-info"></p>
+            </div>
+          </a>
         </div>
       `;
       })
@@ -196,18 +182,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 검색어 입력 이벤트 (Enter키로 검색 실행)
-  $searchInput.addEventListener('keypress', function (e) {
+  $searchInput.addEventListener('keypress', async function (e) {
     if (e.key === 'Enter') {
       const keyword = $searchInput.value.trim();
+
       if (keyword) {
-        performSearch(keyword);
+        const posts = await fetchPosts(keyword);
+        displayPostResults(posts, keyword);
       }
     }
   });
-
-  hideAllContent(); // 모든 콘텐츠 숨기기
-
-  fetchPosts(); // 페이지 로드 시 서버로부터 게시물을 불러 옴
 
   // 처음 화면에서 모든 탭에서 active 클래스 제거
   $navTabs.forEach(function (tab) {
@@ -230,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
       currentTab = index === 0 ? 'post' : 'author';
 
       // 탭에 따라 검색 결과 표시
-      hideAllContent();
+      // hideAllContent();
       if (currentTab === 'post') {
         performSearch(keyword); // 글 검색 결과 표시
       } else {
