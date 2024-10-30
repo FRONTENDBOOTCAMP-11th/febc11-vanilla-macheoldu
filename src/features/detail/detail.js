@@ -66,7 +66,7 @@ const $postContent = document.querySelector('.article');
 const $postReplyCount = document.querySelector('.comments__count');
 const $postLikeCount = document.querySelector('.footer__like-count');
 const $postLikeImage = document.querySelector('.footer__like-icon');
-const $postLikeButton = document.querySelector('#footer__interaction');
+const $postLikeButton = document.getElementById('footer__interaction');
 
 // DOM 요소 선택 - 해당 게시글 작가 정보
 const $authorNickname = document.querySelector('.new-author__nickname');
@@ -114,7 +114,7 @@ const printPost = async function () {
 
     // 1. 게시물 데이터 가져오기
     const postData = await getPost(postId);
-    console.log('해당 게시물 출력을 위한 확인:', postData);
+    // console.log('해당 게시물 출력을 위한 확인:', postData);
 
     // // 2. 작가 정보 가져오기 - 밑에 작성
     // const authorData = await getAuthorInfo(postData.user._id);
@@ -185,7 +185,7 @@ const printPost = async function () {
 
     // 작가 정보 가져오기
     const authorData = await getAuthorInfo(postData.user._id);
-    console.log('작가 정보 데이터 확인:', authorData);
+    // console.log('작가 정보 데이터 확인:', authorData);
 
     // 5. 해당 게시글 작가 정보
     $authorNickname.textContent = authorData.name;
@@ -202,7 +202,7 @@ const printPost = async function () {
 sessionStorage.setItem('userEmail', 'sparkle@gmail.com');
 sessionStorage.setItem(
   'userAccessToken',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAyOTQ5NTksImV4cCI6MTczMDM4MTM1OSwiaXNzIjoiRkVTUCJ9.Fq76i7R2YM6GLo7GfYd8nG55Qfnq68-5aqKh7vQgSeg',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAzMDU4NTgsImV4cCI6MTczMDM5MjI1OCwiaXNzIjoiRkVTUCJ9.vsE4LrTnEziC81aiPrPfzMZ_EPBN3dmv1AsBxrZ_yjQ',
 );
 
 const token = sessionStorage.getItem('userAccessToken');
@@ -223,7 +223,7 @@ const getLoginUser = async function () {
     const loginUser = users.find(function (user) {
       return user.email === userEmail;
     });
-    console.log('현재 로그인한 유저 정보: ', loginUser);
+    // console.log('현재 로그인한 유저 정보: ', loginUser);
 
     return loginUser;
   } catch (error) {
@@ -256,7 +256,7 @@ const checkIsSubscribed = async function () {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('데이터 응답', response);
+    // console.log('구독 상태 확인', response);
 
     // 구독 중이면 1(=true), 구독 아니면 0(=false)
     console.log('현재 페이지 유저에 대한 나의 구독 여부 정보: ', response.data);
@@ -312,13 +312,13 @@ const toggleSubscribe = async function () {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('로그인한 유저의 전체 북마크 목록:', bookmarks);
+      // console.log('로그인한 유저의 전체 북마크 목록:', bookmarks);
 
       // 2. 현재 게시물 유저와 매칭되는 북마크 찾기
       const bookmark = bookmarks.data.item.find(function (bookmark) {
         return bookmark.user._id === targetId;
       });
-      console.log('현재 페이지 유저의 북마크:', bookmark);
+      // console.log('현재 페이지 유저의 북마크:', bookmark);
 
       if (bookmark) {
         // 3. 찾은 북마크의 Id로 삭제 요청
@@ -361,27 +361,21 @@ const setupSubscribeButton = async function () {
 
 // 현재 페이지의 게시글에 대한 좋아요 상태 확인 함수
 const checkIsPostLiked = async function () {
-  // 토큰 체크 추가 - 회원만 구독 가능
   if (!token) {
     alert('로그인이 필요합니다');
     return false;
   }
-
-  // 현재 게시글 번호 가져오기
-  const postId = getPostIdFromUrl();
-
   try {
-    // 로그인 한 유저가 현재 게시글에 좋아요 여부 확인
-    const response = await api.get(`/bookmarks/post/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    const postId = getPostIdFromUrl();
+    // 전체 북마크 목록을 가져와서 현재 게시물이 포함되어 있는지 확인
+    const response = await api.get('/bookmarks/post', {
+      headers: { Authorization: `Bearer ${token}` },
     });
-    console.log('현재 로그인 한 유저가 이 게시글에 대한 좋아요 확인', response);
 
-    // 좋아요면 1(=true), 좋아요가 아니면 0(=false)
-    console.log('현재 페이지 좋아요 여부 정보: ', response.data);
-    return response.data.ok === 1;
+    // some() 메서드로 현재 게시물이 북마크 되어있는지 확인
+    return response.data.item.some(
+      bookmark => bookmark.post._id === Number(postId),
+    );
   } catch (error) {
     console.error('게시물 좋아요 상태 확인 실패', error);
     return false;
@@ -396,50 +390,49 @@ const toggleLike = async function () {
   }
 
   try {
-    // 현재 게시글 번호 가져오기
     const postId = getPostIdFromUrl();
-
-    // 좋아요 상태 확인
     const isPostLiked = await checkIsPostLiked();
 
     if (!isPostLiked) {
-      // 좋아요 추가하기
-      await api.post(
+      // 좋아요 추가
+      const response = await api.post(
         '/bookmarks/post',
-        { target_id: postId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        { target_id: Number(postId) }, // postId를 숫자로 변환
+        { headers: { Authorization: `Bearer ${token}` } },
       );
+
+      if (response.data.ok === 1) {
+        $postLikeImage.src = '/assets/icons/like_sub/like_black.svg';
+        // UI 업데이트 전 잠시 대기
+        await new Promise(resolve => setTimeout(resolve, 100));
+        // 좋아요 수 업데이트를 위해 게시물 정보 새로고침
+        const updatedPost = await getPost(postId);
+        $postLikeCount.textContent = updatedPost.bookmarks;
+      }
     } else {
-      // 좋아요 취소하기
-      // 1. 로그인 한 유저의 좋아요 한 게시물 목록 가져오기
+      // 좋아요 취소
       const likes = await api.get('/bookmarks/post', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-      // 좋아요 이미지 변경
-      $postLikeImage.src = '/assets/icons/like_sub/like_black.svg';
-      console.log('로그인 한 유저의 좋아요 한 게시물 목록 조회:', likes);
 
-      // 2. 목록에서 현재 페이지 좋아요 한 게시글과 일치하는 게시글 찾기
-      const like = likes.data.item.find(function (like) {
-        // URL에서 문자로 추출되서 데이터 검출이 안된....
-        return like.post._id === Number(postId);
-      });
-      console.log('현재 페이지 게시물의 좋아요 정보:', like);
+      const like = likes.data.item.find(
+        item => item.post._id === Number(postId),
+      );
 
-      // 3. 찾은 좋아요 게시물의 Id로 삭제 요청
-      await api.delete(`/bookmarks/${like._id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      // 좋아요 이미지 변경
-      $postLikeImage.src = '/assets/icons/like_sub/like.svg';
+      if (like) {
+        const deleteResponse = await api.delete(`/bookmarks/${like._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (deleteResponse.data.ok === 1) {
+          $postLikeImage.src = '/assets/icons/like_sub/like.svg';
+          // UI 업데이트 전 잠시 대기
+          await new Promise(resolve => setTimeout(resolve, 100));
+          // 좋아요 수 업데이트를 위해 게시물 정보 새로고침
+          const updatedPost = await getPost(postId);
+          $postLikeCount.textContent = updatedPost.bookmarks;
+        }
+      }
     }
   } catch (error) {
     console.error('좋아요 상태 전환 실패:', error);
@@ -463,7 +456,6 @@ const setupLikeImage = async function () {
   }
 };
 
-// 이벤트 리스너 - 페이지 로드 시 실행될 함수들
 document.addEventListener('DOMContentLoaded', async function () {
   try {
     // Promise.all을 사용해 여러 비동기 작업을 동시에 실행
