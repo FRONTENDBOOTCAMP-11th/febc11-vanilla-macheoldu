@@ -176,7 +176,7 @@ const getLoginUser = async function () {
 const checkIsSubscribed = async function () {
   // 토큰 체크 추가 - 회원만 구독 가능
   if (!token) {
-    console.log('로그인이 필요합니다');
+    console.log('로그인이 필요한 서비스입니다. 로그인하시겠습니까?');
     return false;
   }
 
@@ -209,13 +209,12 @@ const toggleSubscribe = async function () {
 
   try {
     // URL에서 페이지 유저 Id 가져오기
-    const targetId = getUserIdFromUrl();
-
+    const targetId = Number(getUserIdFromUrl());
     // 현재 로그인한 사용자 정보 가져오기
     const loginUser = await getLoginUser();
     // 현재 로그인 한 유저의 페이지인지도 확인 - 본인 구독 금지
     if (loginUser._id === targetId) {
-      alert('본인을 구독 할 수 없습니다');
+      alert('본인 계정은 구독할 수 없습니다');
       return;
     }
 
@@ -272,7 +271,7 @@ const toggleSubscribe = async function () {
 };
 
 // 구독 상태에 따라 버튼 이미지를 표시해주는 함수
-const setupSubscribeButton = async function () {
+const setupSubscribeButtonImage = async function () {
   try {
     // 현재 구독 상태 확인
     const isSubscribed = await checkIsSubscribed();
@@ -291,12 +290,22 @@ const setupSubscribeButton = async function () {
 // 이벤트 리스너 - 페이지 로드 시 실행될 함수들
 document.addEventListener('DOMContentLoaded', async function () {
   try {
+    // 뒤로가기 감지 시 강제 새로고침
+    window.onpageshow = function (event) {
+      if (
+        event.persisted ||
+        (window.performance && window.performance.navigation.type === 2)
+      ) {
+        window.location.reload();
+      }
+    };
+
     // 페이지 로드 시 필요한 모든 데이터 병렬로 가져옴 - 모든 작업 시간 단축
     await Promise.all([
       getUserInfo(), // 작가의 기본 정보
       getUserPost(), // 작가의 게시물 목록
       getLoginUser(), // 현재 로그인한 유저 정보
-      setupSubscribeButton(), // 구독 버튼의 초기 상태
+      setupSubscribeButtonImage(), // 구독 버튼의 초기 상태
     ]);
 
     // 모든 데이터가 준비된 후 이벤트 리스너 등록

@@ -64,6 +64,9 @@ const $postAuthor = document.querySelector('.header__author');
 const $postDate = document.querySelector('.header__date');
 const $postContent = document.querySelector('.article');
 const $postReplyCount = document.querySelector('.comments__count');
+const $postLikeCount = document.querySelector('.footer__like-count');
+const $postLikeImage = document.querySelector('.footer__like-icon');
+const $postLikeButton = document.querySelector('#footer__interaction');
 
 // DOM 요소 선택 - 해당 게시글 작가 정보
 const $authorNickname = document.querySelector('.new-author__nickname');
@@ -84,7 +87,7 @@ const $authorSubscribeButtonImage = document.querySelector(
 const getPost = async function (postId) {
   try {
     const response = await api.get(`/posts/${postId}`);
-    // console.log('getPost - 해당 게시물 데이터:', response.data.item);
+    // console.log('해당 게시물 데이터:', response.data.item);
     return response.data.item;
   } catch (error) {
     console.error('해당 게시물 데이터 가져오기 실패:', error);
@@ -96,7 +99,7 @@ const getAuthorInfo = async function (authorId) {
   try {
     const response = await api.get(`/users/${authorId}`);
     const authorData = response.data.item;
-    // console.log('getAuthorInfo - 작가 정보:', authorData);
+    // console.log('작가 정보:', authorData);
 
     return authorData;
   } catch (error) {
@@ -113,7 +116,7 @@ const printPost = async function () {
     const postData = await getPost(postId);
     console.log('해당 게시물 출력을 위한 확인:', postData);
 
-    // // 2. 작가 정보 가져오기
+    // // 2. 작가 정보 가져오기 - 밑에 작성
     // const authorData = await getAuthorInfo(postData.user._id);
     // console.log('작가 정보 데이터 확인:', authorData);
 
@@ -124,8 +127,9 @@ const printPost = async function () {
     $postSubTitle.textContent = postData.extra.subTitle;
     $postAuthor.innerHTML = `<em class="header__author-prefix">by</em> ${postData.user.name}`;
     $postDate.textContent = getFormattedDate(postData.createdAt);
-    $postContent.innerHTML = postData.content;
+    $postContent.innerText = postData.content;
     $postReplyCount.textContent = postData.replies.length;
+    $postLikeCount.textContent = postData.bookmarks;
 
     // 4. 댓글 목록 생성 - 목록 초기화
     const $replyList = document.querySelector('.comments__list');
@@ -198,7 +202,7 @@ const printPost = async function () {
 sessionStorage.setItem('userEmail', 'sparkle@gmail.com');
 sessionStorage.setItem(
   'userAccessToken',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAyMDIzNjYsImV4cCI6MTczMDI4ODc2NiwiaXNzIjoiRkVTUCJ9.Lf6IhIASj8WdBf6YcBzy7q79HKYxq26KUfse2BxFdUM',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAyOTQ5NTksImV4cCI6MTczMDM4MTM1OSwiaXNzIjoiRkVTUCJ9.Fq76i7R2YM6GLo7GfYd8nG55Qfnq68-5aqKh7vQgSeg',
 );
 
 const token = sessionStorage.getItem('userAccessToken');
@@ -231,7 +235,7 @@ const getLoginUser = async function () {
 const checkIsSubscribed = async function () {
   // 토큰 체크 추가 - 회원만 구독 가능
   if (!token) {
-    console.log('로그인이 필요합니다');
+    alert('로그인이 필요합니다');
     return false;
   }
 
@@ -355,6 +359,110 @@ const setupSubscribeButton = async function () {
   }
 };
 
+// 현재 페이지의 게시글에 대한 좋아요 상태 확인 함수
+const checkIsPostLiked = async function () {
+  // 토큰 체크 추가 - 회원만 구독 가능
+  if (!token) {
+    alert('로그인이 필요합니다');
+    return false;
+  }
+
+  // 현재 게시글 번호 가져오기
+  const postId = getPostIdFromUrl();
+
+  try {
+    // 로그인 한 유저가 현재 게시글에 좋아요 여부 확인
+    const response = await api.get(`/bookmarks/post/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log('현재 로그인 한 유저가 이 게시글에 대한 좋아요 확인', response);
+
+    // 좋아요면 1(=true), 좋아요가 아니면 0(=false)
+    console.log('현재 페이지 좋아요 여부 정보: ', response.data);
+    return response.data.ok === 1;
+  } catch (error) {
+    console.error('게시물 좋아요 상태 확인 실패', error);
+    return false;
+  }
+};
+
+// 현재 페이지 좋아요 전환(좋아요/좋아요 취소)하는 함수
+const toggleLike = async function () {
+  if (!token) {
+    alert('로그인이 필요합니다');
+    return;
+  }
+
+  try {
+    // 현재 게시글 번호 가져오기
+    const postId = getPostIdFromUrl();
+
+    // 좋아요 상태 확인
+    const isPostLiked = await checkIsPostLiked();
+
+    if (!isPostLiked) {
+      // 좋아요 추가하기
+      await api.post(
+        '/bookmarks/post',
+        { target_id: postId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+    } else {
+      // 좋아요 취소하기
+      // 1. 로그인 한 유저의 좋아요 한 게시물 목록 가져오기
+      const likes = await api.get('/bookmarks/post', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // 좋아요 이미지 변경
+      $postLikeImage.src = '/assets/icons/like_sub/like_black.svg';
+      console.log('로그인 한 유저의 좋아요 한 게시물 목록 조회:', likes);
+
+      // 2. 목록에서 현재 페이지 좋아요 한 게시글과 일치하는 게시글 찾기
+      const like = likes.data.item.find(function (like) {
+        // URL에서 문자로 추출되서 데이터 검출이 안된....
+        return like.post._id === Number(postId);
+      });
+      console.log('현재 페이지 게시물의 좋아요 정보:', like);
+
+      // 3. 찾은 좋아요 게시물의 Id로 삭제 요청
+      await api.delete(`/bookmarks/${like._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // 좋아요 이미지 변경
+      $postLikeImage.src = '/assets/icons/like_sub/like.svg';
+    }
+  } catch (error) {
+    console.error('좋아요 상태 전환 실패:', error);
+  }
+};
+
+// 게시글 좋아요 상태에 따라 버튼 이미지 표시해주는 함수
+const setupLikeImage = async function () {
+  try {
+    // 게시글 좋아요 상태 확인
+    const isPostLiked = await checkIsPostLiked();
+
+    // 게시글 좋아요에 따라 초기 이미지 설정
+    if (isPostLiked) {
+      $postLikeImage.src = '/assets/icons/like_sub/like_black.svg';
+    } else {
+      $postLikeImage.src = '/assets/icons/like_sub/like.svg';
+    }
+  } catch (error) {
+    console.error('게시물 좋아요 이미지 초기화 실패:', error);
+  }
+};
+
 // 이벤트 리스너 - 페이지 로드 시 실행될 함수들
 document.addEventListener('DOMContentLoaded', async function () {
   try {
@@ -362,11 +470,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     await Promise.all([
       printPost(), // 게시물과 작가 정보 표시
       getLoginUser(), // 로그인 유저 정보 가져오기
-      setupSubscribeButton(), // 구독 버튼 초기 상태 설정
+      setupSubscribeButton(), // 구독 버튼 이미지 초기 상태 설정
+      setupLikeImage(), // 좋아요 이미지 초기 상태 설정
     ]);
 
     // 모든 데이터가 준비된 후 이벤트 리스너 등록
     $authorSubscribeButton.addEventListener('click', toggleSubscribe);
+    $postLikeButton.addEventListener('click', toggleLike);
   } catch (error) {
     console.error('페이지 로드 실패:', error);
   }
