@@ -1,0 +1,22 @@
+meta {
+  name: 로그인(만료시간 1분)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/users/login?expiresIn=10s
+  body: json
+  auth: none
+}
+
+params:query {
+  expiresIn: 1m
+}
+
+body:json {
+  {
+    "email": "w1@gmail.com",
+    "password": "11111111"
+  }
+}
