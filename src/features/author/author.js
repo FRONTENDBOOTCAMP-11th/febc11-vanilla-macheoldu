@@ -79,20 +79,6 @@ const getUserInfo = async function () {
   }
 };
 
-// 게시물 클릭 시 상세페이지로 이동하는 함수
-const setupPostClickToDetail = function () {
-  // 모든 게시물 요소 선택
-  const $postItems = document.querySelectorAll('.article');
-
-  // 각 게시물에 클릭 이벤트 추가
-  $postItems.forEach(postItem => {
-    postItem.addEventListener('click', function () {
-      const postId = postItem.dataset.postId;
-      window.location.href = `/src/features/detail/detail.html?postId=${postId}`;
-    });
-  });
-};
-
 // 유저(작가) 게시물 가져오는 함수
 const getUserPost = async function () {
   try {
@@ -119,7 +105,7 @@ const getUserPost = async function () {
             <h3 class="article__title">${post.title}</h3>
             <p class="article__excerpt">
               <span class="article__subtitle">${post.extra.subTitle}</span>
-              | ${post.content}...
+              | ${post.content}
             </p>
             <div class="article__meta">
               <span class="article__comments">댓글 ${post.repliesCount} ·</span>
@@ -137,6 +123,20 @@ const getUserPost = async function () {
   } catch (error) {
     console.error('유저 게시물을 가져오는 중 에러 발생:', error);
   }
+};
+
+// 게시물 클릭 시 상세페이지로 이동하는 함수
+const setupPostClickToDetail = function () {
+  // 모든 게시물 요소 선택
+  const $postItems = document.querySelectorAll('.article');
+
+  // 각 게시물에 클릭 이벤트 추가
+  $postItems.forEach(postItem => {
+    postItem.addEventListener('click', function () {
+      const postId = postItem.dataset.postId;
+      window.location.href = `/src/features/detail/detail.html?postId=${postId}`;
+    });
+  });
 };
 
 // 🚨 구독 기능 구현 - 강제로 로그인 상태 만들기
@@ -265,6 +265,7 @@ const toggleSubscribe = async function () {
 
     // 서버와 동기화를 위해 작가 정보 갱신
     await getUserInfo();
+    // 에러 발생 시 롤백을 위해 서버 데이터 동기화
   } catch (error) {
     console.error('구독 상태 전환 실패:', error);
   }
@@ -290,15 +291,15 @@ const setupSubscribeButton = async function () {
 // 이벤트 리스너 - 페이지 로드 시 실행될 함수들
 document.addEventListener('DOMContentLoaded', async function () {
   try {
-    // 1. 페이지 로드 시 필요한 모든 데이터 병렬로 가져옴 - 모든 작업 시간 단축
+    // 페이지 로드 시 필요한 모든 데이터 병렬로 가져옴 - 모든 작업 시간 단축
     await Promise.all([
-      getUserInfo(),
-      getUserPost(),
-      getLoginUser(),
-      setupSubscribeButton(), // 구독 버튼의 초기 상태 설정해주는 함수
+      getUserInfo(), // 작가의 기본 정보
+      getUserPost(), // 작가의 게시물 목록
+      getLoginUser(), // 현재 로그인한 유저 정보
+      setupSubscribeButton(), // 구독 버튼의 초기 상태
     ]);
 
-    // 구독 버튼 초기 상태 설정해주는 함수 때문에 위치 중요
+    // 모든 데이터가 준비된 후 이벤트 리스너 등록
     $subscribeButton.addEventListener('click', toggleSubscribe);
   } catch (error) {
     console.error('페이지 로드 실패:', error);
