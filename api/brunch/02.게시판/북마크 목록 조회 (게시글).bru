@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: {{url}}/bookmarks/post
+  url: {{url}}/bookmarks/post?type=info
   body: json
   auth: inherit
+}
+
+params:query {
+  type: info
 }
 
 headers {

@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   <div class="content__text-info">
                     ${formatDate(post.createdAt)}
                     <div class="circle"></div>
-                    <em>by</em> ${highlightSearchTerm(post.user.name, keyword)}
+                    <em>by</em> ${post.user.name}
                   </div>
                 </div>
               </div>
