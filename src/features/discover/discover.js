@@ -201,7 +201,8 @@ document.addEventListener('DOMContentLoaded', function () {
             : '/src/assets/images/no_profile.svg';
 
         return `
-          <div class="post__lists">
+        <div class="post__lists">
+          <a href="/src/features/detail/detail.html?postId=${post._id}">
             <div>
               <h3 class="post__list-title">
                 ${highlightSearchTerm(post.title, keyword)}
@@ -228,7 +229,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 />
               </div>
             </div>
-          </div>
+          </a>
+        </div>
         `;
       })
       .join('');
