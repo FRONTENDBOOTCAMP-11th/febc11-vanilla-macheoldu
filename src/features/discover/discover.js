@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const $searchInput = document.querySelector('.discover__header-input'); // 검색 입력창
   const $mainContent = document.querySelector('.discover__main'); // 메인 콘텐츠 영역
   const $postContent = document.querySelector('.post'); // 글 탭 콘텐츠
-  const $authorContent = document.querySelector('.author__lists'); // 작가 탭 콘텐츠
+  const $authorContent = document.querySelector('.author'); // 작가 탭 콘텐츠
   const $noneContent = document.querySelector('.discover__none'); // '결과 없음' 표시 영역
-  const $navTabs = document.querySelectorAll('.discover__nav-tab'); // 글/작가 탭 버튼
+  const $navTab = document.querySelectorAll('.discover__nav-tab'); // 글/작가 탭 버튼
   const $searchCount = document.querySelector('.discover__count-results'); // 검색 결과 카운트
   const $resetButton = document.querySelector('.discover__header-close'); // X 버튼
 
@@ -83,10 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 기존 콘텐츠 숨기기 및 탭 초기화
     hideAllContent();
-    $navTabs.forEach(function (tab) {
+    $navTab.forEach(function (tab) {
       tab.classList.remove('active');
     });
-    $navTabs[0].classList.add('active'); // "글" 탭 활성화
+    $navTab[0].classList.add('active'); // "글" 탭 활성화
 
     // "글" 탭 검색: 제목과 내용에서 검색
     const filteredPosts = posts.filter(function (post) {
@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // 이미지 URL 설정
         const imageUrl =
           post.image && Array.isArray(post.image) && post.image.length > 0
-            ? `${post.image[0]}` // 첫 번째 이미지 사용
-            : '/assets/images/no_profile.svg'; // post.image가 없으면 기본 이미지 설정
+            ? post.image[0] // 첫 번째 이미지 사용
+            : '/src/assets/images/no_profile.svg'; // post.image가 없으면 기본 이미지 설정
 
         return `
           <div class="post__lists">
@@ -194,19 +194,18 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // 처음 화면에서 모든 탭에서 active 클래스 제거
-  $navTabs.forEach(function (tab) {
+  $navTab.forEach(function (tab) {
     tab.classList.remove('active');
   });
 
-  // 작가 검색 시 중복된 작가 이름이 나타나지 않도록 설정
-  $navTabs.forEach(function (tab, index) {
+  $navTab.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
       // 현재 검색어가 있을 때만 탭 전환 수행
       const keyword = $searchInput.value.trim();
       if (!keyword) return;
 
       // 탭 상태 초기화 후 현재 탭 활성화
-      $navTabs.forEach(function (t) {
+      $navTab.forEach(function (t) {
         t.classList.remove('active');
       });
       tab.classList.add('active');
@@ -243,12 +242,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // 태그 제외하고 순수 텍스트만 보여주는 함수
   function stripHtml(html) {
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || '';
   }
 
+  // 날짜를 Apr 16. 2024 형태로 만들어주는 함수
   function formatDate(dateString) {
     const date = new Date(dateString);
     const month = date.toLocaleString('en-US', { month: 'short' });
@@ -257,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return `${month} ${day}. ${year}`;
   }
 
+  // 키워드 포인트 컬러로 변경
   function highlightSearchTerm(text, keyword) {
     if (!keyword) return text;
     const regex = new RegExp(keyword, 'gi');
