@@ -7,6 +7,7 @@
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
   <link rel="stylesheet" href="start.css">
+  <script type="module" src="signUp.js"></script>
   <title>Document</title>
 </head>
 
@@ -29,24 +30,24 @@
             <input type="text" id="signUpNickname" placeholder="별명">
             <div class="btn type--chip">
               <!-- 중복확인 버튼 클릭 시 서버의 닉네임 확인 -->
-              <button type="button" id="validCheckNickname" aria-label="중복확인 버튼">중복확인</button>
+              <button type="button" id="checkNickname" aria-label="중복확인 버튼">중복확인</button>
             </div>
           </div>
           <!-- 중복 데이터 존재 시, class="invalid" 추가, innerHTML 로 에러 메시지 추가(중복된 별명입니다.)
            중복 데이터 없을 시, innerHTML 로 하단 메시지 추가-->
-          <div class="sign-up__valid nickname">사용할 수 있는 별명입니다.</div>
+          <div class="sign-up__valid nickname"></div>
           <!-- 이메일 입력란 -->
           <div class="input">
             <label class="ir" for="signUpEmail">이메일 입력란</label>
             <input type="email" id="signUpEmail" placeholder="이메일">
             <div class="btn type--chip">
               <!-- 중복확인 버튼 클릭 시 서버의 이메일 확인 -->
-              <button type="button" id="validCheckEmail" aria-label="중복확인 버튼">중복확인</button>
+              <button type="button" id="checkEmail" aria-label="중복확인 버튼">중복확인</button>
             </div>
           </div>
           <!-- 중복 데이터 존재 시, class="invalid" 추가, innerHTML 로 에러 메시지 추가(중복된 이메일입니다.)
            중복 데이터 없을 시, innerHTML 로 하단 메시지 추가-->
-          <div class="sign-up__valid email">사용할 수 있는 이메일입니다.</div>
+          <div class="sign-up__valid email"></div>
         </fieldset>
         <!-- 비밀번호 및 비밀번호 확인 입력란-->
         <fieldset class="sign-up__password">
@@ -57,8 +58,8 @@
             <input type="password" id="signUpPw" placeholder="비밀번호">
             <!-- 비밀번호 표시/숨김 버튼, 숨김이 기본, 버튼 선택 시 비밀번효 표시, class="hidden" toggle -->
             <div class="type--visibility">
-              <img class="type--visibility__icon-hide" src="../../assets/icons/actions/hide.svg">
-              <img class="type--visibility__icon-show hidden" src="../../assets/icons/actions/show.svg">
+              <img class="type--visibility__icon-hide" src="/assets/icons/actions/hide.svg">
+              <img class="type--visibility__icon-show hidden" src="/assets/icons/actions/show.svg">
             </div>
           </div>
           <div class="input">
@@ -67,12 +68,12 @@
             <input type="password" id="signUpPwCheck" placeholder="비밀번호 확인">
             <!-- 비밀번호 표시/숨김 버튼, 숨김이 기본, 버튼 선택 시 비밀번효 표시, class="hidden" toggle -->
             <div class="type--visibility">
-              <img class="type--visibility__icon-hide" src="../../assets/icons/actions/hide.svg">
-              <img class="type--visibility__icon-show hidden" src="../../assets/icons/actions/show.svg">
+              <img class="type--visibility__icon-hide" src="/assets/icons/actions/hide.svg">
+              <img class="type--visibility__icon-show hidden" src="/assets/icons/actions/show.svg">
             </div>
           </div>
           <!-- 유효성 검증 결과 innerHTML 로 출력 -->
-          <div class="sign-up__valid pw invalid">대소문자, 숫자 조합 8자 이상이어야 합니다.</div>
+          <div class="sign-up__valid pw invalid hidden"></div>
         </fieldset>
         <!-- 버튼 선택 시 회원가입 요청, 회원가입 이후 메인 홈으로 이동 -->
         <div class="btn type--long">
