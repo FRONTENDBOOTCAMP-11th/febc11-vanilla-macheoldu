@@ -29,49 +29,10 @@
         <!-- 메인 콘텐츠 영역 시작 -->
         <main>
           <!-- 표지(커버) 섹션 시작 -->
-          <section class="cover">
-            <!-- 작품 제목 -->
-            <h1 class="cover__title">멈추어 버린 시간</h1>
-            <!-- 작가명 -->
-            <p class="cover__author"><em>by</em> 김수정</p>
-            <!-- 표지 이미지 영역 -->
-            <figure class="cover__image-wrapper">
-              <!-- 표지 대표 이미지 -->
-              <img
-                src="/src/assets/images/home/hourglass.png"
-                alt="멈추어 버린 시간"
-                class="cover__image"
-              />
-              <!-- '응원' 뱃지 -->
-              <img src="/src/assets/icons/etc/cheer.svg" class="cover__badge" />
-            </figure>
-            <!-- 응원 정보 표시 영역 -->
-            <div class="cover__support">
-              <!-- 응원 아이콘 -->
-              <img
-                src="/src/assets/icons/etc/won.svg"
-                alt="응원 아이콘"
-                class="cover__support-icon"
-              />
-              <!-- 응원 수 표시 -->
-              <span class="cover__support-count">47명이 응원</span>
-            </div>
-            <!-- 페이지 정보 표시 영역 -->
-            <div class="cover__progress">
-              <div class="cover__progress-steps">
-                <div class="cover__progress-step active"></div>
-                <div class="cover__progress-step active"></div>
-                <div class="cover__progress-step active"></div>
-                <div class="cover__progress-step active"></div>
-                <div class="cover__progress-step"></div>
-                <div class="cover__progress-step active"></div>
-              </div>
-              <span class="cover__progress-text">5 / 6</span>
-            </div>
-          </section>
+          <section class="cover"></section>
 
+          <!-- 요일별 연재 섹션 시작 -->
           <section class="weekly-serial" aria-labelledby="weeklySerialTitle">
-            <!-- 요일별 연재 섹션 시작 -->
             <h2 class="weekly-serial__heading" id="weeklySerialTitle">
               요일별 연재
             </h2>
@@ -139,7 +100,7 @@
                   <p class="weekly-serial__details">
                     6 윤희 - 2
                     <img
-                      src="/src/assets/icons/status/new.svg"
+                      src="/assets/icons/status/new.svg"
                       alt="새 글"
                       class="weekly-serial__new"
                     />
@@ -156,7 +117,7 @@
                   <p class="weekly-serial__details">
                     D-70, 30주
                     <img
-                      src="/src/assets/icons/status/new.svg"
+                      src="/assets/icons/status/new.svg"
                       alt="새 글"
                       class="weekly-serial__new"
                     />
@@ -164,7 +125,7 @@
                   <p class="weekly-serial__author"><em>by</em> Gigantes Yang</p>
                 </article>
                 <img
-                  src="/src/assets/images/home/serial1.png"
+                  src="/assets/images/home/serial1.png"
                   alt="딸과 만나기까지 100일간의 기록"
                   class="weekly-serial__image"
                 />
@@ -175,7 +136,7 @@
                   <h3 class="weekly-serial__title">인류애 충전일기</h3>
                   <p class="weekly-serial__details">
                     열두 살 아이도 '나 몰라라'<img
-                      src="/src/assets/icons/status/new.svg"
+                      src="/assets/icons/status/new.svg"
                       alt="새 글"
                       class="weekly-serial__new"
                     />
@@ -184,7 +145,7 @@
                   <p class="weekly-serial__author"><em>by</em> 박단단</p>
                 </article>
                 <img
-                  src="/src/assets/images/home/serial2.png"
+                  src="/assets/images/home/serial2.png"
                   alt="인류애 충전일기"
                   class="weekly-serial__image"
                 />
@@ -194,7 +155,7 @@
             <button class="weekly-serial__view-all">
               <span>연재 작품 전체 보기</span>
               <img
-                src="/src/assets/icons/actions/next.svg"
+                src="/assets/icons/actions/next.svg"
                 alt="다음"
                 class="icon-next"
               />
@@ -214,226 +175,10 @@
             </h2>
 
             <ol class="main__todays-pick__list">
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      무사히 마흔살이 될 수 있을까
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 강윤이
-                    </p>
-                    <p class="main__todays-pick__description">
-                      병원에서 암 진단을 받고 나와 햇볕이 작열하며 품어오는
-                      거리로...
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick1.png"
-                    alt="무사히 마흔살이 될 수 있을까"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      맞벌이 하루살이
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 서리
-                    </p>
-                    <p class="main__todays-pick__description">
-                      누구의 엄마로 불리지만, 그 전에 내 이름이 있다. 엄마로
-                      육아하면서 ...
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick2.png"
-                    alt="맞벌이 하루살이"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      집이 있었는데, 이제는 없습니다
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 준지
-                    </p>
-                    <p class="main__todays-pick__description">
-                      성북동 부모님 집에서 편하게 얹혀 살며 대학도, 직장도
-                      30분이 넘지…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick3.png"
-                    alt="집이 있었는데, 이제는 없습니다"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      나의 우울일기 2
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 그레이스
-                    </p>
-                    <p class="main__todays-pick__description">
-                      언제부터인지 모를, 심한 우울증을 앓고 있습니다. 인생이
-                      무언가 잘…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick4.png"
-                    alt="나의 우울일기 2"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      포카리스웨트같은 과학콘텐츠 이야기
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> corescience
-                    </p>
-                    <p class="main__todays-pick__description">
-                      우리의 삶속에는 많은 과학적 지식 들이 숨어져
-                      있습니다.알지만 지…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick5.png"
-                    alt="포카리스웨트같은 과학콘텐츠 이야기"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">서울이 싫어서</h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 은연주
-                    </p>
-                    <p class="main__todays-pick__description">
-                      원래부터 도시를 싫어했다. 남편과 연애할 때도 맨날
-                      귀촌하자고 서…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick6.png"
-                    alt="서울이 싫어서"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">수요에세이</h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 뮤뮤
-                    </p>
-                    <p class="main__todays-pick__description">
-                      일주일에 한 번, 수요일마다 에세이 한 편을 배달해
-                      드리겠습니다. 매…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick7.png"
-                    alt="수요에세이"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-
-              <li class="main__todays-pick__item">
-                <div class="number-wrapper">
-                  <img
-                    src="/src/assets/icons/etc/todaysTop.svg"
-                    class="up-triangle"
-                    alt="up"
-                  />
-                </div>
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      강남 안에, 강북 남자
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 눅눅한과자
-                    </p>
-                    <p class="main__todays-pick__description">
-                      나도 몰랐다. 내가 강남에 살게 될 줄 은. 강남 출신 아내를
-                      만나 덜컥 집…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick8.png"
-                    alt="강남 안에, 강북 남자"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      서울에서 혼자 밥해먹고 사는 사람
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 이확위
-                    </p>
-                    <p class="main__todays-pick__description">
-                      해외에서 2년 반을 살다가 다시 한국에 돌아왔습니다.
-                      서울에서 다…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick9.png"
-                    alt="서울에서 혼자 밥해먹고 사는 사람"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
-
-              <li class="main__todays-pick__item">
-                <div class="main__todays-pick__info">
-                  <div class="main__todays-pick__text">
-                    <h3 class="main__todays-pick__item-title">
-                      이과 남편과 문과 아내의 실화극
-                    </h3>
-                    <p class="main__todays-pick__author">
-                      <em style="font-family: Georgia">by</em> 빛날현
-                    </p>
-                    <p class="main__todays-pick__description">
-                      결혼은 보통 극과 극이 만나 맞춰간 다고들 하지만..이건
-                      모서리와 모…
-                    </p>
-                  </div>
-                  <img
-                    src="/src/assets/images/home/pick10.png"
-                    alt="이과 남편과 문과 아내의 실화극"
-                    class="main__todays-pick__image"
-                  />
-                </div>
-              </li>
+              <!-- JavaScript로 동적으로 내용이 채워질 예정이므로 비워둡니다 -->
             </ol>
-            <!-- Today's Pick 섹션 끝 -->
           </section>
+          <!-- Today's Pick 섹션 끝 -->
 
           <!-- 베스트셀러 섹션 시작 -->
           <section class="main__best-seller">
@@ -451,7 +196,7 @@
                 </div>
                 <!-- 책 표지 이미지 -->
                 <img
-                  src="/src/assets/images/home/bestseller1.png"
+                  src="/assets/images/home/bestseller1.png"
                   class="main__best-seller-image"
                   alt="여자야구입문기"
                 />
@@ -476,14 +221,13 @@
             <button class="main__view-all-brunch-book">
               원작 브런치북 보기
               <img
-                src="/src/assets/icons/etc/whiteNext.svg"
+                src="/assets/icons/etc/whiteNext.svg"
                 alt="다음"
                 class="icon-next"
               />
             </button>
           </section>
           <!-- 베스트셀러 섹션 끝 -->
-          <!-- 메인 베스트셀러 섹션 끝 -->
 
           <div class="divider"></div>
 
@@ -495,208 +239,43 @@
             >
               오늘의 작가
             </h2>
-
-            <article class="main__featured-author__content">
-              <!-- 작가 정보 영역 -->
-              <div class="main__featured-author__info-wrapper">
-                <div class="main__featured-author__info">
-                  <h3 class="main__featured-author__name">동그라미 원</h3>
-                  <p class="main__featured-author__role">에세이스트</p>
-                </div>
-                <img
-                  src="/src/assets/images/home/author1.png"
-                  alt="동그라미 원"
-                  class="main__featured-author__image"
-                />
-              </div>
-              <p class="main__featured-author__description">
-                새로운 인생 2막을 함께 나아가고 있습니다. 살면서 깨닫고 어려움을
-                극복한 마음들을 글을 통해 함께...
-              </p>
-            </article>
-
-            <!-- 작가의 책 목록 -->
-            <ul class="main__main__featured-author__books">
-              <li class="main__main__featured-author__books-item">
-                <div class="main__main__featured-author__books-image-wrapper">
-                  <img
-                    src="/src/assets/images/home/authorBook1.png"
-                    alt="행복하게 먹으려면 책 표지 이미지"
-                    class="main__main__featured-author__books-image"
-                  />
-                </div>
-                <div class="main__main__featured-author__books-info">
-                  <h3 class="main__main__featured-author__books-title">
-                    행복하게 먹으려면
-                  </h3>
-                  <p class="main__main__featured-author__books-description">
-                    사람이 행복하기를 원하면서 음식의 맛이나 건강 여부는
-                    따지지만 먹는...
-                  </p>
-                </div>
-              </li>
-              <li class="main__main__featured-author__books-item">
-                <div class="main__main__featured-author__books-image-wrapper">
-                  <img
-                    src="/src/assets/images/home/authorBook2.png"
-                    alt="저는 이런 마음입니다 책 표지 이미지"
-                    class="main__main__featured-author__books-image"
-                  />
-                </div>
-                <div class="main__main__featured-author__books-info">
-                  <h3 class="main__main__featured-author__books-title">
-                    저는 이런 마음입니다
-                  </h3>
-                  <p class="main__main__featured-author__books-description">
-                    우리는 어떤 일들을 겪거나, 어떤 사람들과의 만남을 통해
-                    마음이 요동...
-                  </p>
-                </div>
-              </li>
-            </ul>
+            <!-- 작가 정보 영역 -->
           </section>
           <!-- 오늘의 작가 섹션 끝 -->
 
           <div class="divider"></div>
 
           <!-- 오늘의 추천 도서 섹션 시작 -->
-          <section class="main__featured-book">
-            <div class="main__featured-book-content">
-              <!-- 추천 도서 정보 영역 -->
-              <div class="main__featured-book-info">
-                <!-- 추천 도서 제목 -->
-                <h3 class="main__featured-book-title">그리움이 지칠 때</h3>
-                <!-- 추천 도서 작가 -->
-                <p class="main__featured-book-author"><em>by</em> 산들</p>
-              </div>
-
-              <!-- 추천 도서 이미지 영역 -->
-              <div class="main__featured-book-image-container">
-                <img
-                  src="/src/assets/images/home/featuredBook.png"
-                  alt="그리움이 지칠 때 책 표지 이미지"
-                  class="main__featured-book-image"
-                />
-              </div>
-            </div>
-
-            <!-- 작가가 사랑한 문장 영역 시작 -->
-            <div class="main__featured-book-quote">
-              <div class="main__featured-book-quote-label-container">
-                <p class="main__featured-book-quote-label">
-                  작가가 사랑한 문장 ——
-                </p>
-                <!-- 브런치스토리 로고 심볼 -->
-                <img
-                  src="/src/assets/logos/logo_symbol.svg"
-                  alt="브런치스토리 로고 심볼"
-                  class="main__logo-symbol"
-                  width="18px"
-                  height="18px"
-                />
-              </div>
-              <!-- 인용구 -->
-              <div class="main__featured-book-quote-text">
-                여행의 끝에서 일상으로 돌아오는 것은 몸의 기억을 되살리는
-                일이다.
-              </div>
-            </div>
-            <!-- 작가가 사랑한 문장 영역 끝 -->
-          </section>
+          <section class="main__featured-book"></section>
           <!-- 오늘의 추천 도서 섹션 끝 -->
 
           <!-- Top 구독 작가 섹션 시작 -->
           <section class="main__top-subscribed-authors">
             <h2 class="main__top-subscribed-title">Top 구독 작가</h2>
 
+            <!-- 이 div 안에 JavaScript로 작가 정보가 동적으로 삽입됩니다 -->
             <div class="main__top-subscribed-authors-grid">
-              <!-- 첫 번째 작가 -->
-              <article class="main__top-subscribed-author">
-                <div class="author-content">
-                  <img
-                    src="/src/assets/images/home/author2.png"
-                    alt="피터팬"
-                    class="main__top-subscribed-author-image"
-                  />
-                  <div class="author-text">
-                    <h3 class="main__top-subscribed-author-name">피터팬</h3>
-                    <p class="main__top-subscribed-author-role">목사 만화가</p>
-                    <p class="main__top-subscribed-author-description">
-                      하나님을 사랑하고 아내를 사랑하고 여행을 ...
-                    </p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- 두 번째 작가 -->
-              <article class="main__top-subscribed-author">
-                <div class="author-content">
-                  <img
-                    src="/src/assets/images/home/author3.png"
-                    alt="빛날현"
-                    class="main__top-subscribed-author-image"
-                  />
-                  <div class="author-text">
-                    <h3 class="main__top-subscribed-author-name">빛날현</h3>
-                    <p class="main__top-subscribed-author-role">에세이스트</p>
-                    <p class="main__top-subscribed-author-description">
-                      26살부터 47살까지 교수님이라 불리우는 목...
-                    </p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- 세 번째 작가 -->
-              <article class="main__top-subscribed-author">
-                <div class="author-content">
-                  <img
-                    src="/src/assets/images/home/author4.png"
-                    alt="허사이"
-                    class="main__top-subscribed-author-image"
-                  />
-                  <div class="author-text">
-                    <h3 class="main__top-subscribed-author-name">허사이</h3>
-                    <p class="main__top-subscribed-author-description">
-                      책방 셔터맨을 꿈꾸는 40대 공돌이. 다양한 ….
-                    </p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- 네 번째 작가 -->
-              <article class="main__top-subscribed-author">
-                <div class="author-content">
-                  <img
-                    src="/src/assets/images/home/author5.png"
-                    alt="마틸다 하나씨"
-                    class="main__top-subscribed-author-image"
-                  />
-                  <div class="author-text">
-                    <h3 class="main__top-subscribed-author-name">
-                      마틸다 하나씨
-                    </h3>
-                    <p class="main__top-subscribed-author-role">에세이스트</p>
-                    <p class="main__top-subscribed-author-description">
-                      하노이에 깃든 시간을 따라 매일 새로운 세...
-                    </p>
-                  </div>
-                </div>
-              </article>
+              <!-- JavaScript로 동적 렌더링 -->
             </div>
           </section>
 
           <section class="main__new-authors">
             <!-- 새로운 작가의 탄생 섹션 시작 -->
             <img
-              src="/src/assets/images/home/newAuthorsTxt.png"
+              src="/assets/images/home/newAuthorsTxt.png"
               alt="새로운 작가의 탄생"
               class="main__new-authors-birth"
             />
             <!-- 새로운 작가의 탄생 부제목 -->
             <img
-              src="/src/assets/images/home/newAuthorsSubtxt.png"
+              src="/assets/images/home/newAuthorsSubtxt.png"
               alt="제 11회 브런치북 출판 프로젝트 수상작 보기"
               class="main__new-authors-subtitle"
+              style="cursor: pointer"
+              onclick="window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
+              onkeypress="if(event.key === 'Enter') window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
+              tabindex="0"
+              role="link"
             />
 
             <!-- 새로운 작가의 책 목록 시작 -->
@@ -705,7 +284,7 @@
               <li class="main__new-authors-book-item">
                 <!-- 첫 번째 책 이미지 -->
                 <img
-                  src="/src/assets/images/home/newAuthor1.png"
+                  src="/assets/images/home/newAuthor1.png"
                   alt="태어나는 말들"
                   class="main__new-authors-book-image"
                 />
@@ -719,7 +298,7 @@
               <li class="main__new-authors-book-item">
                 <!-- 두 번째 책 이미지 -->
                 <img
-                  src="/src/assets/images/home/newAuthor2.png"
+                  src="/assets/images/home/newAuthor2.png"
                   alt="엄마 없는 농담"
                   class="main__new-authors-book-image"
                 />
@@ -733,7 +312,7 @@
               <li class="main__new-authors-book-item">
                 <!-- 세 번째 책 이미지 -->
                 <img
-                  src="/src/assets/images/home/newAuthor3.png"
+                  src="/assets/images/home/newAuthor3.png"
                   alt="인생은 방탈출"
                   class="main__new-authors-book-image"
                 />
@@ -746,10 +325,13 @@
             <!-- 새로운 작가의 책 목록 끝 -->
 
             <!-- 브런치 작가 지원 프로젝트 링크 -->
-            <a href="#" class="main__brunch-author-support">
+            <a
+              href="https://brunch.co.kr/special/list"
+              class="main__brunch-author-support"
+            >
               브런치 작가 지원 프로젝트
               <img
-                src="/src/assets/icons/etc/whiteNext.svg"
+                src="/assets/icons/etc/whiteNext.svg"
                 alt="다음"
                 class="icon-next"
               />
@@ -765,27 +347,41 @@
             <nav class="social__nav" aria-label="소셜 미디어 링크">
               <ul class="social__list">
                 <li class="social__item">
-                  <a href="#" class="social__link" aria-label="카카오톡">
+                  <a
+                    href="https://pf.kakao.com/_YYcYV"
+                    class="social__link"
+                    aria-label="공식 카카오톡"
+                  >
                     <img
-                      src="/src/assets/icons/social/social_kakao.svg"
+                      src="/assets/icons/social/social_kakao.svg"
                       alt=""
                       class="social__icon social__icon--kakao"
                     />
                   </a>
                 </li>
                 <li class="social__item">
-                  <a href="#" class="social__link" aria-label="페이스북">
+                  <a
+                    href="https://www.facebook.com/brunch.co.kr/?locale=ko_KR"
+                    class="social__link"
+                    aria-label="공식 페이스북"
+                    target="_blank"
+                  >
                     <img
-                      src="/src/assets/icons/social/social_fb.svg"
+                      src="/assets/icons/social/social_fb.svg"
                       alt=""
                       class="social__icon social__icon--facebook"
                     />
                   </a>
                 </li>
                 <li class="social__item">
-                  <a href="#" class="social__link" aria-label="X (트위터)">
+                  <a
+                    href="#"
+                    class="social__link"
+                    aria-label="공식 x(구 트위터)"
+                    target="_blank"
+                  >
                     <img
-                      src="/src/assets/icons/social/social_x.svg"
+                      src="/assets/icons/social/social_x.svg"
                       alt=""
                       class="social__icon social__icon--x"
                     />
@@ -801,28 +397,54 @@
               <ul class="main__legal--list">
                 <div class="main__legal--row">
                   <li class="main__legal--item">
-                    <a href="#" class="main__legal--link">이용약관</a>
+                    <a
+                      href="https://www.kakao.com/policy/terms"
+                      class="main__legal--link"
+                      target="_blank"
+                      >이용약관</a
+                    >
                   </li>
                   <li class="main__legal--item">
-                    <a href="#" class="main__legal--link">이전 이용약관</a>
+                    <a
+                      href="https://brunch.co.kr/policy/terms"
+                      class="main__legal--link"
+                      target="_blank"
+                      >이전 이용약관</a
+                    >
                   </li>
                   <li class="main__legal--item">
-                    <a href="#" class="main__legal--link"
+                    <a
+                      href="https://billing-web.kakao.com/kbill/terms/service"
+                      class="main__legal--link"
+                      target="_blank"
                       >카카오 유료서비스 이용약관</a
                     >
                   </li>
                 </div>
                 <div class="main__legal--row">
                   <li class="main__legal--item">
-                    <a href="#" class="main__legal--link"
+                    <a
+                      href="https://www.kakao.com/policy/privacy?lang=ko"
+                      class="main__legal--link"
+                      target="_blank"
                       >카카오 개인정보 처리방침</a
                     >
                   </li>
                   <li class="main__legal--item">
-                    <a href="#" class="main__legal--link">청소년 보호정책</a>
+                    <a
+                      href="https://www.kakao.com/policy/safeguard?lang=ko"
+                      class="main__legal--link"
+                      target="_blank"
+                      >청소년 보호정책</a
+                    >
                   </li>
                   <li class="main__legal--item">
-                    <a href="#" class="main__legal--link">운영정책</a>
+                    <a
+                      href="https://brunch.co.kr/policy/oppolicy"
+                      class="main__legal--link"
+                      target="_blank"
+                      >운영정책</a
+                    >
                   </li>
                 </div>
               </ul>
@@ -832,7 +454,7 @@
           <!-- 브랜딩 섹션 -->
           <section class="main-footer__section branding">
             <img
-              src="/src/assets/logos/logo_white.svg"
+              src="/assets/logos/logo_white.svg"
               alt="브런치스토리 로고"
               class="branding__logo"
             />
@@ -843,18 +465,17 @@
       <!-- 공통 푸터 컴포넌트 부분 -->
       <footer id="navigation"></footer>
     </div>
-    <script>
-      fetch('/src/features/components/top-menu/top-menu.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('header').innerHTML = data;
-        });
+    <!-- 상단 메뉴 -->
+    <script
+      src="/src/features/components/top-menu/top-menu.js"
+      type="module"
+    ></script>
 
-      fetch('/src/features/components/navigation/navigation.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('navigation').innerHTML = data;
-        });
-    </script>
+    <!-- 하단 네비게이션 -->
+    <script
+      src="/src/features/components/navigation/navigation.js"
+      type="module"
+    ></script>
+    <script src="home.js" type="module"></script>
   </body>
 </html>
