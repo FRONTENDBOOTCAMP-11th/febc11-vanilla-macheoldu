@@ -92,10 +92,7 @@ export const initData = async (clientId, nextSeq) => {
         image: `/files/${clientId}/user-heartping.webp`,
         createdAt: getTime(-20, -60 * 22),
         updatedAt: getTime(-10, -60 * 11),
-<<<<<<< HEAD
-=======
         bookmark: 11,
->>>>>>> a3161fac17802baa66f33d0cc8be61ef062dc91f
       },
       {
         _id: await nextSeq('user'),
@@ -1411,7 +1408,6 @@ export const initData = async (clientId, nextSeq) => {
           },
         ],
       },
-      {},
     ],
     // 코드
     code: [],
