@@ -201,3 +201,68 @@ function renderRecentlyViewedPosts() {
 document.addEventListener('DOMContentLoaded', () => {
   renderRecentlyViewedPosts();
 });
+
+//내브런치
+// API를 호출하여 게시글 데이터를 가져오는 함수
+const getMyPosts = function () {
+  axios({
+    method: 'get',
+    url: `https://11.fesp.shop/posts/users/${userId}?type=info`,
+    headers: {
+      'client-id': 'vanilla03',
+    },
+  })
+    .then(response => {
+      const myPostsArray = response.data.item;
+      renderMyBrunchPosts(myPostsArray); // 데이터 배열을 렌더링 함수에 전달
+    })
+    .catch(error => {
+      if (error.response && error.response.status === 500) {
+        alert(error.response.data.message);
+      } else {
+        console.error('An error occurred:', error);
+      }
+    });
+};
+
+// 게시글을 화면에 렌더링하는 함수
+function renderMyBrunchPosts(posts) {
+  const brunchSection = document.querySelector('.my-brunch');
+  brunchSection.innerHTML = '';
+  // 기존 콘텐츠 초기화
+  // brunchSection.innerHTML = `
+  //   <div class="section-title">
+  //     <h2>내 브런치</h2>
+  //     <span class="arrow">
+  //       <a href="#">
+  //         <img src="/src/assets/icons/actions/view-more.svg" />
+  //       </a>
+  //     </span>
+  //   </div>
+  // `;
+
+  // posts 배열을 순회하며 게시글 요소 생성 및 데이터 삽입
+  for (let i = 0; i < posts.length; i++) {
+    const post = posts[i];
+
+    // 게시글 요소를 생성하고 데이터 삽입
+    const postElement = document.createElement('div');
+    postElement.classList.add('brunch-info');
+
+    postElement.innerHTML = `
+    <a href="/src/features/detail/detail.html?postId=${post._id}">
+    <h3>${post.title}</h3>
+      <p>${post.extra.subTitle}</p>
+      <p>${post.createdAt}</p>
+    </a>  
+    `;
+
+    // my-brunch 섹션에 생성한 요소 추가
+    brunchSection.appendChild(postElement);
+  }
+}
+
+// 페이지가 로드되면 게시글 데이터를 불러오고 렌더링
+document.addEventListener('DOMContentLoaded', () => {
+  getMyPosts(); // 페이지 로드시 getMyPosts 호출
+});
