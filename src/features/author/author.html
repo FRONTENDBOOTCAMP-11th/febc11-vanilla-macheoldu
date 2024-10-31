@@ -33,7 +33,7 @@
         <div class="header__profile-image-wrapper">
           <img
             class="header__profile-image"
-            src="../../assets/images/author-profile.png"
+            src="/assets/images/author-profile.png"
             alt="작가 프로필 사진"
           />
         </div>
@@ -50,18 +50,18 @@
             <!-- 구독자 -->
             <div class="header__subscriber">
               <p class="header__subscriber-title">구독자</p>
-              <span class="header__subscriber-count">30</span>
+              <span class="header__subscriber-count"> 30 </span>
             </div>
             <!-- 관심작가 -->
             <div class="header__following">
               <p class="header__following-title">관심작가</p>
-              <span class="header__following-count">16</span>
+              <span class="header__following-count"> 16 </span>
             </div>
             <!-- 구독중 버튼 -->
             <div class="header__subscription-button-wrapper">
               <img
                 class="header__subscription-button-image header__subscription-button-image--active"
-                src="../../assets/icons/like_sub/sub_green.svg"
+                src="/assets/icons/like_sub/sub.svg"
                 alt="구독 중"
               />
             </div>
@@ -78,7 +78,7 @@
             <h3 class="article__title">[취업특강] 노션 포트폴리오 만들기</h3>
             <!-- 기사 일부 내용 -->
             <p class="article__excerpt">
-              <span class="article__collaborators"
+              <span class="article__subtitle"
                 >with 노슈니, 슈크림 마을, 마포청년나루
               </span>
               | 취업 준비를 위해 반드시 필요한 것 세 가지. 자기소개서, 이력서,
@@ -98,7 +98,7 @@
             <h3 class="article__title">[취업특강] 노션 포트폴리오 만들기</h3>
             <!-- 기사 일부 내용 -->
             <p class="article__excerpt">
-              <span class="article__collaborators"
+              <span class="article__subtitle"
                 >with 노슈니, 슈크림 마을, 마포청년나루
               </span>
               | 취업 준비를 위해 반드시 필요한 것 세 가지. 자기소개서, 이력서,
@@ -118,7 +118,7 @@
             <h3 class="article__title">[취업특강] 노션 포트폴리오 만들기</h3>
             <!-- 기사 일부 내용 -->
             <p class="article__excerpt">
-              <span class="article__collaborators"
+              <span class="article__subtitle"
                 >with 노슈니, 슈크림 마을, 마포청년나루
               </span>
               | 취업 준비를 위해 반드시 필요한 것 세 가지. 자기소개서, 이력서,
@@ -138,18 +138,16 @@
       <div id="navigation"></div>
     </div>
 
-    <script>
-      fetch('/src/features/components/top-menu/top-menu.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('header').innerHTML = data;
-        });
-
-      fetch('/src/features/components/navigation/navigation.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('navigation').innerHTML = data;
-        });
-    </script>
+    <!-- 상단 메뉴 -->
+    <script
+      type="module"
+      src="/src/features/components/top-menu/top-menu.js"
+    ></script>
+    <!-- 하단 네비게이션 -->
+    <script
+      type="module"
+      src="/src/features/components/navigation/navigation.js"
+    ></script>
+    <script type="module" src="author.js"></script>
   </body>
 </html>
