@@ -27,9 +27,9 @@
         <!-- 저장 버튼 선택 시 게시글 post 로 서버 요청 전송 -->
         <button id="postSave" type="submit" aria-label="글쓰기 저장 버튼">
           <!-- 글쓰기 메인 폼의 모든 입력란이 차지 않은 경우, 글쓰기 저장 비활성화 상태 -->
-          <img src="/src/assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="hidden" aria-disabled="true">
+          <img src="/src/assets/icons/top/top_check.svg" alt="글쓰기 저장 비활성화" class="disabled" aria-disabled="true">
           <!-- 글쓰기 메인 폼의 모든 입력이 완료되었을 때 활성화 -->
-          <img src="/src/assets/icons/top/top_check_green.svg" alt="글쓰기 저장">
+          <img src="/src/assets/icons/top/top_check_green.svg" class="active hidden" alt="글쓰기 저장">
         </button>
       </div>
     </header>
@@ -57,6 +57,7 @@
     </main>
     <footer class="post-utils">
       <!-- 파일 업로드 버튼, type="file" 로 브라우저 파일 탐색창 출력 -->
+      <ul class="file-list hidden"></ul>
       <section class="post-toolbar">
         <div class="post-toolbar__upload">
           <label aria-label="파일 업로드" for="uploadFile">
