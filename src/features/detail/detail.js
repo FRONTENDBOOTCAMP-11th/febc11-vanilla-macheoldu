@@ -5,7 +5,6 @@ const api = axios.create({
   baseURL: 'https://11.fesp.shop',
   headers: {
     'client-id': 'vanilla03',
-    // Authorization: `Bearer ${token}`,
   },
 });
 
@@ -199,11 +198,11 @@ const printPost = async function () {
 };
 
 // 🚨 구독 기능 구현 - 강제로 로그인 상태 만들기
-sessionStorage.setItem('userEmail', 'sparkle@gmail.com');
-sessionStorage.setItem(
-  'userAccessToken',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAzMDU4NTgsImV4cCI6MTczMDM5MjI1OCwiaXNzIjoiRkVTUCJ9.vsE4LrTnEziC81aiPrPfzMZ_EPBN3dmv1AsBxrZ_yjQ',
-);
+// sessionStorage.setItem('userEmail', 'sparkle@gmail.com');
+// sessionStorage.setItem(
+//   'userAccessToken',
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjcsInR5cGUiOiJ1c2VyIiwibmFtZSI6IuyKpO2MjO2BtO2VkSIsImVtYWlsIjoic3BhcmtsZUBnbWFpbC5jb20iLCJpbWFnZSI6Ii9maWxlcy92YW5pbGxhMDMvdXNlci1zcGFya2xlcGluZy53ZWJwIiwibG9naW5UeXBlIjoia2FrYW8iLCJpYXQiOjE3MzAzMDU4NTgsImV4cCI6MTczMDM5MjI1OCwiaXNzIjoiRkVTUCJ9.vsE4LrTnEziC81aiPrPfzMZ_EPBN3dmv1AsBxrZ_yjQ',
+// );
 
 const token = sessionStorage.getItem('userAccessToken');
 
