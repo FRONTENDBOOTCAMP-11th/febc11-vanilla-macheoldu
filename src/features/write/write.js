@@ -90,7 +90,6 @@ window.addEventListener('load', function () {
 
     // 업로드된 파일 객체를 배열로 변경
     const selectedFiles = Array.from($uploadFile.files);
-    console.log(selectedFiles)
     const imageFormData = new FormData();
 
     // 업로드된 파일을 FormData 에 추가
@@ -118,7 +117,6 @@ window.addEventListener('load', function () {
         })
           // 요청 성공 시 실행 코드
           .then(response => {
-            console.log(response.data);
             const imgPath = [];
             // 파일 데이터에서 이미지 url만 배열에 저장
             for (let i = 0; i < response.data.item.length; i++) {
