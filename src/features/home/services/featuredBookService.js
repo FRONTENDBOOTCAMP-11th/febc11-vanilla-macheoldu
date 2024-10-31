@@ -58,7 +58,7 @@ export const featuredBookService = {
           </div>
   
           <div class="main__featured-book-image-container">
-            <a href="/src/features/detail/detail.html?postId=${bookData.postId}" target="_blank" class="main__logo-link">
+            <a href="/src/features/detail/detail.html?postId=${bookData.postId}" class="main__logo-link">
               <img
                 src="${utils.getAssetUrl('image', 'featuredBook.png')}"
                 alt="${bookData.title} 책 표지 이미지"

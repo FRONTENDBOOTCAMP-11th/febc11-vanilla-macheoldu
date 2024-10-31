@@ -118,7 +118,7 @@ const renderTopAuthors = authors => {
       // 작가 정보를 담은 article 요소 생성
       return `
         <article class="main__top-subscribed-author">
-          <a href="/src/features/author/author.html?userId=${author._id}" target="_blank">
+          <a href="/src/features/author/author.html?userId=${author._id}">
             <div class="author-content">
               <img
                 src="${getImgUrl(author.image)}"

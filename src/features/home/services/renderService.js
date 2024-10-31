@@ -60,7 +60,7 @@ export const renderService = {
               <h3 class="main__featured-author__name">${author.name}</h3>
               ${author.extra?.job ? `<p class="main__featured-author__role">${author.extra.job}</p>` : ''}
             </div>
-            <a href="/src/features/author/author.html?userId=${author._id}" target="_blank">
+            <a href="/src/features/author/author.html?userId=${author._id}">
               <img
                 src="${utils.getImgUrl(author.image)}"
                 alt="${author.name}"
@@ -85,7 +85,7 @@ export const renderService = {
         (post, index) => `
         <li class="main__featured-author__books-item">
           <div class="main__featured-author__books-image-wrapper">
-            <a href="/src/features/detail/detail.html?postId=${post._id}" target="_blank">
+            <a href="/src/features/detail/detail.html?postId=${post._id}">
               <img
                 src="${utils.getPlaceholderImage('authorBook', index + 1)}"
                 alt="${post.title}"
@@ -154,7 +154,7 @@ export const renderService = {
 
         return `
           <li class="main__todays-pick__item">
-            <a href="/src/features/detail/detail.html?postId=${post._id}" target="_blank">
+            <a href="/src/features/detail/detail.html?postId=${post._id}">
               <div class="main__todays-pick__info">
                 <div class="main__todays-pick__text">
                   <h3 class="main__todays-pick__item-title">

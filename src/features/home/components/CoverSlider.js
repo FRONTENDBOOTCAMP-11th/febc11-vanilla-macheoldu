@@ -133,7 +133,7 @@ class CoverSlider {
               <h1 class="cover__title">${slide.title}</h1>
               <p class="cover__author"><em>by</em> ${slide.user.name}</p>
               <figure class="cover__image-wrapper">
-                <a href="/src/features/detail/detail.html?postId=${slide._id}" target="_blank">
+                <a href="/src/features/detail/detail.html?postId=${slide._id}">
                   <img 
                     src="${slide.image?.[0] ? `${CONFIG.API.BASE_URL}${slide.image[0]}` : '/assets/images/home/hourglass.png'}" 
                     alt="${slide.title}" 
