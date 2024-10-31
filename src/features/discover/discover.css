@@ -114,6 +114,7 @@ input:focus::placeholder {
 }
 
 .discover__reset {
+  display: none;
   display: flex;
   padding: 0;
   width: 16px;

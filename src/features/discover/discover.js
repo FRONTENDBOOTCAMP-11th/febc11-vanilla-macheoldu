@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
   let currentTab = 'post';
   let posts = [];
 
+  $resetButton.style.display = 'none';
+
   /*
    * 모든 콘텐츠 영역을 숨기는 함수
    * 새로운 검색이나 탭 전환 시 호출되어 화면을 초기화
@@ -146,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $postContent.innerHTML = '';
     $authorContent.innerHTML = '';
     $searchCount.textContent = '';
+    $resetButton.style.display = 'none';
 
     $navTab.forEach(function (tab) {
       tab.classList.remove('active');
@@ -166,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
   async function performSearch(keyword) {
     currentTab = 'post';
     hideAllContent();
+    $resetButton.style.display = 'block';
 
     $navTab.forEach(function (tab) {
       tab.classList.remove('active');
