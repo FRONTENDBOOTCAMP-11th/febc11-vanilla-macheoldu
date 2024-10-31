@@ -33,10 +33,11 @@ img {
   min-height: 100vh;
   max-width: 360px;
   padding-bottom: 100px;
+  background-color: white;
 }
 
 body {
-  background-color: #ffffff;
+  background-color: grey;
   color: #111111;
   margin: 0;
   padding: 0;
@@ -44,7 +45,7 @@ body {
 
 /* 전체 레이아웃 */
 main {
-  margin-left: 25px;
+  padding-left: 25px;
 }
 
 /* 헤더 (공간만) */
@@ -67,6 +68,7 @@ h2 {
 
 main {
   background-color: #ffffff;
+  padding-left: 25px;
 }
 /* 재활용 h2 각 타이틀 */
 .section-title {
@@ -78,9 +80,11 @@ main {
   margin: 0;
 }
 
+/* 각 섹션의 최소한의 공간을줘 간격 유지 */
 .recently-viewed,
 .interested-posts {
   overflow: hidden;
+  min-height: 309px;
 }
 
 .section-title .arrow img {
@@ -217,7 +221,9 @@ main {
 .my-brunch {
   background-color: #ffffff;
   padding: 0px;
-  border-radius: 8px;
+  min-height: 225px;
+  padding-bottom: 35px;
+  /* height: auto; */
 }
 
 .my-brunch h2 {

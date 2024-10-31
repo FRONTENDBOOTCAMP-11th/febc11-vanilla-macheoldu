@@ -6,24 +6,46 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'index.html'),
-        // home 
+        // home
         home: resolve(__dirname, 'src/features/home/home.html'),
         homeCSS: resolve(__dirname, 'src/features/home/home.css'),
         homeJS: resolve(__dirname, 'src/features/home/home.js'),
         homeConfigJS: resolve(__dirname, 'src/features/home/config.js'),
         homeUtilsJS: resolve(__dirname, 'src/features/home/utils.js'),
         // home components
-        homeComponentsoverSliderJS: resolve(__dirname, 'src/features/home/components/CoverSlider.js'),
-        homeComponentsTopAuthorsJS: resolve(__dirname, 'src/features/home/components/TopAuthors.js'),
-        homeComponentsWeeklySeriesManagerJS: resolve(__dirname, 'src/features/home/components/WeeklySeriesManager.js'),
+        homeComponentsoverSliderJS: resolve(
+          __dirname,
+          'src/features/home/components/CoverSlider.js',
+        ),
+        homeComponentsTopAuthorsJS: resolve(
+          __dirname,
+          'src/features/home/components/TopAuthors.js',
+        ),
+        homeComponentsWeeklySeriesManagerJS: resolve(
+          __dirname,
+          'src/features/home/components/WeeklySeriesManager.js',
+        ),
         // home services
-        homeServicesAuthorDataHandlerJS: resolve(__dirname, 'src/features/home/services/authorDataHandler.js'),
-        homeServicesAuthorServiceJS: resolve(__dirname, 'src/features/home/services/authorService.js'),
-        homeServicesFeaturedBookServiceJS: resolve(__dirname, 'src/features/home/services/featuredBookService.js'),
-        homeServicesRenderServiceJS: resolve(__dirname, 'src/features/home/services/renderService.js'),
-        homeServicesStorageServiceJS: resolve(__dirname, 'src/features/home/services/storageService.js'),
-
-
+        homeServicesAuthorDataHandlerJS: resolve(
+          __dirname,
+          'src/features/home/services/authorDataHandler.js',
+        ),
+        homeServicesAuthorServiceJS: resolve(
+          __dirname,
+          'src/features/home/services/authorService.js',
+        ),
+        homeServicesFeaturedBookServiceJS: resolve(
+          __dirname,
+          'src/features/home/services/featuredBookService.js',
+        ),
+        homeServicesRenderServiceJS: resolve(
+          __dirname,
+          'src/features/home/services/renderService.js',
+        ),
+        homeServicesStorageServiceJS: resolve(
+          __dirname,
+          'src/features/home/services/storageService.js',
+        ),
 
         // discover
         discover: resolve(__dirname, 'src/features/discover/discover.html'),
@@ -61,13 +83,31 @@ export default defineConfig({
 
         // components
         // components > top-menu
-        topMenu: resolve(__dirname, 'src/features/components/top-menu/top-menu.html'),
-        topMenuCSS: resolve(__dirname, 'src/features/components/top-menu/top-menu.css'),
-        topMenuJS: resolve(__dirname, 'src/features/components/top-menu/top-menu.js'),
+        topMenu: resolve(
+          __dirname,
+          'src/features/components/top-menu/top-menu.html',
+        ),
+        topMenuCSS: resolve(
+          __dirname,
+          'src/features/components/top-menu/top-menu.css',
+        ),
+        topMenuJS: resolve(
+          __dirname,
+          'src/features/components/top-menu/top-menu.js',
+        ),
         // components > navigation
-        navigation: resolve(__dirname, 'src/features/components/navigation/navigation.html'),
-        navigationCSS: resolve(__dirname, 'src/features/components/navigation/navigation.css'),
-        navigationJS: resolve(__dirname, 'src/features/components/navigation/navigation.js'),
+        navigation: resolve(
+          __dirname,
+          'src/features/components/navigation/navigation.html',
+        ),
+        navigationCSS: resolve(
+          __dirname,
+          'src/features/components/navigation/navigation.css',
+        ),
+        navigationJS: resolve(
+          __dirname,
+          'src/features/components/navigation/navigation.js',
+        ),
       },
     },
   },
