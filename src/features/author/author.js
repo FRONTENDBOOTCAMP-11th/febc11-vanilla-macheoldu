@@ -71,8 +71,6 @@ const getUserInfo = async function () {
     $userOccupation.textContent = userData.extra?.job || '작가'; // 없으면 기본 값 작가로 설정
     $subscriberCount.textContent = userData.bookmarkedBy.users;
     $followingCount.textContent = userData.bookmark.users;
-
-    // TODO: 이미지 비동기 처리로 변경 예정
     $profileImage.src = api.defaults.baseURL + userData.image;
   } catch (error) {
     console.error('유저 정보를 가져오는 중 에러 발생:', error);
@@ -264,7 +262,6 @@ const toggleSubscribe = async function () {
 
     // 서버와 동기화를 위해 작가 정보 갱신
     await getUserInfo();
-    // 에러 발생 시 롤백을 위해 서버 데이터 동기화
   } catch (error) {
     console.error('구독 상태 전환 실패:', error);
   }
@@ -290,7 +287,7 @@ const setupSubscribeButtonImage = async function () {
 // 이벤트 리스너 - 페이지 로드 시 실행될 함수들
 document.addEventListener('DOMContentLoaded', async function () {
   try {
-    // 뒤로가기 감지 시 강제 새로고침
+    // 뒤로가기 감지 시 새로고침
     window.onpageshow = function (event) {
       if (
         event.persisted ||
