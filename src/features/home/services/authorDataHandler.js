@@ -65,8 +65,15 @@ export const handleStoredAuthorData = async (
 
   // 3. 추천 도서가 없는 경우 새로 선택
   if (!featuredBook) {
-    featuredBook = featuredBookService.getRandomBook(response.data.item);
-    if (featuredBook && $featuredBookSection) {
+    const selectedBook = featuredBookService.getRandomBook(response.data.item);
+    if (selectedBook && $featuredBookSection) {
+      // 추천 도서 정보를 완전한 형태로 구성
+      featuredBook = {
+        title: selectedBook.title,
+        author: selectedBook.author,
+        quote: selectedBook.quote,
+        postId: selectedBook.postId, // 게시글 ID 포함
+      };
       storageService.storeFeaturedBook(featuredBook);
       $featuredBookSection.innerHTML =
         featuredBookService.renderFeaturedBook(featuredBook);
@@ -101,8 +108,15 @@ export const handleNewData = async ($featuredBookSection, featuredBook) => {
 
   // 2. 추천 도서 처리
   if (!featuredBook) {
-    featuredBook = featuredBookService.getRandomBook(posts);
-    if (featuredBook && $featuredBookSection) {
+    const selectedBook = featuredBookService.getRandomBook(posts);
+    if (selectedBook && $featuredBookSection) {
+      // 추천 도서 정보를 완전한 형태로 구성
+      featuredBook = {
+        title: selectedBook.title,
+        author: selectedBook.author,
+        quote: selectedBook.quote,
+        postId: selectedBook.postId, // 게시글 ID 포함
+      };
       storageService.storeFeaturedBook(featuredBook);
       $featuredBookSection.innerHTML =
         featuredBookService.renderFeaturedBook(featuredBook);

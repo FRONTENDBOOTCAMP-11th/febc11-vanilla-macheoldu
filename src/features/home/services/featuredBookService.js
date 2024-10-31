@@ -1,8 +1,15 @@
-import CONFIG from '../config.js';
 import { utils } from '../utils.js';
 
-// 추천 도서 서비스 객체
+/**
+ * 추천 도서 서비스 객체
+ * 도서 선택, 인용구 추출, 화면 렌더링 등의 기능을 제공
+ */
 export const featuredBookService = {
+  /**
+   * 게시글 목록에서 랜덤으로 하나의 도서를 선택
+   * @param {Array} posts - 게시글 목록
+   * @returns {Object|null} 선택된 도서 정보
+   */
   getRandomBook: posts => {
     if (!posts || posts.length === 0) return null;
     const randomIndex = Math.floor(Math.random() * posts.length);
@@ -13,9 +20,15 @@ export const featuredBookService = {
       title: post.title,
       author: post.user.name,
       quote: quote,
+      postId: post._id, // postId를 추가
     };
   },
 
+  /**
+   * 게시글 내용에서 랜덤으로 인용구를 추출
+   * @param {string} content - 게시글 내용
+   * @returns {string|null} 추출된 인용구
+   */
   extractRandomQuote: content => {
     const plainText = content.replace(/<[^>]*>/g, '');
     const sentences = plainText
@@ -29,6 +42,11 @@ export const featuredBookService = {
     return sentences[randomIndex];
   },
 
+  /**
+   * 추천 도서 정보를 HTML로 렌더링
+   * @param {Object} bookData - 도서 정보
+   * @returns {string} 렌더링된 HTML
+   */
   renderFeaturedBook: bookData => {
     if (!bookData) return '';
 
@@ -40,12 +58,11 @@ export const featuredBookService = {
           </div>
   
           <div class="main__featured-book-image-container">
-            <a href="/src/features/detail/detail.html?postId=${bookData._id}" target="_blank">
+            <a href="/src/features/detail/detail.html?postId=${bookData.postId}" target="_blank" class="main__logo-link">
               <img
-                src="${bookData.image?.[0] ? `${CONFIG.API.BASE_URL}${bookData.image[0]}` : utils.getAssetUrl('image', 'featuredBook.png')}"
+                src="${utils.getAssetUrl('image', 'featuredBook.png')}"
                 alt="${bookData.title} 책 표지 이미지"
                 class="main__featured-book-image"
-                onerror="this.src='${utils.getAssetUrl('image', 'featuredBook.png')}'"
               />
             </a>
           </div>
@@ -54,13 +71,15 @@ export const featuredBookService = {
         <div class="main__featured-book-quote">
           <div class="main__featured-book-quote-label-container">
             <p class="main__featured-book-quote-label">책 속 한 구절 ——</p>
-            <img
-              src="${utils.getAssetUrl('logo', 'logo_symbol.svg')}"
-              alt="브런치스토리 로고 심볼"
-              class="main__logo-symbol"
-              width="18px"
-              height="18px"
-            />
+            
+              <img
+                src="${utils.getAssetUrl('logo', 'logo_symbol.svg')}"
+                alt="브런치스토리 로고 심볼"
+                class="main__logo-symbol"
+                width="18px"
+                height="18px"
+              />
+            
           </div>
           <div class="main__featured-book-quote-text">
             ${bookData.quote || '여행의 끝에서 일상으로 돌아오는 것은 몸의 기억을 되살리는 일이다.'}

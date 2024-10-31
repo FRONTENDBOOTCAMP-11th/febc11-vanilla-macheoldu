@@ -71,21 +71,63 @@ export const storageService = {
     }
   },
 
-  // 저장된 추천 도서 유효성 검사
+  /**
+   * 저장된 추천 도서 유효성 검사
+   * 시간 체크 및 필수 데이터 존재 여부 확인
+   */
   isStoredFeaturedBookValid: () => {
     const timestamp = localStorage.getItem(
       CONFIG.STORAGE_KEYS.FEATURED_BOOK_TIMESTAMP,
     );
     if (!timestamp) return false;
+
+    // 시간 유효성 검사
     const now = new Date().getTime();
-    return now - parseInt(timestamp) < CONFIG.ONE_DAY_MS;
+    if (now - parseInt(timestamp) >= CONFIG.ONE_DAY_MS) return false;
+
+    // 저장된 데이터 유효성 검사
+    try {
+      const bookData = JSON.parse(
+        localStorage.getItem(CONFIG.STORAGE_KEYS.FEATURED_BOOK),
+      );
+      if (!bookData) return false;
+
+      // 필수 필드 존재 여부 확인
+      const requiredFields = ['title', 'author', 'postId'];
+      return requiredFields.every(field => bookData[field]);
+    } catch (error) {
+      console.error('추천 도서 데이터 검증 오류:', error);
+      return false;
+    }
   },
 
-  // 추천 도서 저장
+  /**
+   * 추천 도서 저장
+   * 필수 필드 검증 후 저장
+   */
   storeFeaturedBook: bookData => {
+    if (!bookData) return;
+
+    // 필수 필드 검증
+    const requiredFields = ['title', 'author', 'postId'];
+    const isValid = requiredFields.every(field => bookData[field]);
+
+    if (!isValid) {
+      console.error('필수 필드가 누락된 도서 데이터:', bookData);
+      return;
+    }
+
+    // 검증된 데이터만 저장
+    const validatedData = {
+      title: bookData.title,
+      author: bookData.author,
+      quote: bookData.quote || '',
+      postId: bookData.postId,
+    };
+
     localStorage.setItem(
       CONFIG.STORAGE_KEYS.FEATURED_BOOK,
-      JSON.stringify(bookData),
+      JSON.stringify(validatedData),
     );
     localStorage.setItem(
       CONFIG.STORAGE_KEYS.FEATURED_BOOK_TIMESTAMP,
@@ -93,12 +135,23 @@ export const storageService = {
     );
   },
 
-  // 저장된 추천 도서 조회
+  /**
+   * 저장된 추천 도서 조회
+   * 필수 필드가 있는 완전한 데이터만 반환
+   */
   getStoredFeaturedBook: () => {
     try {
-      return JSON.parse(
+      const bookData = JSON.parse(
         localStorage.getItem(CONFIG.STORAGE_KEYS.FEATURED_BOOK),
       );
+
+      if (!bookData) return null;
+
+      // 필수 필드 검증
+      const requiredFields = ['title', 'author', 'postId'];
+      const isValid = requiredFields.every(field => bookData[field]);
+
+      return isValid ? bookData : null;
     } catch (error) {
       console.error('저장된 추천 도서 데이터 파싱 오류:', error);
       return null;

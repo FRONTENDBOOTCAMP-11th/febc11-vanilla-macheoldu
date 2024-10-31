@@ -24,20 +24,6 @@ const api = axios.create({
 });
 
 /**
- * API 통신에 필요한 설정 정보
- * - URL: server에서 슬라이더 데이터를 가져올 주소
- * - HEADERS : sever와 통신할 때 필요한 인증 정보와 data 형식
- */
-const API_CONFIG = {
-  URL: 'https://11.fesp.shop/posts?type=info',
-  HEADERS: {
-    'client-id': 'vanilla03',
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-};
-
-/**
  * 커버 슬라이더 클래스
  *
  * 클래스란?
