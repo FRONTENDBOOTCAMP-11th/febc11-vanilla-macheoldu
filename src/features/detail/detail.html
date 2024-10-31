@@ -30,14 +30,14 @@
         <div class="header__cover-image-wrapper">
           <img
             class="header__cover-image"
-            src="../../assets/images/heartbg.png"
+            src="/assets/images/heartbg.png"
             alt=""
           />
         </div>
         <!-- 이미지 위에 떠 있는 글들 -->
         <div class="header__info">
           <h3 class="header__title">우여곡절 끝에 도착한 첫 번째 목적지</h3>
-          <p class="header__source">Val carlos</p>
+          <p class="header__subtitle">Val carlos</p>
           <!-- 글의 저자 정보 -->
           <div class="header__meta">
             <!--작가 이름 -->
@@ -56,7 +56,7 @@
       <!-- main -->
       <main class="main">
         <!-- 블로그 글 -->
-        <article class="article">
+        <article class="article" style="white-space: pre-line">
           <!-- 글의 첫 단락 -->
           <header class="article__header">
             <p class="article__excerpt">
@@ -70,7 +70,7 @@
           <figure class="article__main">
             <img
               class="article__main-image"
-              src="../../assets/images/cars.png"
+              src="/assets/images/cars.png"
               alt="프랑스와 스페인 사이의 국경선 역할을 하는 피레네 산맥 이미지"
             />
             <figcaption class="article__main-description">
@@ -103,7 +103,7 @@
                 <div class="comments__profile-image-wrapper">
                   <img
                     class="comments__profile-image"
-                    src="../../assets/images/user1.png"
+                    src="/assets/images/user1.png"
                     alt="이상옥의 프로필 이미지"
                   />
                 </div>
@@ -121,7 +121,7 @@
                 >
                   <img
                     class="comments__option-icon"
-                    src="../../assets/icons/like_sub/addmore.svg"
+                    src="/assets/icons/like_sub/addmore.svg"
                     alt="옵션 버튼 아이콘"
                   />
                 </button>
@@ -148,7 +148,7 @@
                 <div class="comments__profile-image-wrapper">
                   <img
                     class="comments__profile-image"
-                    src="../../assets/images/user2.png"
+                    src="/assets/images/user2.png"
                     alt="jungsin의 프로필 이미지"
                   />
                 </div>
@@ -164,7 +164,7 @@
                 >
                   <img
                     class="comments__option-icon"
-                    src="../../assets/icons/like_sub/addmore.svg"
+                    src="/assets/icons/like_sub/addmore.svg"
                     alt="옵션 버튼 아이콘"
                   />
                 </button>
@@ -180,7 +180,7 @@
                 <div class="comments__profile-image-wrapper">
                   <img
                     class="comments__profile-image"
-                    src="../../assets/images/user3.png"
+                    src="/assets/images/user3.png"
                     alt="Sunday Writer의 프로필 이미지"
                   />
                 </div>
@@ -196,7 +196,7 @@
                 >
                   <img
                     class="comments__option-icon"
-                    src="../../assets/icons/like_sub/addmore.svg"
+                    src="/assets/icons/like_sub/addmore.svg"
                     alt="옵션 버튼 아이콘"
                   />
                 </button>
@@ -214,7 +214,7 @@
           <div class="comments__input-image-wrapper">
             <img
               class="comments__input-image"
-              src="../../assets/images/input.png"
+              src="/assets/images/input.png"
               alt="댓글 입력"
             />
           </div>
@@ -232,7 +232,7 @@
             <div class="new-author__image-wrapper">
               <img
                 class="new-author__image"
-                src="../../assets/images/new-author.png"
+                src="/assets/images/new-author.png"
                 alt="Sunny의 프로필 사진"
               />
             </div>
@@ -257,7 +257,7 @@
             >
               <img
                 class="new-author__subscribe-icon"
-                src="../../assets/icons/like_sub/sub.svg"
+                src="/assets/icons/like_sub/sub.svg"
                 alt="구독 버튼 아이콘"
               />
             </button>
@@ -269,11 +269,11 @@
       <footer class="footer">
         <ul class="footer__interactions">
           <!-- 좋아요 버튼 -->
-          <li class="footer__interaction">
+          <li class="footer__interaction" id="footer__interaction">
             <button aria-label="좋아요">
               <img
                 class="footer__like-icon"
-                src="../../assets/icons/like_sub/like_black.svg"
+                src="/assets/icons/like_sub/like_black.svg"
                 alt="좋아요"
               />
               <span class="footer__like-count">81</span>
@@ -284,7 +284,7 @@
             <button aria-label="링크 복사">
               <img
                 class="footer__link-icon"
-                src="../../assets/icons/like_sub/link.svg"
+                src="/assets/icons/like_sub/link.svg"
                 alt="이동하기"
               />
             </button>
@@ -294,7 +294,7 @@
             <button aria-label="댓글 보기">
               <img
                 class="footer__comment-icon"
-                src="../../assets/icons/like_sub/comment.svg"
+                src="/assets/icons/like_sub/comment.svg"
                 alt="댓글"
               />
               <span class="footer__comment-count">3</span>
@@ -306,18 +306,11 @@
       <div id="navigation"></div>
     </div>
 
-    <script>
-      fetch('/src/features/components/top-menu/top-menu.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('header').innerHTML = data;
-        });
-
-      fetch('/src/features/components/navigation/navigation.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('navigation').innerHTML = data;
-        });
+    <!-- 상단 메뉴 -->
+    <script type="module" src="/src/features/components/top-menu/top-menu.js"></script>
+    <!-- 하단 네비게이션 -->
+    <script type="module" src="/src/features/components/navigation/navigation.js"></script>
     </script>
+    <script type="module" src="detail.js"></script>
   </body>
 </html>

@@ -3,20 +3,20 @@ body {
   margin: 0;
   padding: 0;
   font-family:
-    "Pretendard Variable",
+    'Pretendard Variable',
     Pretendard,
     -apple-system,
     BlinkMacSystemFont,
     system-ui,
     Roboto,
-    "Helvetica Neue",
-    "Segoe UI",
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    "Malgun Gothic",
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
     sans-serif;
 }
 
@@ -39,6 +39,10 @@ ul {
 }
 
 /* Layouts */
+body {
+  background-color: grey;
+}
+
 .wrapper {
   max-width: 360px;
   min-height: 100vh;
@@ -49,6 +53,7 @@ ul {
   background-color: #f8f8f8;
   color: var(--color-placeholder);
   padding-bottom: 49px;
+  position: relative;
 }
 
 .status-bar {
@@ -109,6 +114,7 @@ input:focus::placeholder {
 }
 
 .discover__reset {
+  display: none;
   display: flex;
   padding: 0;
   width: 16px;
@@ -127,7 +133,11 @@ input:focus::placeholder {
 .discover__nav-wrapper {
   display: flex;
   justify-content: center;
-  padding: 0;
+  border-bottom: none; /* 기본 회색 선 제거 */
+  position: sticky; /* 스크롤할 때 고정 */
+  top: 60px; /* 검색창 높이만큼 아래에 고정 */
+  z-index: 10; /* 다른 요소 위에 표시 */
+  background-color: #fff; /* 배경색 지정하여 콘텐츠와 구분 */
 }
 
 .discover__nav-tab {
@@ -140,25 +150,23 @@ input:focus::placeholder {
   font-weight: 300;
   color: var(--color-inactive);
   position: relative;
+  outline: none; /* 버튼 스타일을 깔끔하게 */
+  border-bottom: 1px solid #ddd; /* 기본 회색 선 */
 }
 
-.discover__nav-tab--active {
+/* 활성화된 탭에 하단 선 추가 */
+.discover__nav-tab.active {
   color: var(--color-point);
-  /* ❓상의 후 bold 처리 여부 적용 예정 */
-  /* font-weight: bold; */
+  border-bottom: 1px solid #00c6be; /* 활성화된 탭에만 하단 선 추가 */
 }
 
-.discover__nav-tab--active::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-point);
+/* 메인 */
+.discover__main {
+  /* 상단 요소들의 높이만 제외 */
+  height: calc(100vh - 94px); /* 헤더(52px) + 탭(42px) = 94px */
+  overflow: hidden;
 }
 
-/* 검색 결과 헤더 */
 .discover__main .discover__search-header + .post__lists {
   margin-top: 0;
 }
@@ -175,13 +183,6 @@ input:focus::placeholder {
   box-sizing: border-box;
 }
 
-.disdover__search-header.author {
-  padding: 0;
-  margin: 12px auto;
-  font-size: 12px;
-  font-weight: 300;
-}
-
 .discover__count-results {
   margin: 12px 0;
   font-size: 0.75rem;
@@ -191,34 +192,6 @@ input:focus::placeholder {
 .discover__search-filters {
   margin: 0;
   display: flex;
-}
-
-.circle__active {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--color-point);
-}
-
-.discover__filter-btn {
-  background: none;
-  border: none;
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-weight: 300;
-  gap: 5px; /* 원과 텍스트 사이 5px의 간격 */
-  font-size: 13px;
-}
-
-.discover__filter-btn.recent {
-  color: var(--color-content);
-}
-
-/* discover - home을 보기 위한 임시 코드 */
-.discover__home {
-  margin-left: 35%;
-  height: 300px;
 }
 
 /* 📖 discover - post */
@@ -253,11 +226,6 @@ input:focus::placeholder {
   margin-right: 12px;
 }
 
-.discover__keyword {
-  color: #00c6be;
-  font-weight: 400;
-}
-
 .content__text-main {
   font-size: 12px;
   color: var(--color-content);
@@ -266,7 +234,7 @@ input:focus::placeholder {
   font-weight: 300;
   line-height: 1.6;
   display: -webkit-box;
-  /* -webkit-line-clamp: 2; */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -279,21 +247,6 @@ input:focus::placeholder {
   font-weight: 300;
   line-height: 1.6;
   color: var(--color-content);
-}
-em {
-  font-family: Georgia, "Times New Roman", Times, serif;
-}
-
-.circle {
-  display: inline;
-  width: 2px;
-  height: 2px;
-  justify-content: center;
-  margin-left: 7px;
-  margin-right: 5px;
-  align-items: center;
-  border-radius: 50%;
-  background: var(--color-border);
 }
 
 .content__cover {
@@ -308,6 +261,7 @@ em {
 }
 
 /* 🧑‍🦲 discover - author */
+
 .author__lists {
   margin: 18px auto;
   /* 하단 내비 바 중첩되는 부분 */
@@ -315,60 +269,138 @@ em {
 }
 
 .author__list {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.author__list a {
+  text-decoration: none;
+  display: block;
+}
+
+.author__info-wrapper {
   display: flex;
-  padding: 16px 20px 18px 20px;
-  border-bottom: 1px solid #eee;
-  min-height: 80px;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
 .author__list:first-child {
   padding-top: 0;
 }
 
+.author__list:last-child {
+  margin-bottom: 100px;
+}
+
 .author__list-cover {
-  margin-top: 2px;
-  margin-right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .author__list-title {
   color: var(--color-title);
-  margin: 0;
   font-size: 16px;
-  font-weight: 300;
-  line-height: 1.6;
+  font-weight: 400;
+  margin: 0 0 4px 0;
 }
 
+.author__text-wrapper {
+  flex: 1;
+}
+
+.author__list-info {
+  color: var(--color-content);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.author__keywords {
+  margin-left: 64px;
+}
+
+.author__keywords .keyword {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: #f8f8f8;
+  border-radius: 15px;
+  color: var(--color-content);
+  font-size: 13px;
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+/* 공통 요소 */
 .discover__keyword {
   color: #00c6be;
   font-weight: 400;
 }
 
-.author__list-info {
-  color: var(--color-content);
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1.6;
-  padding-right: 10px;
+.content__text-main,
+.author__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2; /* 2줄까지만 표시 */
+  line-clamp: 2;
+}
+
+em {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.circle {
+  display: inline;
+  width: 2px;
+  height: 2px;
+  justify-content: center;
+  margin-left: 7px;
+  margin-right: 5px;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+/* 스크롤바 스타일링 */
+.post,
+.author {
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 100px; /* 하단 네비게이션 바 공간 */
+}
+
+.post::-webkit-scrollbar,
+.author::-webkit-scrollbar {
+  width: 6px;
+}
+
+.post::-webkit-scrollbar-thumb,
+.author::-webkit-scrollbar-thumb {
+  background-color: var(--color-content);
+  border-radius: 3px;
+}
+
+.post::-webkit-scrollbar-track,
+.author::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 /* 🚫 discover - null */
 .discover__none {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: 100px;
-  /* 하단 내비 바 중첩되는 부분, 위에 두 개 합친 것이 96px */
-  height: calc(100vh - 96px);
-}
-
-.discover__none {
-  /* 하단 내비 바 중첩되는 부분 */
-  padding-bottom: 100px;
+  /* 헤더 52, 탭 42, 필터 24, 탭바 100 => 총 220 */
+  height: calc(100vh - 220px);
 }
 
 .discover__result-noneImg {
@@ -387,4 +419,9 @@ em {
   color: var(--color-content);
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.discover__keyword {
+  color: #00c6be;
+  font-weight: 400;
 }

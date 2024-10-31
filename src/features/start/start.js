@@ -101,7 +101,6 @@ window.addEventListener('load', () => {
             const userEmail = response.data.item.email;
             const userId = response.data.item._id
             const userAccessToken = response.data.item.token.accessToken;
-            const userRefeshToken = response.data.item.token.refeshToken;
 
             // 기존에 있던 세션 스토리지 데이터 초기화
             sessionStorage.clear();
@@ -111,13 +110,11 @@ window.addEventListener('load', () => {
             sessionStorage.setItem('userEmail', userEmail);
             sessionStorage.setItem('userIdNum', userId);
             sessionStorage.setItem('userAccessToken', userAccessToken);
-            sessionStorage.setItem('userRefreshToken', userRefeshToken);
 
             // 로그인 정보 저장 체크박스 선택 시 로컬 스토리지에 사용자 데이터 저장(이메일, 사용자 토큰)
             if ($saveIdPw.checked) {
               let res = response.data.item;
               localStorage.userAccessToken = res.token.accessToken;
-              localStorage.userRefreshToken = res.token.accesToken;
               localStorage.userEmail = res.email;
             } else {
               localStorage.clear();
