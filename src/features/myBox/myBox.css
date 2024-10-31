@@ -33,6 +33,7 @@ img {
   min-height: 100vh;
   max-width: 360px;
   padding-bottom: 100px;
+  background-color: white;
 }
 
 body {

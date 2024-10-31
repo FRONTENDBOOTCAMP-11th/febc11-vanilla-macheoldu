@@ -71,14 +71,15 @@ const renderInterestedAuthors = function (bookmarkedAuthors) {
   for (let i = 0; i < bookmarkedAuthors.length; i++) {
     let bookmarkAuthorName = bookmarkedAuthors[i].user.name; // 구독한 작가 이름 추출
     let bookmarkAuthorImage = bookmarkedAuthors[i].user.image; // 구독한 작가 프사 추출
-
+    let bookmarkAuthorId = bookmarkedAuthors[i].user._id; //
     // li node 생성
     const li = document.createElement('li');
     li.classList.add('interested-author-item');
     // 사용자 프로필 정보 node 생성
-    li.innerHTML = `
+    li.innerHTML = `<a href="/src/features/author/author.html?userId=${bookmarkAuthorId}">
       <img src="https://11.fesp.shop${bookmarkAuthorImage}" alt="${bookmarkAuthorName}의 이미지" />
       <p>${bookmarkAuthorName}</p>
+      </a>
     `;
     // ul 태그에 추가
     ulElement.appendChild(li);
@@ -95,7 +96,7 @@ const renderInterestedPosts = function (post) {
     card.classList.add('card');
     card.innerHTML = `
       <a href="/src/features/detail/detail.html?postId=${Interestedinfo.post._id}"> 
-        <img src="${Interestedinfo.post.image || 'https://11.fesp.shop/files/vanilla03/no_profile.svg'}" alt="${Interestedinfo.post.title}" />
+        <img src="https://11.fesp.shop${Interestedinfo.post.image || '/files/vanilla03/no_profile.svg'}" />
       </a>
       <h3>${Interestedinfo.post.title}</h3>
       <p><em>by</em> ${Interestedinfo.post.user.name}</p>
