@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const noResultsHtml = `
       <div class="discover__result-noneImg">
         <img
-          src="/src/assets/icons/etc/logo_brunch_italic.svg"
+          src="/assets/icons/etc/logo_brunch_italic.svg"
           alt="관련 이미지"
         />
       </div>
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .map(author => {
         return `
           <div class="author__list">
-            <a href="/src/features/author/author.html?no=${author._id}">
+            <a href="/src/features/author/author.html?userId=${author._id}">
               <div class="author__info-wrapper">
                 <img 
                   class="author__list-cover" 
