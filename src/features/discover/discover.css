@@ -163,7 +163,7 @@ input:focus::placeholder {
 /* 메인 */
 .discover__main {
   /* 상단 요소들의 높이만 제외 */
-  height: calc(100vh - 94px); /* 헤더(52px) + 탭(42px) = 94px */
+  height: calc(100vh - 194px); /* 헤더(52px) + 탭(42px) = 94px */
   overflow: hidden;
 }
 
@@ -195,11 +195,6 @@ input:focus::placeholder {
 }
 
 /* 📖 discover - post */
-.post {
-  /* 하단 내비 바 중첩되는 부분 */
-  padding-bottom: 100px;
-}
-
 .post__lists {
   padding: 0 20px;
   margin: 34px 0;
@@ -207,6 +202,10 @@ input:focus::placeholder {
 
 .post__lists:first-child {
   margin-top: 0;
+}
+
+.post__lists:last-child {
+  margin-bottom: 116px;
 }
 
 .post__list-title {
@@ -289,7 +288,9 @@ input:focus::placeholder {
 }
 
 .author__list:last-child {
-  margin-bottom: 100px;
+  padding-bottom: 16px;
+  /* 여유 공간 추가 */
+  margin-bottom: 70px;
 }
 
 .author__list-cover {
@@ -369,7 +370,7 @@ em {
 .author {
   height: 100%;
   overflow-y: auto;
-  padding-bottom: 100px; /* 하단 네비게이션 바 공간 */
+  margin-bottom: 100px; /* 하단 네비게이션 바 공간 */
 }
 
 .post::-webkit-scrollbar,

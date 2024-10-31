@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const noResultsHtml = `
       <div class="discover__result-noneImg">
         <img
-          src="/src/assets/icons/etc/logo_brunch_italic.svg"
+          src="/assets/icons/etc/logo_brunch_italic.svg"
           alt="관련 이미지"
         />
       </div>
