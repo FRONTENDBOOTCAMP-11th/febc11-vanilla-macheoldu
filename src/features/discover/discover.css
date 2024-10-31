@@ -260,6 +260,7 @@ input:focus::placeholder {
 }
 
 /* 🧑‍🦲 discover - author */
+
 .author__lists {
   margin: 18px auto;
   /* 하단 내비 바 중첩되는 부분 */
@@ -284,6 +285,10 @@ input:focus::placeholder {
 
 .author__list:first-child {
   padding-top: 0;
+}
+
+.author__list:last-child {
+  margin-bottom: 100px;
 }
 
 .author__list-cover {
