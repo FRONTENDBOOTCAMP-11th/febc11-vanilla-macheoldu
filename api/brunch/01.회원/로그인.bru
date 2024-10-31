@@ -1,0 +1,23 @@
+meta {
+  name: 로그인
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/users/login
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+    "email": "test2@gmail.com",
+    "password": "12345678"
+  }
+  
+}
