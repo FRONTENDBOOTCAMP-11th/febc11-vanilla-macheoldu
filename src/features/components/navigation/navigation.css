@@ -36,3 +36,7 @@ img {
 .navigation__button {
   width: 48px;
 }
+
+.hidden {
+  display: none;
+}

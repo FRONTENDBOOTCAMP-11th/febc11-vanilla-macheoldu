@@ -1,481 +1,328 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="home.css" />
-    <link
-      rel="stylesheet"
-      as="style"
-      crossorigin
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/src/features/components/top-menu/top-menu.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/src/features/components/navigation/navigation.css"
-    />
-    <title>home</title>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div id="header"></div>
 
-      <!-- 스크롤 가능 영역 -->
-      <div class="content">
-        <!-- 메인 콘텐츠 영역 시작 -->
-        <main>
-          <!-- 표지(커버) 섹션 시작 -->
-          <section class="cover"></section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  <link rel="stylesheet" href="/src/features/components/top-menu/top-menu.css" />
+  <link rel="stylesheet" href="/src/features/components/navigation/navigation.css" />
+  <title>home</title>
+</head>
 
-          <!-- 요일별 연재 섹션 시작 -->
-          <section class="weekly-serial" aria-labelledby="weeklySerialTitle">
-            <h2 class="weekly-serial__heading" id="weeklySerialTitle">
-              요일별 연재
-            </h2>
-            <!-- 연재 설명 문구 -->
-            <p class="weekly-serial__description">
-              브런치북 오리지널 연재를 만나 보세요.
-            </p>
-            <!-- 요일별 탭 네비게이션 -->
-            <nav
-              class="weekly-serial__tabs"
-              role="tablist"
-              aria-label="요일별 연재"
-            >
-              <button class="weekly-serial__tab" role="tab" data-day="monday">
-                월
-              </button>
-              <button class="weekly-serial__tab" role="tab" data-day="tuesday">
-                화
-              </button>
-              <button
-                class="weekly-serial__tab"
-                role="tab"
-                data-day="wednesday"
-              >
-                수
-              </button>
-              <button
-                class="weekly-serial__tab"
-                role="tab"
-                data-day="thursday"
-                aria-selected="true"
-              >
-                목
-              </button>
-              <button class="weekly-serial__tab" role="tab" data-day="friday">
-                금
-              </button>
-              <button class="weekly-serial__tab" role="tab" data-day="saturday">
-                토
-              </button>
-              <button class="weekly-serial__tab" role="tab" data-day="sunday">
-                일
-              </button>
-            </nav>
-            <!-- 정렬 옵션 버튼 그룹 -->
-            <div class="weekly-serial__options">
-              <button
-                class="weekly-serial__option"
-                aria-label="최신순으로 정렬"
-              >
-                최신순
-              </button>
-              <button
-                class="weekly-serial__option"
-                aria-label="라이킷순으로 정렬"
-              >
-                라이킷순
-              </button>
+<body>
+  <div class="wrapper">
+    <div id="header"></div>
+
+    <!-- 스크롤 가능 영역 -->
+    <div class="content">
+      <!-- 메인 콘텐츠 영역 시작 -->
+      <main>
+        <!-- 표지(커버) 섹션 시작 -->
+        <section class="cover"></section>
+
+        <!-- 요일별 연재 섹션 시작 -->
+        <section class="weekly-serial" aria-labelledby="weeklySerialTitle">
+          <h2 class="weekly-serial__heading" id="weeklySerialTitle">
+            요일별 연재
+          </h2>
+          <!-- 연재 설명 문구 -->
+          <p class="weekly-serial__description">
+            브런치북 오리지널 연재를 만나 보세요.
+          </p>
+          <!-- 요일별 탭 네비게이션 -->
+          <nav class="weekly-serial__tabs" role="tablist" aria-label="요일별 연재">
+            <button class="weekly-serial__tab" role="tab" data-day="monday">
+              월
+            </button>
+            <button class="weekly-serial__tab" role="tab" data-day="tuesday">
+              화
+            </button>
+            <button class="weekly-serial__tab" role="tab" data-day="wednesday">
+              수
+            </button>
+            <button class="weekly-serial__tab" role="tab" data-day="thursday" aria-selected="true">
+              목
+            </button>
+            <button class="weekly-serial__tab" role="tab" data-day="friday">
+              금
+            </button>
+            <button class="weekly-serial__tab" role="tab" data-day="saturday">
+              토
+            </button>
+            <button class="weekly-serial__tab" role="tab" data-day="sunday">
+              일
+            </button>
+          </nav>
+          <!-- 정렬 옵션 버튼 그룹 -->
+          <div class="weekly-serial__options">
+            <button class="weekly-serial__option" aria-label="최신순으로 정렬">
+              최신순
+            </button>
+            <button class="weekly-serial__option" aria-label="라이킷순으로 정렬">
+              라이킷순
+            </button>
+          </div>
+          <!-- 연재 리스트 -->
+          <ul class="weekly-serial__list">
+            <li class="weekly-serial__item">
+              <article class="weekly-serial__info">
+                <h3 class="weekly-serial__title">낙원</h3>
+                <p class="weekly-serial__details">
+                  6 윤희 - 2
+                  <img src="/assets/icons/status/new.svg" alt="새 글" class="weekly-serial__new" />
+                </p>
+                <p class="weekly-serial__author"><em>by</em> 아무</p>
+              </article>
+            </li>
+
+            <li class="weekly-serial__item">
+              <article class="weekly-serial__info">
+                <h3 class="weekly-serial__title">
+                  딸과 만나기까지 100일간의 기록
+                </h3>
+                <p class="weekly-serial__details">
+                  D-70, 30주
+                  <img src="/assets/icons/status/new.svg" alt="새 글" class="weekly-serial__new" />
+                </p>
+                <p class="weekly-serial__author"><em>by</em> Gigantes Yang</p>
+              </article>
+              <img src="/assets/images/home/serial1.png" alt="딸과 만나기까지 100일간의 기록" class="weekly-serial__image" />
+            </li>
+
+            <li class="weekly-serial__item">
+              <article class="weekly-serial__info">
+                <h3 class="weekly-serial__title">인류애 충전일기</h3>
+                <p class="weekly-serial__details">
+                  열두 살 아이도 '나 몰라라'<img src="/assets/icons/status/new.svg" alt="새 글" class="weekly-serial__new" />
+                  하지는 않는다
+                </p>
+                <p class="weekly-serial__author"><em>by</em> 박단단</p>
+              </article>
+              <img src="/assets/images/home/serial2.png" alt="인류애 충전일기" class="weekly-serial__image" />
+            </li>
+          </ul>
+          <!-- 연재 작품 전체 보기 버튼 -->
+          <button class="weekly-serial__view-all">
+            <span>연재 작품 전체 보기</span>
+            <img src="/assets/icons/actions/next.svg" alt="다음" class="icon-next" />
+          </button>
+          <!-- 요일별 연재 섹션 끝 -->
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- Today's Pick 섹션 시작 -->
+        <section class="main__todays-pick">
+          <h2 class="main__todays-pick__title">
+            <em class="main__todays-pick-title--english">Today's Pick</em>
+            <span class="main__todays-pick-title--korean">요즘 뜨는 브런치</span>
+          </h2>
+
+          <ol class="main__todays-pick__list">
+            <!-- JavaScript로 동적으로 내용이 채워질 예정이므로 비워둡니다 -->
+          </ol>
+        </section>
+        <!-- Today's Pick 섹션 끝 -->
+
+        <!-- 베스트셀러 섹션 시작 -->
+        <section class="main__best-seller">
+          <!-- 섹션 제목 -->
+          <h2 class="main__section-title">브런치북 원작 베스트셀러</h2>
+
+          <!-- 베스트셀러 컨텐츠 영역 시작 -->
+          <div class="main__best-seller-content">
+            <!-- 책 정보 영역 시작 -->
+            <div class="main__best-seller-info">
+              <!-- 책 제목과 작가 정보 -->
+              <div class="main__best-seller-text">
+                <h3 class="main__best-seller-book-title">여자야구입문기</h3>
+                <p class="main__best-seller-author">김입문</p>
+              </div>
+              <!-- 책 표지 이미지 -->
+              <img src="/assets/images/home/bestseller1.png" class="main__best-seller-image" alt="여자야구입문기" />
             </div>
-            <!-- 연재 리스트 -->
-            <ul class="weekly-serial__list">
-              <li class="weekly-serial__item">
-                <article class="weekly-serial__info">
-                  <h3 class="weekly-serial__title">낙원</h3>
-                  <p class="weekly-serial__details">
-                    6 윤희 - 2
-                    <img
-                      src="/assets/icons/status/new.svg"
-                      alt="새 글"
-                      class="weekly-serial__new"
-                    />
-                  </p>
-                  <p class="weekly-serial__author"><em>by</em> 아무</p>
-                </article>
-              </li>
+            <!-- 책 정보 영역 끝 -->
 
-              <li class="weekly-serial__item">
-                <article class="weekly-serial__info">
-                  <h3 class="weekly-serial__title">
-                    딸과 만나기까지 100일간의 기록
-                  </h3>
-                  <p class="weekly-serial__details">
-                    D-70, 30주
-                    <img
-                      src="/assets/icons/status/new.svg"
-                      alt="새 글"
-                      class="weekly-serial__new"
-                    />
-                  </p>
-                  <p class="weekly-serial__author"><em>by</em> Gigantes Yang</p>
-                </article>
-                <img
-                  src="/assets/images/home/serial1.png"
-                  alt="딸과 만나기까지 100일간의 기록"
-                  class="weekly-serial__image"
-                />
-              </li>
+            <!-- 인용구 영역 시작 -->
+            <div class="main__best-seller-quote">
+              <!-- 인용구 라벨 -->
+              <p class="main__best-seller__quote-label">작가가 사랑한 문장</p>
+              <!-- 인용된 문장 -->
+              <blockquote class="main__best-seller-quote-text">
+                최선을 다해서 응원해주는 이가 내 뒤에 있다. 그들을 뒤에 두고
+                있으면서, 나는 앞을 볼 수 밖에 없다.
+              </blockquote>
+            </div>
+            <!-- 인용구 영역 끝 -->
+          </div>
+          <!-- 베스트셀러 컨텐츠 영역 끝 -->
 
-              <li class="weekly-serial__item">
-                <article class="weekly-serial__info">
-                  <h3 class="weekly-serial__title">인류애 충전일기</h3>
-                  <p class="weekly-serial__details">
-                    열두 살 아이도 '나 몰라라'<img
-                      src="/assets/icons/status/new.svg"
-                      alt="새 글"
-                      class="weekly-serial__new"
-                    />
-                    하지는 않는다
-                  </p>
-                  <p class="weekly-serial__author"><em>by</em> 박단단</p>
-                </article>
-                <img
-                  src="/assets/images/home/serial2.png"
-                  alt="인류애 충전일기"
-                  class="weekly-serial__image"
-                />
+          <!-- '원작 브런치북 보기' 버튼 -->
+          <button class="main__view-all-brunch-book">
+            원작 브런치북 보기
+            <img src="/assets/icons/etc/whiteNext.svg" alt="다음" class="icon-next" />
+          </button>
+        </section>
+        <!-- 베스트셀러 섹션 끝 -->
+
+        <div class="divider"></div>
+
+        <!-- 오늘의 작가 섹션 시작 -->
+        <section class="main__featured-author">
+          <h2 class="main__featured-author__title" aria-labelledby="featuredAuthorTitle">
+            오늘의 작가
+          </h2>
+          <!-- 작가 정보 영역 -->
+        </section>
+        <!-- 오늘의 작가 섹션 끝 -->
+
+        <div class="divider"></div>
+
+        <!-- 오늘의 추천 도서 섹션 시작 -->
+        <section class="main__featured-book"></section>
+        <!-- 오늘의 추천 도서 섹션 끝 -->
+
+        <!-- Top 구독 작가 섹션 시작 -->
+        <section class="main__top-subscribed-authors">
+          <h2 class="main__top-subscribed-title">Top 구독 작가</h2>
+
+          <!-- 이 div 안에 JavaScript로 작가 정보가 동적으로 삽입됩니다 -->
+          <div class="main__top-subscribed-authors-grid">
+            <!-- JavaScript로 동적 렌더링 -->
+          </div>
+        </section>
+
+        <section class="main__new-authors">
+          <!-- 새로운 작가의 탄생 섹션 시작 -->
+          <img src="/assets/images/home/newAuthorsTxt.png" alt="새로운 작가의 탄생" class="main__new-authors-birth" />
+          <!-- 새로운 작가의 탄생 부제목 -->
+          <img src="/assets/images/home/newAuthorsSubtxt.png" alt="제 11회 브런치북 출판 프로젝트 수상작 보기"
+            class="main__new-authors-subtitle" style="cursor: pointer"
+            onclick="window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
+            onkeypress="if(event.key === 'Enter') window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
+            tabindex="0" role="link" />
+
+          <!-- 새로운 작가의 책 목록 시작 -->
+          <ul class="main__new-authors-books-list">
+            <!-- 첫 번째 책 -->
+            <li class="main__new-authors-book-item">
+              <!-- 첫 번째 책 이미지 -->
+              <img src="/assets/images/home/newAuthor1.png" alt="태어나는 말들" class="main__new-authors-book-image" />
+              <!-- 첫 번째 책 제목 -->
+              <p class="main__new-authors-book-title">태어나는 말들</p>
+              <!-- 첫 번째 책 작가 -->
+              <p class="main__new-authors-book-author"><em>by</em> 조소연</p>
+            </li>
+
+            <!-- 두 번째 책 -->
+            <li class="main__new-authors-book-item">
+              <!-- 두 번째 책 이미지 -->
+              <img src="/assets/images/home/newAuthor2.png" alt="엄마 없는 농담" class="main__new-authors-book-image" />
+              <!-- 두 번째 책 제목 -->
+              <p class="main__new-authors-book-title">엄마 없는 농담</p>
+              <!-- 두 번째 책 작가 -->
+              <p class="main__new-authors-book-author"><em>by</em> 김현민</p>
+            </li>
+
+            <!-- 세 번째 책 -->
+            <li class="main__new-authors-book-item">
+              <!-- 세 번째 책 이미지 -->
+              <img src="/assets/images/home/newAuthor3.png" alt="인생은 방탈출" class="main__new-authors-book-image" />
+              <!-- 세 번째 책 제목 -->
+              <p class="main__new-authors-book-title">인생은 방탈출</p>
+              <!-- 세 번째 책 작가 -->
+              <p class="main__new-authors-book-author"><em>by</em> 오지은</p>
+            </li>
+          </ul>
+          <!-- 새로운 작가의 책 목록 끝 -->
+
+          <!-- 브런치 작가 지원 프로젝트 링크 -->
+          <a href="https://brunch.co.kr/special/list" class="main__brunch-author-support">
+            브런치 작가 지원 프로젝트
+            <img src="/assets/icons/etc/whiteNext.svg" alt="다음" class="icon-next" />
+          </a>
+          <!-- 새로운 작가의 탄생 섹션 끝 -->
+        </section>
+      </main>
+
+      <!-- 메인 푸터 섹션 시작 -->
+      <footer class="app__footer main-footer">
+        <!-- 소셜 미디어 링크 섹션 -->
+        <section class="main-footer__section social">
+          <nav class="social__nav" aria-label="소셜 미디어 링크">
+            <ul class="social__list">
+              <li class="social__item">
+                <a href="https://pf.kakao.com/_YYcYV" class="social__link" aria-label="공식 카카오톡">
+                  <img src="/assets/icons/social/social_kakao.svg" alt="" class="social__icon social__icon--kakao" />
+                </a>
+              </li>
+              <li class="social__item">
+                <a href="https://www.facebook.com/brunch.co.kr/?locale=ko_KR" class="social__link" aria-label="공식 페이스북"
+                  target="_blank">
+                  <img src="/assets/icons/social/social_fb.svg" alt="" class="social__icon social__icon--facebook" />
+                </a>
+              </li>
+              <li class="social__item">
+                <a href="#" class="social__link" aria-label="공식 x(구 트위터)" target="_blank">
+                  <img src="/assets/icons/social/social_x.svg" alt="" class="social__icon social__icon--x" />
+                </a>
               </li>
             </ul>
-            <!-- 연재 작품 전체 보기 버튼 -->
-            <button class="weekly-serial__view-all">
-              <span>연재 작품 전체 보기</span>
-              <img
-                src="/assets/icons/actions/next.svg"
-                alt="다음"
-                class="icon-next"
-              />
-            </button>
-            <!-- 요일별 연재 섹션 끝 -->
-          </section>
+          </nav>
+        </section>
 
-          <div class="divider"></div>
-
-          <!-- Today's Pick 섹션 시작 -->
-          <section class="main__todays-pick">
-            <h2 class="main__todays-pick__title">
-              <em class="main__todays-pick-title--english">Today's Pick</em>
-              <span class="main__todays-pick-title--korean"
-                >요즘 뜨는 브런치</span
-              >
-            </h2>
-
-            <ol class="main__todays-pick__list">
-              <!-- JavaScript로 동적으로 내용이 채워질 예정이므로 비워둡니다 -->
-            </ol>
-          </section>
-          <!-- Today's Pick 섹션 끝 -->
-
-          <!-- 베스트셀러 섹션 시작 -->
-          <section class="main__best-seller">
-            <!-- 섹션 제목 -->
-            <h2 class="main__section-title">브런치북 원작 베스트셀러</h2>
-
-            <!-- 베스트셀러 컨텐츠 영역 시작 -->
-            <div class="main__best-seller-content">
-              <!-- 책 정보 영역 시작 -->
-              <div class="main__best-seller-info">
-                <!-- 책 제목과 작가 정보 -->
-                <div class="main__best-seller-text">
-                  <h3 class="main__best-seller-book-title">여자야구입문기</h3>
-                  <p class="main__best-seller-author">김입문</p>
-                </div>
-                <!-- 책 표지 이미지 -->
-                <img
-                  src="/assets/images/home/bestseller1.png"
-                  class="main__best-seller-image"
-                  alt="여자야구입문기"
-                />
+        <!-- 법적 정보 링크 섹션 -->
+        <section class="main-footer__section main__legal">
+          <nav class="main__legal--nav" aria-label="법적 정보 링크">
+            <ul class="main__legal--list">
+              <div class="main__legal--row">
+                <li class="main__legal--item">
+                  <a href="https://www.kakao.com/policy/terms" class="main__legal--link" target="_blank">이용약관</a>
+                </li>
+                <li class="main__legal--item">
+                  <a href="https://brunch.co.kr/policy/terms" class="main__legal--link" target="_blank">이전 이용약관</a>
+                </li>
+                <li class="main__legal--item">
+                  <a href="https://billing-web.kakao.com/kbill/terms/service" class="main__legal--link"
+                    target="_blank">카카오 유료서비스 이용약관</a>
+                </li>
               </div>
-              <!-- 책 정보 영역 끝 -->
-
-              <!-- 인용구 영역 시작 -->
-              <div class="main__best-seller-quote">
-                <!-- 인용구 라벨 -->
-                <p class="main__best-seller__quote-label">작가가 사랑한 문장</p>
-                <!-- 인용된 문장 -->
-                <blockquote class="main__best-seller-quote-text">
-                  최선을 다해서 응원해주는 이가 내 뒤에 있다. 그들을 뒤에 두고
-                  있으면서, 나는 앞을 볼 수 밖에 없다.
-                </blockquote>
+              <div class="main__legal--row">
+                <li class="main__legal--item">
+                  <a href="https://www.kakao.com/policy/privacy?lang=ko" class="main__legal--link" target="_blank">카카오
+                    개인정보 처리방침</a>
+                </li>
+                <li class="main__legal--item">
+                  <a href="https://www.kakao.com/policy/safeguard?lang=ko" class="main__legal--link" target="_blank">청소년
+                    보호정책</a>
+                </li>
+                <li class="main__legal--item">
+                  <a href="https://brunch.co.kr/policy/oppolicy" class="main__legal--link" target="_blank">운영정책</a>
+                </li>
               </div>
-              <!-- 인용구 영역 끝 -->
-            </div>
-            <!-- 베스트셀러 컨텐츠 영역 끝 -->
-
-            <!-- '원작 브런치북 보기' 버튼 -->
-            <button class="main__view-all-brunch-book">
-              원작 브런치북 보기
-              <img
-                src="/assets/icons/etc/whiteNext.svg"
-                alt="다음"
-                class="icon-next"
-              />
-            </button>
-          </section>
-          <!-- 베스트셀러 섹션 끝 -->
-
-          <div class="divider"></div>
-
-          <!-- 오늘의 작가 섹션 시작 -->
-          <section class="main__featured-author">
-            <h2
-              class="main__featured-author__title"
-              aria-labelledby="featuredAuthorTitle"
-            >
-              오늘의 작가
-            </h2>
-            <!-- 작가 정보 영역 -->
-          </section>
-          <!-- 오늘의 작가 섹션 끝 -->
-
-          <div class="divider"></div>
-
-          <!-- 오늘의 추천 도서 섹션 시작 -->
-          <section class="main__featured-book"></section>
-          <!-- 오늘의 추천 도서 섹션 끝 -->
-
-          <!-- Top 구독 작가 섹션 시작 -->
-          <section class="main__top-subscribed-authors">
-            <h2 class="main__top-subscribed-title">Top 구독 작가</h2>
-
-            <!-- 이 div 안에 JavaScript로 작가 정보가 동적으로 삽입됩니다 -->
-            <div class="main__top-subscribed-authors-grid">
-              <!-- JavaScript로 동적 렌더링 -->
-            </div>
-          </section>
-
-          <section class="main__new-authors">
-            <!-- 새로운 작가의 탄생 섹션 시작 -->
-            <img
-              src="/assets/images/home/newAuthorsTxt.png"
-              alt="새로운 작가의 탄생"
-              class="main__new-authors-birth"
-            />
-            <!-- 새로운 작가의 탄생 부제목 -->
-            <img
-              src="/assets/images/home/newAuthorsSubtxt.png"
-              alt="제 11회 브런치북 출판 프로젝트 수상작 보기"
-              class="main__new-authors-subtitle"
-              style="cursor: pointer"
-              onclick="window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
-              onkeypress="if(event.key === 'Enter') window.location.href='https://brunch.co.kr/brunchbookproject/prize/11'"
-              tabindex="0"
-              role="link"
-            />
-
-            <!-- 새로운 작가의 책 목록 시작 -->
-            <ul class="main__new-authors-books-list">
-              <!-- 첫 번째 책 -->
-              <li class="main__new-authors-book-item">
-                <!-- 첫 번째 책 이미지 -->
-                <img
-                  src="/assets/images/home/newAuthor1.png"
-                  alt="태어나는 말들"
-                  class="main__new-authors-book-image"
-                />
-                <!-- 첫 번째 책 제목 -->
-                <p class="main__new-authors-book-title">태어나는 말들</p>
-                <!-- 첫 번째 책 작가 -->
-                <p class="main__new-authors-book-author"><em>by</em> 조소연</p>
-              </li>
-
-              <!-- 두 번째 책 -->
-              <li class="main__new-authors-book-item">
-                <!-- 두 번째 책 이미지 -->
-                <img
-                  src="/assets/images/home/newAuthor2.png"
-                  alt="엄마 없는 농담"
-                  class="main__new-authors-book-image"
-                />
-                <!-- 두 번째 책 제목 -->
-                <p class="main__new-authors-book-title">엄마 없는 농담</p>
-                <!-- 두 번째 책 작가 -->
-                <p class="main__new-authors-book-author"><em>by</em> 김현민</p>
-              </li>
-
-              <!-- 세 번째 책 -->
-              <li class="main__new-authors-book-item">
-                <!-- 세 번째 책 이미지 -->
-                <img
-                  src="/assets/images/home/newAuthor3.png"
-                  alt="인생은 방탈출"
-                  class="main__new-authors-book-image"
-                />
-                <!-- 세 번째 책 제목 -->
-                <p class="main__new-authors-book-title">인생은 방탈출</p>
-                <!-- 세 번째 책 작가 -->
-                <p class="main__new-authors-book-author"><em>by</em> 오지은</p>
-              </li>
             </ul>
-            <!-- 새로운 작가의 책 목록 끝 -->
+          </nav>
+        </section>
 
-            <!-- 브런치 작가 지원 프로젝트 링크 -->
-            <a
-              href="https://brunch.co.kr/special/list"
-              class="main__brunch-author-support"
-            >
-              브런치 작가 지원 프로젝트
-              <img
-                src="/assets/icons/etc/whiteNext.svg"
-                alt="다음"
-                class="icon-next"
-              />
-            </a>
-            <!-- 새로운 작가의 탄생 섹션 끝 -->
-          </section>
-        </main>
-
-        <!-- 메인 푸터 섹션 시작 -->
-        <footer class="app__footer main-footer">
-          <!-- 소셜 미디어 링크 섹션 -->
-          <section class="main-footer__section social">
-            <nav class="social__nav" aria-label="소셜 미디어 링크">
-              <ul class="social__list">
-                <li class="social__item">
-                  <a
-                    href="https://pf.kakao.com/_YYcYV"
-                    class="social__link"
-                    aria-label="공식 카카오톡"
-                  >
-                    <img
-                      src="/assets/icons/social/social_kakao.svg"
-                      alt=""
-                      class="social__icon social__icon--kakao"
-                    />
-                  </a>
-                </li>
-                <li class="social__item">
-                  <a
-                    href="https://www.facebook.com/brunch.co.kr/?locale=ko_KR"
-                    class="social__link"
-                    aria-label="공식 페이스북"
-                    target="_blank"
-                  >
-                    <img
-                      src="/assets/icons/social/social_fb.svg"
-                      alt=""
-                      class="social__icon social__icon--facebook"
-                    />
-                  </a>
-                </li>
-                <li class="social__item">
-                  <a
-                    href="#"
-                    class="social__link"
-                    aria-label="공식 x(구 트위터)"
-                    target="_blank"
-                  >
-                    <img
-                      src="/assets/icons/social/social_x.svg"
-                      alt=""
-                      class="social__icon social__icon--x"
-                    />
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </section>
-
-          <!-- 법적 정보 링크 섹션 -->
-          <section class="main-footer__section main__legal">
-            <nav class="main__legal--nav" aria-label="법적 정보 링크">
-              <ul class="main__legal--list">
-                <div class="main__legal--row">
-                  <li class="main__legal--item">
-                    <a
-                      href="https://www.kakao.com/policy/terms"
-                      class="main__legal--link"
-                      target="_blank"
-                      >이용약관</a
-                    >
-                  </li>
-                  <li class="main__legal--item">
-                    <a
-                      href="https://brunch.co.kr/policy/terms"
-                      class="main__legal--link"
-                      target="_blank"
-                      >이전 이용약관</a
-                    >
-                  </li>
-                  <li class="main__legal--item">
-                    <a
-                      href="https://billing-web.kakao.com/kbill/terms/service"
-                      class="main__legal--link"
-                      target="_blank"
-                      >카카오 유료서비스 이용약관</a
-                    >
-                  </li>
-                </div>
-                <div class="main__legal--row">
-                  <li class="main__legal--item">
-                    <a
-                      href="https://www.kakao.com/policy/privacy?lang=ko"
-                      class="main__legal--link"
-                      target="_blank"
-                      >카카오 개인정보 처리방침</a
-                    >
-                  </li>
-                  <li class="main__legal--item">
-                    <a
-                      href="https://www.kakao.com/policy/safeguard?lang=ko"
-                      class="main__legal--link"
-                      target="_blank"
-                      >청소년 보호정책</a
-                    >
-                  </li>
-                  <li class="main__legal--item">
-                    <a
-                      href="https://brunch.co.kr/policy/oppolicy"
-                      class="main__legal--link"
-                      target="_blank"
-                      >운영정책</a
-                    >
-                  </li>
-                </div>
-              </ul>
-            </nav>
-          </section>
-
-          <!-- 브랜딩 섹션 -->
-          <section class="main-footer__section branding">
-            <img
-              src="/assets/logos/logo_white.svg"
-              alt="브런치스토리 로고"
-              class="branding__logo"
-            />
-          </section>
-        </footer>
-        <!-- 메인 푸터 섹션 끝 -->
-      </div>
-      <!-- 공통 푸터 컴포넌트 부분 -->
-      <footer id="navigation"></footer>
+        <!-- 브랜딩 섹션 -->
+        <section class="main-footer__section branding">
+          <img src="/assets/logos/logo_white.svg" alt="브런치스토리 로고" class="branding__logo" />
+        </section>
+      </footer>
+      <!-- 메인 푸터 섹션 끝 -->
     </div>
-    <!-- 상단 메뉴 -->
-    <script
-      src="/src/features/components/top-menu/top-menu.js"
-      type="module"
-    ></script>
+    <!-- 공통 푸터 컴포넌트 부분 -->
+    <footer id="navigation"></footer>
+  </div>
+  <!-- 상단 메뉴 -->
+  <script src="/src/features/components/top-menu/top-menu.js" type="module"></script>
 
-    <!-- 하단 네비게이션 -->
-    <script
-      src="/src/features/components/navigation/navigation.js"
-      type="module"
-    ></script>
-    <script src="home.js" type="module"></script>
-  </body>
+  <!-- 하단 네비게이션 -->
+  <script src="/src/features/components/navigation/navigation.js" type="module"></script>
+  <script src="home.js" type="module"></script>
+</body>
+
 </html>
