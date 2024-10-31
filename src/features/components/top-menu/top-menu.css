@@ -59,3 +59,16 @@
   width: 62px;
   height: 24px;
 }
+
+.hidden {
+  display: none;
+}
+
+.brunch__header__profile-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;
+  border: 0.5px solid #ddd !important;
+  object-fit: fill;
+  overflow: hidden;
+}

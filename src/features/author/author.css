@@ -74,11 +74,12 @@ body {
   width: 360px;
   margin: 0 auto;
   min-height: 100vh;
+  background-color: var(--color-white);
 }
 
 /* Design */
 body {
-  background-color: var(--color-white);
+  background-color: gray;
 }
 
 .header {
@@ -96,11 +97,14 @@ body {
   position: absolute;
   right: 0;
   transform: translateY(-50%);
-  aspect-ratio: 1/1;
+  /* aspect-ratio: 1/1; */
+  width: 80px;
+  height: 80px;
 }
 
 .header__profile-image {
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .header__info {
@@ -200,9 +204,19 @@ body {
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 1.66667;
+
+  word-break: break-word;
+  overflow-wrap: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 비표준 속성 (WebKit 전용) */
+  line-clamp: 2; /* 표준 속성 (추가) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.article__collaborators {
+.article__subtitle {
   margin-right: 20px;
   color: var(--color-gray-60);
   font-size: 1.2rem;
