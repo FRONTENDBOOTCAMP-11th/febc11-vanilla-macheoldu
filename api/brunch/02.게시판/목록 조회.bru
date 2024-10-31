@@ -1,0 +1,19 @@
+meta {
+  name: 목록 조회
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/posts?type=info
+  body: none
+  auth: none
+}
+
+params:query {
+  type: info
+}
+
+headers {
+  client-id: vanilla03
+}

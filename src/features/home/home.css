@@ -150,107 +150,7 @@ body {
   display: none;
 }
 
-/* 커버 섹션의 전체 스타일 */
-.cover {
-  background-color: var(--purple);
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding: 55px 0 28px;
-}
-
-/* 책 제목 스타일 */
-.cover__title {
-  font-size: var(--font-size-xxl);
-  font-weight: 300;
-  line-height: 1.41;
-  margin: 0;
-}
-
-/* 작가 이름 스타일 */
-.cover__author {
-  font-size: 12px;
-  line-height: 1.33;
-  margin-top: 10.5px; /* 제목과의 간격 */
-  margin-bottom: 66px; /* 이미지와의 간격 */
-}
-
-/* 이미지 컨테이너 스타일 */
-.cover__image-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-/* 책 표지 이미지 스타일 */
-.cover__image {
-  width: 135px;
-  height: 190px;
-}
-
-/* 응원 뱃지 스타일 */
-.cover__badge {
-  position: absolute;
-  top: -5px;
-  right: 0;
-  width: 29px;
-  height: 32px;
-}
-
-/* 응원 정보 컨테이너 스타일 */
-.cover__support {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px; /* 이미지와의 간격 */
-  margin-bottom: 38px; /* 프로그레스 바와의 간격 */
-}
-
-/* 응원 아이콘 스타일 */
-.cover__support-icon {
-  margin-right: 4px;
-  width: 21px;
-  height: 21px;
-}
-
-/* 응원 수 텍스트 스타일 */
-.cover__support-count {
-  font-size: 14px;
-}
-
-/* 프로그레스 바 컨테이너 스타일 */
-.cover__progress {
-  display: flex;
-  align-items: center;
-}
-
-/* 프로그레스 바 스텝 컨테이너 스타일 */
-.cover__progress-steps {
-  display: flex;
-  gap: 1px;
-}
-
-/* 프로그레스 바 각 스텝 스타일 */
-.cover__progress-step {
-  width: 20px;
-  height: 1px;
-  background-color: white;
-  opacity: 1;
-}
-
-/* 활성화된 프로그레스 바 스텝 스타일 */
-.cover__progress-step.active {
-  opacity: 0.3;
-}
-
-/* 프로그레스 텍스트 스타일 */
-.cover__progress-text {
-  font-size: 11px;
-  margin-left: 3px;
-}
-
-/* 주간 연재 스타일 */
+/* 요일별 연재 스타일 */
 .weekly-serial {
   padding: 50px 25px 34px;
 }
@@ -293,7 +193,7 @@ body {
   border-bottom: 2px solid var(--point-color);
 }
 
-/* 주간 연재 옵션 스타일 */
+/* 요일별 연재 옵션 스타일 */
 .weekly-serial__options {
   font-size: var(--font-size-sm);
   display: flex;
@@ -327,21 +227,26 @@ body {
   color: var(--grey-40);
 }
 
-/* 주간 연재 아이템 스타일 */
+/* 요일별 연재 아이템 스타일 */
 .weekly-serial__details {
   font-size: var(--font-size-lg);
   line-height: 1.53;
   margin-right: 7px;
   margin-bottom: 10px;
+
+  /* 컨텐츠를 위한 flex container 설정 */
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .weekly-serial__new {
   width: 14px;
   height: 14px;
 
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 2px;
+  /* vertical-align 제거하고 flex item으로 정렬 */
+  display: inline-flex;
+  align-items: center;
 }
 
 .weekly-serial__author {
@@ -393,6 +298,7 @@ body {
   font-size: var(--font-size-lg);
   flex-direction: column;
   color: var(--grey-90);
+  margin-bottom: 30px;
 }
 
 .main__todays-pick-title--english {
@@ -405,11 +311,6 @@ body {
 .main__todays-pick-title--korean {
   font-weight: 600;
   font-size: var(--font-size-xl);
-}
-
-.main__todays-pick__title {
-  font-size: var(--font-size-lg);
-  margin-bottom: 30px;
 }
 
 /* 오늘의 추천 리스트 스타일 */
@@ -429,6 +330,14 @@ body {
   gap: 8px; /* 제목, 작성자, 설명 사이의 간격 */
 }
 
+/* 텍스트 영역 */
+.main__todays-pick__item-title {
+  font-size: var(--font-size-lg);
+  color: var(--grey-90);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
 .main__todays-pick__item:last-child {
   position: relative;
   margin-bottom: 20px;
@@ -436,6 +345,7 @@ body {
   border-bottom: none;
 }
 
+/* 순위 숫자 */
 .main__todays-pick__item::before {
   counter-increment: main__todays-pick-counter;
   content: counter(main__todays-pick-counter);
@@ -447,16 +357,24 @@ body {
   color: var(--grey-90);
 }
 
-.number-wrapper {
-  position: relative;
-}
-
-.up-triangle {
+/* NEW 및 순위 상승 표시 */
+.rank-indicator {
   position: absolute;
   left: -25px;
-  top: 25px;
+  top: 28px; /* 숫자 바로 아래에 위치 */
+  font-size: var(--font-size-xs);
+  line-height: 1;
+}
+
+.rank-indicator--new {
+  color: var(--grey-90);
+  font-weight: bold;
+}
+
+.rank-up-icon {
   width: 10px;
   height: 10px;
+  display: block;
 }
 
 .main__todays-pick__info {
@@ -465,23 +383,11 @@ body {
   align-items: flex-start;
 }
 
-.main__todays-pick__text {
-  flex: 1;
-  padding-right: 15px;
-}
-
 .main__todays-pick__author {
   font-size: var(--font-size-md);
   color: var(--grey-35);
   margin-bottom: 10px;
 }
-
-/* .main__todays-pick__description {
-  font-size: 13px;
-  color: var(--grey-50);
-  font-weight: 300;
-  line-height: 1.4;
-} */
 
 .main__todays-pick__description {
   font-size: 13px;
@@ -514,7 +420,7 @@ body {
 
 /* 베스트셀러 섹션 스타일 */
 .main__best-seller {
-  background-image: url('/src/assets/images/home/bestsellerBg.png');
+  background-image: url('/assets/images/home/bestsellerBg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -626,7 +532,7 @@ body {
   content: '';
   position: absolute;
   display: inline-block;
-  background-image: url('/src/assets/icons/etc/doubleQuotes.svg');
+  background-image: url('/assets/icons/etc/doubleQuotes.svg');
   background-size: contain;
   background-repeat: no-repeat;
   top: 5px;
@@ -654,7 +560,7 @@ body {
 }
 
 /* 추천 작가 섹션 스타일 */
-.main__main__featured-author__books-image-wrapper {
+.main__featured-author__books-image-wrapper {
   flex-shrink: 0;
   width: 60px;
 }
@@ -694,18 +600,18 @@ body {
   height: 80px;
 }
 
-.main__main__featured-author__books-item {
+.main__featured-author__books-item {
   background-color: var(--grey-10);
   padding: 20px;
   display: flex;
   margin-bottom: 5px;
 }
 
-.main__main__featured-author__books-info {
+.main__featured-author__books-info {
   margin-left: 25px;
 }
 
-.main__main__featured-author__books-title {
+.main__featured-author__books-title {
   font-size: var(--font-size-md);
   color: var(--grey-90);
 }
@@ -721,13 +627,13 @@ body {
   margin-bottom: 25px;
 }
 
-.main__main__featured-author__books-description {
+.main__featured-author__books-description {
   font-size: var(--font-size-sm);
   color: var(--grey-50);
   font-weight: 300;
 }
 
-.main__main__featured-author__books-image {
+.main__featured-author__books-image {
   width: 60px;
   height: 85px;
 }
@@ -809,10 +715,22 @@ body {
 }
 
 .main__featured-book-quote-text::before {
-  content: url('/src/assets/icons/etc/doubleQuotes.svg');
+  content: url('/assets/icons/etc/doubleQuotes.svg');
   position: absolute;
   left: 0;
   top: -5px;
+}
+
+.no-authors-message {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--grey-30);
+  border-bottom: 1px solid var(--grey-30);
+  padding: 80px 0;
+  text-align: center;
+  color: var(--grey-50);
+  font-size: var(--font-size-md);
+  font-weight: 300;
+  width: 100%;
 }
 
 .main__top-subscribed-authors {

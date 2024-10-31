@@ -1,0 +1,17 @@
+meta {
+  name: 관심글 추가
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/bookmarks/post
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "target_id": 2
+  }
+}

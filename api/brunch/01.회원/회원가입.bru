@@ -1,0 +1,24 @@
+meta {
+  name: 회원가입
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/users/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "muscle@market.com",
+    "password": "12345678",
+    "name": "근육펌핑",
+    "phone": "01025252525",
+    "address": "헬스장",
+    "type": "user",
+    "image": "/files/00-sample/profile.jpg",
+    "info": "딱 3세트만 더 하쟈"
+  }
+}
