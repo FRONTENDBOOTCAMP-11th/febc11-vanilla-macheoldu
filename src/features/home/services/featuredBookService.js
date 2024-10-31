@@ -1,3 +1,4 @@
+import CONFIG from '../config.js';
 import { utils } from '../utils.js';
 
 // 추천 도서 서비스 객체
@@ -39,11 +40,14 @@ export const featuredBookService = {
           </div>
   
           <div class="main__featured-book-image-container">
-            <img
-              src="${utils.getAssetUrl('image', 'featuredBook.png')}"
-              alt="${bookData.title} 책 표지 이미지"
-              class="main__featured-book-image"
-            />
+            <a href="/src/features/detail/detail.html?postId=${bookData._id}" target="_blank">
+              <img
+                src="${bookData.image?.[0] ? `${CONFIG.API.BASE_URL}${bookData.image[0]}` : utils.getAssetUrl('image', 'featuredBook.png')}"
+                alt="${bookData.title} 책 표지 이미지"
+                class="main__featured-book-image"
+                onerror="this.src='${utils.getAssetUrl('image', 'featuredBook.png')}'"
+              />
+            </a>
           </div>
         </div>
   
