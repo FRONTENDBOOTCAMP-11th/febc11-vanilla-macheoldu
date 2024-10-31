@@ -227,7 +227,7 @@ const getMyPosts = function () {
 
 // 게시글을 화면에 렌더링하는 함수
 function renderMyBrunchPosts(posts) {
-  const brunchSection = document.querySelector('.my-brunch');
+  const brunchSection = document.querySelector('.my-brunch-info');
   brunchSection.innerHTML = '';
   // 기존 콘텐츠 초기화
   // brunchSection.innerHTML = `
