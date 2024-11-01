@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
       axios({
         method: 'get',
         // 요청 헤더에 별명 전송
-        url: `/api/users/name`,
+        url: `https://11.fesp.shop/users/name`,
         headers: {
           'client-id': 'vanilla03',
           'content-type': 'application/json',
@@ -155,7 +155,7 @@ window.addEventListener('load', () => {
         // 이메일 중복확인 API 활용
         axios({
           method: 'get',
-          url: '/api/users/email',
+          url: 'https://11.fesp.shop/users/email',
           headers: {
             'client-id': 'vanilla03',
             'content-type': 'application/json',
@@ -284,7 +284,7 @@ window.addEventListener('load', () => {
       // 사용자 입력 데이터 서버 전송
       axios({
         method: 'post',
-        url: '/api/users',
+        url: 'https://11.fesp.shop/users',
         // 요청 헤더
         headers: {
           'client-id': 'vanilla03',
