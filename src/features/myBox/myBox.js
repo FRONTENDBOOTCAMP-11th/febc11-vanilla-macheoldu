@@ -118,7 +118,7 @@ function loadMyBoxData(userId) {
   // 관심 작가 북마크 데이터 요청
   axios({
     method: 'get',
-    url: `/api/users/${userId}/bookmarks`, // 사용자 북마크 데이터 호출 API
+    url: `https://11.fesp.shop/users/${userId}/bookmarks`, // 사용자 북마크 데이터 호출 API
     headers: { 'client-id': 'vanilla03' },
   })
     .then(response => {
@@ -140,7 +140,7 @@ function loadMyBoxData(userId) {
 function loadInterestedPosts(userId) {
   axios({
     method: 'get',
-    url: `/api/users/${userId}/bookmarks`, // 사용자의 관심 글 API
+    url: `https://11.fesp.shop/users/${userId}/bookmarks`, // 사용자의 관심 글 API
     headers: { 'client-id': 'vanilla03' },
   })
     .then(response => {
@@ -169,7 +169,7 @@ function renderRecentlyViewedPosts() {
     // 서버나 API로부터 게시글 정보를 가져오는 예시
     axios({
       method: 'get',
-      url: `/api/posts/${postId}`,
+      url: `https://11.fesp.shop/posts/${postId}`,
       headers: {
         'client-id': 'vanilla03',
       },

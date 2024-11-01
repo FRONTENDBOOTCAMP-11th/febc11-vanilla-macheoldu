@@ -105,7 +105,7 @@ window.addEventListener('load', function () {
         // 첨부 파일 서버로 전송
         axios({
           method: 'post',
-          url: '/api/files',
+          url: 'https://11.fesp.shop/files',
           // 요청 헤더
           headers: {
             'client-id': 'vanilla03',
@@ -126,7 +126,7 @@ window.addEventListener('load', function () {
             // 서버 요청 전송
             axios({
               method: 'post',
-              url: '/api/posts',
+              url: 'https://11.fesp.shop/posts',
               // 요청 header
               headers: {
                 'client-id': 'vanilla03',
