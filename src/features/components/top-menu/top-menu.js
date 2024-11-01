@@ -13,7 +13,7 @@ fetch('/src/features/components/top-menu/top-menu.html')
     if (userEmail) {
       axios({
         method: 'get',
-        url: '/api/users',
+        url: 'https://11.fesp.shop/users',
         headers: {
           'client-id': 'vanilla03',
           'content-type': 'application/json',

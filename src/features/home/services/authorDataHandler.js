@@ -5,7 +5,7 @@ import { renderService } from './renderService.js';
 import { storageService } from './storageService.js';
 import { authorService } from './authorService.js';
 import { featuredBookService } from './featuredBookService.js';
-import { initializeTopAuthors } from '../components/topAuthors.js';
+import { initializeTopAuthors } from '../components/TopAuthors.js';
 
 /**
  * 게시글 API 기본 주소와 인기 게시글 필터 옵션

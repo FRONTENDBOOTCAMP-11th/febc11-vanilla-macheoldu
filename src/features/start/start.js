@@ -82,7 +82,7 @@ window.addEventListener('load', () => {
         axios({
           // client header
           method: 'post',
-          url: '/api/users/login',
+          url: 'https://11.fesp.shop/users/login',
           headers: {
             'client-id': 'vanilla03',
             'content-type': 'application/json',
