@@ -1,5 +1,5 @@
 // 외부 라이브러리와 컴포넌트 import
-import { initializeCoverSlider } from './components/coverSlider.js';
+import { initializeCoverSlider } from './components/CoverSlider.js';
 import { WeeklyPostsManager } from './components/WeeklySeriesManager.js';
 import { storageService } from './services/storageService.js';
 import { featuredBookService } from './services/featuredBookService.js';
