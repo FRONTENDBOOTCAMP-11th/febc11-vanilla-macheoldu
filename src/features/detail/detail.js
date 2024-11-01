@@ -389,9 +389,6 @@ const toggleSubscribe = async function () {
      * 구독 취소 로직이 복잡해 보이는 이유:
      * 1. 서버 API가 북마크 ID를 필요로 함
      * 2. 북마크 ID를 얻기 위해 전체 북마크 목록을 조회해야 함
-     *
-     * 이상적으로는 서버 API가 사용자 ID만으로 구독 취소가 가능하도록
-     * 설계되는 것이 더 좋았을 것
      */
     if (!isSubscribed) {
       await api.post(
