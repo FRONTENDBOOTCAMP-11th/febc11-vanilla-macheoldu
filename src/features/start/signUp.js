@@ -298,7 +298,7 @@ window.addEventListener('load', () => {
           name: `${signUpNickname}`,
           type: 'user',
           // 최초 회원가입 시 디폴트 이미지 추가
-          image: '/files/vanilla03/no_profile.svg',
+          image: '/files/vanilla03/no-profile.png',
         },
       })
         .then(response => {
